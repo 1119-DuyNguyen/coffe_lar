@@ -29,7 +29,15 @@ class DatabaseSeeder extends Seeder
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
         $this->call(UserSeeder::class);
-        $this->call(AdminProfileSeeder::class);
-        $this->call(VendorShopProfileSeeder::class);
+//        $this->call(AdminProfileSeeder::class);
+//        $this->call(VendorShopProfileSeeder::class);
+        //data product
+        $file_path = __DIR__.'/seeder.sql';
+
+        \DB::unprepared(
+            file_get_contents($file_path)
+        );
+//         data all
+
     }
 }

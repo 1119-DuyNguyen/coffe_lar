@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_reviews', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
-            $table->integer('user_id');
-            $table->integer('vendor_id');
+            $table->foreignId('product_id')->constrained()->noActionOnDelete();
+            $table->foreignId('user_id')->constrained()->noActionOnDelete();
+            $table->foreignId('vendor_id')->constrained('users', 'id')->noActionOnDelete();
             $table->string('review');
             $table->string('rating');
             $table->boolean('status');

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('invocie_id');
-            $table->integer('user_id');
+            $table->integer('invocie_id');
+            $table->foreignId('user_id') ->constrained()->noActionOnDelete();
             $table->double('sub_total');
             $table->double('amount');
             $table->string('currency_name');

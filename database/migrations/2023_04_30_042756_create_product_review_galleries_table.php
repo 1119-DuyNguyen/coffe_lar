@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_review_galleries', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_review_id');
+            $table->foreignId('product_review_id')->constrained()->cascadeOnDelete();
             $table->text('image');
             $table->timestamps();
         });

@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('order_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
-            $table->integer('product_id');
-            $table->integer('vendor_id');
+            $table->foreignId('order_id')->constrained()->noActionOnDelete();
+            $table->foreignId('product_id')->constrained()->noActionOnDelete();
+            $table->foreignId('vendor_id')->constrained(
+                table: 'users', column: 'id'
+            )->noActionOnDelete();
             $table->string('product_name');
             $table->text('variants');
             $table->integer('variant_total')->nullable();

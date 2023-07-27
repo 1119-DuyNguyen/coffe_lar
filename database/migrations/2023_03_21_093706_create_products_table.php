@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('thumb_image');
-            $table->integer('vendor_id');
-            $table->integer('category_id');
-            $table->integer('sub_category_id')->nullable();
-            $table->integer('child_category_id')->nullable();
-            $table->integer('brand_id');
-            $table->integer('qty');
+            $table->foreignId('vendor_id')->constrained(
+                table: 'users', column: 'id'
+            )->noActionOnDelete();
+            $table->foreignId('category_id')->constrained()->noActionOnDelete();
+            $table->foreignId('sub_category_id')->nullable()->constrained()->noActionOnDelete();
+            $table->foreignId('child_category_id')->nullable()->constrained()->noActionOnDelete();
+            $table->foreignId('brand_id')->constrained()->noActionOnDelete();
+            $table->unsignedInteger('qty');
             $table->text('short_description');
             $table->text('long_description');
             $table->text('video_link')->nullable();

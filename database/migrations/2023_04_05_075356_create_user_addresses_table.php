@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->noActionOnDelete();
             $table->string('name');
             $table->string('email');
             $table->string('phone');

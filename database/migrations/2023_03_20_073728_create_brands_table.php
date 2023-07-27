@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->boolean('is_featured');
-            $table->boolean('status');
+            $table->boolean('status') -> default(true);
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_variant_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_variant_id');
+            $table->foreignId('product_variant_id')->constrained()->noActionOnDelete();
             $table->string('name');
             $table->double('price');
             $table->boolean('is_default');
