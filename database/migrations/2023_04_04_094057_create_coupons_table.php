@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('discount_type');
             $table->double('discount');
             $table->boolean('status');
-            $table->integer('total_used');
+            $table->integer('total_used')->default(0);
             $table->timestamps();
         });
     }

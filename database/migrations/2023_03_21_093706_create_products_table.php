@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('thumb_image');
             $table->foreignId('vendor_id')->constrained(
                 table: 'users', column: 'id'
-            )->noActionOnDelete();
+            )->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->noActionOnDelete();
             $table->foreignId('sub_category_id')->nullable()->constrained()->noActionOnDelete();
             $table->foreignId('child_category_id')->nullable()->constrained()->noActionOnDelete();
