@@ -54,6 +54,11 @@
 
         gtag('config', 'UA-94034622-3');
     </script>
+    <style>
+        .dataTables_wrapper{
+            overflow-x: auto;
+        }
+    </style>
     <!-- /END GA -->
 {{--    vendor--}}
    {{--    @include('sweetalert::alert')--}}
@@ -101,6 +106,7 @@
 {{--<script src="{{asset("backend/assets/js/page/index-0.js")}}"></script>--}}
 <script src="{{asset('backend/assets/modules/datatables/datatables.min.js')}}"></script>
 <script src="{{asset('backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/modules/datatables/Responsive-2.2.1/js/responsive.bootstrap4.js')}}"></script>
 
 <!-- Template JS File -->
 <script src="{{asset("backend/assets/js/scripts.js")}}"></script>

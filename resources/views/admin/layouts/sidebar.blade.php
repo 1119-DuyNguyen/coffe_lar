@@ -74,7 +74,7 @@
                 <span>Ecommerce</span></a>
             <ul class="dropdown-menu">
                 <li class=""><a class="nav-link"
-                                href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
+                                href="{{ route('admin.featured-product.index') }}">Featured Product</a></li>
                 <li class=""><a class="nav-link"
                                 href="{{ route('admin.coupons.index') }}">Coupons</a></li>
 

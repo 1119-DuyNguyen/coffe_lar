@@ -189,7 +189,7 @@
                     success: function (data) {
 
                             window.location.replace(
-                                '{{Redirect::intended(route("dashboard"))->getTargetUrl()}}'
+                                '{{Redirect::intended(route("home"))->getTargetUrl()}}'
                             );
                         // } else if (data == 2) {
                         //

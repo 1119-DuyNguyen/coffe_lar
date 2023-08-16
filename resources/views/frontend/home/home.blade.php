@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 @section('title')
-{{$settings->site_name}} || Home
+    {{$settings->site_name}} || Home
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
     <!--============================
         FLASH SELL START
     ==============================-->
-    @include('frontend.home.sections.flash-sale')
+    @include('frontend.home.sections.featured-product')
     <!--============================
         FLASH SELL END
     ==============================-->
@@ -25,7 +25,7 @@
     <!--============================
         HOT DEALS START
     ==============================-->
-    @include('frontend.home.sections.hot-deals')
+    @include('frontend.home.sections.type-product')
     <!--============================
         HOT DEALS END
     ==============================-->
@@ -42,11 +42,9 @@
     <!--============================
       HOME SERVICES START
     ==============================-->
-    {{-- @include('frontend.home.sections.services') --}}
+    @include('frontend.home.sections.services')
     <!--============================
         HOME SERVICES END
     ==============================-->
-
-
 
 @endsection

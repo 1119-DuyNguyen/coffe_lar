@@ -149,12 +149,6 @@ INSERT INTO `products` (`id`, `name`, `slug`, `thumb_image`, `vendor_id`, `categ
 (50, 'Wrangler Men\'s Iconic Denim Regular Fit Snap Shirt', 'wrangler-mens-iconic-denim-regular-fit-snap-shirt', 'uploads/media_645876a53c0c4.jpg', 1, 11, NULL, NULL, 12, 800, 'Perfect for beginners, this camera bundle offers the essential tools needed to take your SLR skills to new heights, all in one convenient package. No matter where your next adventure takes you, count on the EOS Rebel t7\'s impressive 24.1 Megapixel', '<p>The Canon EOS Rebel SL3 Digital SLR Camera is a versatile and \r\nlightweight camera that is perfect for capturing high-quality photos and\r\n videos. With its 24.1 Megapixel CMOS (APS-C) sensor and DIGIC 8 Image \r\nProcessor, this camera delivers stunning image quality with excellent \r\ndetail and clarity.</p><p>The EOS Rebel SL3 also features Dual Pixel \r\nCMOS AF, which provides fast and accurate autofocus during both photo \r\nand video shooting. This makes it easy to capture the perfect shot, even\r\n when your subject is moving.</p><p>This camera is also equipped with a \r\nVari-angle Touchscreen LCD that can be rotated to various angles for \r\neasy framing and shooting at different angles. The touchscreen interface\r\n is intuitive and user-friendly, making it easy to access the camera\'s \r\nmany features and settings.</p><p>In addition, the EOS Rebel SL3 offers \r\nbuilt-in Wi-Fi and Bluetooth connectivity, allowing you to easily \r\ntransfer photos and videos to your smart devices or share them on social\r\n media. The camera also includes a built-in feature guide to help you \r\nlearn how to use its various functions and settings.</p><p>Other key features of the Canon EOS Rebel SL3 Digital SLR Camera include:</p><ul><li>9-point AF system</li><li>ISO range of 100-25600 (expandable to 51200)</li><li>5 fps continuous shooting</li><li>Full HD 1080p video recording at up to 60 fps</li><li>Creative Assist mode for easy customization of settings</li><li>EF-S 18-55mm f/4-5.6 IS STM lens included</li></ul><p>Here is a specification table for the Canon EOS Rebel SL3 Digital SLR Camera:<br><br></p><table class=\"table table-bordered\"><tbody><tr><td><h5><b>Specification</b></h5></td><td><h5>Description</h5></td></tr><tr><td>Image sensor</td><td>24.1 Megapixel APS-C CMOS sensor</td></tr><tr><td>Image processor</td><td>DIGIC 8</td></tr><tr><td>Autofocus</td><td>Dual Pixel CMOS AF</td></tr><tr><td>AF points</td><td>9-point AF system</td></tr><tr><td>ISO range</td><td>100-25600 (expandable to 51200)</td></tr><tr><td>Continuous shooting</td><td>Up to 5 fps</td></tr><tr><td>Video recording</td><td>Full HD 1080p at up to 60 fps</td></tr></tbody></table><p><br></p><p></p>', NULL, 'MKV-2342345', 800, 1000, '2023-05-08', '2023-05-08', NULL, 1, 1, NULL, NULL, '2023-05-07 22:12:21', '2023-05-07 22:12:21'),
 (51, 'Hanes Sport Men\'s Polo Shirt, Men\'s Cool DRI Moisture-Wicking Performance Polo Shirt', 'hanes-sport-mens-polo-shirt-mens-cool-dri-moisture-wicking-performance-polo-shirt', 'uploads/media_64587721f3057.JPG', 1, 11, NULL, NULL, 12, 876, 'Perfect for beginners, this camera bundle offers the essential tools needed to take your SLR skills to new heights, all in one convenient package. No matter where your next adventure takes you, count on the EOS Rebel t7\'s impressive 24.1 Megapixel', '<p>The Canon EOS Rebel SL3 Digital SLR Camera is a versatile and \r\nlightweight camera that is perfect for capturing high-quality photos and\r\n videos. With its 24.1 Megapixel CMOS (APS-C) sensor and DIGIC 8 Image \r\nProcessor, this camera delivers stunning image quality with excellent \r\ndetail and clarity.</p><p>The EOS Rebel SL3 also features Dual Pixel \r\nCMOS AF, which provides fast and accurate autofocus during both photo \r\nand video shooting. This makes it easy to capture the perfect shot, even\r\n when your subject is moving.</p><p>This camera is also equipped with a \r\nVari-angle Touchscreen LCD that can be rotated to various angles for \r\neasy framing and shooting at different angles. The touchscreen interface\r\n is intuitive and user-friendly, making it easy to access the camera\'s \r\nmany features and settings.</p><p>In addition, the EOS Rebel SL3 offers \r\nbuilt-in Wi-Fi and Bluetooth connectivity, allowing you to easily \r\ntransfer photos and videos to your smart devices or share them on social\r\n media. The camera also includes a built-in feature guide to help you \r\nlearn how to use its various functions and settings.</p><p>Other key features of the Canon EOS Rebel SL3 Digital SLR Camera include:</p><ul><li>9-point AF system</li><li>ISO range of 100-25600 (expandable to 51200)</li><li>5 fps continuous shooting</li><li>Full HD 1080p video recording at up to 60 fps</li><li>Creative Assist mode for easy customization of settings</li><li>EF-S 18-55mm f/4-5.6 IS STM lens included</li></ul><p>Here is a specification table for the Canon EOS Rebel SL3 Digital SLR Camera:<br><br></p><table class=\"table table-bordered\"><tbody><tr><td><h5><b>Specification</b></h5></td><td><h5>Description</h5></td></tr><tr><td>Image sensor</td><td>24.1 Megapixel APS-C CMOS sensor</td></tr><tr><td>Image processor</td><td>DIGIC 8</td></tr><tr><td>Autofocus</td><td>Dual Pixel CMOS AF</td></tr><tr><td>AF points</td><td>9-point AF system</td></tr><tr><td>ISO range</td><td>100-25600 (expandable to 51200)</td></tr><tr><td>Continuous shooting</td><td>Up to 5 fps</td></tr><tr><td>Video recording</td><td>Full HD 1080p at up to 60 fps</td></tr></tbody></table><p><br></p><p></p>', NULL, 'MKV-2342345', 90, 1000, '2023-05-08', '2023-05-08', 'top_product', 1, 1, NULL, NULL, '2023-05-07 22:14:26', '2023-05-07 22:14:26');
 
---
--- Đang đổ dữ liệu cho bảng `cod_settings`
---
-
-INSERT INTO `cod_settings` (`id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, '2023-05-06 00:32:51', '2023-05-06 00:35:07');
 
 --
 -- Đang đổ dữ liệu cho bảng `coupons`
@@ -171,27 +165,17 @@ INSERT INTO `coupons` (`id`, `name`, `code`, `quantity`, `max_use`, `start_date`
 INSERT INTO `email_configurations` (`id`, `email`, `host`, `username`, `password`, `port`, `encryption`, `created_at`, `updated_at`) VALUES
 (1, 'support@sazao.com', 'sandbox.smtp.mailtrap.io', '808ae887829cf7', '188d4565252515', '2525', 'tls', '2023-04-27 03:53:19', '2023-04-27 05:53:06');
 
---
--- Đang đổ dữ liệu cho bảng `flash_sales`
---
-
-INSERT INTO `flash_sales` (`id`, `end_date`, `created_at`, `updated_at`) VALUES
-(2, '2023-05-31', '2023-04-24 09:40:47', '2023-04-24 09:40:47'),
-(3, '2023-05-31', '2023-05-06 22:42:08', '2023-05-06 22:42:08'),
-(4, '2023-05-31', '2023-05-06 22:42:37', '2023-05-06 22:42:37'),
-(5, '2023-05-31', '2023-05-06 22:44:04', '2023-05-06 22:44:04'),
-(6, '2023-05-31', '2023-05-06 22:45:25', '2023-05-06 22:45:25');
 
 --
--- Đang đổ dữ liệu cho bảng `flash_sale_items`
+-- Đang đổ dữ liệu cho bảng `featured_products`
 --
 
-INSERT INTO `flash_sale_items` (`id`, `product_id`, `flash_sale_id`, `show_at_home`, `status`, `created_at`, `updated_at`) VALUES
-(6, 23, 2, 1, 1, '2023-04-25 21:19:41', '2023-04-25 21:19:41'),
-(7, 12, 2, 1, 1, '2023-04-25 21:20:00', '2023-04-25 21:20:00'),
-(8, 13, 2, 1, 1, '2023-04-25 21:20:13', '2023-04-25 21:20:13'),
-(9, 20, 2, 1, 1, '2023-04-25 21:20:21', '2023-04-25 21:20:21'),
-(10, 15, 2, 1, 1, '2023-04-25 21:20:46', '2023-04-25 21:20:46');
+INSERT INTO `featured_products` (`id`, `product_id`, `show_at_home`, `status`, `created_at`, `updated_at`) VALUES
+(6, 23,  1, 1, '2023-04-25 21:19:41', '2023-04-25 21:19:41'),
+(7, 12,  1, 1, '2023-04-25 21:20:00', '2023-04-25 21:20:00'),
+(8, 13,  1, 1, '2023-04-25 21:20:13', '2023-04-25 21:20:13'),
+(9, 20,  1, 1, '2023-04-25 21:20:21', '2023-04-25 21:20:21'),
+(10, 15,  1, 1, '2023-04-25 21:20:46', '2023-04-25 21:20:46');
 
 --
 -- Đang đổ dữ liệu cho bảng `footer_grid_threes`
@@ -386,22 +370,6 @@ INSERT INTO `product_image_galleries` (`id`, `image`, `product_id`, `created_at`
 (115, 'uploads/media_64586f31673d1.JPG', 36, '2023-05-07 21:40:33', '2023-05-07 21:40:33'),
 (116, 'uploads/media_64586f31677be.JPG', 36, '2023-05-07 21:40:33', '2023-05-07 21:40:33');
 
---
--- Đang đổ dữ liệu cho bảng `product_reviews`
---
-
-INSERT INTO `product_reviews` (`id`, `product_id`, `user_id`, `vendor_id`, `review`, `rating`, `status`, `created_at`, `updated_at`) VALUES
-(1, 23, 3, 1, 'good products', '5', 1, '2023-04-29 23:51:02', '2023-04-29 23:51:02'),
-(2, 23, 3, 1, 'test review', '4', 0, '2023-04-29 23:52:17', '2023-04-30 03:11:20');
-
---
--- Đang đổ dữ liệu cho bảng `product_review_galleries`
---
-
-INSERT INTO `product_review_galleries` (`id`, `product_review_id`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 'uploads/media_644e01c65194e.jpg', '2023-04-29 23:51:02', '2023-04-29 23:51:02'),
-(2, 2, 'uploads/media_644e02114e15e.jpg', '2023-04-29 23:52:17', '2023-04-29 23:52:17'),
-(3, 2, 'uploads/media_644e02114e6d3.png', '2023-04-29 23:52:17', '2023-04-29 23:52:17');
 
 --
 -- Đang đổ dữ liệu cho bảng `product_variants`

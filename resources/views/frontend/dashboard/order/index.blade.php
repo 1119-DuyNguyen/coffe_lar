@@ -1,37 +1,59 @@
-@extends('frontend.dashboard.layouts.master')
+@extends('frontend.layouts.master')
 
 @section('title')
-{{$settings->site_name}} || Product
+    {{$settings->site_name}}
 @endsection
 
 @section('content')
-  <!--=============================
-    DASHBOARD START
-  ==============================-->
-  <section id="wsus__dashboard">
-    <div class="container-fluid">
-        @include('frontend.dashboard.layouts.sidebar')
+    <div class="container-fluid p-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="form-group">
+                    <form action="{{route('user.orders.index')}}" method="get">
 
-      <div class="row">
-        <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
-          <div class="dashboard_content mt-2 mt-md-0">
-            <h3><i class="far fa-user"></i> Orders</h3>
-            <div class="wsus__dashboard_profile">
-              <div class="wsus__dash_pro_area">
-                {{ $dataTable->table() }}
-              </div>
+                        <select class="form-control" name="status" onchange="this.closest('form').submit();">
+                            <option value=""> All</option>
+                            @foreach ( $statusOrder as $key => $status)
+                                <option
+                                    value="{{$key}}"
+                                    @if(!empty(request()->input('status'))&& request()->input('status') == $key)
+                                        selected
+                                    @endif
+                                >{{$status['status']}}</option>
+                            @endforeach
+
+                        </select>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>All Order</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ $dataTable->table() }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
-  </section>
-  <!--=============================
-    DASHBOARD START
-  ==============================-->
+
+
+
 @endsection
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 
 @endpush
+
+{{--@section('content')--}}
+{{--  <!--=============================--}}
+{{--    DASHBOARD START--}}
+{{--  ==============================-->--}}
+

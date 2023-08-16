@@ -2,9 +2,10 @@
     $address = json_decode($order->order_address);
     $shipping = json_decode($order->shpping_method);
     $coupon = json_decode($order->coupon);
+
 @endphp
 
-@extends('frontend.dashboard.layouts.master')
+@extends('frontend.layouts.master')
 
 @section('title')
     {{ $settings->site_name }} || Product
@@ -14,12 +15,10 @@
     <!--=============================
         DASHBOARD START
       ==============================-->
-    <section id="wsus__dashboard">
-        <div class="container-fluid">
-            @include('vendor.layouts.sidebar')
+        <div class="container-fluid p-4">
 
             <div class="row">
-                <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
+                <div class="col-12">
                     <div class="dashboard_content mt-2 mt-md-0">
                         <h3><i class="far fa-user"></i> Order Details</h3>
                         <div class="wsus__dashboard_profile">
@@ -57,13 +56,14 @@
                                                     </div>
                                                     <div class="col-xl-4 col-md-4">
                                                         <div class="wsus__invoice_single text-md-end">
-                                                            <h5>Order id: #{{ $order->invocie_id }}</h5>
+                                                            <h5>Order id: #{{ $order->id }}</h5>
                                                             <h6>Order status:
                                                                 {{ config('order_status.order_status_admin')[$order->order_status]['status'] }}
                                                             </h6>
                                                             <p>Payment Method: {{ $order->payment_method }}</p>
-                                                            <p>Payment Status: {{ $order->payment_status }}</p>
-                                                            <p>Transaction id: {{ $order->transaction->transaction_id }}
+                                                            <p>Payment Status: {{$order->payment_status === 1 ? 'Complete' : 'Pending'}}</p>
+
+{{--                                                            <p>Transaction id: {{ $order->transaction->transaction_id }}--}}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -84,8 +84,8 @@
                                                                 amount
                                                             </th>
 
-                                                            <th class="quentity">
-                                                                quentity
+                                                            <th class="">
+                                                                quantity
                                                             </th>
                                                             <th class="total">
                                                                 total
@@ -113,7 +113,7 @@
                                                                         {{ $product->unit_price }}
                                                                     </td>
 
-                                                                    <td class="quentity">
+                                                                    <td class="">
                                                                         {{ $product->qty }}
                                                                     </td>
                                                                     <td class="total">
@@ -130,10 +130,10 @@
                                         </div>
                                         <div class="wsus__invoice_footer">
 
-                                            <p><span>Sub Total:</span> {{ @$settings->currency_icon }} {{@$order->sub_total}}</p>
-                                            <p><span>Shipping Fee(+):</span>{{ @$settings->currency_icon }} {{@$shipping->cost}} </p>
-                                            <p><span>Coupon(-):</span>{{ @$settings->currency_icon }} {{@$coupon->discount ? $coupon->discount : 0}}</p>
-                                            <p><span>Total Amount :</span>{{ @$settings->currency_icon }} {{@$order->amount}}</p>
+                                            <p><span>Sub Total:</span>{{ $settings->currency_icon }} {{$order->sub_total}}</p>
+                                            <p><span>Shipping Fee(+):</span>{{ $settings->currency_icon }} {{$shipping->cost ?? 0}} </p>
+                                            <p><span>Coupon(-):</span>{{ $settings->currency_icon }} {{$coupon->discount ??  0}}</p>
+                                            <p><span>Total Amount :</span>{{ $settings->currency_icon }} {{$order->amount}}</p>
 
 
                                         </div>
@@ -154,7 +154,6 @@
                 </div>
             </div>
         </div>
-    </section>
     <!--=============================
         DASHBOARD START
       ==============================-->

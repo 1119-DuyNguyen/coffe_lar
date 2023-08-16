@@ -71,7 +71,7 @@
 
                                         <td class="">
                                             <a class="common_btn"
-                                               href="{{route('product-detail', $item->product->slug)}}">View Product</a>
+                                               href="{{route('product.show', $item->product->slug)}}">View Product</a>
                                         </td>
                                     </tr>
 

@@ -3236,51 +3236,8 @@ PPRODUCT PAGE START
     display: flex;
 }
 
-#pagination,
-#pagination2 {
-    margin-top: 30px;
-}
 
-#pagination nav ul {
-    justify-content: center;
-}
 
-#pagination nav ul li a,
-#pagination2 nav ul li a {
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    text-align: center;
-    line-height: 35px;
-    font-size: 13px;
-    font-weight: 400;
-    transition: all linear 0.3s;
-    -webkit-transition: all linear 0.3s;
-    -moz-transition: all linear 0.3s;
-    -ms-transition: all linear 0.3s;
-    -o-transition: all linear 0.3s;
-    border-radius: 50%;
-    border: 1px solid #08C;
-    margin-right: 10px;
-}
-
-#pagination nav ul li a i,
-#pagination2 nav ul li a i {
-    font-size: 12px;
-}
-
-#pagination nav ul li a.page_active,
-#pagination nav ul li a:hover,
-#pagination2 nav ul li a.page_active,
-#pagination2 nav ul li a:hover {
-    background: #08C;
-    color: #fff;
-}
-
-#pagination .page-link:focus,
-#pagination2 .page-link:focus {
-    box-shadow: none;
-}
 
 .wsus__list_view .wsus__pro_link {
     width: 40%;
@@ -4850,9 +4807,7 @@ INVOICE PAGE SATAR
     vertical-align: middle;
 }
 
-.wsus__invoice_description .table tr {
-    display: flex;
-}
+
 
 .wsus__invoice_description table tr:last-child td {
     border-bottom: none;
@@ -9475,59 +9430,7 @@ a:not([href]):not([class]):hover {
 }
 
 
-.page-item.disabled > .page-link {
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    text-align: center;
-    line-height: 35px;
-    font-size: 13px;
-    font-weight: 400;
-    transition: all linear 0.3s;
-    -webkit-transition: all linear 0.3s;
-    -moz-transition: all linear 0.3s;
-    -ms-transition: all linear 0.3s;
-    -o-transition: all linear 0.3s;
-    border-radius: 50%;
-    border: 1px solid #08C;
-    margin-right: 10px;
-}
 
-.page-item.active > .page-link {
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    text-align: center;
-    line-height: 35px;
-    font-size: 13px;
-    font-weight: 400;
-    transition: all linear 0.3s;
-    -webkit-transition: all linear 0.3s;
-    -moz-transition: all linear 0.3s;
-    -ms-transition: all linear 0.3s;
-    -o-transition: all linear 0.3s;
-    border-radius: 50%;
-    border: 1px solid #08C;
-    margin-right: 10px;
-}
-
-.page-item > .page-link {
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    text-align: center;
-    line-height: 35px;
-    font-size: 13px;
-    font-weight: 400;
-    transition: all linear 0.3s;
-    -webkit-transition: all linear 0.3s;
-    -moz-transition: all linear 0.3s;
-    -ms-transition: all linear 0.3s;
-    -o-transition: all linear 0.3s;
-    border-radius: 100% !important;;
-    border: 1px solid #08C;
-    margin-right: 10px;
-}
 
 
 .wsus__new {

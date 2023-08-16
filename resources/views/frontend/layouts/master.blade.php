@@ -6,12 +6,11 @@
 @endphp
 @endforeach
 @endif
-
     <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
@@ -21,6 +20,7 @@
     </title>
     <link rel="icon" type="image/png" href="{{asset($logoSetting->favicon)}}">
     <link rel="stylesheet" href="{{asset('frontend/css/all.min.css')}}">
+
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/slick.css')}}">
@@ -34,13 +34,20 @@
     <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
     <link rel="stylesheet" href="{{asset('lib/sweetalert/sweetalert.all.min.css')}}">
-
+    <link rel="stylesheet" href="{{asset('lib/fontawesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset("backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css")}}">
+    <link rel="stylesheet" href="{{asset("backend/assets/modules/datatables/datatables.min.css")}}">
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if($settings->layout=="RTL")
         <link rel="stylesheet" href="{{asset("frontend/css/rtl.css")}}">
     @endif
+    <style >
+        .dataTables_wrapper{
+            overflow-x: auto;
+        }
+    </style>
     <!-- <link rel="stylesheet" href="{{asset('front/cssrtl.css')}}> -->
 </head>
 
@@ -157,9 +164,11 @@
 <!--jquery library js-->
 <script src="{{asset('frontend/js/jquery-3.6.0.min.js')}}"></script>
 <!--bootstrap js-->
+<script src="{{asset("backend/assets/modules/bootstrap/js/bootstrap.min.js")}}"></script>
 <script src="{{asset('frontend/js/bootstrap.bundle.min.js')}}"></script>
+
 <!--font-awesome js-->
-<script src="{{asset('frontend/js/Font-Awesome.js')}}"></script>
+{{--<script src="{{asset('frontend/js/Font-Awesome.js')}}"></script>--}}
 <!--select2 js-->
 <script src="{{asset('frontend/js/select2.min.js')}}"></script>
 <!--slick slider js-->
@@ -189,6 +198,10 @@
 <!--classycountdown js-->
 <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
 
+<script src="{{asset('backend/assets/modules/datatables/datatables.min.js')}}"></script>
+<script src="{{asset('backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/modules/datatables/Responsive-2.2.1/js/responsive.bootstrap4.js')}}"></script>
+{{--<link rel="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.bootstrap4.min.css" />--}}
 <script src="{{asset('lib/sweetalert/sweetalert.all.min.js')}}"></script>
 
 <!--main/custom js-->

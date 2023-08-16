@@ -4,7 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\CouponController;
-use App\Http\Controllers\Frontend\FlashSaleController;
+use App\Http\Controllers\Frontend\FeaturedProductController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
@@ -36,9 +36,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,7 +51,7 @@ require __DIR__.'/auth.php';
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
-Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
+Route::get('flash-sale', [FeaturedProductController::class, 'index'])->name('flash-sale');
 
 /** Product route */
 Route::get('product', [ProductController::class, 'index'])->name('product.index');
@@ -95,7 +95,7 @@ Route::get('order-tracking', [OrderTrackController::class, 'index'])->name('orde
 
 
 
-Route::group(['middleware' =>['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
+Route::group(['middleware' =>['auth', 'verified'],  'as' => 'user.'], function(){
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile'); // user.profile
     Route::put('profile', [UserProfileController::class, 'updateProfile'])->name('profile.update'); // user.profile.update
@@ -105,18 +105,10 @@ Route::group(['middleware' =>['auth', 'verified'], 'prefix' => 'user', 'as' => '
     Route::resource('address', UserAddressController::class);
     /** Order Routes */
     Route::get('orders', [UserOrderController::class, 'index'])->name('orders.index');
-    Route::get('orders/show/{id}', [UserOrderController::class, 'show'])->name('orders.show');
+    Route::get('orders/{id}', [UserOrderController::class, 'show'])->name('orders.show');
 
     /** Wishlist routes */
     Route::resource('wishlist', WishlistController::class)->only(['index','store','destroy']);
-
-    Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
-
-
-
-
-    /** product review routes */
-    Route::post('review', [ReviewController::class, 'create'])->name('review.create');
 
     /** Checkout routes */
     Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
@@ -125,12 +117,6 @@ Route::group(['middleware' =>['auth', 'verified'], 'prefix' => 'user', 'as' => '
 
     /** Payment Routes */
     Route::get('payment', [PaymentController::class, 'index'])->name('payment');
-    Route::get('payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-
-    /** Paypal routes */
-    Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
-    Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
-    Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
 
     /** COD routes */
     Route::post('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');

@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\Category\SubCategoryController;
 use App\Http\Controllers\Backend\Category\SubChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CustomerListController;
-use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\FeaturedProductController;
 use App\Http\Controllers\Backend\Footer\FooterGridThreeController;
 use App\Http\Controllers\Backend\Footer\FooterGridTwoController;
 use App\Http\Controllers\Backend\Footer\FooterInfoController;
@@ -35,6 +35,7 @@ use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\UserController;
+use App\Models\FeaturedProduct;
 use Illuminate\Support\Facades\Route;
 
 
@@ -105,12 +106,9 @@ Route::get('seller-pending-products', [SellerProductController::class, 'pendingP
 Route::put('change-approve-status', [SellerProductController::class, 'changeApproveStatus'])->name('change-approve-status');
 
 /** Flash Sale Routes */
-Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
-Route::put('flash-sale', [FlashSaleController::class, 'update'])->name('flash-sale.update');
-Route::post('flash-sale/add-product', [FlashSaleController::class, 'addProduct'])->name('flash-sale.add-product');
-Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class, 'chageShowAtHomeStatus'])->name('flash-sale.show-at-home.change-status');
-Route::put('flash-sale/change-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale.change-status');
-Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destory'])->name('flash-sale.destory');
+Route::put('featured-product/show-at-home/status-change', [FeaturedProductController::class, 'changeShowAtHomeStatus'])->name('featured-product.show-at-home.change-status');
+Route::put('featured-product/change-status', [FeaturedProductController::class, 'changeStatus'])->name('featured-product.change-status');
+Route::resource('featured-product',FeaturedProductController::class)->except(['update','edit']);
 
 /** Coupon Routes */
 Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');

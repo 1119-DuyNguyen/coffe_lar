@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-<section id="wsus__dashboard">
 
     <div class="container-fluid">
       @include('frontend.dashboard.layouts.sidebar')
@@ -67,5 +66,4 @@
         </div>
       </div>
     </div>
-  </section>
 @endsection

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $logoSetting = LogoSetting::first();
 
             /** set time zone */
-            Config::set('app.timezone', $generalSetting->time_zone);
+//            Config::set('app.timezone', $generalSetting->time_zone);
 
 
             /** Share variable at all view */

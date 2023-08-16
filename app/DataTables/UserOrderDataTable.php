@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Order;
 use App\Models\VendorOrder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -21,9 +22,14 @@ class UserOrderDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function dataTable(QueryBuilder $query,Request $request): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($builder) use ($request) {
+                if (!empty($request->input('status'))) {
+                    $builder->where('order_status', $request->input('status'));
+                }
+            })
             ->addColumn('action', function($query){
                 $showBtn = "<a href='".route('user.orders.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
 
@@ -83,7 +89,7 @@ class UserOrderDataTable extends DataTable
      */
     public function query(Order $model): QueryBuilder
     {
-        return $model::where('user_id', Auth::user()->id)->newQuery();
+        return $model->where('user_id',Auth::user()->id)->newQuery();
     }
 
     /**
@@ -92,20 +98,11 @@ class UserOrderDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('vendororder-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('order-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(0);
     }
 
     /**
@@ -114,8 +111,8 @@ class UserOrderDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+
             Column::make('id'),
-            Column::make('invocie_id'),
             Column::make('customer'),
             Column::make('date'),
             Column::make('product_qty'),
@@ -127,10 +124,10 @@ class UserOrderDataTable extends DataTable
 
 
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(200)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(200)
+                ->addClass('text-center'),
         ];
     }
 
@@ -139,6 +136,6 @@ class UserOrderDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'VendorOrder_' . date('YmdHis');
+        return 'Order_' . date('YmdHis');
     }
 }
