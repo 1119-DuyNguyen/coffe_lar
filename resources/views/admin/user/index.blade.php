@@ -30,29 +30,7 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    <x-change-status :url="route('admin.user.change-status')">
 
-    <script>
-        $(document).ready(function(){
-            $('body').on('click', '.change-status', function(){
-                let isChecked = $(this).is(':checked');
-                let id = $(this).data('id');
-
-                $.ajax({
-                    url: "{{route('admin.admin-list.status-change')}}",
-                    method: 'PUT',
-                    data: {
-                        status: isChecked,
-                        id: id
-                    },
-                    success: function(data){
-                        toastr.success(data.message)
-                    },
-                    error: function(xhr, status, error){
-                        console.log(error);
-                    }
-                })
-
-            })
-        })
-    </script>
+    </x-change-status>
 @endpush

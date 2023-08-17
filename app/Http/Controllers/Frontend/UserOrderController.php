@@ -22,7 +22,7 @@ class UserOrderController extends Controller
 
     public function show(string $id)
     {
-        $order = Order::with('orderProducts')->findOrFail($id);
+        $order = Order::with('orderProducts.vendor')->findOrFail($id);
         return view('frontend.dashboard.order.show', compact('order'));
     }
 }

@@ -2,24 +2,19 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\FeaturedProductController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PageController;
-use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\OrderTrackController;
 use App\Http\Controllers\Frontend\ReviewController;
-use App\Http\Controllers\Frontend\UserAddressController;
-use App\Http\Controllers\Frontend\UserDashboardController;
-use App\Http\Controllers\Frontend\UserOrderController;
-use App\Http\Controllers\Frontend\UserProfileController;
 
-use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
 
 // frontend
 
@@ -95,29 +90,4 @@ Route::get('order-tracking', [OrderTrackController::class, 'index'])->name('orde
 
 
 
-Route::group(['middleware' =>['auth', 'verified'],  'as' => 'user.'], function(){
-    Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-    Route::get('profile', [UserProfileController::class, 'index'])->name('profile'); // user.profile
-    Route::put('profile', [UserProfileController::class, 'updateProfile'])->name('profile.update'); // user.profile.update
-    Route::post('profile', [UserProfileController::class, 'updatePassword'])->name('profile.update.password');
 
-    /** User Address Route */
-    Route::resource('address', UserAddressController::class);
-    /** Order Routes */
-    Route::get('orders', [UserOrderController::class, 'index'])->name('orders.index');
-    Route::get('orders/{id}', [UserOrderController::class, 'show'])->name('orders.show');
-
-    /** Wishlist routes */
-    Route::resource('wishlist', WishlistController::class)->only(['index','store','destroy']);
-
-    /** Checkout routes */
-    Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
-    Route::post('checkout/address-create', [CheckOutController::class, 'createAddress'])->name('checkout.address.create');
-    Route::post('checkout', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.store');
-
-    /** Payment Routes */
-    Route::get('payment', [PaymentController::class, 'index'])->name('payment');
-
-    /** COD routes */
-    Route::post('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');
-});

@@ -1,22 +1,16 @@
+
 <div class="main-sidebar sidebar-style-2">
     <div class="sidebar-brand sidebar-brand-sm">
         <a href="#">Admin Panel||</a>
     </div>
     <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
-        <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i
-                    class="fas fa-fire"></i>
-                <span>Dashboard</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.dashboard') }}">All</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('user.dashboard') }}">User</a></li>
 
-            </ul>
-        </li>
+        <li><a class="nav-link "
+               href="{{  route('admin.dashboard.index')  }}"> <i
+                    class="fas fa-fire"></i>
+                <span>Dashboard</span></a></li>
+
         <li class="menu-header">Ecommerce</li>
 
         <li
@@ -44,14 +38,6 @@
                 <li
                     class="">
                     <a class="nav-link" href="{{ route('admin.products.index') }}">Products</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a>
-                </li>
-
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.reviews.index') }}">Product Reviews</a></li>
 
             </ul>
         </li>

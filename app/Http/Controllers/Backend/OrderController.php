@@ -30,7 +30,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('orderProducts.vendor')->findOrFail($id);
+        $order = Order::with('orderProducts')->findOrFail($id);
         return view('admin.order.show', compact('order'));
     }
 
@@ -75,12 +75,4 @@ class OrderController extends Controller
         return response(['status' => 'success', 'message' => 'Updated Order Status']);
     }
 
-    public function changePaymentStatus(Request $request)
-    {
-        $paymentStatus = Order::findOrFail($request->id);
-        $paymentStatus->payment_status = $request->status;
-        $paymentStatus->save();
-
-        return response(['status' => 'success', 'message' => 'Updated Payment Status Successfully']);
-    }
 }

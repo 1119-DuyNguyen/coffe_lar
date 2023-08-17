@@ -76,7 +76,6 @@
                                         <th data-width="40">#</th>
                                         <th>Item</th>
                                         <th>Variant</th>
-                                        <th>Vendor Name</th>
                                         <th class="text-center">Price</th>
                                         <th class="text-center">Quantity</th>
                                         <th class="text-right">Totals</th>
@@ -89,7 +88,7 @@
                                             <td>{{++$loop->index}}</td>
                                             @if (isset($orderProduct->product->slug))
                                                 <td><a target="_blank"
-                                                       href="{{route('product-detail', $orderProduct->product->slug)}}">{{$orderProduct->product_name}}</a>
+                                                       href="{{route('product.show', $orderProduct->product->slug)}}">{{$orderProduct->product_name}}</a>
                                                 </td>
                                             @else
                                                 <td>{{$orderProduct->product_name}}</td>
@@ -101,7 +100,7 @@
 
                                                 @endforeach
                                             </td>
-                                            <td>{{$orderProduct->product->vendor->name}}</td>
+
 
                                             <td class="text-center">{{$settings->currency_icon}}{{$orderProduct->unit_price}} </td>
                                             <td class="text-center">{{$orderProduct->qty}}</td>

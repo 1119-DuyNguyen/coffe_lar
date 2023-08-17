@@ -4,14 +4,20 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Mail\AccountCreatedMail;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Traits\CrudTrait;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ManageUserController extends Controller
 {
+    use CrudTrait;
+
     public function index(UserListDataTable $dataTable)
     {
         return $dataTable->render('admin.user.index');
@@ -21,6 +27,7 @@ class ManageUserController extends Controller
     {
         return view('admin.user.create');
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -32,7 +39,7 @@ class ManageUserController extends Controller
 
         $user = new User();
 
-        if($request->role === 'user'){
+        if ($request->role === 'user') {
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
@@ -44,7 +51,7 @@ class ManageUserController extends Controller
 
             toastr('Created Successfully!', 'success', 'success');
             return redirect()->back();
-        }elseif ($request->role === 'vendor'){
+        } elseif ($request->role === 'vendor') {
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
@@ -54,7 +61,7 @@ class ManageUserController extends Controller
 
             $vendor = new Vendor();
             $vendor->banner = 'uploads/1343.jpg';
-            $vendor->shop_name = $request->name.' Shop';
+            $vendor->shop_name = $request->name . ' Shop';
             $vendor->phone = '12321312';
             $vendor->email = 'test@gmail.com';
             $vendor->address = 'Usa';
@@ -67,7 +74,7 @@ class ManageUserController extends Controller
 
             toastr('Created Successfully!', 'success', 'success');
             return redirect()->back();
-        }elseif($request->role === 'admin'){
+        } elseif ($request->role === 'admin') {
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
@@ -77,7 +84,7 @@ class ManageUserController extends Controller
 
             $vendor = new Vendor();
             $vendor->banner = 'uploads/1343.jpg';
-            $vendor->shop_name = $request->name.' Shop';
+            $vendor->shop_name = $request->name . ' Shop';
             $vendor->phone = '12321312';
             $vendor->email = 'test@gmail.com';
             $vendor->address = 'Usa';
@@ -91,5 +98,33 @@ class ManageUserController extends Controller
             toastr('Created Successfully!', 'success', 'success');
             return redirect()->back();
         }
+    }
+
+    protected function model(): string
+    {
+        return User::class;
+    }
+
+    protected function getFormRequest(): FormRequest
+    {
+        return new ProfileUpdateRequest();
+    }
+
+
+    public function destory(string $id)
+    {
+        $admin = User::findOrFail($id);
+
+        $products = Product::where('vendor_id', $admin->vendor->id)->get();
+
+        if (count($products) > 0) {
+            return response(['status' => 'error', 'message' => 'Admin can\'t be deleted please ban the user insted of delete!']);
+        }
+
+        Vendor::where('user_id', $admin->id)->delete();
+        $admin->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted successfully']);
+
     }
 }

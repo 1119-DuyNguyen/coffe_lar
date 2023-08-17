@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Route;
 
 /** Admin Routes */
 
-Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard.index');
 
 /** Profile Routes */
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
@@ -96,17 +96,10 @@ Route::delete('products-variant-item/{variantItemId}', [ProductVariantItemContro
 
 Route::put('products-variant-item-status', [ProductVariantItemController::class, 'chageStatus'])->name('products-variant-item.chages-status');
 
-/** reviews routes */
-Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
-Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
 
-/** Seller product routes */
-Route::get('seller-products', [SellerProductController::class, 'index'])->name('seller-products.index');
-Route::get('seller-pending-products', [SellerProductController::class, 'pendingProducts'])->name('seller-pending-products.index');
-Route::put('change-approve-status', [SellerProductController::class, 'changeApproveStatus'])->name('change-approve-status');
 
-/** Flash Sale Routes */
-Route::put('featured-product/show-at-home/status-change', [FeaturedProductController::class, 'changeShowAtHomeStatus'])->name('featured-product.show-at-home.change-status');
+/** featured-product */
+Route::put('featured-product/show-at-home/change-status', [FeaturedProductController::class, 'changeShowAtHomeStatus'])->name('featured-product.show-at-home.change-status');
 Route::put('featured-product/change-status', [FeaturedProductController::class, 'changeStatus'])->name('featured-product.change-status');
 Route::resource('featured-product',FeaturedProductController::class)->except(['update','edit']);
 
@@ -116,8 +109,7 @@ Route::resource('coupons', CouponController::class);
 
 
 /** Order routes */
-Route::put('payment/status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
-Route::put('order/status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
+Route::put('order/status', [OrderController::class, 'changeOrderStatus'])->name('order.change-status');
 
 Route::resource('order', OrderController::class);
 
@@ -136,13 +128,8 @@ Route::delete('subscribers/{id}', [SubscribersController::class, 'destory'])->na
 Route::post('subscribers-send-mail', [SubscribersController::class, 'sendMail'])->name('subscribers-send-mail');
 
 
-/** coustomer list routes */
-Route::get('admin-list', [UserController::class, 'index'])->name('admin-list.index');
-Route::put('admin-list/status-change', [UserController::class, 'changeStatus'])->name('admin-list.status-change');
-Route::delete('admin-list/{id}', [UserController::class, 'destory'])->name('admin-list.destory');
-
-
 /** manage user routes */
+Route::put('user/change-status', [ManageUserController::class, 'changeStatus'])->name('user.change-status');
 Route::resource('user', ManageUserController::class);
 
 

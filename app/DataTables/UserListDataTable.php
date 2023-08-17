@@ -25,14 +25,16 @@ class UserListDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
                 if($query->id != 1){
-                    $deleteBtn = "<a href='".route('admin.admin-list.destory', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                    $deleteBtn = "<a href='".route('admin.user.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                     return $deleteBtn;
                 }
             })
+
+
             ->addColumn('status', function($query){
                 if($query->id != 1){
-                    if($query->status == 'active'){
+                    if($query->status == true){
                         $button = '<label class="custom-switch mt-2">
                             <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status" >
                             <span class="custom-switch-indicator"></span>
@@ -80,7 +82,7 @@ class UserListDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('email'),
-            Column::make('role'),
+            Column::make('role_id'),
             Column::make('status'),
             Column::computed('action')
             ->exportable(false)

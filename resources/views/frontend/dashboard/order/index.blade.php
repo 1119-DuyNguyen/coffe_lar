@@ -9,7 +9,7 @@
         <div class="row mb-4">
             <div class="col-12">
                 <div class="form-group">
-                    <form action="{{route('user.orders.index')}}" method="get">
+                    <form action="{{route('user.order.index')}}" method="get">
 
                         <select class="form-control" name="status" onchange="this.closest('form').submit();">
                             <option value=""> All</option>

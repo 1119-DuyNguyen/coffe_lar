@@ -20,15 +20,21 @@
                         {{-- <li><a href="#"><i class="fas fa-star"></i> hot promotions</a></li> --}}
 
                         @foreach ($categories as $category)
-                            <li><a class="{{count($category->subCategories) > 0 ? 'wsus__droap_arrow' : ''}}" href="{{route('product.index', ['category' => $category->slug])}}"><i class="{{$category->icon}}"></i> {{$category->name}} </a>
+                            <li><a class="{{count($category->subCategories) > 0 ? 'wsus__droap_arrow' : ''}}"
+                                   href="{{route('product.index', ['category' => $category->slug])}}"><i
+                                        class="{{$category->icon}}"></i> {{$category->name}} </a>
                                 @if(count($category->subCategories) > 0)
                                     <ul class="wsus_menu_cat_droapdown">
                                         @foreach ($category->subCategories as $subCategory)
-                                            <li><a href="{{route('product.index', ['subcategory' => $subCategory->slug])}}">{{$subCategory->name}} <i class="{{count($subCategory->childCategories) > 0 ? 'fas fa-angle-right' : ''}}"></i></a>
+                                            <li>
+                                                <a href="{{route('product.index', ['subcategory' => $subCategory->slug])}}">{{$subCategory->name}}
+                                                    <i class="{{count($subCategory->childCategories) > 0 ? 'fas fa-angle-right' : ''}}"></i></a>
                                                 @if(count($subCategory->childCategories) > 0)
                                                     <ul class="wsus__sub_category">
                                                         @foreach ($subCategory->childCategories as $childCategory)
-                                                            <li><a href="{{route('product.index', ['childcategory' => $childCategory->slug])}}">{{$childCategory->name}}</a> </li>
+                                                            <li>
+                                                                <a href="{{route('product.index', ['childcategory' => $childCategory->slug])}}">{{$childCategory->name}}</a>
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 @endif
@@ -43,7 +49,7 @@
                         {{-- <li><a href="#"><i class="far fa-gem"></i> View All Categories</a></li> --}}
                     </ul>
                     <ul class="wsus__menu_item">
-                        <li><a  class="" href="{{url('/')}}">home</a></li>
+                        <li><a class="" href="{{url('/')}}">home</a></li>
 
                         <li><a class="" href="{{route('featured.product.index')}}">featured product</a></li>
                         <li><a class="" href="{{route('about')}}">about</a></li>
@@ -53,16 +59,25 @@
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
 
-                        <li><a href="{{route('order-tracking.index')}}">track order</a></li>
                         @if (auth()->check())
-{{--                            @if (auth()->user()->role === 'user')--}}
-{{--                                <li><a href="{{route('user.dashboard')}}">my account</a></li>--}}
-{{--                            @elseif (auth()->user()->role === 'admin')--}}
-                                <li><a href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
-                            <li><a class="" href="{{route('user.orders.index')}}"><i class="fas fa-file-invoice"></i> Orders</a></li>
+                            {{--                            @if (auth()->user()->role === 'user')--}}
+                            {{--                                <li><a href="{{route('user.dashboard')}}">my account</a></li>--}}
+                            {{--                            @elseif (auth()->user()->role === 'admin')--}}
+                            <li>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <a href="" onclick="this.closest('form').submit();return false;"><i
+                                            class="fas fa-sign-out-alt"></i>logout</a>
+
+                                </form>
+                            </li>
+                            <li><a href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i> Dashboard</a>
+                            </li>
+                            <li><a class="" href="{{route('user.order.index')}}"><i class="fas fa-file-invoice"></i>
+                                    Orders</a></li>
 
 
-{{--                            @endif--}}
+                            {{--                            @endif--}}
                         @else
 
                             <li><a href="{{route('login')}}">login</a></li>
@@ -89,28 +104,35 @@
         </span></a></li>
 
         @if (auth()->check())
-{{--            Dashboard--}}
+            {{--            Dashboard--}}
             <li><a href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i>
                 </a></li>
-{{--            Orders--}}
-            <li><a class="" href="{{route('user.orders.index')}}"><i class="fas fa-file-invoice"></i>
-                 </a></li>
-{{--            <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"--}}
-{{--                   data-bs-target="#flush-collapseThree" aria-expanded="farse"--}}
-{{--                   aria-controls="flush-collapseThree">shop</a>--}}
-{{--                <div id="flush-collapseThree" class="accordion-collapse collapse"--}}
-{{--                     data-bs-parent="#accordionFlushExample2">--}}
-{{--                    <div class="accordion-body">--}}
-{{--                        <ul>--}}
-{{--                            <li><a href="{{route('user.dashboard')}}"><i class="far fa-user"></i></a></li>--}}
+            {{--            Orders--}}
+            <li><a class="" href="{{route('user.order.index')}}"><i class="fas fa-file-invoice"></i>
+                </a></li>
+            <li>
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <a href="" onclick="this.closest('form)" .submit();return false;><i class="fas fa-sign-out-alt"></i></a>
 
-{{--                            <li><a href="#">wemen's</a></li>--}}
-{{--                            <li><a href="#">kid's</a></li>--}}
-{{--                            <li><a href="#">others</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </li>--}}
+                </form>
+            </li>
+            {{--            <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"--}}
+            {{--                   data-bs-target="#flush-collapseThree" aria-expanded="farse"--}}
+            {{--                   aria-controls="flush-collapseThree">shop</a>--}}
+            {{--                <div id="flush-collapseThree" class="accordion-collapse collapse"--}}
+            {{--                     data-bs-parent="#accordionFlushExample2">--}}
+            {{--                    <div class="accordion-body">--}}
+            {{--                        <ul>--}}
+            {{--                            <li><a href="{{route('user.dashboard')}}"><i class="far fa-user"></i></a></li>--}}
+
+            {{--                            <li><a href="#">wemen's</a></li>--}}
+            {{--                            <li><a href="#">kid's</a></li>--}}
+            {{--                            <li><a href="#">others</a></li>--}}
+            {{--                        </ul>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </li>--}}
 
         @else
             <li><a href="{{route('login')}}"><i class="far fa-user"></i></a></li>
@@ -126,11 +148,13 @@
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                    role="tab" aria-controls="pills-home" aria-selected="true">Categories</button>
+                    role="tab" aria-controls="pills-home" aria-selected="true">Categories
+            </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                    role="tab" aria-controls="pills-profile" aria-selected="farse">main menu</button>
+                    role="tab" aria-controls="pills-profile" aria-selected="farse">main menu
+            </button>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
@@ -140,9 +164,12 @@
                     <ul class="wsus_mobile_menu_category">
                         @foreach ($categories as $categoryItem)
                             <li>
-                                <a href="#" class="{{count($categoryItem->subCategories) > 0 ? 'accordion-button' : ''}} collapsed" data-bs-toggle="collapse"
+                                <a href="#"
+                                   class="{{count($categoryItem->subCategories) > 0 ? 'accordion-button' : ''}} collapsed"
+                                   data-bs-toggle="collapse"
                                    data-bs-target="#flush-collapseThreew-{{$loop->index}}" aria-expanded="farse"
-                                   aria-controls="flush-collapseThreew-{{$loop->index}}"><i class="{{$categoryItem->icon}}"></i> {{$categoryItem->name}}</a>
+                                   aria-controls="flush-collapseThreew-{{$loop->index}}"><i
+                                        class="{{$categoryItem->icon}}"></i> {{$categoryItem->name}}</a>
 
                                 @if(count($categoryItem->subCategories) > 0)
                                     <div id="flush-collapseThreew-{{$loop->index}}" class="accordion-collapse collapse"
@@ -173,8 +200,6 @@
                         <li><a href="{{route('contact')}}">contact</a></li>
 
 
-
-                        <li><a href="{{route('order-tracking.index')}}">track order</a></li>
                         <li><a href="{{route('featured.product.index')}}">featured product</a></li>
                     </ul>
                 </div>
@@ -190,12 +215,12 @@
 @push('scripts')
     <script>
         // for single sidebar menu
-        var url =document.location.protocol +"//"+ document.location.hostname + document.location.pathname;
+        var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
 
         // multiple
         var navActive = Array.from(document.querySelectorAll('ul.wsus__menu_item a')).filter(function (a) {
 
-            return url==a.href;
+            return url == a.href;
         });
         navActive.forEach(nav => {
             nav.classList.add('active');

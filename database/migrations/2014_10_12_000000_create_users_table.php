@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('image')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->boolean('status')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

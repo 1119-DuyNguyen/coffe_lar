@@ -6,7 +6,7 @@
             <h1>Dashboard</h1>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index') }}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
@@ -23,7 +23,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index',['status'=>'pending']) }}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
@@ -41,7 +41,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index') }}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
@@ -59,7 +59,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index',['status'=>'pending']) }}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
@@ -77,7 +77,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index',['status'=>"canceled"]) }}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-danger">
@@ -95,7 +95,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index',['status'=>"delivered"]) }}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-danger">
@@ -112,7 +112,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
 
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
@@ -130,7 +130,7 @@
 
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
 
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
@@ -148,7 +148,7 @@
 
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
 
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-info">
@@ -166,26 +166,10 @@
 
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <a href="{{route('admin.reviews.index')}}">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-info">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Reviews</h4>
-                            </div>
-                            <div class="card-body">
-                                {{ $totalReview }}
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
 
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{route('admin.brand.index')}}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-info">
@@ -203,7 +187,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{route('admin.category.index')}}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-info">
@@ -222,7 +206,7 @@
             </div>
 
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{route('admin.subscribers.index')}}">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-warning">
@@ -239,7 +223,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="#">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-warning">
