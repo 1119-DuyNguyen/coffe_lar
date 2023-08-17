@@ -58,7 +58,7 @@
 {{--                            @if (auth()->user()->role === 'user')--}}
 {{--                                <li><a href="{{route('user.dashboard')}}">my account</a></li>--}}
 {{--                            @elseif (auth()->user()->role === 'admin')--}}
-                                <li><a href="{{route('admin.dashboard')}}"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                                <li><a href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
                             <li><a class="" href="{{route('user.orders.index')}}"><i class="fas fa-file-invoice"></i> Orders</a></li>
 
 
@@ -90,7 +90,7 @@
 
         @if (auth()->check())
 {{--            Dashboard--}}
-            <li><a href="{{route('admin.dashboard')}}"><i class="fas fa-chart-bar"></i>
+            <li><a href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i>
                 </a></li>
 {{--            Orders--}}
             <li><a class="" href="{{route('user.orders.index')}}"><i class="fas fa-file-invoice"></i>
@@ -102,7 +102,7 @@
 {{--                     data-bs-parent="#accordionFlushExample2">--}}
 {{--                    <div class="accordion-body">--}}
 {{--                        <ul>--}}
-{{--                            <li><a href="{{route('admin.dashboard')}}"><i class="far fa-user"></i></a></li>--}}
+{{--                            <li><a href="{{route('user.dashboard')}}"><i class="far fa-user"></i></a></li>--}}
 
 {{--                            <li><a href="#">wemen's</a></li>--}}
 {{--                            <li><a href="#">kid's</a></li>--}}

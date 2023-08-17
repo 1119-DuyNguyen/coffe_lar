@@ -28,16 +28,14 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         //
         try {
-            $generalSetting = GeneralSetting::first();
-            $logoSetting = LogoSetting::first();
-
             /** set time zone */
 //            Config::set('app.timezone', $generalSetting->time_zone);
 
 
             /** Share variable at all view */
-            View::composer('*', function($view) use ($generalSetting, $logoSetting){
-
+            View::composer('*', function($view) {
+                $generalSetting = GeneralSetting::first();
+                $logoSetting = LogoSetting::first();
                 $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
             });
         } catch (Exception $e) {
