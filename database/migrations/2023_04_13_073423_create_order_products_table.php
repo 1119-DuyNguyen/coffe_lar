@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('variant_total')->nullable();
             $table->string('unit_price');
             $table->integer('qty');
-
+            $table->unique(['order_id', 'product_id']);
             $table->timestamps();
         });
     }
