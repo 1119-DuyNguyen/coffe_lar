@@ -61,7 +61,7 @@
                         <a class="wsis__del_icon remove_sidebar_product" data-id="{{$sidebarProduct->id}}" href="#" ><i class="fas fa-minus-circle"></i></a>
                     </div>
                     <div class="wsus__cart_text">
-                        <a class="wsus__cart_title" href="{{route('product-detail', $sidebarProduct->attributes->slug)}}">{{$sidebarProduct->name}}</a>
+                        <a class="wsus__cart_title" href="{{route('product.show', $sidebarProduct->attributes->slug)}}">{{$sidebarProduct->name}}</a>
                         <p>
                             {{$settings->currency_icon}}{{$sidebarProduct->price}}
                         </p>

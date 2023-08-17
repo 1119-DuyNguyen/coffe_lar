@@ -12,6 +12,6 @@ class FeaturedProductController extends Controller
     public function index()
     {
         $flashSaleItems = FeaturedProduct::with('product')->where('status', 1)->orderBy('id', 'ASC')->paginate(10);
-        return view('frontend.pages.flash-sale', compact( 'flashSaleItems'));
+        return view('frontend.pages.featured-product', compact( 'flashSaleItems'));
     }
 }

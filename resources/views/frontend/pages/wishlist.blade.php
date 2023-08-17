@@ -49,7 +49,7 @@
                                             <form method="POST" action="{{route('user.wishlist.destroy', $item->id)}}">
                                                 @csrf
                                                 <a href="#" onclick="this.closest('form').submit(); return false;"><i
-                                                        class="far fa-times"></i></a>
+                                                        class="fas fa-times"></i></a>
                                                 <input type="hidden" name="_method" value="DELETE">
                                             </form>
 

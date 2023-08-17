@@ -22,8 +22,7 @@ class HomeController extends Controller
     public function index()
     {
         $sliders = Slider::where('status', 1)->orderBy('serial', 'asc')->get();
-        $featuredProducts = FeaturedProduct::with('product.reviews')
-            ->where('show_at_home', 1)
+        $featuredProducts = FeaturedProduct::where('show_at_home', 1)
             ->where('status', 1)->get();
         $brands = Brand::where('status', 1)->where('is_featured', 1)->get();
         $typeBaseProducts = $this->getTypeBaseProduct();

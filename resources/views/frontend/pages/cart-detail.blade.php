@@ -80,7 +80,7 @@
                                         <td class="wsus__pro_icon">
                                             <form method="POST" action="{{route('cart.destroy', $item->id)}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger" ><i class="far fa-times"></i></button>
+                                                <button type="submit" class="btn btn-danger" ><i class="fas fa-times"></i></button>
                                                 <input type="hidden" name="_method" value="DELETE">
 {{--                                            <a href="javascript:void(0);" onclick="this.closest('form').submit(); return false;"></a>--}}
                                             </form>

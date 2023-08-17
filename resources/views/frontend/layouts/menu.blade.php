@@ -45,7 +45,7 @@
                     <ul class="wsus__menu_item">
                         <li><a  class="" href="{{url('/')}}">home</a></li>
 
-                        <li><a class="" href="{{route('flash-sale')}}">flash Sale</a></li>
+                        <li><a class="" href="{{route('featured.product.index')}}">featured product</a></li>
                         <li><a class="" href="{{route('about')}}">about</a></li>
                         <li><a class="" href="{{route('contact')}}">contact</a></li>
 
@@ -77,7 +77,7 @@
     MOBILE MENU START
 ==============================-->
 <section id="wsus__mobile_menu">
-    <span class="wsus__mobile_menu_close"><i class="far fa-times"></i></span>
+    <span class="wsus__mobile_menu_close"><i class="fas fa-times"></i></span>
     <ul class="wsus__mobile_menu_header_icon d-inline-flex">
 
         <li><a href="{{route('user.wishlist.index')}}"><i class="far fa-heart"></i><span id="wishlist_count">
@@ -175,7 +175,7 @@
 
 
                         <li><a href="{{route('order-tracking.index')}}">track order</a></li>
-                        <li><a href="{{route('flash-sale')}}">flash sale</a></li>
+                        <li><a href="{{route('featured.product.index')}}">featured product</a></li>
                     </ul>
                 </div>
             </div>

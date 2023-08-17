@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DB::table($name)->truncate();
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        $this->call(PermissionRoleSeeder::class);
         $this->call(UserSeeder::class);
 //        $this->call(AdminProfileSeeder::class);
 //        $this->call(VendorShopProfileSeeder::class);

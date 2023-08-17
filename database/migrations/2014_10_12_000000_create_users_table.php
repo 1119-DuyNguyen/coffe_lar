@@ -16,11 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->text('image')->nullable();
-            $table->text('address')->nullable();
-            $table->text('description')->nullable();
-            $table->text('fb_link')->nullable();
-            $table->text('tw_link')->nullable();
-            $table->text('insta_link')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -51,7 +51,7 @@ require __DIR__.'/auth.php';
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
-Route::get('flash-sale', [FeaturedProductController::class, 'index'])->name('flash-sale');
+Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured.product.index');
 
 /** Product route */
 Route::get('product', [ProductController::class, 'index'])->name('product.index');
