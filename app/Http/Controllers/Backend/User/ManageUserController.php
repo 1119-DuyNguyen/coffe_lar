@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\User;
 
 use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
@@ -13,6 +13,7 @@ use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use function App\Http\Controllers\Backend\toastr;
 
 class ManageUserController extends Controller
 {

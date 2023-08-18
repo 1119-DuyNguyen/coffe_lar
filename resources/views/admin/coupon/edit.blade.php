@@ -17,7 +17,7 @@
 
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.coupons.update', $coupon->id)}}" method="POST">
+                    <form action="{{route('admin.coupon.update', $coupon->id)}}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

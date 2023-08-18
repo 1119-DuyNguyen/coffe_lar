@@ -15,7 +15,7 @@
                   <div class="card-header">
                     <h4>All Products</h4>
                     <div class="card-header-action">
-                        <a href="{{route('admin.products.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
+                        <a href="{{route('admin.product.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
                     </div>
                   </div>
                   <div class="card-body">

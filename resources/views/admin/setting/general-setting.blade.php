@@ -1,7 +1,7 @@
 <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 <div class="card border">
     <div class="card-body">
-        <form action="{{route('admin.generale-setting-update')}}" method="POST">
+        <form action="{{route('admin.general-setting.update')}}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">

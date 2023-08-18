@@ -16,7 +16,6 @@ use App\Http\Controllers\Backend\Footer\FooterGridThreeController;
 use App\Http\Controllers\Backend\Footer\FooterGridTwoController;
 use App\Http\Controllers\Backend\Footer\FooterInfoController;
 use App\Http\Controllers\Backend\Footer\FooterSocialController;
-use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Payment\CodSettingController;
 use App\Http\Controllers\Backend\Payment\PaymentSettingController;
@@ -34,8 +33,9 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\User\ManageRoleController;
+use App\Http\Controllers\Backend\User\ManageUserController;
 use App\Http\Controllers\Backend\UserController;
-use App\Models\FeaturedProduct;
 use Illuminate\Support\Facades\Route;
 
 
@@ -72,7 +72,7 @@ Route::resource('brand', BrandController::class);
 
 /** Products routes */
 Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
-Route::resource('products', ProductController::class);
+Route::resource('product', ProductController::class);
 
 
 /** Products image gallery route */
@@ -104,8 +104,8 @@ Route::put('featured-product/change-status', [FeaturedProductController::class, 
 Route::resource('featured-product',FeaturedProductController::class)->except(['update','edit']);
 
 /** Coupon Routes */
-Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
-Route::resource('coupons', CouponController::class);
+Route::put('coupon/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
+Route::resource('coupon', CouponController::class);
 
 
 /** Order routes */
@@ -115,10 +115,10 @@ Route::resource('order', OrderController::class);
 
 
 /** settings routes */
-Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-Route::put('generale-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('generale-setting-update');
-Route::put('email-setting-update', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
-Route::put('logo-setting-update', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting-update');
+Route::get('setting', [SettingController::class, 'edit'])->name('setting.index');
+Route::put('general-setting', [SettingController::class, 'update'])->name('general-setting.update');
+Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
+Route::put('logo-setting', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting.update');
 
 
 
@@ -131,6 +131,8 @@ Route::post('subscribers-send-mail', [SubscribersController::class, 'sendMail'])
 /** manage user routes */
 Route::put('user/change-status', [ManageUserController::class, 'changeStatus'])->name('user.change-status');
 Route::resource('user', ManageUserController::class);
+//manage role
+Route::resource('role', ManageRoleController::class);
 
 
 /** about routes */

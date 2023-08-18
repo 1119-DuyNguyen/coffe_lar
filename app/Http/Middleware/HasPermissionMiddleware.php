@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Services\GateService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,22 +20,21 @@ class HasPermissionMiddleware
 //        if($request->user()->role !== $role){
 //            return redirect()->route('dashboard');
 //        }
-        $nameRoute= $request->route()->getName();
-        $last_word_start = strrpos($nameRoute, '.') + 1; // +1 so we don't include the space in our result
-        $last_word = substr($nameRoute, $last_word_start); // $last_word = PHP.
-        switch ($last_word){
-            case 'change-status': $nameRoute=substr_replace($nameRoute,'update',$last_word_start); break;
-        }
-        if(in_array($last_word,['index','show','store','update','destroy']))
-        {
-            if($request->user()->can($nameRoute)) {
-                return $next($request);
-            }
+//        return $next($request);
 
-            abort(403);
-        }
-        else {
+        $routeName= GateService::getGateDefineFromRouteName($request->route()->getName());
+
+        if($request->user()->can($routeName)) {
             return $next($request);
         }
+
+        abort(403);
+//        if(in_array($last_word,['index','show','store','update','destroy']))
+//        {
+//
+//        }
+//        else {
+//            return $next($request);
+//        }
     }
 }

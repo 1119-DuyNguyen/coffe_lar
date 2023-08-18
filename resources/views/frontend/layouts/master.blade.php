@@ -47,6 +47,10 @@
         .dataTables_wrapper{
             overflow-x: auto;
         }
+        table.table.dataTable
+        {
+            width: 100% !important;
+        }
     </style>
     <!-- <link rel="stylesheet" href="{{asset('front/cssrtl.css')}}> -->
 </head>

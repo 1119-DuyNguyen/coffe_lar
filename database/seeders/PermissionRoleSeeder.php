@@ -29,21 +29,23 @@ class PermissionRoleSeeder extends Seeder
             'admin.user',
             'admin.brand',
             'admin.category',
-            'admin.subcategory',
+            'admin.sub-category',
+            'admin.child-category',
             'admin.product',
             'admin.slider',
             'admin.coupon',
             'admin.order',
             'admin.featured-product',
+            'admin.role'
         ];
         foreach ($arrayPermission as $per) {
             $perIndex = $this->createRolePermission($superAdminRole, $per . '.index');
-            $perAdd = $this->createRolePermission($superAdminRole, $per . '.add');
+            $perStore = $this->createRolePermission($superAdminRole, $per . '.store');
             $perShow = $this->createRolePermission($superAdminRole, $per . '.show');
             $perUpdate = $this->createRolePermission($superAdminRole, $per . '.update');
             $perDel = $this->createRolePermission($superAdminRole, $per . '.delete');
         }
-
+        $this->createRolePermission($superAdminRole, 'admin.setting.index');
         $this->createRolePermission($superAdminRole, 'admin.dashboard.index');
         $this->createRolePermission($superAdminRole, 'footer.edit');
         $this->createRolePermission($superAdminRole, 'setting.edit');

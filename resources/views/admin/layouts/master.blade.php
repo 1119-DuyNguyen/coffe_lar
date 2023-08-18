@@ -3,7 +3,7 @@
 @foreach ($errors->all() as $error)
 @php
     toast($error, "error")->autoClose('8000');
-@endphp
+@endphp////
 @endforeach
 
 @endif
@@ -15,7 +15,8 @@
     <title>General Dashboard &mdash; Stisla</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{asset("backend/assets/modules/bootstrap/css/bootstrap.min.css")}}">
-    <link rel="stylesheet" href="{{asset("backend/assets/modules/fontawesome/css/all.min.css")}}">
+{{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/fontawesome/css/all.min.css")}}">--}}
+    <link rel="stylesheet" href="{{asset('lib/fontawesome/css/all.min.css')}}">
 
     <!-- CSS Libraries -->
     {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/jqvmap/dist/jqvmap.min.css")}}">--}}
@@ -57,6 +58,10 @@
     <style>
         .dataTables_wrapper{
             overflow-x: auto;
+        }
+        table.table.dataTable
+        {
+        width: 100% !important;
         }
     </style>
     <!-- /END GA -->

@@ -13,7 +13,7 @@ class SettingController extends Controller
 {
     use ImageUploadTrait;
 
-    public function index()
+    public function edit()
     {
         $generalSettings = GeneralSetting::first();
         $emailSettings = EmailConfiguration::first();

@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
     <div class="card border">
         <div class="card-body">
-            <form action="{{route('admin.logo-setting-update')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.logo-setting.update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -22,7 +22,7 @@
 
                 </div>
 
-            
+
 
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

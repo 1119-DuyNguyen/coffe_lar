@@ -4,7 +4,7 @@
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
-            <h1>Coupons</h1>
+            <h1>Admin list</h1>
           </div>
 
           <div class="section-body">
@@ -13,10 +13,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>All Coupons</h4>
-                    <div class="card-header-action">
-                        <a href="{{route('admin.coupon.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
-                    </div>
+                    <h4>All Admin</h4>
                   </div>
                   <div class="card-body">
                     {{ $dataTable->table() }}
@@ -33,6 +30,7 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-    <x-change-status :url="route('admin.coupons.change-status')"></x-change-status>
+    <x-change-status :url="route('admin.user.change-status')">
 
+    </x-change-status>
 @endpush

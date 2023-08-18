@@ -1,132 +1,135 @@
-
+@php use App\Http\Services\GateService;use Illuminate\Support\Facades\Gate; @endphp
 <div class="main-sidebar sidebar-style-2">
+    <div class="sidebar-brand">
+        <a href="index.html">Admin Panel</a>
+    </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="#">Admin Panel||</a>
+        <a href="#">AD</a>
     </div>
     <ul class="sidebar-menu">
-        <li class="menu-header">Dashboard</li>
+        {{--        [ name=>str, title=>str,child=>[]]--}}
 
-        <li><a class="nav-link "
-               href="{{  route('admin.dashboard.index')  }}"> <i
-                    class="fas fa-fire"></i>
-                <span>Dashboard</span></a></li>
+        @foreach([
+    ['name'=>'Dashboard','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index' ,'title'=>'Dashboard','child'=>[]],
+    ['name'=>'User','icon'=>'<i class="fas fa-user"></i>','child'=>
+    [
+        ['name'=>'User List','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.user.index'],
+        ['name'=>'Create User','icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.user.create' ],
+    ]],
+        ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','child'=>
+    [
+        ['name'=>'Role List','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.role.index'],
+        ['name'=>'Create Role','icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.role.create' ],
+    ]],
+    ['title'=>'Ecommerce'],
+    ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','child'=>
+    [
+        ['name'=>'Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
+        ['name'=>'Sub Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.sub-category.index' ],
+        ['name'=>'Child Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.child-category.index']
+    ]],
+    ['name'=>'Manage Products','icon'=>'<i class="fas fa-box"></i>','child'=>[
+        ['name'=>'Brands','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.brand.index' ],
+        ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'  ],
+        ['name'=>'Featured Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.featured-product.index'],
+    ['name'=>'Coupons','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.coupon.index' ],
+]],
 
-        <li class="menu-header">Ecommerce</li>
+    ['name'=>'Orders','icon'=>'<i class="fas fa-cart-plus"></i>','routeName'=>'admin.order.index' ,'child'=>[]],
+    ['title'=>'Settings & More'],
 
-        <li
-            class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-list"></i>
-                <span>Manage Categories</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.category.index') }}">Category</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.sub-category.index') }}">Sub Category</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.child-category.index') }}">Child Category</a></li>
+   ['name'=>'Settings','icon'=>'<i class="fas fa-wrench"></i>','routeName'=>'admin.setting.index'  ],
+    ['name'=>'Manage Website','icon'=>'<i class="fas fa-pager"></i>','child'=>[
+                ['name'=>'Slider','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.slider.index' ],
 
-            </ul>
-        </li>
+                ['name'=>'About Page','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.about.index' ],
+        ['name'=>'Terms Page','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.terms-and-conditions.index'  ],
 
-        <li
-            class="dropdown ">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-box"></i>
-                <span>Manage Products</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.brand.index') }}">Brands</a></li>
-                <li
-                    class="">
-                    <a class="nav-link" href="{{ route('admin.products.index') }}">Products</a></li>
+]],
 
-            </ul>
-        </li>
+    ] as $nav
+    )
 
+            {{--            <li><a class="nav-link "--}}
+            {{--                   href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user"></i>--}}
+            {{--                    <span>Subscribers</span></a></li>--}}
+            @if(isset($nav['title']))
+                <li class="menu-header">{{$nav['title']}}</li>
+            @endif
+            @if(isset($nav['name']))
+                @if(empty($nav['child']))
+                    @can(GateService::getGateDefineFromRouteName($nav['routeName']))
+                        <li><a class="nav-link "
+                               href="{{route($nav['routeName'])}}">
+                                {!!  $nav['icon']!!}
+                                <span>{{$nav['name']}}</span></a></li>
+                    @endcan
+                @else
+                    <li
+                        class="dropdown">
 
-        <li
-            class="dropdown ">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-cart-plus"></i>
-                <span>Orders</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.order.index') }}">All Orders</a></li>
-            </ul>
-        </li>
+                        @php
+                            $nameRouteList=[];
+                            $html='';
+                            foreach($nav['child'] as $child)
+                                {
+                            $nameRoute=GateService::getGateDefineFromRouteName($child['routeName']);
+                            $nameRouteList[]=$nameRoute;
+                            if(Gate::allows($nameRoute))
+                                {
+                            $html.='                                 <li><a class="nav-link "
+                                           href="'.route($child['routeName']).'">
 
+                                            <span>'.$child['icon'].$child['name'].'</span></a></li>';
 
-        <li
-            class="dropdown ">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                <span>Ecommerce</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.featured-product.index') }}">Featured Product</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.coupons.index') }}">Coupons</a></li>
+                                }
+                                }
+                        @endphp
+                        @canany($nameRouteList)
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                {!!  $nav['icon']!!}
+                                <span>    {{$nav['name']}}</span></a>
+                            <ul class="dropdown-menu">
+                                {!! $html !!}
+                                {{--                            @foreach($nav['child'] as $child)--}}
+                                {{--                                @can(GateService::getGateDefineFromRouteName($child['routeName']))--}}
 
-            </ul>
-        </li>
+                                {{--                                    <li><a class="nav-link "--}}
+                                {{--                                           href="{{route($child['routeName'])}}">--}}
 
-        <li
-            class="dropdown ">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-cog"></i> <span>Manage Website</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.slider.index') }}">Slider</a></li>
+                                {{--                                            <span>{{$child['icon']}}{{$child['name']}}</span></a></li>--}}
+                                {{--                                @endcan--}}
+                                {{--                            @endforeach--}}
+                            </ul>
+                        @endcan
 
-         <li class=""><a class="nav-link"
-                                href="{{ route('admin.about.index') }}">About page</a></li>
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.terms-and-conditions.index') }}">Terms Page</a></li>
+                    </li>
 
-            </ul>
-        </li>
-
-
-        <li class="menu-header">Settings & More</li>
-
-
-        <li
-            class="dropdown ">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                    class="fas fa-th-large"></i><span>Footer</span></a>
-            <ul class="dropdown-menu">
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>
-
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.footer-socials.index') }}">Footer Socials</a></li>
-
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.footer-grid-two.index') }}">Footer Grid Two</a></li>
-
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.footer-grid-three.index') }}">Footer Grid Three</a></li>
-
-            </ul>
-        </li>
-        <li
-            class="dropdown ">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i>
-                <span>Users</span></a>
-            <ul class="dropdown-menu">
-
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.user.index') }}">User Lists</a></li>
-
-                <li class=""><a class="nav-link"
-                                href="{{ route('admin.user.create') }}">Create user</a></li>
-
-            </ul>
-        </li>
+                @endif
+            @endif
+        @endforeach
 
 
-        <li><a class="nav-link "
-               href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user"></i>
-                <span>Subscribers</span></a></li>
+        {{--        <li--}}
+        {{--            class="dropdown ">--}}
+        {{--            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i--}}
+        {{--                    class="fas fa-th-large"></i><span>Footer</span></a>--}}
+        {{--            <ul class="dropdown-menu">--}}
+        {{--                <li class=""><a class="nav-link"--}}
+        {{--                                href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>--}}
 
-        <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
-                <span>Settings</span></a></li>
+        {{--                <li class=""><a class="nav-link"--}}
+        {{--                                href="{{ route('admin.footer-socials.index') }}">Footer Socials</a></li>--}}
+
+        {{--                <li class=""><a class="nav-link"--}}
+        {{--                                href="{{ route('admin.footer-grid-two.index') }}">Footer Grid Two</a></li>--}}
+
+        {{--                <li class=""><a class="nav-link"--}}
+        {{--                                href="{{ route('admin.footer-grid-three.index') }}">Footer Grid Three</a></li>--}}
+
+        {{--            </ul>--}}
+        {{--        </li>--}}
+
 
     </ul>
 
@@ -135,8 +138,8 @@
 {{--dynamic sidebar--}}
 @push('scripts')
     <script>
-        const dynamicSidebar=function (){
-            console.log('here')
+        const dynamicSidebar = function () {
+
             // for single sidebar menu
             var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
 
@@ -145,7 +148,7 @@
                 return url.includes(a.href);
             });
             navActive.forEach(nav => {
-                if(nav.href==url){
+                if (nav.href == url) {
                     nav.parentElement.classList.add('active');
                 }
                 var parent = nav.closest('li.dropdown');
