@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->boolean('show_at_home');
-            $table->boolean('status');
+            $table->boolean('status') -> default(true);
             $table->timestamps();
         });
     }

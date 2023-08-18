@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('discount_type');
             $table->double('discount');
-            $table->boolean('status');
+            $table->boolean('status') -> default(true);
             $table->integer('total_used')->default(0);
             $table->timestamps();
         });
