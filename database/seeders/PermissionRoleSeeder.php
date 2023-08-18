@@ -22,8 +22,8 @@ class PermissionRoleSeeder extends Seeder
     public function run(): void
     {
         //
-        $superAdminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+        $superAdminRole = Role::create(['name' => 'Super Admin']);
+        $userRole = Role::create(['name' => 'User']);
 
         $arrayPermission = [
             'admin.user',
@@ -43,7 +43,7 @@ class PermissionRoleSeeder extends Seeder
             $perStore = $this->createRolePermission($superAdminRole, $per . '.store');
             $perShow = $this->createRolePermission($superAdminRole, $per . '.show');
             $perUpdate = $this->createRolePermission($superAdminRole, $per . '.update');
-            $perDel = $this->createRolePermission($superAdminRole, $per . '.delete');
+            $perDel = $this->createRolePermission($superAdminRole, $per . '.destroy');
         }
         $this->createRolePermission($superAdminRole, 'admin.setting.index');
         $this->createRolePermission($superAdminRole, 'admin.dashboard.index');

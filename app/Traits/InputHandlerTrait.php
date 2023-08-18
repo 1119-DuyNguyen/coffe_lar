@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 
+use App\Traits\App\Http\Requests;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +15,7 @@ trait InputHandlerTrait
 {
     use ImageUploadTrait;
 
-    protected function addAutoInput(): array
+    protected function addAutoInput(Request $request): array
     {
         return [];
     }
@@ -56,7 +57,7 @@ trait InputHandlerTrait
      */
     protected function handleDataInput(Request $request, $oldPath = null)
     {
-        $rawData = array_merge($request->all(), $this->addAutoInput());
+        $rawData = array_merge($request->all(), $this->addAutoInput($request));
         // transform slug
         if (!empty($this->getInputSlug())) {
             $rawData['slug'] = Str::slug($this->getInputSlug());

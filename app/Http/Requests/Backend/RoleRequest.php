@@ -27,9 +27,9 @@ class RoleRequest extends FormRequest
     {
 
         return [
-            'id' => ['required', 'not_in:empty'],
             'name' => ['required', 'max:200'],
-            'description' => [ 'max:200'],
+            'description' => ['nullable', 'max:200'],
+            'permissions'=>['required','array'],
             ];
     }
     public function messages()

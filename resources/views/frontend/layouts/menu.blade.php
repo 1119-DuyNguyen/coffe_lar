@@ -66,16 +66,20 @@
                             <li>
                                 <form action="{{route('logout')}}" method="POST">
                                     @csrf
-                                    <a href="" onclick="this.closest('form').submit();return false;"><i
+                                    <a href="#" onclick="this.closest('form').submit();return false;"><i
                                             class="fas fa-sign-out-alt"></i>logout</a>
 
                                 </form>
                             </li>
+                            @can('user.dashboard.index')
                             <li><a href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i> Dashboard</a>
+
                             </li>
+                            @endcan
+                            @can('user.order.index')
                             <li><a class="" href="{{route('user.order.index')}}"><i class="fas fa-file-invoice"></i>
                                     Orders</a></li>
-
+                            @endcan
 
                             {{--                            @endif--}}
                         @else

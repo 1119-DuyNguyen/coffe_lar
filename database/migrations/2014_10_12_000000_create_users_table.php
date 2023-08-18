@@ -16,11 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->text('image')->nullable();
-            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->boolean('status')->default(true);
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default(bcrypt('123'));
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,17 +17,18 @@
 
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.user.store')}}" method="POST">
+                    <form action="{{route('admin.user.update',$user->id)}}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" name="name" value="">
+                            <input type="text" class="form-control" name="name" value="{{$user->name}}">
                         </div>
 
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" class="form-control" name="email" value="">
+                            <input type="text" class="form-control" name="email" value="{{$user->email}}">
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -49,7 +50,7 @@
 
                             <select id="inputState" class="form-control" name="role">
                             @foreach($roleList as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                <option value="{{$role->id}}" {{$role->id==$user->role_id ? 'selected': ""}} >{{$role->name}}</option>
                             @endforeach
 
                             </select>

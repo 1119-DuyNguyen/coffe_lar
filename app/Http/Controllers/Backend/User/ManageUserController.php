@@ -4,21 +4,36 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRegisterRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Mail\AccountCreatedMail;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use function App\Http\Controllers\Backend\toastr;
 
 class ManageUserController extends Controller
 {
     use CrudTrait;
-
+    protected function model(): string
+    {
+        return User::class;
+    }
+    protected function addAutoInput(Request $request): array
+    {
+        $role_id=$request->input('role',[]) ;
+        return ['role_id'=>$role_id];
+    }
+    protected function getFormRequest(): FormRequest
+    {
+        return new ProfileRegisterRequest();
+    }
     public function index(UserListDataTable $dataTable)
     {
         return $dataTable->render('admin.user.index');
@@ -26,106 +41,13 @@ class ManageUserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        $roleList=Role::all()->whereNotIn('id','1');
+        return view('admin.user.create',compact( 'roleList'));
     }
-
-    public function store(Request $request)
+    public function edit(User $user)
     {
-        $request->validate([
-            'name' => ['required', 'max:200'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8', 'confirmed'],
-            'role' => ['required']
-        ]);
-
-        $user = new User();
-
-        if ($request->role === 'user') {
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->role = 'user';
-            $user->status = 'active';
-            $user->save();
-
-            Mail::to($request->email)->send(new AccountCreatedMail($request->name, $request->email, $request->password));
-
-            toastr('Created Successfully!', 'success', 'success');
-            return redirect()->back();
-        } elseif ($request->role === 'vendor') {
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->role = 'vendor';
-            $user->status = 'active';
-            $user->save();
-
-            $vendor = new Vendor();
-            $vendor->banner = 'uploads/1343.jpg';
-            $vendor->shop_name = $request->name . ' Shop';
-            $vendor->phone = '12321312';
-            $vendor->email = 'test@gmail.com';
-            $vendor->address = 'Usa';
-            $vendor->description = 'shop description';
-            $vendor->user_id = $user->id;
-            $vendor->status = 1;
-            $vendor->save();
-
-            Mail::to($request->email)->send(new AccountCreatedMail($request->name, $request->email, $request->password));
-
-            toastr('Created Successfully!', 'success', 'success');
-            return redirect()->back();
-        } elseif ($request->role === 'admin') {
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->role = 'admin';
-            $user->status = 'active';
-            $user->save();
-
-            $vendor = new Vendor();
-            $vendor->banner = 'uploads/1343.jpg';
-            $vendor->shop_name = $request->name . ' Shop';
-            $vendor->phone = '12321312';
-            $vendor->email = 'test@gmail.com';
-            $vendor->address = 'Usa';
-            $vendor->description = 'shop description';
-            $vendor->user_id = $user->id;
-            $vendor->status = 1;
-            $vendor->save();
-
-            Mail::to($request->email)->send(new AccountCreatedMail($request->name, $request->email, $request->password));
-
-            toastr('Created Successfully!', 'success', 'success');
-            return redirect()->back();
-        }
+        $roleList=Role::all()->whereNotIn('id','1');
+        return view('admin.user.edit',compact( ['user','roleList']));
     }
 
-    protected function model(): string
-    {
-        return User::class;
-    }
-
-    protected function getFormRequest(): FormRequest
-    {
-        return new ProfileUpdateRequest();
-    }
-
-
-    public function destory(string $id)
-    {
-        $admin = User::findOrFail($id);
-
-        $products = Product::where('vendor_id', $admin->vendor->id)->get();
-
-        if (count($products) > 0) {
-            return response(['status' => 'error', 'message' => 'Admin can\'t be deleted please ban the user insted of delete!']);
-        }
-
-        Vendor::where('user_id', $admin->id)->delete();
-        $admin->delete();
-
-        return response(['status' => 'success', 'message' => 'Deleted successfully']);
-
-    }
 }

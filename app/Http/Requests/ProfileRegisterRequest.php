@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileRegisterRequest extends FormRequest
 {
@@ -17,9 +18,11 @@ class ProfileRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'image' => ['image', 'max:2048']
+
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Password::defaults()],
+            'role'=> ['int']
         ];
 
     }

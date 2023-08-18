@@ -25,9 +25,10 @@ class UserListDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
                 if($query->id != 1){
+                    $editBtn = "<a href='".route('admin.user.edit', $query->id)."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
                     $deleteBtn = "<a href='".route('admin.user.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
-                    return $deleteBtn;
+                    return $editBtn.$deleteBtn;
                 }
             })
 
@@ -87,7 +88,7 @@ class UserListDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(60)
+            ->width(100)
             ->addClass('text-center'),
         ];
     }
