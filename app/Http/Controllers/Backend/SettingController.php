@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\SettingService;
 use App\Models\EmailConfiguration;
 use App\Models\GeneralSetting;
 use App\Models\LogoSetting;
@@ -13,12 +14,12 @@ class SettingController extends Controller
 {
     use ImageUploadTrait;
 
-    public function edit()
+    public function index()
     {
-        $generalSettings = GeneralSetting::first();
-        $emailSettings = EmailConfiguration::first();
-        $logoSetting = LogoSetting::first();
-        return view('admin.setting.index', compact('generalSettings', 'emailSettings', 'logoSetting'));
+//        $settings = GeneralSetting::first();
+//        $emailSettings = EmailConfiguration::first();
+//        $logoSetting = LogoSetting::first();
+        return view('admin.setting.index');
     }
 
 
@@ -33,55 +34,42 @@ class SettingController extends Controller
             'time_zone' => ['required', 'max:200'],
             'currency_icon' => ['required', 'max:200'],
         ]);
+        SettingService::updateGeneralSetting($request->all());
 
-        GeneralSetting::updateOrCreate(
-            ['id' => 1],
-            [
-                'site_name' => $request->site_name,
-                'layout' => $request->layout,
-                'contact_email' => $request->contact_email,
-                'contact_phone' => $request->contact_phone,
-                'contact_address' => $request->contact_address,
-                'map' => $request->map,
-                'currency_name' => $request->currency_name,
-                'currency_icon' => $request->currency_icon,
-                'time_zone' => $request->time_zone
-            ]
-        );
         toast()->success('Updated successfully!');
 
         return redirect()->back();
 
     }
 
-    public function emailConfigSettingUpdate(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'host' => ['required', 'max:200'],
-            'username' => ['required', 'max:200'],
-            'password' => ['required', 'max:200'],
-            'port' => ['required', 'max:200'],
-            'encryption' => ['required', 'max:200'],
-        ]);
-
-         EmailConfiguration::updateOrCreate(
-            ['id' => 1],
-            [
-                'email' => $request->email,
-                'host' => $request->host,
-                'username' => $request->username,
-                'password' => $request->password,
-                'port' => $request->port,
-                'encryption' => $request->encryption,
-            ]
-        );
-        toast()->success('Updated successfully!');
-
-
-
-        return redirect()->back();
-    }
+//    public function emailConfigSettingUpdate(Request $request)
+//    {
+//        $request->validate([
+//            'email' => ['required', 'email'],
+//            'host' => ['required', 'max:200'],
+//            'username' => ['required', 'max:200'],
+//            'password' => ['required', 'max:200'],
+//            'port' => ['required', 'max:200'],
+//            'encryption' => ['required', 'max:200'],
+//        ]);
+//
+//         EmailConfiguration::updateOrCreate(
+//            ['id' => 1],
+//            [
+//                'email' => $request->email,
+//                'host' => $request->host,
+//                'username' => $request->username,
+//                'password' => $request->password,
+//                'port' => $request->port,
+//                'encryption' => $request->encryption,
+//            ]
+//        );
+//        toast()->success('Updated successfully!');
+//
+//
+//
+//        return redirect()->back();
+//    }
 
     public function logoSettingUpdate(Request $request)
     {
@@ -89,17 +77,12 @@ class SettingController extends Controller
             'logo' => ['image', 'max:3000'],
             'favicon' => ['image', 'max:3000'],
         ]);
+        $data=$request->all();
 
-        $logoPath = $this->updateImage($request, 'logo', 'uploads', $request->old_logo);
-        $favicon = $this->updateImage($request, 'favicon', 'uploads', $request->old_favicon);
+        $data['logo'] = $this->updateImage($request, 'logo', 'uploads', $request->input('old_logo'));
+        $data['favicon'] = $this->updateImage($request, 'favicon', 'uploads', $request->input('old_favicon'));
+        SettingService::updateLogoSetting($data);
 
-       LogoSetting::updateOrCreate(
-            ['id' => 1],
-            [
-                'logo' =>  (!empty($logoPath)) ? $logoPath : $request->old_logo,
-                'favicon' => (!empty($favicon)) ? $favicon : $request->old_favicon
-            ]
-        );
         toast()->success('Updated successfully!');
 
 

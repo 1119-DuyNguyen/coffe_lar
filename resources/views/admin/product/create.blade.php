@@ -41,10 +41,6 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label>SKU</label>
-                            <input type="text" class="form-control" name="sku" value="{{old('sku')}}">
-                        </div>
 
                         <div class="form-group">
                             <label>Price</label>
@@ -75,13 +71,7 @@
                             <label>Stock Quantity</label>
                             <input type="number" min="0" class="form-control" name="qty" value="{{old('qty')}}">
                         </div>
-
-                        <div class="form-group">
-                            <label>Video Link</label>
-                            <input type="text" class="form-control" name="video_link" value="{{old('video_link')}}">
-                        </div>
-
-
+                        
                         <div class="form-group">
                             <label>Short Description</label>
                             <textarea name="short_description" class="form-control" value="{{old('short_description')}}"></textarea>
@@ -93,31 +83,12 @@
                             <textarea name="long_description" class="form-control summernote" value="{{old('long_description')}}"> </textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="inputState">Product Type</label>
-                            <select id="inputState" class="form-control" name="product_type">
-                                <option value="">Select</option>
-                                <option value="new_arrival">New Arrival</option>
-                                <option value="featured_product">Featured</option>
-                                <option value="top_product">Top Product</option>
-                                <option value="best_product">Best Product</option>
-                            </select>
-                        </div>
 
-                        <div class="form-group">
-                            <label>Seo Title</label>
-                            <input type="text" class="form-control" name="seo_title" value="{{old('seo_title')}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Seo Description</label>
-                            <textarea name="seo_description" class="form-control"value="{{old('seo_description')}}"></textarea>
-                        </div>
 
                         <div class="form-group">
                             <label for="inputState">Status</label>
                             <select id="inputState" class="form-control" name="status">
-                              <option value="1">Active</option>
+                              <option value="1" selected>Active</option>
                               <option value="0">Inactive</option>
                             </select>
                         </div>

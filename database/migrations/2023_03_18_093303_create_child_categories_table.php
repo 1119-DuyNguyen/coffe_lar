@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->noActionOnDelete();
             $table->foreignId('sub_category_id')->constrained()->noActionOnDelete();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->boolean('status') -> default(true);
             $table->timestamps();
         });

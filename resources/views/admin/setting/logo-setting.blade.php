@@ -5,7 +5,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <img src="{{asset(@$logoSetting->logo)}}" width="150px" alt="">
+                    <img src="{{asset(@$logoSetting->logo)}}" width="150px" alt="" style="background-color: #ccc;">
                     <br>
                     <label>Logo</label>
                     <input type="file" class="form-control" name="logo" value="">
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="form-group">
-                    <img src="{{asset(@$logoSetting->favicon)}}" width="150px" alt="">
+                    <img src="{{asset(@$logoSetting->favicon)}}" width="150px" alt="" style="background-color: #ccc;">
                     <br>
                     <label>Favicon</label>
                     <input type="file" class="form-control" name="favicon" value="">

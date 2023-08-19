@@ -63,6 +63,9 @@
         {
         width: 100% !important;
         }
+        table tr td:last-child{
+            white-space: nowrap;
+        }
     </style>
     <!-- /END GA -->
 {{--    vendor--}}

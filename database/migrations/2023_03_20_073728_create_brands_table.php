@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('logo');
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->boolean('is_featured');
             $table->boolean('status') -> default(true);
             $table->timestamps();

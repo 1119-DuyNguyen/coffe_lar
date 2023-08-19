@@ -38,27 +38,6 @@ class ProductDataTable extends DataTable
             ->addColumn('image', function($query){
                 return "<img width='70px' src='".asset($query->thumb_image)."' ></img>";
             })
-            ->addColumn('type', function($query){
-                switch ($query->product_type) {
-                    case 'new_arrival':
-                        return '<i class="badge badge-success">New Arrival</i>';
-                        break;
-                    case 'featured_product':
-                        return '<i class="badge badge-warning">Featured Product</i>';
-                        break;
-                    case 'top_product':
-                        return '<i class="badge badge-info">Top Product</i>';
-                        break;
-
-                    case 'best_product':
-                        return '<i class="badge badge-danger">Top Product</i>';
-                        break;
-
-                    default:
-                        return '<i class="badge badge-dark">None</i>';
-                        break;
-                }
-            })
             ->addColumn('status', function($query){
                 if($query->status == 1){
                     $button = '<label class="custom-switch mt-2">
@@ -109,7 +88,6 @@ class ProductDataTable extends DataTable
             Column::make('image'),
             Column::make('name'),
             Column::make('price'),
-            Column::make('type')->width(150),
             Column::make('status'),
             Column::computed('action')
             ->exportable(false)

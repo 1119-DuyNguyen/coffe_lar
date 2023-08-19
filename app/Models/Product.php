@@ -48,7 +48,6 @@ class Product extends Model
     {
         return $this->hasMany(ProductImageGallery::class);
     }
-
     public function variants()
     {
         return $this->hasMany(ProductVariant::class);
@@ -59,10 +58,7 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function reviews()
-    {
-        return $this->hasMany(ProductReview::class);
-    }
+
 
     /** Check if product have discount */
     public function checkDiscount(): bool

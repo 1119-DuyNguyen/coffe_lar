@@ -7,9 +7,9 @@
                     <span class="wsus__mobile_menu_icon"><i class="fas fa-bars"></i></span>
                 </div>
             </div>
-            <div class="col-xl-2 col-7 col-md-8 col-lg-2">
-                <a class="h-100" href="{{url('/')}}">
-                    <img src="{{asset($logoSetting->logo)}}" alt="logo" class="img-fluid p-3 h-100 rounded" >
+            <div class="col-xl-2 col-7 col-md-8 col-lg-2" style="justify-content: center;text-align: center;">
+                <a class="h-100" href="{{url('/')}}" >
+                    <img src="{{asset($logoSetting->logo)}}" alt="logo" class="img-fluid p-3 rounded" style="width: 80px;" >
                 </a>
 
             </div>

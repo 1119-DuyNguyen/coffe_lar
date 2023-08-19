@@ -53,11 +53,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>SKU</label>
-                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}">
-                                </div>
-
-                                <div class="form-group">
                                     <label>Price</label>
                                     <input type="text" class="form-control" name="price" value="{{$product->price}}">
                                 </div>
@@ -91,11 +86,6 @@
                                            value="{{$product->qty}}">
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Video Link</label>
-                                    <input type="text" class="form-control" name="video_link"
-                                           value="{{$product->video_link}}">
-                                </div>
 
 
                                 <div class="form-group">
@@ -111,40 +101,6 @@
                                               class="form-control summernote">{!! $product->long_description !!}</textarea>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="inputState">Product Type</label>
-                                    <select id="inputState" class="form-control" name="product_type">
-                                        <option value="">Select</option>
-                                        <option
-                                            {{$product->product_type == 'new_arrival' ? 'selected' : ''}} value="new_arrival">
-                                            New Arrival
-                                        </option>
-                                        <option
-                                            {{$product->product_type == 'featured_product' ? 'selected' : ''}} value="featured_product">
-                                            Featured
-                                        </option>
-                                        <option
-                                            {{$product->product_type == 'top_product' ? 'selected' : ''}} value="top_product">
-                                            Top Product
-                                        </option>
-                                        <option
-                                            {{$product->product_type == 'best_product' ? 'selected' : ''}} value="best_product">
-                                            Best Product
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Seo Title</label>
-                                    <input type="text" class="form-control" name="seo_title"
-                                           value="{{$product->seo_title}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Seo Description</label>
-                                    <textarea name="seo_description"
-                                              class="form-control">{!!$product->seo_description!!}</textarea>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="inputState">Status</label>
@@ -153,7 +109,7 @@
                                         <option {{$product->status == 0 ? 'selected' : ''}} value="0">Inactive</option>
                                     </select>
                                 </div>
-                                <button type="submmit" class="btn btn-primary">Create</button>
+                                <button type="submmit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
 

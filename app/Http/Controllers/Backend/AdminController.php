@@ -47,8 +47,6 @@ class AdminController extends Controller
         $totalBrands = Brand::count();
         $totalCategories = Category::count();
 
-        $totalSubscriber = NewsletterSubscriber::count();
-
         $totalUsers = User::count();
 
 
@@ -64,8 +62,6 @@ class AdminController extends Controller
             'yearEarnings',
             'totalBrands',
             'totalCategories',
-
-            'totalSubscriber',
 
             'totalUsers'
         ));

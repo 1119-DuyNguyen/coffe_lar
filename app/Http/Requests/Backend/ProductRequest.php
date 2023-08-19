@@ -34,8 +34,6 @@ class ProductRequest extends FormRequest
             'qty' => ['required'],
             'short_description' => ['required', 'max: 600'],
             'long_description' => ['required'],
-            'seo_title' => ['nullable','max:200'],
-            'seo_description' => ['nullable','max:250'],
             'status' => ['required']
         ];
     }

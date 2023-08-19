@@ -1,8 +1,10 @@
-@php use App\Models\Product; @endphp
+@php use App\Models\Product;
+$currentParameter=request()->query();
+@endphp
 @extends('frontend.layouts.master')
 
 @section('title')
-    {{$settings->site_name}} || Product Details
+    {{$settings->site_name}} || Product
 @endsection
 
 @section('content')
@@ -29,8 +31,8 @@
                     <div class="wsus__sidebar_filter ">
                         <p>filter</p>
                         <span class="wsus__filter_icon">
-                            <i class="far fa-minus" id="minus"></i>
-                            <i class="far fa-plus" id="plus"></i>
+                            <i class="fas fa-minus" id="minus"></i>
+                            <i class="fas fa-plus" id="plus"></i>
                         </span>
                     </div>
                     <div class="wsus__product_sidebar" id="sticky_sidebar">
@@ -47,10 +49,17 @@
                                      aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <ul>
+                                            <li>
+                                                <a href="{{route('product.index', array_merge($currentParameter,['category' => '']))}}"
+                                                   style="{{ request()->input('category') == '' ?"color: #08C;":"" }}"
+                                                >All</a>
+                                            </li>
                                             @foreach ($categories as $category)
 
                                                 <li>
-                                                    <a href="{{route('product.index', ['category' => $category->slug])}}">{{$category->name}}</a>
+                                                    <a href="{{route('product.index', array_merge($currentParameter,['category' => $category->slug]))}}"
+                                                    style="{{ request()->input('category') == $category->slug ?"color: #08C;":"" }}"
+                                                    >{{$category->name}}</a>
                                                 </li>
                                             @endforeach
 
@@ -59,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
+                                <h2 class="accordion-header" >
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#collapseTwo" aria-expanded="false"
                                             aria-controls="collapseTwo">
@@ -67,20 +76,19 @@
                                     </button>
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse show"
-                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                     >
                                     <div class="accordion-body">
-                                        <div class="price_ranger">
-                                            <form action="{{url()->current()}}">
-                                                @foreach (request()->query() as $key => $value)
-                                                    @if($key != 'range')
-                                                        <input type="hidden" name="{{$key}}" value="{{$value}}"/>
-                                                    @endif
-                                                @endforeach
-                                                <input type="hidden" id="slider_range" name="range"
-                                                       class="flat-slider"/>
-                                                <button type="submit" class="common_btn">filter</button>
+                                            <form method="get" action="{{route('product.index', array_merge($currentParameter,['range-min' => request()->input('range-min'),'range-max'=>request()->input('range-max')]))}}">
+                                                <span>Min</span>
+                                                <input class="text-center" type="number" name="range-min" min="0" style="width: 100%;"  value="{{request()->input('range-min')}}" required />
+                                                <span>Max</span>
+                                                <input class="text-center" type="number" name="range-max" min="0" style="width: 100%;" value="{{request()->input('range-max')}}" required/>
+                                                <input type="hidden" name="category" value="{{$currentParameter['category'] ??""}}" >
+                                                <input type="hidden" name="brand" value= "{{$currentParameter['brand'] ?? "" }}" >
+                                                {{--                                                <input type="hidden" id="slider_range" name="range"--}}
+{{--                                                       class="flat-slider"/>--}}
+                                                <button type="submit" class="common_btn mt-3" onclick="">filter</button>
                                             </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -97,10 +105,19 @@
                                      aria-labelledby="headingThree3" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <ul>
+                                            <li>
+                                                <a href="{{route('product.index', array_merge($currentParameter,['brand' => '']))}}"
+                                                   style="{{ request()->input('brand') == '' ?"color: #08C;":"" }}"
+                                                >all</a>
+                                            </li>
+
+
                                             @foreach ($brands  as $brand)
 
                                                 <li>
-                                                    <a href="{{route('product.index', ['brand' => $brand->slug])}}">{{$brand->name}}</a>
+                                                    <a href="{{route('product.index', array_merge($currentParameter,['brand' => $brand->slug]))}}"
+                                                       style="{{ request()->input('brand') == $brand->slug ?"color: #08C;":"" }}"
+                                                    >{{$brand->name}}</a>
                                                 </li>
                                             @endforeach
 
@@ -120,14 +137,14 @@
                                     <div class="nav nav-pills" id="v-pills-tab" role="tablist"
                                          aria-orientation="vertical">
                                         <button
-                                            class="nav-link {{session()->has('product_list_style') && session()->get('product_list_style') == 'grid' ? 'active' : ''}} {{!session()->has('product_list_style') ? 'active' : ''}} list-view"
+                                            class="nav-link  list-view active"
                                             data-id="grid" id="v-pills-home-tab" data-bs-toggle="pill"
                                             data-bs-target="#v-pills-home" type="button" role="tab"
                                             aria-controls="v-pills-home" aria-selected="true">
                                             <i class="fas fa-th"></i>
                                         </button>
                                         <button
-                                            class="nav-link list-view {{session()->has('product_list_style') && session()->get('product_list_style') == 'list' ? 'active' : ''}}"
+                                            class="nav-link list-view "
                                             data-id="list" id="v-pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#v-pills-profile" type="button" role="tab"
                                             aria-controls="v-pills-profile" aria-selected="false">
@@ -222,7 +239,6 @@
                                                             </button>
                                                         </form>
                                                         <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-random"></i></a>
                                                     </ul>
 
                                                 </div>

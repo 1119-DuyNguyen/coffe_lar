@@ -3,7 +3,7 @@
 @foreach ($errors->all() as $error)
 @php
     toast($error, "error")->autoClose('8000');
-@endphp
+@endphp//
 @endforeach
 @endif
     <!DOCTYPE html>
@@ -141,14 +141,30 @@
     </div>
 </section>
 @endif
-@yield('content')
 
+<div class="container" style="min-height: 100vh;">
+
+@yield('content')
+</div>
 
 <!--============================
     FOOTER PART START
 ==============================-->
 
-@include('frontend.layouts.footer')
+<footer style="  background: transparent;">
+    <div class="wsus__footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="wsus__copyright d-flex justify-content-center">
+                        <p>Copyright ©{{date('Y')}} Duy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{{--@include('frontend.layouts.footer')--}}
 <!--============================
     FOOTER PART END
 ==============================-->

@@ -155,7 +155,7 @@
             let id = $(this).data('id');
 
             $.ajax({
-                method: 'GET',
+                method: 'POST',
                 url: "{{route('user.wishlist.store')}}",
                 data: {id:id},
                 success:function(data){

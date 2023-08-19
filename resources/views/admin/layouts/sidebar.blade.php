@@ -110,26 +110,6 @@
         @endforeach
 
 
-        {{--        <li--}}
-        {{--            class="dropdown ">--}}
-        {{--            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i--}}
-        {{--                    class="fas fa-th-large"></i><span>Footer</span></a>--}}
-        {{--            <ul class="dropdown-menu">--}}
-        {{--                <li class=""><a class="nav-link"--}}
-        {{--                                href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>--}}
-
-        {{--                <li class=""><a class="nav-link"--}}
-        {{--                                href="{{ route('admin.footer-socials.index') }}">Footer Socials</a></li>--}}
-
-        {{--                <li class=""><a class="nav-link"--}}
-        {{--                                href="{{ route('admin.footer-grid-two.index') }}">Footer Grid Two</a></li>--}}
-
-        {{--                <li class=""><a class="nav-link"--}}
-        {{--                                href="{{ route('admin.footer-grid-three.index') }}">Footer Grid Three</a></li>--}}
-
-        {{--            </ul>--}}
-        {{--        </li>--}}
-
 
     </ul>
 

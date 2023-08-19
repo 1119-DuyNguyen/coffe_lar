@@ -36,7 +36,13 @@ class PermissionRoleSeeder extends Seeder
             'admin.coupon',
             'admin.order',
             'admin.featured-product',
-            'admin.role'
+            'admin.role',
+            'admin.footer-info',
+            'admin.footer-socials'
+            ,
+            'admin.footer-grid-two',
+            'admin.footer-grid-three',
+
         ];
         foreach ($arrayPermission as $per) {
             $perIndex = $this->createRolePermission($superAdminRole, $per . '.index');
@@ -46,7 +52,10 @@ class PermissionRoleSeeder extends Seeder
             $perDel = $this->createRolePermission($superAdminRole, $per . '.destroy');
         }
         $this->createRolePermission($superAdminRole, 'admin.setting.index');
+        $this->createRolePermission($superAdminRole, 'admin.general-setting.update');
+        $this->createRolePermission($superAdminRole, 'admin.logo-setting.update');
         $this->createRolePermission($superAdminRole, 'admin.dashboard.index');
+
         $this->createRolePermission($superAdminRole, 'footer.edit');
         $this->createRolePermission($superAdminRole, 'setting.edit');
         $arrayUserPermission=['dashboard.index','order.index','order.show'];

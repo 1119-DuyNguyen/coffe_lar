@@ -25,7 +25,7 @@
     <!--============================
         HOT DEALS START
     ==============================-->
-    @include('frontend.home.sections.type-product')
+{{--    @include('frontend.home.sections.type-product')--}}
     <!--============================
         HOT DEALS END
     ==============================-->
