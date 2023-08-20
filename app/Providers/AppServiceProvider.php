@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
                 });
             }
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
 

@@ -4,16 +4,14 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\FeaturedProductController;
-use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
-use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\OrderTrackController;
+use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ReviewController;
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 
 
 // frontend
@@ -35,11 +33,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+//Route::middleware('auth')->group(function () {
+//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//});
 
 
 require __DIR__.'/auth.php';
@@ -67,8 +65,8 @@ Route::get('coupon/calculation', [CouponController::class, 'couponCalculation'])
 
 /** Newsletter routes */
 
-Route::post('newsletter-request', [NewsletterController::class, 'newsLetterRequset'])->name('newsletter-request');
-Route::get('newsletter-verify/{token}', [NewsletterController::class, 'newsLetterEmailVarify'])->name('newsletter-verify');
+//Route::post('newsletter-request', [NewsletterController::class, 'newsLetterRequset'])->name('newsletter-request');
+//Route::get('newsletter-verify/{token}', [NewsletterController::class, 'newsLetterEmailVarify'])->name('newsletter-verify');
 
 /** vendor page routes */
 //Route::get('vendor', [HomeController::class, 'vendorPage'])->name('vendor.index');

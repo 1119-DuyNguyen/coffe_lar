@@ -13,8 +13,10 @@
                     <a class="wsus__footer_2_logo" href="{{url('/')}}">
                         <img src="{{asset(@$footerInfo->logo)}}" alt="logo">
                     </a>
-                    <a class="action" href="callto:{{@$footerInfo->phone}}"><i class="fas fa-phone-alt"></i>{{@$footerInfo->phone}}</a>
-                    <a class="action" href="mailto:{{@$footerInfo->email}}"><i class="far fa-envelope"></i>{{@$footerInfo->email}}</a>
+                    <a class="action" href="callto:{{@$footerInfo->phone}}"><i
+                            class="fas fa-phone-alt"></i>{{@$footerInfo->phone}}</a>
+                    <a class="action" href="mailto:{{@$footerInfo->email}}"><i
+                            class="far fa-envelope"></i>{{@$footerInfo->email}}</a>
                     <p><i class="fal fa-map-marker-alt"></i> {{@$footerInfo->address}}</p>
                     <ul class="wsus__footer_social">
                         @foreach ($footerSocials as $link)
@@ -64,10 +66,15 @@
     <div class="wsus__footer_bottom">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
+                <div class="col-4">
                     <div class="wsus__copyright d-flex justify-content-center">
                         <p>{{@$footerInfo->copyright}}</p>
                     </div>
+                </div>
+                <div class="nav-item col-4"><a class="nav-link" aria-current="page" href="{{route('about')}}"><i
+                            class="fas fa-pager"></i> about</a></div>
+                <div class="nav-item col-4"><a class="nav-link" aria-current="page" href="{{route('contact')}}"><i
+                            class="fas fa-phone"></i> contact</a>
                 </div>
             </div>
         </div>

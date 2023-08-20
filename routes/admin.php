@@ -26,28 +26,26 @@ use App\Http\Controllers\Backend\Product\ProductImageGalleryController;
 use App\Http\Controllers\Backend\Product\ProductVariantController;
 use App\Http\Controllers\Backend\Product\ProductVariantItemController;
 use App\Http\Controllers\Backend\Product\SellerProductController;
-use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
-use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\User\ManageRoleController;
 use App\Http\Controllers\Backend\User\ManageUserController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('category.sub-category', CategorySubController::class)->only(['index']);
 Route::resource('sub-category.child-category', SubChildCategoryController::class)->only(['index']);
+/** Profile Routes */
+Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 /** Admin Routes */
 Route::middleware('hasPermission')->group(function (){
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard.index');
-
-    /** Profile Routes */
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
-    Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
-    Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
     /** Slider Route */
     Route::resource('slider', SliderController::class);
@@ -133,7 +131,7 @@ Route::middleware('hasPermission')->group(function (){
     /** terms and conditons routes */
     Route::get('terms-and-conditions', [TermsAndConditionController::class, 'index'])->name('terms-and-conditions.index');
     Route::put('terms-and-conditions/update', [TermsAndConditionController::class, 'update'])->name('terms-and-conditions.update');
-    
+
 });
 
 

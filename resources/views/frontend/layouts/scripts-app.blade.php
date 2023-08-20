@@ -116,7 +116,6 @@
         bindDeleteCartHeader();
         const ajaxCartStoreFunction= function (classSelector){
             $(document).ready(function (){
-                console.log( $(classSelector));
                 $(classSelector).on('submit', function (e){
                     e.preventDefault();
                     let formData= $(this).serialize();
@@ -203,56 +202,56 @@
         })
 
         // newsletter
-        $('#newsletter').on('submit', function(e){
-            e.preventDefault();
-            let data = $(this).serialize();
+        {{--$('#newsletter').on('submit', function(e){--}}
+        {{--    e.preventDefault();--}}
+        {{--    let data = $(this).serialize();--}}
 
-            $.ajax({
-                method: 'POST',
-                url: "{{route('newsletter-request')}}",
-                data: data,
-                beforeSend: function(){
-                    $('.subscribe_btn').text('Loading...');
-                },
-                success: function(data){
-                    if(data.status === 'success'){
-                        $('.subscribe_btn').text('Subscribe');
-                        $('.newsletter_email').val('');
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    }else if(data.status === 'error'){
-                        $('.subscribe_btn').text('Subscribe');
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    }
-                },
-                error: function(data){
-                    let errors = data.responseJSON.errors;
-                    if(errors){
-                        $.each(errors, function(key, value){
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: value,
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        })
-                    }
-                    $('.subscribe_btn').text('Subscribe');
-                }
-            })
-        })
+        {{--    $.ajax({--}}
+        {{--        method: 'POST',--}}
+        {{--        url: "{{route('newsletter-request')}}",--}}
+        {{--        data: data,--}}
+        {{--        beforeSend: function(){--}}
+        {{--            $('.subscribe_btn').text('Loading...');--}}
+        {{--        },--}}
+        {{--        success: function(data){--}}
+        {{--            if(data.status === 'success'){--}}
+        {{--                $('.subscribe_btn').text('Subscribe');--}}
+        {{--                $('.newsletter_email').val('');--}}
+        {{--                Swal.fire({--}}
+        {{--                    position: 'top-end',--}}
+        {{--                    icon: 'success',--}}
+        {{--                    title: data.message,--}}
+        {{--                    showConfirmButton: false,--}}
+        {{--                    timer: 1500--}}
+        {{--                })--}}
+        {{--            }else if(data.status === 'error'){--}}
+        {{--                $('.subscribe_btn').text('Subscribe');--}}
+        {{--                Swal.fire({--}}
+        {{--                    position: 'top-end',--}}
+        {{--                    icon: 'error',--}}
+        {{--                    title: data.message,--}}
+        {{--                    showConfirmButton: false,--}}
+        {{--                    timer: 1500--}}
+        {{--                })--}}
+        {{--            }--}}
+        {{--        },--}}
+        {{--        error: function(data){--}}
+        {{--            let errors = data.responseJSON.errors;--}}
+        {{--            if(errors){--}}
+        {{--                $.each(errors, function(key, value){--}}
+        {{--                    Swal.fire({--}}
+        {{--                        position: 'top-end',--}}
+        {{--                        icon: 'error',--}}
+        {{--                        title: value,--}}
+        {{--                        showConfirmButton: false,--}}
+        {{--                        timer: 1500--}}
+        {{--                    })--}}
+        {{--                })--}}
+        {{--            }--}}
+        {{--            $('.subscribe_btn').text('Subscribe');--}}
+        {{--        }--}}
+        {{--    })--}}
+        {{--})--}}
 
 
     })
