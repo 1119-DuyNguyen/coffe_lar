@@ -9,7 +9,9 @@
     ->get();
 @endphp
 <style>
-
+    a i{
+        padding: 0 2px;
+    }
 
     .navbar-light .navbar-nav .dropdown-menu .nav-link.dropdown-toggle {
         /*color: #575757;*/
@@ -88,11 +90,11 @@
         <a class="navbar-brand fw-bold h-100" href="{{url('/')}}">
             <img src="{{asset($logoSetting->logo)}}" alt="logo" class="img-fluid p-3 rounded" style="width: 80px; ">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler shadow-none " style="border:none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse ps-3 pe-3 pb-3 ps-lg-0 pe-lg-0 pb-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="{{url('/')}}"><i
                             class="fas fa-home"></i> home</a></li>
@@ -120,7 +122,7 @@
                     <li class="nav-item position-relative ms-md-2">
 
                         <a class="position-relative nav-link" href="{{route('user.wishlist.index')}}">
-                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart"></i>
                             Wishlist
                             <span
                                 class="position-absolute top-0 translate-middle p-2 bg-danger  rounded-circle"
@@ -217,7 +219,7 @@
 
                 </ul>
                 <form class="d-flex" action="{{route('product.index')}}" role="search">
-                    <input class="form-control me-2 shadow-none" type="text" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2 shadow-none" type="text" name='search' placeholder="Search" aria-label="Search">
                     <input type="submit" hidden/>
                     {{--                <button class="btn btn-outline-primary" type="submit">Search</button>--}}
                 </form>

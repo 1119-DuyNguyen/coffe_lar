@@ -28,29 +28,32 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::where(['status' => 1]);
-        $categories = Category::where(['status' => 1])->get();
-        $subCategories = SubCategory::where(['status' => 1])->get();
-        $childCategories = ChildCategory::where(['status' => 1])->get();
+        $categories = Category::with(['subCategories' => function ($query) {
+            $query->where('sub_categories.status', '=', '1')->with(['childCategories' => function ($query) {
+                $query->where('child_categories.status', '=', '1');
+            }]);
+        },])
+            ->where('categories.status', '=', 1)->get();
         $brands = Brand::where(['status' => 1])->get();
-        if ($request->filled('category')) {
-            $category = $categories->firstWhere('slug', $request->input('category'));
-//            $category = Category::where('slug', $request->input('category', ''))->firstOrFail();
+        if ($request->filled('childcategory')) {
+            $category = ChildCategory::where(['status' => 1])->where('slug', $request->input('childcategory'))->first();
+
+//            $category = ChildCategory::where('slug', $request->input('childcategory'))->firstOrFail();
             $products = $products->where([
-                'category_id' => $category->id,
+                'child_category_id' => $category->id,
             ]);
         } elseif ($request->filled('subcategory')) {
-            $category = $subCategories->firstWhere('slug', $request->input('subcategory'));
+            $category = SubCategory::where(['status' => 1])->where('slug', $request->input('subcategory'))->first();
 //            $category = SubCategory::where('slug', $request->input('subcategory'))->firstOrFail();
             $products = $products->where([
                 'sub_category_id' => $category->id,
             ]);
 
-        } elseif ($request->filled('childcategory')) {
-            $category = $childCategories->firstWhere('slug', $request->input('childcategory'));
-
-//            $category = ChildCategory::where('slug', $request->input('childcategory'))->firstOrFail();
+        } else if ($request->filled('category')) {
+            $category = $categories->firstWhere('slug', $request->input('category'));
+//            $category = Category::where('slug', $request->input('category', ''))->firstOrFail();
             $products = $products->where([
-                'child_category_id' => $category->id,
+                'category_id' => $category->id,
             ]);
         }
         if ($request->filled('brand')) {
@@ -67,13 +70,12 @@ class ProductController extends Controller
                     ->orWhere('long_description', 'like', '%' . $keySearch . '%');
             });
         }
-        if ($request->filled('range-min')&&$request->filled('range-max')) {
+        if ($request->filled('range-min') && $request->filled('range-max')) {
             $from = $request->input('range-min');
-            $to =  $request->input('range-max');
+            $to = $request->input('range-max');
             $products = $products->where('price', '>=', $from)->where('price', '<=', $to);
         }
         $products = $products->orderBy('id', 'DESC')->paginate(12);
-
 
         return view('frontend.pages.product', compact('products', 'categories', 'brands'));
     }

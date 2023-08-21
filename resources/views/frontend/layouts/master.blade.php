@@ -108,7 +108,7 @@
 @if($countSegments>0)
     BREADCRUMB START
 ==============================-->
-<section id="wsus__breadcrumb">
+<section id="wsus__breadcrumb" class="mt-0">
     <div class="wsus_breadcrumb_overlay">
         <div class="container">
             <div class="row">

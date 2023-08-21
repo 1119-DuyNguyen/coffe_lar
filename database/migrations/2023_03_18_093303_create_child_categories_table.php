@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('child_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->noActionOnDelete();
+//            $table->foreignId('category_id')->constrained()->noActionOnDelete();
             $table->foreignId('sub_category_id')->constrained()->noActionOnDelete();
             $table->string('name');
             $table->string('slug')->unique();
