@@ -75,9 +75,8 @@ function getMainCartTotal(){
             $total = $subTotal - $coupon['discount'];
             return $total;
         }elseif($coupon['discount_type'] === 'percent'){
-            $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
-            $total = $subTotal - $discount;
-            return $total;
+            $discount = ($subTotal * $coupon['discount'] / 100);
+            return $subTotal - $discount;
         }
     }else {
         return getCartTotal();
@@ -86,14 +85,15 @@ function getMainCartTotal(){
 //
 ///** get cart discount */
 function getCartDiscount(){
+
     if(Session::has('coupon')){
         $coupon = Session::get('coupon');
+//        dd($coupon);
         $subTotal = getCartTotal();
         if($coupon['discount_type'] === 'amount'){
             return $coupon['discount'];
         }elseif($coupon['discount_type'] === 'percent'){
-            $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
-            return $discount;
+            return ($subTotal * $coupon['discount'] / 100);
         }
     }else {
         return 0;

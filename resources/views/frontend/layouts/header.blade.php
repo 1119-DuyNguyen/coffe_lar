@@ -98,11 +98,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="{{url('/')}}"><i
                             class="fas fa-home"></i> home</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="{{route('featured.product.index')}}"><i
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="{{route('featured-product.index')}}"><i
                             class="fas fa-star"></i> featured</a></li>
                 <li class="nav-item dropdown">
 
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="{{route('product.index')}}" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         <i class="fas fa-box"></i> Product
                     </a>

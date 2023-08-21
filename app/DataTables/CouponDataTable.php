@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Http\Services\SettingService;
 use App\Models\Coupon;
 use App\Models\GeneralSetting;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -30,7 +31,10 @@ class CouponDataTable extends DataTable
                 return $editBtn.$deleteBtn;
             })
             ->addColumn('discount', function($query){
-                return GeneralSetting::first()->currency_icon.$query->discount;
+                if($query->discount_type=='percent'){
+                    return $query->discount.'%';
+                }
+                return SettingService::getGeneralSetting()->currency_icon.$query->discount;
             })
             ->addColumn('status', function($query){
                 if($query->status == 1){
@@ -80,6 +84,7 @@ class CouponDataTable extends DataTable
 
             Column::make('id'),
             Column::make('name'),
+            Column::make('code'),
             Column::make('discount_type'),
             Column::make('discount'),
             Column::make('start_date'),

@@ -1,6 +1,7 @@
-@props(['url'=>route('admin.change-approve-status'),
+@props(['url',
 'selectorBtn'=>".is_approve"]
 )
+@isset($url)
 <script>
     // change approve status
     $('body').on('change', '{{$selectorBtn}}', function () {
@@ -28,3 +29,4 @@
 
     })
 </script>
+@endisset

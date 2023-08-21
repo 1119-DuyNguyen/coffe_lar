@@ -43,13 +43,13 @@ class OrderDataTable extends DataTable
             ->addColumn('date', function($query){
                 return date('d-M-Y', strtotime($query->created_at));
             })
-            ->addColumn('payment_status', function($query){
-                if($query->payment_status === 1){
-                    return "<span class='badge bg-success'>complete</span>";
-                }else {
-                    return "<span class='badge bg-warning'>pending</span>";
-                }
-            })
+//            ->addColumn('payment_status', function($query){
+//                if($query->payment_status === 1){
+//                    return "<span class='badge bg-success'>complete</span>";
+//                }else {
+//                    return "<span class='badge bg-warning'>pending</span>";
+//                }
+//            })
             ->addColumn('order_status', function($query){
                 switch ($query->order_status) {
                     case 'pending':
@@ -117,7 +117,7 @@ class OrderDataTable extends DataTable
             Column::make('product_qty'),
             Column::make('amount'),
             Column::make('order_status'),
-            Column::make('payment_status'),
+//            Column::make('payment_status'),
 
             Column::make('payment_method'),
 

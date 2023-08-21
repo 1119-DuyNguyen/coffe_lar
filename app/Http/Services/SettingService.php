@@ -30,15 +30,7 @@ class SettingService
     }
     public static function initSetting()
     {
-        $emailSetting = [
-            'email' => '2',
-            'host' => '2',
-            'username' => '2',
-            'password' => '2',
-            'port' => '2',
-            'encryption' => '2'
-        ];
-        $logoSetting = ['logo' => 'uploads/media_645627dd32a77.png', 'favicon' => 'uploads/media_645627dd34272.png'];
+
         Cache::rememberForever('generalSetting', function () {
             return [
                 'site_name' => 'Shop',
@@ -57,7 +49,7 @@ class SettingService
         });
         Cache::rememberForever('emailSetting', function () {
             return [
-                'email' => '2',
+                'email' => 'thanhduy191103@gmail.com',
                 'host' => '2',
                 'username' => '2',
                 'password' => '2',

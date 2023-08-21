@@ -105,7 +105,7 @@
                                     <li><a style="border: 1px solid gray;
                                         padding: 7px 11px;
                                         border-radius: 100%;" href="javascript:;" class="add_to_wishlist"
-                                           data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
+                                           data-id="{{$product->id}}"><i class="fas fa-heart"></i></a></li>
 
                                 </ul>
                             </form>

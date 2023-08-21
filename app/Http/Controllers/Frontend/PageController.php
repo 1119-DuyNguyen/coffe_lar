@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\SettingService;
 use App\Mail\Contact;
 use App\Models\About;
 use App\Models\EmailConfiguration;
@@ -38,9 +39,9 @@ class PageController extends Controller
             'message' => ['required', 'max:1000']
         ]);
 
-        $setting = EmailConfiguration::first();
+        $setting = SettingService::getEmailSetting();
 
-        Mail::to($setting->email)->send(new Contact($request->subject, $request->message, $request->email));
+        Mail::to($setting->email)->send(new Contact($request->input('subject'), $request->input('message'), $request->input('email')));
 
         return response(['status' => 'success', 'message' => 'Mail sent successfully!']);
 

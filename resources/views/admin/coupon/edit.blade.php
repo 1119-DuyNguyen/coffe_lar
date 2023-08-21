@@ -36,10 +36,10 @@
                             <input type="text" class="form-control" name="quantity" value="{{$coupon->quantity}}">
                         </div>
 
-                        <div class="form-group">
-                            <label>Max Use Per Person</label>
-                            <input type="text" class="form-control" name="max_use" value="{{$coupon->max_use}}">
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label>Max Use Per Person</label>--}}
+{{--                            <input type="text" class="form-control" name="max_use" value="{{$coupon->max_use}}">--}}
+{{--                        </div>--}}
 
                         <div class="row">
                             <div class="col-md-6">

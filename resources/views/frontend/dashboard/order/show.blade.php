@@ -61,11 +61,11 @@
                                                             {{ config('order_status.order_status_admin')[$order->order_status]['status'] }}
                                                         </h6>
                                                         <p>Payment Method: {{ $order->payment_method }}</p>
-                                                        <p>Payment
-                                                            Status: {{$order->payment_status === 1 ? 'Complete' : 'Pending'}}</p>
+{{--                                                        <p>Payment--}}
+{{--                                                            Status: {{$order->payment_status === 1 ? 'Complete' : 'Pending'}}</p>--}}
 
-                                                        {{--                                                            <p>Transaction id: {{ $order->transaction->transaction_id }}--}}
-                                                        </p>
+{{--                                                        --}}{{--                                                            <p>Transaction id: {{ $order->transaction->transaction_id }}--}}
+{{--                                                        </p>--}}
                                                     </div>
                                                 </div>
                                             </div>

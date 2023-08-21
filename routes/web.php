@@ -10,7 +10,6 @@ use App\Http\Controllers\Frontend\OrderTrackController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ReviewController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,7 +43,7 @@ require __DIR__.'/auth.php';
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
-Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured.product.index');
+Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured-product.index');
 
 /** Product route */
 Route::get('product', [ProductController::class, 'index'])->name('product.index');
@@ -81,7 +80,7 @@ Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
 
 /** Product track route */
-Route::get('order-tracking', [OrderTrackController::class, 'index'])->name('order-tracking.index');
+//Route::get('order-tracking', [OrderTrackController::class, 'index'])->name('order-tracking.index');
 
 
 

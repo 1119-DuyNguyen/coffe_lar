@@ -18,9 +18,6 @@ use App\Http\Controllers\Backend\Footer\FooterInfoController;
 use App\Http\Controllers\Backend\Footer\FooterSocialController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Payment\CodSettingController;
-use App\Http\Controllers\Backend\Payment\PaymentSettingController;
-use App\Http\Controllers\Backend\Payment\PaypalSettingController;
-use App\Http\Controllers\Backend\Payment\StripeSettingController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ProductImageGalleryController;
 use App\Http\Controllers\Backend\Product\ProductVariantController;
@@ -107,7 +104,7 @@ Route::middleware('hasPermission')->group(function (){
 
 
     /** Order routes */
-    Route::put('order/status', [OrderController::class, 'changeOrderStatus'])->name('order.change-status');
+    Route::put('order/change-status', [OrderController::class, 'changeOrderStatus'])->name('order.change-status');
 
     Route::resource('order', OrderController::class);
 
@@ -115,7 +112,7 @@ Route::middleware('hasPermission')->group(function (){
     /** settings routes */
     Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('general-setting', [SettingController::class, 'generalSettingUpdate'])->name('general-setting.update');
-//Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
+    Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
     Route::put('logo-setting', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting.update');
 
     /** manage user routes */

@@ -23,7 +23,7 @@ class CouponRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:200'],
-            'code' => ['required', 'max:200'],
+            'code' => ['required', 'max:200','regex:/^[a-zA-Z0-9_-]*$/','unique:coupons'],
             'quantity' => ['required', 'integer'],
             'max_use' => ['required', 'integer'],
             'start_date' => ['required'],
@@ -31,6 +31,17 @@ class CouponRequest extends FormRequest
             'discount_type' => ['required', 'max:200'],
             'discount' => ['required', 'integer'],
             'status' => ['required', 'integer']
+        ];
+    }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'code.regex' => 'A code must be a-z, A-Z, 0-9 or "_","-"',
         ];
     }
 }

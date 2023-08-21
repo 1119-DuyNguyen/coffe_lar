@@ -16,9 +16,7 @@ class SettingController extends Controller
 
     public function index()
     {
-//        $settings = GeneralSetting::first();
-//        $emailSettings = EmailConfiguration::first();
-//        $logoSetting = LogoSetting::first();
+
         return view('admin.setting.index');
     }
 
@@ -31,7 +29,6 @@ class SettingController extends Controller
             'layout' => ['required', 'max:200'],
             'contact_email' => ['required', 'max:200'],
             'currency_name' => ['required', 'max:200'],
-            'time_zone' => ['required', 'max:200'],
             'currency_icon' => ['required', 'max:200'],
         ]);
         SettingService::updateGeneralSetting($request->all());
@@ -42,34 +39,25 @@ class SettingController extends Controller
 
     }
 
-//    public function emailConfigSettingUpdate(Request $request)
-//    {
-//        $request->validate([
-//            'email' => ['required', 'email'],
-//            'host' => ['required', 'max:200'],
-//            'username' => ['required', 'max:200'],
-//            'password' => ['required', 'max:200'],
-//            'port' => ['required', 'max:200'],
-//            'encryption' => ['required', 'max:200'],
-//        ]);
-//
-//         EmailConfiguration::updateOrCreate(
-//            ['id' => 1],
-//            [
-//                'email' => $request->email,
-//                'host' => $request->host,
-//                'username' => $request->username,
-//                'password' => $request->password,
-//                'port' => $request->port,
-//                'encryption' => $request->encryption,
-//            ]
-//        );
-//        toast()->success('Updated successfully!');
-//
-//
-//
-//        return redirect()->back();
-//    }
+    public function emailConfigSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'host' => ['required', 'max:200'],
+            'username' => ['required', 'max:200'],
+            'password' => ['required', 'max:200'],
+            'port' => ['required', 'max:200'],
+            'encryption' => ['required', 'max:200'],
+        ]);
+        SettingService::updateEmailSetting($request->all());
+
+
+        toast()->success('Updated successfully!');
+
+
+
+        return redirect()->back();
+    }
 
     public function logoSettingUpdate(Request $request)
     {

@@ -20,20 +20,20 @@
 
                             <div class="col-xl-12">
                                 <div class="wsus__contact_single">
-                                    <i class="fal fa-envelope"></i>
+                                    <i class="fas fa-envelope"></i>
                                     <h5>mail address</h5>
-                                    <a href="mailto:example@gmail.com">{{@$settings->contact_email}}</a>
-                                    <span><i class="fal fa-envelope"></i></span>
+                                    <a href="mailto:{{@$settings->contact_email}}">{{@$settings->contact_email}}</a>
+                                    <span><i class="fas fa-envelope"></i></span>
                                 </div>
                             </div>
                             @endif
                             @if ($settings->contact_phone)
                             <div class="col-xl-12">
                                 <div class="wsus__contact_single">
-                                    <i class="far fa-phone-alt"></i>
+                                    <i class="fas fa-phone-alt"></i>
                                     <h5>phone number</h5>
-                                    <a href="macallto:{{@$settings->contact_phone}}">{{@$settings->contact_phone}}</a>
-                                    <span><i class="far fa-phone-alt"></i></span>
+                                    <a href="callto:{{@$settings->contact_phone}}">{{@$settings->contact_phone}}</a>
+                                    <span><i class="fas fa-phone-alt"></i></span>
                                 </div>
                             </div>
                             @endif
@@ -41,10 +41,10 @@
 
                             <div class="col-xl-12">
                                 <div class="wsus__contact_single">
-                                    <i class="fal fa-map-marker-alt"></i>
+                                    <i class="fas fa-map-marker-alt"></i>
                                     <h5>contact address</h5>
                                     <a href="javascript:;">{{@$settings->contact_address}}</a>
-                                    <span><i class="fal fa-map-marker-alt"></i></span>
+                                    <span><i class="fas fa-map-marker-alt"></i></span>
                                 </div>
                             </div>
                             @endif
@@ -57,23 +57,23 @@
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <input type="text" placeholder="Your Name" name="name">
+                                            <input type="text" placeholder="Your Name" name="name" required>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <input type="email" placeholder="Email" name="email">
+                                            <input type="email" placeholder="Email" name="email" required>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <input type="text" placeholder="Subject" name="subject">
+                                            <input type="text" placeholder="Subject" name="subject" required>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <textarea cols="3" rows="5" placeholder="Message" name="message"></textarea>
+                                            <textarea cols="3" rows="5" placeholder="Message" name="message" required></textarea>
                                         </div>
                                         <button type="submit" class="common_btn" id="form-submit">send now</button>
                                     </div>
@@ -114,7 +114,13 @@
                     },
                     success: function(data){
                         if(data.status == 'success'){
-                            toastr.success(data.message);
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: data.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                             $('#contact-form')[0].reset();
                             $('#form-submit').text('send now')
                             $('#form-submit').attr('disabled', false);
@@ -124,7 +130,11 @@
                         let errors = data.responseJSON.errors;
 
                         $.each(errors, function(key, value){
-                            toastr.error(value);
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: value,
+                            })
                         })
 
                         $('#form-submit').text('send now');

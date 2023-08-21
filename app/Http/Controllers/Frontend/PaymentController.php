@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\OrderService;
+use App\Http\Services\SettingService;
 use App\Models\CodSetting;
 use App\Models\GeneralSetting;
 use App\Models\Order;
@@ -47,7 +48,7 @@ class PaymentController extends Controller
     public function payWithCod(Request $request)
     {
         $this->orderService->checkOutFormSubmit($request);
-        $setting = GeneralSetting::first();
+        $setting = SettingService::getGeneralSetting();
 
         // amount calculation
         $total = getFinalPayableAmount();

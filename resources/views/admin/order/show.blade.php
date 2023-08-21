@@ -113,19 +113,19 @@
                             <div class="row mt-4">
                                 <div class="col-lg-8">
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Payment status</label>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="">Payment status</label>--}}
 
-                                            <select name="" id="payment_status" class="form-control"
-                                                    data-id="{{$order->id}}">
-                                                <option {{$order->payment_status === 0 ? 'selected': ''}} value="0">
-                                                    Pending
-                                                </option>
-                                                <option {{$order->payment_status === 1 ? 'selected': ''}} value="1">
-                                                    Completed
-                                                </option>
-                                            </select>
-                                        </div>
+{{--                                            <select name="" id="payment_status" class="form-control"--}}
+{{--                                                    data-id="{{$order->id}}">--}}
+{{--                                                <option {{$order->payment_status === 0 ? 'selected': ''}} value="0">--}}
+{{--                                                    Pending--}}
+{{--                                                </option>--}}
+{{--                                                <option {{$order->payment_status === 1 ? 'selected': ''}} value="1">--}}
+{{--                                                    Completed--}}
+{{--                                                </option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
 
                                         <div class="form-group">
                                             <label for="">Order Status</label>
@@ -145,11 +145,11 @@
                                         <div
                                             class="invoice-detail-value">{{$settings->currency_icon}} {{$order->sub_total}}</div>
                                     </div>
-                                    <div class="invoice-detail-item">
-                                        <div class="invoice-detail-name">Shipping (+)</div>
-                                        <div
-                                            class="invoice-detail-value">{{$settings->currency_icon}} {{@$shipping->cost}}</div>
-                                    </div>
+{{--                                    <div class="invoice-detail-item">--}}
+{{--                                        <div class="invoice-detail-name">Shipping (+)</div>--}}
+{{--                                        <div--}}
+{{--                                            class="invoice-detail-value">{{$settings->currency_icon}} {{@$shipping->cost}}</div>--}}
+{{--                                    </div>--}}
                                     <div class="invoice-detail-item">
                                         <div class="invoice-detail-name">Coupon (-)</div>
                                         <div
@@ -178,12 +178,10 @@
 @endsection
 
 @push('scripts')
-    <x-change-approve-status :url="route('admin.order.status')" selectorBtn="#order_status">
+    <x-change-approve-status :url="route('admin.order.change-status')" selectorBtn="#order_status">
 
     </x-change-approve-status>
-    <x-change-approve-status :url="route('admin.payment.status')" selectorBtn="#payment_status">
 
-    </x-change-approve-status>
     <script>
         $(document).ready(function () {
 
