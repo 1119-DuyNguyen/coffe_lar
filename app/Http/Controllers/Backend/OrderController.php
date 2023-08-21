@@ -12,6 +12,8 @@ use App\DataTables\processedOrderDataTable;
 use App\DataTables\shippedOrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -31,7 +33,10 @@ class OrderController extends Controller
     public function show(string $id)
     {
         $order = Order::with('orderProducts')->findOrFail($id);
-        return view('admin.order.show', compact('order'));
+        dd('2');
+        $pdf= Pdf::loadView('admin.order.show', compact('order'));
+        return $pdf->stream('bill.pdf');
+//        return view('admin.order.show', compact('order'));
     }
 
     /**
