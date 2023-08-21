@@ -44,15 +44,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-md-4 mb-5 mb-md-0">
-                                                    <div class="wsus__invoice_single text-md-center">
-                                                        <h5>shipping information</h5>
-                                                        <h6>{{ $address->name }}</h6>
-                                                        <p>{{ $address->email }}</p>
-                                                        <p>{{ $address->phone }}</p>
-                                                        <p>{{ $address->address }}, {{ $address->city }},
-                                                            {{ $address->state }}, {{ $address->zip }}</p>
-                                                        <p>{{ $address->country }}</p>
-                                                    </div>
+                                                    {{--                                                    <div class="wsus__invoice_single text-md-center">--}}
+                                                    {{--                                                        <h5>shipping information</h5>--}}
+                                                    {{--                                                        <h6>{{ $address->name }}</h6>--}}
+                                                    {{--                                                        <p>{{ $address->email }}</p>--}}
+                                                    {{--                                                        <p>{{ $address->phone }}</p>--}}
+                                                    {{--                                                        <p>{{ $address->address }}, {{ $address->city }},--}}
+                                                    {{--                                                            {{ $address->state }}, {{ $address->zip }}</p>--}}
+                                                    {{--                                                        <p>{{ $address->country }}</p>--}}
+                                                    {{--                                                    </div>--}}
                                                 </div>
                                                 <div class="col-xl-4 col-md-4">
                                                     <div class="wsus__invoice_single text-md-end">
@@ -61,11 +61,11 @@
                                                             {{ config('order_status.order_status_admin')[$order->order_status]['status'] }}
                                                         </h6>
                                                         <p>Payment Method: {{ $order->payment_method }}</p>
-{{--                                                        <p>Payment--}}
-{{--                                                            Status: {{$order->payment_status === 1 ? 'Complete' : 'Pending'}}</p>--}}
+                                                        {{--                                                        <p>Payment--}}
+                                                        {{--                                                            Status: {{$order->payment_status === 1 ? 'Complete' : 'Pending'}}</p>--}}
 
-{{--                                                        --}}{{--                                                            <p>Transaction id: {{ $order->transaction->transaction_id }}--}}
-{{--                                                        </p>--}}
+                                                        {{--                                                        --}}{{--                                                            <p>Transaction id: {{ $order->transaction->transaction_id }}--}}
+                                                        {{--                                                        </p>--}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,6 +73,7 @@
                                         <div class="wsus__invoice_description">
                                             <div class="table-responsive">
                                                 <table class="table">
+                                                    <thead>
                                                     <tr>
                                                         <th class="name">
                                                             product
@@ -89,6 +90,8 @@
                                                             total
                                                         </th>
                                                     </tr>
+                                                    </thead>
+                                                    <tbody>
                                                     @foreach ($order->orderProducts as $orderProduct)
                                                         @php
                                                             $variants = json_decode($orderProduct->variants);
@@ -118,8 +121,11 @@
                                                         </tr>
 
                                                     @endforeach
+                                                    </tbody>
+
 
                                                 </table>
+
                                             </div>
                                         </div>
                                     </div>
@@ -127,11 +133,17 @@
 
                                         <p><span>Sub Total:</span>{{ $settings->currency_icon }} {{$order->sub_total}}
                                         </p>
+                                        {{--                                        <p>--}}
+                                        {{--                                            <span>Shipping Fee(+):</span>{{ $settings->currency_icon }} {{$shipping->cost ?? 0}}--}}
+                                        {{--                                        </p>--}}
                                         <p>
-                                            <span>Shipping Fee(+):</span>{{ $settings->currency_icon }} {{$shipping->cost ?? 0}}
-                                        </p>
-                                        <p>
-                                            <span>Coupon(-):</span>{{ $settings->currency_icon }} {{$coupon->discount ??  0}}
+                                            <span>Coupon(-):</span>
+                                            @if($coupon->discount_type=='percent')
+                                                {{$coupon->discount ??  0}}%
+
+                                            @else
+                                                {{ $settings->currency_icon }} {{$coupon->discount ??  0}}
+                                            @endif
                                         </p>
                                         <p><span>Total Amount :</span>{{ $settings->currency_icon }} {{$order->amount}}
                                         </p>
@@ -155,6 +167,7 @@
             </div>
         </div>
     </div>
+
     <!--=============================
         DASHBOARD START
       ==============================-->

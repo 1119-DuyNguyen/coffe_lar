@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AboutController;
-use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\Category\CategoryController;
@@ -11,13 +11,13 @@ use App\Http\Controllers\Backend\Category\SubCategoryController;
 use App\Http\Controllers\Backend\Category\SubChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CustomerListController;
-use App\Http\Controllers\Backend\FeaturedProductController;
 use App\Http\Controllers\Backend\Footer\FooterGridThreeController;
 use App\Http\Controllers\Backend\Footer\FooterGridTwoController;
 use App\Http\Controllers\Backend\Footer\FooterInfoController;
 use App\Http\Controllers\Backend\Footer\FooterSocialController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Payment\CodSettingController;
+use App\Http\Controllers\Backend\Product\FeaturedProductController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ProductImageGalleryController;
 use App\Http\Controllers\Backend\Product\ProductVariantController;
@@ -42,7 +42,7 @@ Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name
 Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 /** Admin Routes */
 Route::middleware('hasPermission')->group(function (){
-    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard.index');
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
 
     /** Slider Route */
     Route::resource('slider', SliderController::class);

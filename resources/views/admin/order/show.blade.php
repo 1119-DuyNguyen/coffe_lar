@@ -153,7 +153,15 @@
                                     <div class="invoice-detail-item">
                                         <div class="invoice-detail-name">Coupon (-)</div>
                                         <div
-                                            class="invoice-detail-value">{{$settings->currency_icon}} {{@$coupon->discount ? @$coupon->discount : 0}}</div>
+                                            class="invoice-detail-value">
+                                            @if($coupon->discount_type=='percent')
+                                                {{$coupon->discount ??  0}}%
+
+                                            @else
+                                                {{ $settings->currency_icon }} {{$coupon->discount ??  0}}
+                                            @endif
+{{--                                            {{$settings->currency_icon}} {{@$coupon->discount ? @$coupon->discount : 0}}--}}
+                                        </div>
                                     </div>
                                     <hr class="mt-2 mb-2">
                                     <div class="invoice-detail-item">

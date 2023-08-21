@@ -28,7 +28,7 @@ class FeaturedProductDataTable extends DataTable
                 return $deleteBtn;
             })
             ->addColumn('product_name', function($query){
-                return "<a href='".route('admin.products.edit', $query->product->id)."'>".$query->product->name."</a>";
+                return "<a href='".route('admin.product.edit', $query->product->id)."'>".$query->product->name."</a>";
             })
             ->addColumn('status', function($query){
                 if($query->status == 1){

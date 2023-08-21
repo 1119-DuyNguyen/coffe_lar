@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Review;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     public function dashboard()
     {

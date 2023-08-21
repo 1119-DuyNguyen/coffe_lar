@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Product;
 
 use App\DataTables\FeaturedProductDataTable;
 use App\DataTables\FlashSaleItemDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\FlashSale;
 use App\Models\FeaturedProduct;
+use App\Models\FlashSale;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class FeaturedProductController extends Controller
     public function index(FeaturedProductDataTable $dataTable)
     {
 
-        $products = Product::where('is_approved', 1)->where('status', 1)->orderBy('id', 'DESC')->get();
+        $products = Product::where('status', 1)->orderBy('id', 'DESC')->get();
         return $dataTable->render('admin.featured-product.index', compact( 'products'));
     }
 

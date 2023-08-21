@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\FeaturedProductController;
@@ -41,7 +41,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 require __DIR__.'/auth.php';
 
-Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::get('admin/login', [DashboardController::class, 'login'])->name('admin.login');
 
 Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured-product.index');
 
