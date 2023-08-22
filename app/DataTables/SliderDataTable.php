@@ -6,10 +6,7 @@ use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class SliderDataTable extends DataTable
@@ -29,7 +26,7 @@ class SliderDataTable extends DataTable
                return $editBtn.$deleteBtn;
             })
             ->addColumn('banner', function($query){
-              return $img = "<img width='100px' src='".asset($query->banner)."' ></img>";
+              return "<img width='100px' src='".asset($query->banner)."' alt='banner'/>";
             })
             ->addColumn('status', function($query){
                 $active = '<i class="badge badge-success">Active</i>';

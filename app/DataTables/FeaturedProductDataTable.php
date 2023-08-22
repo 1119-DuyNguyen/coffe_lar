@@ -6,10 +6,7 @@ use App\Models\FeaturedProduct;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class FeaturedProductDataTable extends DataTable
@@ -23,9 +20,7 @@ class FeaturedProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
-                $deleteBtn = "<a href='".route('admin.featured-product.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-
-                return $deleteBtn;
+                return "<a href='".route('admin.featured-product.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
             })
             ->addColumn('product_name', function($query){
                 return "<a href='".route('admin.product.edit', $query->product->id)."'>".$query->product->name."</a>";

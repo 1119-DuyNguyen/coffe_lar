@@ -27,8 +27,8 @@ class ProductDataTable extends DataTable
                 <button class="btn btn-primary dropdown-toggle ml-1" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cog"></i>
                 </button>
-                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                  <a class="dropdown-item has-icon" href="'.route('admin.products-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0; left: 0; will-change: transform;">
+                  <a class="dropdown-item has-icon" href="' .route('admin.products-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
                   <a class="dropdown-item has-icon" href="'.route('admin.products-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a>
                 </div>
               </div>';
@@ -36,7 +36,7 @@ class ProductDataTable extends DataTable
                 return $editBtn.$deleteBtn.$moreBtn;
             })
             ->addColumn('image', function($query){
-                return "<img width='70px' src='".asset($query->thumb_image)."' ></img>";
+                return "<img width='70px' src='".asset($query->thumb_image)."' alt='image'/>";
             })
             ->addColumn('status', function($query){
                 if($query->status == 1){

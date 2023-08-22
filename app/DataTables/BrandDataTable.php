@@ -6,10 +6,7 @@ use App\Models\Brand;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class BrandDataTable extends DataTable
@@ -29,7 +26,7 @@ class BrandDataTable extends DataTable
                 return $editBtn.$deleteBtn;
             })
             ->addColumn('logo', function($query){
-               return "<img width='100px' src='".asset($query->logo)."' ></img>";
+               return "<img width='100px' src='".asset($query->logo)."' alt='logo'/>";
             })
             ->addColumn('is_featured', function($query){
                 $active = '<i class="badge badge-success">Yes</i>';

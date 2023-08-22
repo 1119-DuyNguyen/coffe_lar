@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Http\Request;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class OrderDataTable extends DataTable
@@ -54,28 +51,28 @@ class OrderDataTable extends DataTable
                 switch ($query->order_status) {
                     case 'pending':
                         return "<span class='badge bg-warning'>pending</span>";
-                        break;
+
                     case 'processed_and_ready_to_ship':
                         return "<span class='badge bg-info'>processed</span>";
-                        break;
+
                     case 'dropped_off':
                         return "<span class='badge bg-info'>dropped off</span>";
-                        break;
+
                     case 'shipped':
                         return "<span class='badge bg-info'>shipped</span>";
-                        break;
+
                     case 'out_for_delivery':
                         return "<span class='badge bg-primary'>out for delivery</span>";
-                        break;
+
                     case 'delivered':
                         return "<span class='badge bg-success'>delivered</span>";
-                        break;
+
                     case 'canceled':
                         return "<span class='badge bg-danger'>canceled</span>";
-                        break;
+
                     default:
                         # code...
-                        break;
+                        return "";
                 }
 
             })
