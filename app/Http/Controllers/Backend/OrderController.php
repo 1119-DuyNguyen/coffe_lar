@@ -23,8 +23,8 @@ class OrderController extends Controller
      */
     public function index(OrderDataTable $dataTable)
     {
-        $statusOrder=config('order_status.order_status_admin');
-        return $dataTable->render('admin.order.index',compact('statusOrder'));
+        $statusOrder = config('order_status.order_status_admin');
+        return $dataTable->render('admin.order.index', compact('statusOrder'));
     }
 
     /**
@@ -33,10 +33,8 @@ class OrderController extends Controller
     public function show(string $id)
     {
         $order = Order::with('orderProducts')->findOrFail($id);
-        dd('2');
-        $pdf= Pdf::loadView('admin.order.show', compact('order'));
-        return $pdf->stream('bill.pdf');
-//        return view('admin.order.show', compact('order'));
+
+        return view('admin.order.show', compact('order'));
     }
 
     /**

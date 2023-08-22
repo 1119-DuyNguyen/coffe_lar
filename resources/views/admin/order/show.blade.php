@@ -176,8 +176,9 @@
                 </div>
                 <hr>
                 <div class="text-md-right">
-                    <button class="btn btn-warning btn-icon icon-left print_invoice"><i class="fas fa-print"></i> Print
-                    </button>
+                    <a href="{{route('user.order.show', $order->id)}}" class='btn btn-warning btn-icon icon-left print_invoice'><i class='fas fa-print'></i>Print</a>
+{{--                    <button class="btn btn-warning btn-icon icon-left print_invoice"><i class="fas fa-print"></i> Print--}}
+{{--                    </button>--}}
                 </div>
             </div>
         </div>
@@ -230,17 +231,17 @@
             {{--    })--}}
             {{--})--}}
 
-            $('.print_invoice').on('click', function () {
-                let printBody = $('.invoice-print');
-                let originalContents = $('body').html();
-
-                $('body').html(printBody.html());
-
-                window.print();
-
-                $('body').html(originalContents);
-
-            })
+            // $('.print_invoice').on('click', function () {
+            //     let printBody = $('.invoice-print');
+            //     let originalContents = $('body').html();
+            //
+            //     $('body').html(printBody.html());
+            //
+            //     window.print();
+            //
+            //     $('body').html(originalContents);
+            //
+            // })
         })
     </script>
 @endpush
