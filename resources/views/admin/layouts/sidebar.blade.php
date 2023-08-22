@@ -42,8 +42,6 @@
     ['name'=>'Manage Website','icon'=>'<i class="fas fa-pager"></i>','child'=>[
                 ['name'=>'Slider','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.slider.index' ],
 
-                ['name'=>'About Page','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.about.index' ],
-        ['name'=>'Terms Page','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.terms-and-conditions.index'  ],
 
 ]],
 

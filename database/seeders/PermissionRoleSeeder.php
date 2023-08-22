@@ -55,10 +55,8 @@ class PermissionRoleSeeder extends Seeder
         $this->createRolePermission($superAdminRole, 'admin.general-setting.update');
         $this->createRolePermission($superAdminRole, 'admin.logo-setting.update');
         $this->createRolePermission($superAdminRole, 'admin.dashboard.index');
-
-        $this->createRolePermission($superAdminRole, 'footer.edit');
         $this->createRolePermission($superAdminRole, 'setting.edit');
-        $arrayUserPermission=['dashboard.index','order.index','order.show'];
+        $arrayUserPermission=['dashboard.index','order.index','order.show','cod.payment'];
         foreach ($arrayUserPermission as $per){
             $perObject=$this->createRolePermission($superAdminRole,'user.'.$per );
             $userRole->permissions()->attach($perObject->id);

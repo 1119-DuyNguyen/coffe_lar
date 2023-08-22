@@ -21,17 +21,11 @@ class Product extends Model
         "qty",
         "short_description",
         "long_description",
-        "video_link",
-        "sku",
         "price",
         "offer_price",
         "offer_start_date",
         "offer_end_date",
-        "product_type",
         "status",
-        "is_approved",
-        "seo_title",
-        "seo_description"
     ];
 
     public function vendor()

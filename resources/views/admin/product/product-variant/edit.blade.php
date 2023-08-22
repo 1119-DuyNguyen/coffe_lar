@@ -6,7 +6,9 @@
           <div class="section-header">
             <h1>Product Variant</h1>
           </div>
-
+            <div class="mb-3">
+                <a href="{{route('admin.product.product-variant.index', ['product' => $variant->product_id])}}" class="btn btn-primary">Back</a>
+            </div>
           <div class="section-body">
 
             <div class="row">
@@ -17,9 +19,10 @@
 
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.products-variant.update', $variant->id)}}" method="POST">
+                    <form action="{{route('admin.product-variant.update', $variant->id)}}" method="POST">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" class="form-control" name="product_id" value="{{$variant->product_id}}">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" name="name" value="{{$variant->name}}">

@@ -17,12 +17,6 @@ class HasPermissionMiddleware
 
     public function handle(Request $request, Closure $next): Response
     {
-//        if($request->user()->role !== $role){
-//            return redirect()->route('dashboard');
-//        }
-//        return $next($request);
-        return $next($request);
-
         $routeName= GateService::getGateDefineFromRouteName($request->route()->getName());
 
         if($request->user()->can($routeName)) {

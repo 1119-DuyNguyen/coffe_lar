@@ -79,11 +79,11 @@ trait ImageUploadTrait
     }
 
     /** Handle Delte File */
-//    public function deleteImage(string $path)
-//    {
-//        if ($path!=="default/coming-soon.jpg" &&File::exists(public_path($path))) {
-//            File::delete(public_path($path));
-//        }
-//    }
+    public function deleteImage(string $path)
+    {
+        if ($path!=="default/coming-soon.jpg" &&File::exists(public_path($path))) {
+            File::delete(public_path($path));
+        }
+    }
 }
 

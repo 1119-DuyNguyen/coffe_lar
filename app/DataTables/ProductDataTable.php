@@ -28,8 +28,8 @@ class ProductDataTable extends DataTable
                 <i class="fas fa-cog"></i>
                 </button>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0; left: 0; will-change: transform;">
-                  <a class="dropdown-item has-icon" href="' .route('admin.products-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
-                  <a class="dropdown-item has-icon" href="'.route('admin.products-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a>
+                  <a class="dropdown-item has-icon" href="' .route('admin.product.product-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
+                  <a class="dropdown-item has-icon" href="'.route('admin.product.product-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a>
                 </div>
               </div>';
 

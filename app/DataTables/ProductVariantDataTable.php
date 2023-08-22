@@ -18,14 +18,15 @@ class ProductVariantDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $product=$this->product;
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
-                $veriantItems = "<a href='".route('admin.products-variant-item.index', ['productId' => request()->product, 'variantId' => $query->id])."' class='btn btn-info mr-2'><i class='far fa-edit'></i> Variant Items</a>";
+            ->addColumn('action', function($query) use ($product){
+                $variantItems = "<a href='".route('admin.product.product-variant.product-variant-item.index', ['product' => $product->id, 'product_variant' => $query->id])."' class='btn btn-info mr-2'><i class='far fa-edit'></i> Variant Items</a>";
 
-                $editBtn = "<a href='".route('admin.products-variant.edit', $query->id)."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='".route('admin.products-variant.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='".route('admin.product.product-variant.edit', ['product' =>$product->id,'product_variant'=>$query->id])."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='".route('admin.product-variant.destroy', ['product_variant'=>$query->id])."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
-                return $veriantItems.$editBtn.$deleteBtn;
+                return $variantItems.$editBtn.$deleteBtn;
             })
             ->addColumn('status', function($query){
                 if($query->status == 1){
@@ -50,7 +51,7 @@ class ProductVariantDataTable extends DataTable
      */
     public function query(ProductVariant $model): QueryBuilder
     {
-        return $model->where('product_id', request()->input('product'))->newQuery();
+        return $model->where('product_id', $this->product->id)->newQuery();
     }
 
     /**

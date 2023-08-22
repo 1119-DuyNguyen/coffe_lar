@@ -18,11 +18,13 @@ class ProductVariantItemDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $product=$this->product;
+        $variant=$this->variant;
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
+            ->addColumn('action', function($query) use ($product,$variant){
 
-                $editBtn = "<a href='".route('admin.products-variant-item.edit', $query->id)."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='".route('admin.products-variant-item.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='".route('admin.product.product-variant.product-variant-item.edit', ['product' =>$product->id,'product_variant'=>$variant->id,'product_variant_item'=>$query->id])."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='".route('admin.product-variant-item.destroy', ['product' =>$product->id,'product_variant'=>$variant->id,'product_variant_item'=>$query->id])."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn.$deleteBtn;
             })
@@ -59,7 +61,7 @@ class ProductVariantItemDataTable extends DataTable
      */
     public function query(ProductVariantItem $model): QueryBuilder
     {
-        return $model->where('product_variant_id', request()->input('variantId'))->newQuery();
+        return $model->where('product_variant_id',$this->variant->id)->newQuery();
     }
 
     /**

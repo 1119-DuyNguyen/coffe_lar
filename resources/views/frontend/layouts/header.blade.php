@@ -9,7 +9,7 @@
     ->get();
 @endphp
 <style>
-    a i{
+    a i {
         padding: 0 2px;
     }
 
@@ -90,7 +90,8 @@
         <a class="navbar-brand fw-bold h-100" href="{{url('/')}}">
             <img src="{{asset($logoSetting->logo)}}" alt="logo" class="img-fluid p-3 rounded" style="width: 80px; ">
         </a>
-        <button class="navbar-toggler shadow-none " style="border:none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler shadow-none " style="border:none;" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -102,13 +103,15 @@
                             class="fas fa-star"></i> featured</a></li>
                 <li class="nav-item dropdown">
 
-                    <a class="nav-link dropdown-toggle" href="{{route('product.index')}}" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="{{route('product.index')}}" role="button"
+                       data-bs-toggle="dropdown"
                        aria-expanded="false">
                         <i class="fas fa-box"></i> Product
                     </a>
                     @php
                         //                        $keyChildList=['subCategories','childCategories'];
-                                                $keyChildList=[];
+
+                        $keyChildList=[];
 
                     @endphp
                     <x-menu-recursive-category :categories="$categories" :keyChildList="$keyChildList">
@@ -181,14 +184,19 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item">
 
-                                        <a href="{{ route('user.profile') }}"><i
-                                            <i class="fas fa-id-card"></i> Profile</a>
+                                    <a href="{{ route('user.profile') }}"><i
+                                        <i class="fas fa-id-card"></i> Profile</a>
 
                                 </li>
                                 @can('user.dashboard.index')
                                     <li class="dropdown-item"><a href="{{route('user.dashboard')}}"><i
-                                                class="fas fa-chart-bar"></i> Dashboard</a>
+                                                class="fas fa-chart-bar"></i> User Dashboard</a>
 
+                                    </li>
+                                @endcan
+                                @can('admin.dashboard.index')
+                                    <li class="dropdown-item"><a href="{{route('admin.dashboard.index')}}"><i
+                                                class="fas fa-chart-bar"></i> Admin Dashboard</a>
                                     </li>
                                 @endcan
                                 @can('user.order.index')
@@ -205,7 +213,7 @@
 
                                     </form>
                                 </li>
-                            </li>
+                                </li>
                             </ul>
                         {{--                            @if (auth()->user()->role === 'user')--}}
                         {{--                                <li><a href="{{route('user.dashboard')}}">my account</a></li>--}}
@@ -219,7 +227,8 @@
 
                 </ul>
                 <form class="d-flex" action="{{route('product.index')}}" role="search">
-                    <input class="form-control me-2 shadow-none" type="text" name='search' placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2 shadow-none" type="text" name='search' placeholder="Search"
+                           aria-label="Search">
                     <input type="submit" hidden/>
                     {{--                <button class="btn btn-outline-primary" type="submit">Search</button>--}}
                 </form>

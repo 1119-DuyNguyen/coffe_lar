@@ -13,17 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class PageController extends Controller
 {
-    public function about()
-    {
-        $about = About::first();
-        return view('frontend.pages.about', compact('about'));
-    }
-
-    public function termsAndCondition()
-    {
-        $terms = TermsAndCondition::first();
-        return view('frontend.pages.terms-and-condition', compact('terms'));
-    }
 
     public function contact()
     {

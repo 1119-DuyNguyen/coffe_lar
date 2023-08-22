@@ -17,7 +17,7 @@
 
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.products-variant-item.store')}}" method="POST">
+                    <form action="{{route('admin.product-variant-item.store')}}" method="POST">
                         @csrf
 
                         <div class="form-group">
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="variant_id" value="{{$variant->id}}">
+                            <input type="hidden" class="form-control" name="product_variant_id" value="{{$variant->id}}">
                         </div>
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="product_id" value="{{$product->id}}">
@@ -47,7 +47,7 @@
                             <select id="inputState" class="form-control" name="is_default">
                                 <option value="">Select</option>
                               <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="0" selected>No</option>
                             </select>
                         </div>
 

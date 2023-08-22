@@ -17,9 +17,12 @@
 
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.products-variant-item.update', $variantItem->id)}}" method="POST">
+                    <form action="{{route('admin.product-variant-item.update', $variantItem->id)}}" method="POST">
                         @csrf
                         @method('PUT')
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="product_variant_id" value="{{$variantItem->product_variant_id}}">
+                        </div>
                         <div class="form-group">
                             <label>Variant Name</label>
                             <input type="text" class="form-control" name="variant_name" value="{{$variantItem->productVariant->name}}" readonly>

@@ -17,7 +17,7 @@
                   <div class="card-header">
                     <h4>Product: {{$product->name}}</h4>
                     <div class="card-header-action">
-                        <a href="{{route('admin.products-variant.create', ['product' => $product->id])}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
+                        <a href="{{route('admin.product.product-variant.create', ['product' => $product->id])}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -35,6 +35,6 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-    <x-change-status :url="route('admin.products-variant.change-status')"></x-change-status>
+    <x-change-status :url="route('admin.product-variant.change-status')"></x-change-status>
 
 @endpush
