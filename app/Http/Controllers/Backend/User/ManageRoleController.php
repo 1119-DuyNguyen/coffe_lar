@@ -3,21 +3,14 @@
 namespace App\Http\Controllers\Backend\User;
 
 use App\DataTables\RoleDataTable;
-use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\RoleRequest;
-use App\Http\Requests\ProfileUpdateRequest;
-use App\Mail\AccountCreatedMail;
 use App\Models\Permission;
-use App\Models\Product;
 use App\Models\Role;
-use App\Models\User;
-use App\Models\Vendor;
 use App\Traits\CrudTrait;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function App\Http\Controllers\Backend\toastr;
 
 class ManageRoleController extends Controller
 {
@@ -60,6 +53,7 @@ class ManageRoleController extends Controller
     }
     public function update(RoleRequest $request,$resource_id)
     {
+        if($resource_id==0) return redirect()->back();
         $role=Role::findOrFail($resource_id);
         $permissionList=$request->input('permissions');
         $role->fill($request->all())->save();
@@ -68,5 +62,35 @@ class ManageRoleController extends Controller
 
         return redirect()->back();
     }
+    public function destroy($resource_id)
+    {
+        if($resource_id==0) return redirect()->back();
+        
+        $resource = $this->model()::findOrFail($resource_id);
 
+        try {
+            if ($this->getImageInput() && $resource->{$this->getImageInput()}) {
+                {
+                    $imagePath = $this->getImageInput();
+
+                }
+            }
+            $resource->delete();
+
+            if (isset($imagePath)) {
+                $this->deleteImage($resource->{$this->getImageInput()});
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == '1451') {
+                return response(['status' => 'error', 'message' => 'This item contain relation can\'t delete it.']);
+            }
+
+        } catch (Exception $e) {
+            return response(['status' => 'error', 'message' => "Can't do this action. Please try again later !"]);
+        }
+
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+
+    }
 }

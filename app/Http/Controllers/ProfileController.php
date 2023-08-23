@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserAddress;
 use App\Traits\ProfileHandlerTrait;
-use File;
 
 class ProfileController extends Controller
 {

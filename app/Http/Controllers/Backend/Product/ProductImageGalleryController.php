@@ -5,10 +5,6 @@ namespace App\Http\Controllers\Backend\Product;
 use App\DataTables\ProductImageGalleryDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductImageGallery;
-use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request;
-use function App\Http\Controllers\Backend\toastr;
 
 class ProductImageGalleryController extends Controller
 {

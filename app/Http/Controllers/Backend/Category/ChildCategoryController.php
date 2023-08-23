@@ -10,7 +10,6 @@ use App\Models\ChildCategory;
 use App\Models\SubCategory;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Str;
 
 class ChildCategoryController extends Controller
 {

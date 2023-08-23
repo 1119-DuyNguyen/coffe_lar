@@ -15,10 +15,8 @@ use App\Models\ProductVariant;
 use App\Models\SubCategory;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
-
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
-use Str;
 
 class ProductController extends Controller
 {
@@ -29,7 +27,7 @@ class ProductController extends Controller
     }
     protected function addAutoInput(Request $request): array
     {
-        return ['vendor_id'=>Auth::user()->vendor->id];
+        return ['vendor_id'=>Auth::user()->id];
     }
 
     protected function getFormRequest(): FormRequest

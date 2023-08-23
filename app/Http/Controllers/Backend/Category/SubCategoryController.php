@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Str;
 
 class SubCategoryController extends Controller
 {

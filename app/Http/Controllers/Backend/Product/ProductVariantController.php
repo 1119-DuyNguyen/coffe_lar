@@ -6,9 +6,6 @@ use App\DataTables\ProductVariantDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;
-use App\Models\ProductVariantItem;
-use Illuminate\Http\Request;
-use function App\Http\Controllers\Backend\toastr;
 
 class ProductVariantController extends Controller
 {

@@ -5,16 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\BrandDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\BrandRequest;
-use App\Http\Requests\Backend\ChildCategoryRequest;
 use App\Models\Brand;
-use App\Models\ChildCategory;
-use App\Models\Product;
 use App\Traits\CrudTrait;
-use App\Traits\ImageUploadTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Cell\IValueBinder;
-use Str;
 
 class BrandController extends Controller
 {

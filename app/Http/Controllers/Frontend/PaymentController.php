@@ -5,23 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Services\OrderService;
 use App\Http\Services\SettingService;
-use App\Models\CodSetting;
-use App\Models\GeneralSetting;
-use App\Models\Order;
-use App\Models\OrderProduct;
-use App\Models\PaypalSetting;
-use App\Models\Product;
-use App\Models\RazorpaySetting;
-use App\Models\StripeSetting;
-use App\Models\Transaction;
-use App\Traits\PaypalTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
-use Stripe\Charge;
-use Stripe\Stripe;
-use Razorpay\Api\Api;
 
 class PaymentController extends Controller
 {

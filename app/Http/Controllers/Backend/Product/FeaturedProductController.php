@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Backend\Product;
 
 use App\DataTables\FeaturedProductDataTable;
-use App\DataTables\FlashSaleItemDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\FeaturedProduct;
-use App\Models\FlashSale;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -32,9 +30,9 @@ class FeaturedProductController extends Controller
 
 
         $flashSaleItem = new FeaturedProduct();
-        $flashSaleItem->product_id = $request->product;
-        $flashSaleItem->show_at_home = $request->show_at_home;
-        $flashSaleItem->status = $request->status;
+        $flashSaleItem->product_id = $request->input('product');
+        $flashSaleItem->show_at_home = $request->input('show_at_home');
+        $flashSaleItem->status = $request->input('status');
         $flashSaleItem->save();
         toast()->success('Product Added Successfully!');
 

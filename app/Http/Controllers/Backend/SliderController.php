@@ -7,10 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\SliderUpdateRequest;
 use App\Models\Slider;
 use App\Traits\CrudTrait;
-use App\Traits\ImageUploadTrait;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
 class
 SliderController extends Controller

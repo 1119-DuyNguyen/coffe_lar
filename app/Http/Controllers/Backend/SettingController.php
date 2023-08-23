@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\SettingService;
-use App\Models\EmailConfiguration;
-use App\Models\GeneralSetting;
-use App\Models\LogoSetting;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 

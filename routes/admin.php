@@ -83,7 +83,6 @@ Route::middleware('hasPermission')->group(function () {
     Route::resource('product', ProductController::class);
 
 
-
     /** featured-product */
 
     Route::resource('featured-product', FeaturedProductController::class)->except(['update', 'edit']);
@@ -102,7 +101,7 @@ Route::middleware('hasPermission')->group(function () {
     /** settings routes */
     Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('general-setting', [SettingController::class, 'generalSettingUpdate'])->name('general-setting.update');
-    Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
+//    Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
     Route::put('logo-setting', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting.update');
 
     /** manage user routes */

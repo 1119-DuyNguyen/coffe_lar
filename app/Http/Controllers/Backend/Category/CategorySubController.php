@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\SubCategory;
-use Str;
 
 class CategorySubController extends Controller
 {

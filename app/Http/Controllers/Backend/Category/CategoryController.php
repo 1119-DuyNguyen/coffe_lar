@@ -8,7 +8,6 @@ use App\Http\Requests\Backend\CategoryRequest;
 use App\Models\Category;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Str;
 
 class CategoryController extends Controller
 {

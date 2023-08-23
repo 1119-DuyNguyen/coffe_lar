@@ -3,27 +3,24 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Adverisement;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
-use App\Models\ProductReview;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    private function getMatchValue($array, $keyMatch, $valueMatch)
-    {
-        foreach ($array as $key => $value) {
-            if ($array->{$keyMatch} == $valueMatch) {
-                return $array->{$key};
-            }
-        }
-        return null;
-    }
+//    private function getMatchValue($array, $keyMatch, $valueMatch)
+//    {
+//        foreach ($array as $key => $value) {
+//            if ($array->{$keyMatch} == $valueMatch) {
+//                return $array->{$key};
+//            }
+//        }
+//        return null;
+//    }
 
     public function index(Request $request)
     {
@@ -92,8 +89,4 @@ class ProductController extends Controller
         } else abort(404);
     }
 
-    public function chageListView(Request $request)
-    {
-        Session::put('product_list_style', $request->style);
-    }
 }

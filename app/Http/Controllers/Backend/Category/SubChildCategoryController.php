@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend\Category;
 use App\Http\Controllers\Controller;
 use App\Models\ChildCategory;
 use Illuminate\Http\Request;
-use Str;
 
 class SubChildCategoryController extends Controller
 {

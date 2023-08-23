@@ -3,19 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Adverisement;
-use App\Models\Blog;
 use App\Models\Brand;
-use App\Models\Category;
-use App\Models\ChildCategory;
-use App\Models\FlashSale;
 use App\Models\FeaturedProduct;
-use App\Models\HomePageSetting;
-use App\Models\Product;
 use App\Models\Slider;
-use App\Models\SubCategory;
-use App\Models\Vendor;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

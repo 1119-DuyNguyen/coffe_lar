@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\FlashSale;
 use App\Models\FeaturedProduct;
-use Illuminate\Http\Request;
 
 class FeaturedProductController extends Controller
 {

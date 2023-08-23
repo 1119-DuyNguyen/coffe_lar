@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fronend\CartRequest;
-use App\Models\Adverisement;
-use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductVariantItem;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -67,7 +63,7 @@ class CartController extends Controller
                     $idVariants+=[$variantItem->productVariant->name => $variantItem->id];
                 }
             }
-            catch (Exception $e){
+            catch (\Exception $e){
                 return response(['status' => 'error', 'message' => 'Something went wrong! Please try again.']);
             }
         }

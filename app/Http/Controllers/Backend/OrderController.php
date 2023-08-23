@@ -2,18 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\DataTables\canceledOrderDataTable;
-use App\DataTables\deliveredOrderDataTable;
-use App\DataTables\droppedOffOrderDataTable;
 use App\DataTables\OrderDataTable;
-use App\DataTables\outForDeliveryOrderDataTable;
-use App\DataTables\PendingOrderDataTable;
-use App\DataTables\processedOrderDataTable;
-use App\DataTables\shippedOrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller

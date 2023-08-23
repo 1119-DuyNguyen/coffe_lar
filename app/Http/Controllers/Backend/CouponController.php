@@ -5,13 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\CouponDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CouponRequest;
-use App\Http\Requests\Backend\ProductRequest;
 use App\Models\Coupon;
-use App\Models\Product;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {

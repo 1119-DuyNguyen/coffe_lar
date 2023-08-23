@@ -5,9 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Services\SettingService;
 use App\Mail\Contact;
-use App\Models\About;
-use App\Models\EmailConfiguration;
-use App\Models\TermsAndCondition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
