@@ -35,6 +35,9 @@
 - Analytic dashboard
 - Profile Settings
 
+## database
+![database complete ecommerce](https://github.com/1119-DuyNguyen/complete-ecommerce-lar/assets/62139508/00f61e19-6c71-471d-ac26-1687a8a34115)
+
 ## Screenshots :
 ![ảnh](https://github.com/1119-DuyNguyen/complete-ecommerce-lar/assets/62139508/36e324c9-b911-402a-80be-a81e4a5fe19a)
 ![ảnh](https://github.com/1119-DuyNguyen/complete-ecommerce-lar/assets/62139508/bfc47ef4-b481-4b0d-97b0-6001b7801f1d)
