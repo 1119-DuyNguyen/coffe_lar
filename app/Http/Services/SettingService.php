@@ -34,7 +34,7 @@ class SettingService
             ];
         });
         Cache::rememberForever('logoSetting', function () {
-            return ['logo' => 'uploads/media_645627dd32a77.png', 'favicon' => 'uploads/media_645627dd34272.png'];
+            return ['logo' => 'uploads/media_64cd537af35c94.07800862.png', 'favicon' => 'uploads/media_645627dd34272.png'];
         });
         Cache::rememberForever('emailSetting', function () {
             return [
