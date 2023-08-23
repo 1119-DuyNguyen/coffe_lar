@@ -1,11 +1,11 @@
 # Complete E-commerce website in  Laravel 10
 
 ## Demo website :
-+ Link:
-+ Account:
++ Link:https://nguyenthanhduy.id.vn/login
+Account (pass = 123):
 + admin@gmail.com
 + user@gmail.com
-
+  
 ## Features :
 
 ### ====== FRONT-END =======
