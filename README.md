@@ -38,3 +38,5 @@
 ## Screenshots :
 ![ảnh](https://github.com/1119-DuyNguyen/complete-ecommerce-lar/assets/62139508/36e324c9-b911-402a-80be-a81e4a5fe19a)
 ![ảnh](https://github.com/1119-DuyNguyen/complete-ecommerce-lar/assets/62139508/bfc47ef4-b481-4b0d-97b0-6001b7801f1d)
+### Permission:
+![ảnh](https://github.com/1119-DuyNguyen/complete-ecommerce-lar/assets/62139508/328d2667-b32d-41ef-85a4-3a41d26ad829)
