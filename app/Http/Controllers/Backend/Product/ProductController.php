@@ -15,7 +15,7 @@ use App\Models\ProductVariant;
 use App\Models\SubCategory;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller

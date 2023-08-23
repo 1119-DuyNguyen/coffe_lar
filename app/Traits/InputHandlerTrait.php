@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 
-use App\Traits\App\Http\Requests;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
