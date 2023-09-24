@@ -34,7 +34,7 @@ class ManageUserController extends Controller
 
     public function create()
     {
-        $roleList=Role::all()->whereNotIn('id',);
+        $roleList=Role::all()->whereNotIn('id',['1']);
         return view('admin.user.create',compact( 'roleList'));
     }
     public function edit(User $user)

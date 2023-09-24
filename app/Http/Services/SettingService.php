@@ -22,6 +22,7 @@ class SettingService
 
         Cache::rememberForever('generalSetting', function () {
             return [
+                'name'=>'Ngôi nhà cafe',
                 'site_name' => 'Shop',
                 'layout' => 'LTR',
                 'contact_email' => 'contact@gmail.com',

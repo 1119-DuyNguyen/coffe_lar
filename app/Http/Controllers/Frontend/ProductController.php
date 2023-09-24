@@ -24,42 +24,16 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = Product::where(['status' => 1]);
-        $categories = Category::with(['subCategories' => function ($query) {
-            $query->where('sub_categories.status', '=', '1')->with(['childCategories' => function ($query) {
-                $query->where('child_categories.status', '=', '1');
-            }]);
-        },])
-            ->where('categories.status', '=', 1)->get();
-        $brands = Brand::where(['status' => 1])->get();
-        if ($request->filled('childcategory')) {
-            $category = ChildCategory::where(['status' => 1])->where('slug', $request->input('childcategory'))->first();
-
-//            $category = ChildCategory::where('slug', $request->input('childcategory'))->firstOrFail();
-            $products = $products->where([
-                'child_category_id' => $category->id,
-            ]);
-        } elseif ($request->filled('subcategory')) {
-            $category = SubCategory::where(['status' => 1])->where('slug', $request->input('subcategory'))->first();
-//            $category = SubCategory::where('slug', $request->input('subcategory'))->firstOrFail();
-            $products = $products->where([
-                'sub_category_id' => $category->id,
-            ]);
-
-        } else if ($request->filled('category')) {
+        $products = Product::where(['status' => true]);
+        $categories = Category::where(['status' => true])->get();
+         if ($request->filled('category')) {
             $category = $categories->firstWhere('slug', $request->input('category'));
 //            $category = Category::where('slug', $request->input('category', ''))->firstOrFail();
             $products = $products->where([
                 'category_id' => $category->id,
             ]);
         }
-        if ($request->filled('brand')) {
-            $brand = Brand::where('slug', $request->input('brand'))->firstOrFail();
 
-            $products = $products->where([
-                'brand_id' => $brand->id,
-            ]);
-        }
         if ($request->filled('search')) {
             $products = $products->where(function ($query) use ($request) {
                 $keySearch = $request->input('search');
@@ -73,14 +47,38 @@ class ProductController extends Controller
             $products = $products->where('price', '>=', $from)->where('price', '<=', $to);
         }
         $products = $products->orderBy('id', 'DESC')->paginate(12);
+        $viewData = [
+            'products' => $products,
+            'categories' => $categories,
+        ];
+//        if($request->ajax()){
+//            return view('templates.clients.product.search', $viewData);
+//        }
 
-        return view('frontend.pages.product', compact('products', 'categories', 'brands'));
+        return view('templates.clients.product.index', $viewData);
+        return view('frontend.pages.product', compact('products', 'categories'));
     }
 
     /** Show product detail page */
-    public function show(string $slug)
+    public function show(Request $request,string $slug)
     {
+        if($request->ajax())
+        {
 
+                $product = Product::where('slug', $slug)->where('status', 1)->first();
+//                $discount = 0;
+//                if (count($product->Coupon) > 0) {
+//                    if ($product->Coupon[0]->loaigiam === 1) {
+//                        $discount = $product->giaban *  $product->Coupon[0]->giamgia / 100;
+//                    } else {
+//                        $discount = $product->Coupon[0]->giamgia;
+//                    }
+//                }
+//                $product->giaban = ($product->giaban - $discount < 0) ? 0 : $product->giaban - $discount;
+
+                return view('templates.clients.home.quick-view', ['product' => $product]);
+
+        }
         $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where('slug', $slug)->where('status', 1)->first();
 //        $reviews = ProductReview::where('product_id', $product->id)->where('status', 1)->paginate(10);
         if (isset($product)) {

@@ -16,20 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('thumb_image');
-            $table->foreignId('vendor_id')->constrained(
-                table: 'users', column: 'id'
-            )->cascadeOnDelete();
+
             $table->foreignId('category_id')->constrained()->noActionOnDelete();
-            $table->foreignId('sub_category_id')->nullable()->constrained()->noActionOnDelete();
-            $table->foreignId('child_category_id')->nullable()->constrained()->noActionOnDelete();
-            $table->foreignId('brand_id')->constrained()->noActionOnDelete();
-            $table->unsignedInteger('qty');
-            $table->text('short_description');
-            $table->text('long_description');
+            $table->text('description');
+            $table->text('content');
             $table->double('price');
-            $table->double('offer_price')->nullable();
-            $table->date('offer_start_date')->nullable();
-            $table->date('offer_end_date')->nullable();
+
             $table->boolean('status') -> default(true);
             $table->timestamps();
         });

@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/quickview', [HomeController::class, 'quickView'])->name('quickview');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');

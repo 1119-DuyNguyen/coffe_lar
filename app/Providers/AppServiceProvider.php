@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
             /** set time zone */
 //            Config::set('app.timezone', $generalSetting->time_zone);
             //role & permissions
-            $this->setupRBAC();
+//            $this->setupRBAC();
 
             SettingService::initSetting();
             $generalSetting = SettingService::getGeneralSetting();
@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
             if(isset($generalSetting)&&isset($logoSetting))
             {
 
-                View::composer('*', function ($view) use ($generalSetting,$logoSetting){
+                View::composer('templates.clients.frontend', function ($view) use ($generalSetting,$logoSetting){
 
                     $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
                 });

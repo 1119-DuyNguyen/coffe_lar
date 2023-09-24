@@ -13,18 +13,12 @@ class Product extends Model
         "thumb_image",
         "name",
         "slug",
-        "vendor_id",
         "category_id",
-        "sub_category_id",
-        "child_category_id",
-        "brand_id",
-        "qty",
-        "short_description",
-        "long_description",
+
+        "description",
+        "content",
         "price",
-        "offer_price",
-        "offer_start_date",
-        "offer_end_date",
+
         "status",
     ];
 
