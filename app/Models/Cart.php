@@ -9,4 +9,8 @@ class Cart extends Model
 {
     protected $fillable=[];
     use HasFactory;
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

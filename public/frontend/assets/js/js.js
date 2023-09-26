@@ -99,7 +99,7 @@ $(document).ready(function () {
     const item_user = document.querySelectorAll(".item_user");
     item_user.forEach((tab, index) => {
         tab.onclick = function (e) {
-            e.preventDefault()    
+            e.preventDefault()
             document
                 .querySelector(".item_user.active")
                 .classList.remove("active");
@@ -130,13 +130,13 @@ $(document).ready(function () {
 
     //             let card = '.filter_card_'+ item.getAttribute('id').trim();
     //             let getCard = document.querySelector(card);
-    //             getCard.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}) 
+    //             getCard.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
     //         })
 
 
     //     })
     // }
-    
+
     window.addEventListener('scroll', () => {
         let current = "";
         sections.forEach( section => {

@@ -27,4 +27,5 @@ class CartRequest extends FormRequest
             //
         ];
     }
+
 }

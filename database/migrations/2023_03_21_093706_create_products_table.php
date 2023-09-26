@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->noActionOnDelete();
             $table->text('description');
             $table->text('content');
-            $table->double('price');
+            $table->double('price_origin')->unsigned()->default(0);
+            $table->double('price')->unsigned();
 
             $table->boolean('status') -> default(true);
             $table->timestamps();

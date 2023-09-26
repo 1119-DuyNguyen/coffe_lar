@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('product_variant_id')->constrained()->noActionOnDelete();
             $table->string('name');
             $table->double('price');
-            $table->boolean('is_default')->default(false);
+            $table->double('price_origin')->default(0);
             $table->boolean('status') -> default(true);
             $table->timestamps();
         });

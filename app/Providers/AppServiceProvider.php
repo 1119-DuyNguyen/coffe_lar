@@ -7,6 +7,7 @@ use App\Models\GeneralSetting;
 use App\Models\LogoSetting;
 use App\Models\Role;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
@@ -51,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         //
+        App::setLocale('vi');
         try {
             /** set time zone */
 //            Config::set('app.timezone', $generalSetting->time_zone);

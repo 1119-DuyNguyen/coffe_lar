@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('thumb_image');
             $table->string('code')->unique();
-            $table->integer('quantity');
-//            $table->integer('max_use');
+            $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('discount_type');
             $table->double('discount');
+            $table->double('condition');
+            $table->string('discount_type');
             $table->boolean('status') -> default(true);
+            $table->integer('total')->default(0);
             $table->integer('total_used')->default(0);
             $table->timestamps();
         });

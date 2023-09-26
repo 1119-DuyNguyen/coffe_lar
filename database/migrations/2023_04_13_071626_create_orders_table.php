@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id') ->constrained()->noActionOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->noActionOnDelete();
+            $table->string('name_receiver');
+            $table->text('address_receiver');
+            $table->string('phone_receiver');
+            $table->text('email_receiver');
+            $table->text('note');
             $table->double('sub_total');
-            $table->double('amount');
-            $table->string('currency_name');
-            $table->string('currency_icon');
-            $table->unsignedInteger('product_qty');
-            $table->string('payment_method');
-            $table->integer('payment_status');
-            $table->text('order_address');
-            $table->text('shpping_method');
-            $table->text('coupon');
+            $table->double('discount_price');
+            $table->double('total');
+            $table->json('coupon');
+            $table->boolean('payment_status')->default(false);
             $table->string('order_status');
             $table->timestamps();
         });

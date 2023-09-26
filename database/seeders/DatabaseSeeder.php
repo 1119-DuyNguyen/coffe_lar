@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ProductVariant;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -33,12 +34,21 @@ class DatabaseSeeder extends Seeder
 //        $this->call(AdminProfileSeeder::class);
 //        $this->call(VendorShopProfileSeeder::class);
         //data product
-        $file_path = __DIR__.'/seeder.sql';
 
-        \DB::unprepared(
-            file_get_contents($file_path)
-        );
+        $file_path = [
+            __DIR__.'/seeder-product.sql',
+            __DIR__.'/seeder.sql',
+            __DIR__.'/seeder-coupon.sql',
+            ];
+        foreach ($file_path as $file)
+        {
+            \DB::unprepared(
+                file_get_contents($file)
+            );
+        }
+
 //         data all
+        $this->call(ProductVariantSeeder::class);
 
     }
 }
