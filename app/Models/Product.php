@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -14,13 +15,21 @@ class Product extends Model
         "name",
         "slug",
         "category_id",
-
         "description",
         "content",
         "price",
 
         "status",
     ];
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $slug = Str::slug($model->title);
+            $model->slug = $slug;
+        });
+    }
 
     public function vendor()
     {
@@ -59,4 +68,5 @@ class Product extends Model
 
         return false;
     }
+
 }

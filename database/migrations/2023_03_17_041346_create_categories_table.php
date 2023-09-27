@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('icon');
             $table->boolean('status') -> default(true);
-            $table->foreignId('parent_id')->nullable()->constrained(
-                table: 'categories', indexName: 'id'
-            )->cascadeOnDelete();
+//            $table->foreignId('parent_id')->nullable()->constrained(
+//                table: 'categories', indexName: 'id'
+//            )->cascadeOnDelete();
 
             $table->timestamps();
         });

@@ -34,15 +34,4 @@ return [
 
     ],
 
-
-    'order_status_vendor' => [
-        'pending' => [
-            'status' => 'Pending',
-            'details' => 'Your order is currently pending'
-        ],
-        'processed_and_ready_to_ship' => [
-            'status' => 'Processed and ready to ship',
-            'details' => 'Your pacakge has been processed and will be with our delivery parter soon'
-        ]
-    ]
 ];

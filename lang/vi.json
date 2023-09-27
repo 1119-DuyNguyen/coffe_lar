@@ -1,4 +1,22 @@
 {
+    "order_status": {
+        "pending": "Đang chờ xử lý",
+        "pending_details": "Đơn hàng của bạn hiện đang chờ xử lý",
+        "processed_and_ready_to_ship": "Đã xử lý và sẵn sàng giao hàng",
+        "processed_and_ready_to_ship_details": "Gói hàng của bạn đã được xử lý và sẽ được giao đến đối tác giao hàng của chúng tôi sớm",
+        "dropped_off": "Đã giao hàng",
+        "dropped_off_details": "Gói hàng của bạn đã được người bán giao đi",
+        "shipped": "Đang giao hàng",
+        "shipped_details": "Gói hàng của bạn đã đến tại cơ sở vận chuyển của chúng tôi",
+        "out_for_delivery": "Đang giao hàng",
+        "out_for_delivery_details": "Đối tác giao hàng của chúng tôi sẽ cố gắng giao hàng cho bạn",
+        "delivered": "Đã giao hàng",
+        "delivered_details": "Đã giao hàng",
+        "canceled": "Đã hủy",
+        "canceled_details": "Đã hủy",
+        "unknown": "Tình trạng không xác định",
+        "unknown_details": "Tình trạng không xác định"
+    },
     "Cart": "Giỏ hàng",
     "30 Days": "30 Ngày",
     "60 Days": "60 Ngày",

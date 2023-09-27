@@ -11,20 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_products', function (Blueprint $table) {
+        Schema::create('order_product', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->noActionOnDelete();
             $table->foreignId('product_id')->constrained()->noActionOnDelete();
             $table->json('variants');
-            $table->integer('variant_total_price')->unsigned()->default(0);
-            $table->integer('variant_total_price_origin')->unsigned()->default(0);
-            $table->integer('product_price')->unsigned()->default(0);
-            $table->integer('product_price_origin')->unsigned()->default(0);
-            $table->integer('discount_price')->unsigned()->default(0);
+            $table->double('variant_total_price')->unsigned();
+            $table->double('variant_total_price_origin')->unsigned();
+            $table->double('product_price')->unsigned();
+            $table->double('product_price_origin')->unsigned();
             $table->integer('qty')->unsigned();
-            $table->integer('sub_total')->unsigned()->default(0);
-            $table->integer('sub_total_profit')->unsigned()->default(0);
-
             $table->unique(['order_id', 'product_id']);
             $table->timestamps();
         });
