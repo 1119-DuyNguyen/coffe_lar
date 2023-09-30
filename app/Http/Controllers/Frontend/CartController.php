@@ -28,11 +28,10 @@ class CartController extends Controller
     {
         $cartItems = \Cart::getContent();
         if ($request->ajax()) {
-            $cart = $this->cartService->getCart();
+            $cart = $this->cartService->getListCart();
 
             return response()->json(['cart' => $cart], 200);
         }
-
 
         return view('frontend.pages.cart-detail', compact('cartItems'));
     }
@@ -40,16 +39,9 @@ class CartController extends Controller
     /** Add item to cart */
     public function store(CartRequest $request)
     {
-        // check product quantity
-//        if($product->qty === 0){
-//            return response(['status' => 'error', 'message' => 'Product stock out']);
-//        }elseif($product->qty < $request->qty){
-//            return response(['status' => 'error', 'message' => 'Quantity not available in our stock','qty' => $product->qty]);
-//        }
 
-        $this->cartService->store($request->input('id'), $request->input('qty'), $request->input('variants_items', []));
-
-
+        $this->cartService->store($request->input('product_id'), $request->input('qty'), $request->input('variants_items', []));
+        return  view('templates.clients.home.cart');
         return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
     }
 

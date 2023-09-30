@@ -15,7 +15,17 @@ $.ajaxSetup({
         } else if (jqXHR.status == 500) {
             toastr.error('Máy chủ bận. Vui lòng thử lại sau');
 
-        } else if (exception === 'parsererror') {
+        }
+        else if(jqXHR.status=419)
+        {
+            toastr.error('Hãy bấm F5 để làm mới trang');
+
+        }
+        else if(jqXHR.status == 422){
+            toastr.error( JSON.parse(jqXHR.responseText).message);
+
+        }
+        else if (exception === 'parsererror') {
             // alert('Requested JSON parse failed.');
             toastr.error('Dữ liệu bị lỗi. Vui lòng thử lại sau');
 
@@ -28,6 +38,7 @@ $.ajaxSetup({
 
         } else {
             toastr.error('Có lỗi đang xảy ra. Vui lòng thử lại sau ');
+            // alert(jqXHR.responseText);
             // alert('Uncaught Error.\n' + jqXHR.responseText);
 
         }
@@ -54,37 +65,23 @@ $(document).on('click', '.quickView', function() {
         }
     });
 })
-$(document).on('click', '#addCart', function() {
-    let id = $(this).data('id')
-    let qty = $('input[name="addSl"]').val()
-    let size = $('input[name="sizeRadio"]')
-    let slSize = null;
-    if (size.length > 0) {
-        for (let i = 0; i < size.length; i++) {
-            if (size[i].checked) {
-                slSize = size[i].value
-            }
+$(document).on('click', '#addCart', function(e) {
+    e.preventDefault();
+    var frm = $(this).closest('form');
+    $.ajax({
+        type: frm.attr('method'),
+        url: frm.attr('action'),
+        data: frm.serialize(),
+        success: function (data) {
+            console.log(data)
+            loadCart(data);
+            loadCartItem(data);
+            $('#viewproduct-over').modal('hide');
+            toastr.options.timeOut = 30;
+            toastr.success('Đã thêm món');
         }
-    }
-    if (qty > 0) {
-        $.ajax({
-            url: '{{ route("cart.store")}}',
-            type: 'post',
-            data: {
-                id: id,
-                qty: qty,
-                size: slSize
-            },
-            success(data) {
-                loadCart(data);
-                loadCartItem(data);
-                $('#viewproduct-over').modal('hide');
-                toastr.options.timeOut = 30;
-                toastr.success('Đã thêm món');
+    });
 
-            }
-        })
-    }
 })
 $(document).on('click', '#delItemCart', function(e) {
     e.preventDefault();

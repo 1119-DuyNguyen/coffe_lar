@@ -65,7 +65,7 @@ class ProductController extends Controller
         if($request->ajax())
         {
 
-                $product = Product::where('slug', $slug)->where('status', 1)->first();
+                $product = Product::where('slug', $slug)->where('status', true)->first();
 //                $discount = 0;
 //                if (count($product->Coupon) > 0) {
 //                    if ($product->Coupon[0]->loaigiam === 1) {
@@ -79,7 +79,7 @@ class ProductController extends Controller
                 return view('templates.clients.home.quick-view', ['product' => $product]);
 
         }
-        $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where('slug', $slug)->where('status', 1)->first();
+        $product = Product::with(['category', 'variants'])->where('slug', $slug)->where('status', 1)->first();
 //        $reviews = ProductReview::where('product_id', $product->id)->where('status', 1)->paginate(10);
         if (isset($product)) {
             return view('frontend.pages.product-detail', compact('product'));

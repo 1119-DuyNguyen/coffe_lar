@@ -2,11 +2,16 @@
 
 namespace App\Http\Services;
 
+use App\Enums\VariantOption;
 use App\Models\Product;
-use App\Models\ProductVariantItem;
-use Exception;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
+use Illuminate\Validation\ValidationException;
+use App\Cart;
+
+// Import the Cart model
 
 class CartService
 {
@@ -17,13 +22,60 @@ class CartService
         $this->loadCart();
     }
 
-    public function getCart()
+    public static function getListCart()
     {
-        return $this->cart;
+        // Check if the user is logged in
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cart = Cart::where('user_id', $user->id)->first();
+            $cartItems = $cart ? json_decode($cart->cart_items, true) : [];
+        } else {
+            $cartItems = Session::get('cart', []);
+        }
+        if (empty($cartItems)) {
+            return [];
+        }
+        $productList = Product::with('variants.productVariantItems')->whereIn('id', array_keys($cartItems))->get();
+        $totalAmount = 0;
+        foreach ($productList as $product) {
+            $variantTotalAmount = 0;
+            $productVariants = $product->variants;
+            $productCart = $cartItems[$product->id];
+            if (!empty($productVariants)) {
+                $variants_items = $productCart['variants'];
+                foreach ($productVariants as $key => $variant) {
+                    //calculate
+                    foreach ($variant->productVariantItems as $key => $item) {
+                        //remove unused keys
+                        if (empty($variants_items[$variant->id]) || !in_array($item->id,$variants_items[$variant->id])) {
+//                            dd($item->name,$variants_items,$variants_items[$variant->id],in_array($item->id,$variants_items[$variant->id]));
+                            $variant->productVariantItems->forget($key);
+                            continue;
+
+                        }
+                        $arrayValidates = $variants_items[$variant->id];
+                        if (!is_array($arrayValidates)) {
+                            $arrayValidates = [$arrayValidates];
+                        }
+                        if (in_array($item->id, $arrayValidates)) {
+//                                $variants[$variant->id][] = $item;
+                            $variantTotalAmount += $item->price;
+
+
+                        };
+                    }
+                }
+            }
+            $product->quantity = $productCart['quantity'];
+            $product->variantTotalAmount = $variantTotalAmount;
+            $totalAmount += ($product->price + $variantTotalAmount) * $product->quantity;
+        }
+        return ['productList' => $productList, 'total' => $totalAmount];
+//        return $this->cart;
     }
 
 
-    public function update($idCart,$qty,$variants_items)
+    public function update($idCart, $qty, $variants_items)
     {
         $productId = \Cart::get($idCart)->attributes->product_id;
         if (!isset($productId)) {
@@ -66,67 +118,62 @@ class CartService
         }
     }
 
-    public function store($idProduct,$qty,$variants_items)
+    public function store($idProduct, $qty, $variants_items)
     {
 
-        $product = Product::findOrFail($idProduct);
+        //        if($product->qty === 0){
+//            return response(['status' => 'error', 'message' => 'Product stock out']);
+//        }elseif($product->qty < $request->qty){
+//            return response(['status' => 'error', 'message' => 'Quantity not available in our stock','qty' => $product->qty]);
+//        }
+        if ($qty < 1) {
+            throw ValidationException::withMessages(['Số lượng sản phẩm không hợp lệ']);
+        }
+        $product = Product::with('variants')->findOrFail($idProduct);
+        $productVariants = $product->variants;
+        $productCart = ['quantity' => $qty];
         $variants = [];
-        $idVariants=['product'=>$product->id];
-        $variantTotalAmount = 0;
-
-        if(!empty($variants_items)){
-
-                $listProductVariantItem = ProductVariantItem::with('productVariant')->whereIn('id', $variants_items)->get();
-                foreach($listProductVariantItem  as $variantItem){
-                    $variants[$variantItem->productVariant->name]['name'] = $variantItem->name;
-                    $variants[$variantItem->productVariant->name]['price'] = $variantItem->price;
-                    $variantTotalAmount += $variantItem->price;
-                    $idVariants+=[$variantItem->productVariant->name => $variantItem->id];
+        // filter true data, remove fake data
+        if (!empty($productVariants)) {
+            foreach ($productVariants as $variant) {
+                if (empty($variants_items[$variant->id])) {
+                    if ($variant->must_have = true) {
+                        throw ValidationException::withMessages(['Bạn chưa chọn ' . $variant->name]);
+                    }
+                } else {
+                    $variants[$variant->id] = [];
                 }
-
-
+                foreach ($variant->productVariantItems as $item) {
+                    $arrayValidates = $variants_items[$variant->id];
+                    if (!is_array($arrayValidates)) {
+                        $arrayValidates = [$arrayValidates];
+                    }
+                    if (in_array($item->id, $arrayValidates)) {
+                        $variants[$variant->id][] = $item->id;
+                        if ($variant->type == VariantOption::radio) {
+                            break;
+                        }
+                    };
+                }
+            }
         }
-        ksort($idVariants);
-        $strIdCart= $this->generateIdCart($idVariants);
+        $productCart['variants'] = $variants;
+        // Check if the user is logged in
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cart = Cart::firstOrNew(['user_id' => $user->id]);
+            $cartItems = json_decode($cart->cart_items, true);
 
-        /** check discount */
-        $productPrice = 0;
+            $cartItems[$idProduct] = $productCart ?? [];
+            $cart->user_id = $user->id;
+            $cart->cart_items = json_encode($cartItems);
+            $cart->save();
+        } else {
+            $cart = Session::get('cart', []);
+            $cart[$idProduct] = $productCart ?? [];
 
-        if($product->checkDiscount()){
-            $productPrice = $product->offer_price;
-        }else {
-            $productPrice = $product->price;
+            Session::put('cart', $cart);
         }
-
-        $cartData = [];
-        $cartData['id'] = $strIdCart;
-        $cartData['name'] = $product->name;
-        $cartData['quantity'] = $qty;
-        $cartData['price'] = $productPrice;
-        if(!isset($cartData['attributes'])){
-            $cartData['attributes'] = [];
-        }
-        $cartData['attributes']['product_id'] = $product->id;
-        $cartData['attributes']['weight'] = 10;
-        $cartData['attributes']['variants'] = $variants;
-        $cartData['attributes']['variants_total'] = $variantTotalAmount;
-        $cartData['attributes']['image'] = $product->thumb_image;
-        $cartData['attributes']['slug'] = $product->slug;
-
-        \Cart::add($cartData);
     }
-    private function generateIdCart($array) :string {
-        $out ='';
-        $isGenerate=false;
-        foreach($array as $key => $value)
-        {
-            $out.= "$key-$value-";
-            $isGenerate=true;
-        }
-        if($isGenerate){
-            $out = substr($out, 0, -1);
-        }
 
-        return $out;
-    }
 }

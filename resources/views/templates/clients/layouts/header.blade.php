@@ -134,7 +134,7 @@
                                     <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i
                                             class="fas fa-cart-plus"></i><span class="cart_counter">
                                             @if(Session::has('cart') != null)
-                                            {{ Session::get('cart')->totalQuanty}}
+                                            {{ count(Session::get('cart')) }}
                                             @else
                                             0
                                             @endif

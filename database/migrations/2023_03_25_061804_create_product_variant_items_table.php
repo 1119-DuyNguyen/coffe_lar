@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->double('price');
             $table->double('price_origin')->default(0);
+            $table->double('max_qty' )->default(0);
             $table->boolean('status') -> default(true);
             $table->timestamps();
         });

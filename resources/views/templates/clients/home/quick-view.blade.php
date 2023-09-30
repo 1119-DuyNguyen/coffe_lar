@@ -7,7 +7,8 @@
     </div>
 
     <div class="col-lg-6 col-md-12 col-sm-12">
-        <form class="woo_pr_detail">
+        <form class="woo_pr_detail" method="POST" action="{{ route("cart.store")}}">
+            @csrf
             <input type="hidden" name="product_id" value="{{$product->id}}">
             <div class="woo_cats_wrps">
                 <a href="#" class="woo_pr_cats">{{$product->category->name}}</a>
@@ -25,8 +26,8 @@
                 <p>{{$product->description}}</p>
             </div>
             @foreach ($product->variants as $variant)
-                    @if ($variant->status != 0)
-                <fieldset class="woo_pr_color mb-3" name="variants_items[{{$variant->id}}]">
+                    @if ($variant->status != 0 && count($variant->productVariantItems) > 0)
+                <fieldset class="woo_pr_color mb-3" name="variants_items[{{$variant->id}}]{{$variant->type==VariantOption::checkbox ? "[]":""}}">
                         <div class="woo_pr_varient text-nowrap">
                             <h6>{{$variant->name}}:</h6>
                         </div>
@@ -41,7 +42,7 @@
                                             {{--                                            </option>--}}
                                             <div class="custom-varient custom-size">
                                                 <input type="radio" class="custom-control-input"
-                                                       name="variant-radio-{{$value->id}}"
+                                                       name="variants_items[{{$variant->id}}]"
                                                        id="sizeRadioOne{{$value->id}}"
                                                        value="{{$value->id}}" data-toggle="form-caption"
                                                        data-target="#sizeCaption"
@@ -56,6 +57,23 @@
                                     @endforeach
                                     @break
                                 @case(VariantOption::checkbox)
+                                    @foreach($variant->productVariantItems as $key => $value)
+                                        @if ( $value->status != 0)
+                                            <div class="custom-varient custom-size">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       name="variants_items[{{$variant->id}}][]"
+                                                       id="sizeRadioOne{{$value->id}}"
+                                                       value="{{$value->id}}" data-toggle="form-caption"
+                                                       data-target="#sizeCaption"
+                                                    {{($key == 0 ? "checked" : "")}}>
+                                                <label class="custom-control-label"
+                                                       for="sizeRadioOne{{$value->id}}">{{ $value->name}}<span
+                                                        class="price-plus"> +
+                                                    {{currency_format($value->price) ?? '0đ'}}</span></label>
+                                            </div>
+                                        @endif
+
+                                    @endforeach
                                     @break
                             @endswitch
 

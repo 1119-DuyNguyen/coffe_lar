@@ -1,9 +1,9 @@
-@props(['product'])
 
+@props(['product'])
 @if($product)
             <!-- Single Item -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="item">
+                    {{$slot}}
                     <div class="woo_product_grid">
 {{--                        @if(count($product->Coupon) > 0)--}}
 {{--                            <span class="woo_offer_sell">--}}
@@ -50,5 +50,4 @@
 
                     </div>
                 </div>
-            </div>
 @endif

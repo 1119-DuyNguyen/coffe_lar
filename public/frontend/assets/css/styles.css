@@ -2870,6 +2870,8 @@ a.btn-trans-video i {
     left: -9999px;
 }
 
+[type="checkbox"]:checked + label,
+[type="checkbox"]:not(:checked) + label,
 [type="radio"]:checked + label,
 [type="radio"]:not(:checked) + label {
     position: relative;

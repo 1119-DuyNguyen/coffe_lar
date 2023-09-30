@@ -21,6 +21,8 @@
     <!-- <script src="{{ asset('backend/assets/alert/alertify.min.js') }}"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/themify-icons/themify-icons.css')}}" />
+
     <!-- <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/alertify.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/semantic.min.css') }}" />
@@ -88,6 +90,7 @@ window.fbAsyncInit = function() {
 
 
 <script>
+
     function openFilterSearch() {
         document.getElementById("filter_search").style.display = "block";
     }

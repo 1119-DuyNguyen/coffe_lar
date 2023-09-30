@@ -1,17 +1,17 @@
 $(function() {
     "use strict";
 
-	//Loader	
+	//Loader
 	$(function preloaderLoad() {
         if($('.preloader').length){
-            $('.preloader').delay(500).fadeOut(200);
+            $('.preloader').delay(1000).fadeOut(200);
         }
         $(".preloader_disabler").on('click', function() {
             $("#preloader").hide();
         });
     });
-	
-	
+
+
 	// Range Slider Script
 	$(".js-range-slider").ionRangeSlider({
 		type: "double",
@@ -21,7 +21,7 @@ $(function() {
 		to: 500,
 		grid: true
 	});
-	
+
 	// Script Navigation
 	! function(n, e, i, a) {
 		n.navigation = function(t, s) {
@@ -166,11 +166,11 @@ $(function() {
 	}
 	(jQuery, window, document), $(document).ready(function() {
 		$("#navigation").navigation()
-	});	
-	
+	});
+
 	// Tooltip
 	$('[data-toggle="tooltip"]').tooltip();
-	
+
 	// Bottom To Top Scroll Script
 	$(window).on('scroll', function() {
 		var height = $(window).scrollTop();
@@ -180,27 +180,27 @@ $(function() {
 			$('#back2Top').fadeOut();
 		}
 	});
-	
+
 	// Rattings
 	//$('.rating-opt').start(function(cur){
 	//	console.log(cur);
 		// $('#info').text(cur);
 	// });
-	
+
 	$("#back2Top").on('click', function(event) {
 		event.preventDefault();
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		return false;
 	});
-	
+
 	// Metis Menu
 	$('#side-menu').metisMenu();
-	
+
 	// Product Preview
 	$('.sp-wrap').smoothproducts();
-	
+
 	// Script For Fix Header on Scroll
-	$(window).on('scroll', function() {    
+	$(window).on('scroll', function() {
 		var scroll = $(window).scrollTop();
 
 		if (scroll >= 50) {
@@ -209,8 +209,8 @@ $(function() {
 			$(".header_nav").removeClass("header-fixed");
 		}
 	});
-	
-	
+
+
 	// === team-carousel === //
 	$('#team-carousel').owlCarousel({
 		loop:true,
@@ -238,7 +238,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	// === team-carousel === //
 	$('#customers-carousel').owlCarousel({
 		loop:true,
@@ -266,7 +266,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	// === Banner Home === //
 	$('.banner-offers').owlCarousel({
 		loop:true,
@@ -297,7 +297,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	// Recent Products Slider
 	$('.products-slider').owlCarousel({
 		items:7,
@@ -353,7 +353,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	// Recent Products Slider
 	$('.deals').owlCarousel({
 		items:1,
@@ -382,7 +382,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	// Recent Products Slider
 	$('.side-products-slider').owlCarousel({
 		items:1,
@@ -410,8 +410,8 @@ $(function() {
 			}
 		}
 	});
-	
-	//slideshow 
+
+	//slideshow
 
 	$('.owl-slide').owlCarousel({
 		items:1,
@@ -425,7 +425,7 @@ $(function() {
 		autoplayTimeout:2000,
 		autoplayHoverPause:true
 	});
-	
+
 
 
 	// Recent Products Slider
@@ -458,7 +458,7 @@ $(function() {
 	});
 	$("document").ready(function($){
 		var nav = $('.general_header');
-	
+
 		$(window).scroll(function () {
 			if ($(this).scrollTop() > 75) {
 				nav.addClass("f-nav");
@@ -470,12 +470,12 @@ $(function() {
 
 	$('document').ready(function(){
 		if (window.location.hash === "#_=_"){
-			history.replaceState 
+			history.replaceState
 				? history.replaceState(null, null, window.location.href.split("#")[0])
 				: window.location.hash = "";
 		}
 	})
 
-	
-	
+
+
 });
