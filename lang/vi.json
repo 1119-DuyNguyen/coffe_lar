@@ -1,4 +1,6 @@
 {
+    "Update Cart": "Cập nhập giỏ hàng",
+    "Quantity is not valid": "Số lượng sản phẩm không hợp lệ",
     "order_status": {
         "pending": "Đang chờ xử lý",
         "pending_details": "Đơn hàng của bạn hiện đang chờ xử lý",

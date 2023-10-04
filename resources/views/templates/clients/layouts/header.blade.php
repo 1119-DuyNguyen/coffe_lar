@@ -132,7 +132,7 @@
                                 <li>
                                     @if(Route::currentRouteName() !== "get.cart")
                                     <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i
-                                            class="fas fa-cart-plus"></i><span class="cart_counter">
+                                            class="fas fa-cart-plus"></i><span class="cart_counter" id="header-cart-quantity">
                                             @if(Session::has('cart') != null)
                                             {{ count(Session::get('cart')) }}
                                             @else

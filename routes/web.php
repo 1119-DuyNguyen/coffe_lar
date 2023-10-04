@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/quickview', [HomeController::class, 'quickView'])->name('quickview');
 
@@ -53,9 +54,7 @@ Route::get('product/{slug}', [ProductController::class, 'show'])->name('product.
 /** Cart routes */
 Route::get('cart/all', [CartController::class, 'all'])->name('cart.all');
 
-Route::get('cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-Route::get('cart/total', [CartController::class, 'cartTotal'])->name('cart.total');
-Route::resource('cart',CartController::class)->except(['show']);
+Route::resource('cart',CartController::class);
 
 Route::post('coupon/apply', [CouponController::class, 'applyCoupon'])->name('coupon.apply');
 Route::get('coupon/calculation', [CouponController::class, 'couponCalculation'])->name('coupon.calculation');

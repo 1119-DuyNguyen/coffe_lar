@@ -17,7 +17,7 @@
                         <div class="address_infos">
                             <ul>
 {{--                                <li><i class="fas fa-map-marker-alt"></i>{{ $setting->diachi ?? ""}}<br></li>--}}
-                                <li><i class="fas fa-phone-square"></i>{{ $setting->dienthoai ?? ""}}</li>
+{{--                                <li><i class="fas fa-phone-square"></i>{{ $setting->dienthoai ?? ""}}</li>--}}
                                 <li><i class="fas fa-envelope"></i>{{ $setting->email ?? ""}}</li>
                             </ul>
                         </div>
@@ -111,35 +111,8 @@
     <div class="rightMenu-scroll">
         <h4 class="cart_heading">Các món đã chọn</h4>
         <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large"><i class="fas fa-times"></i></button>
-        <div class="right-ch-sideBar item-cart isCart" id="side-scroll">
+        <div class="right-ch-sideBar item-cart isCart" id="cart-sidebar">
             @include('templates.clients.home.cart')
-{{--            @if(Session::has('cart') != null && Session::get('cart')->products)--}}
-
-{{--            <div class="cart_select_items">--}}
-{{--                @foreach(Session::get('cart')->products as $key => $value)--}}
-{{--                <div class="cart_selected_single">--}}
-{{--                    <div class="cart_selected_single_thumb">--}}
-{{--                        <a href="#"><img src="{{ asset('uploads/product').'/'.$value['productInfo']->hinhanh }}"--}}
-{{--                                class="img-fluid" alt="" /></a>--}}
-{{--                    </div>--}}
-{{--                    <div class="cart_selected_single_caption">--}}
-{{--                        <h4 class="product_title">{{$value['productInfo']->tensp}}</h4>--}}
-{{--                        <span class="numberof_item">Số lượng : {{$value['quanty']}}</span>--}}
-{{--                        <span class="sizeof_item">Size : {{$value['size']->size_name}} ---}}
-{{--                            {{ currency_format($value['productInfo']->giaban)}}</span>--}}
-{{--                        <a href="#" class="text-danger btn-cart-del" id="delItemCart" data-id="{{$key}}">Xoá</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-
-{{--            <div class="cart_subtotal">--}}
-{{--                <h6>Tổng<span class="theme-cl">{{currency_format(Session::get('cart')->totalPrice)}}</span></h6>--}}
-{{--                <input id="totalPrice" hidden type="number"--}}
-{{--                    data-price="{{currency_format(Session::get('cart')->totalPrice, ' đ')}}" value="">--}}
-{{--                <input id="totalQuanty" hidden type="number" value="{{ Session::get('cart')->totalQuanty}}">--}}
-{{--            </div>--}}
-{{--            @endif--}}
 
         </div>
         <div class="cart_action">

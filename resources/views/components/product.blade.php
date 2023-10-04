@@ -13,6 +13,7 @@
 {{--                        <div class="woo_product_thumb">--}}
 {{--                            <img src="{{ asset('uploads/product/'.$product->thumb_image)}}" class="img-fluid" alt="" />--}}
 {{--                        </div>--}}
+
                         <div class="woo_product_caption center">
                             <div class="woo_title">
                                 <h4 class="woo_pro_title"><a

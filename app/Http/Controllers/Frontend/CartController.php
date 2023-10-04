@@ -40,54 +40,24 @@ class CartController extends Controller
     public function store(CartRequest $request)
     {
 
-        $this->cartService->store($request->input('product_id'), $request->input('qty'), $request->input('variants_items', []));
+        $this->cartService->store($request->input('product_id'), $request->input('qty'), $request->input('variants_items', []),$request->input('idOldCart',''));
         return  view('templates.clients.home.cart');
-        return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
+//        return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
+    }
+    public function show($idCart){
+        $product=$this->cartService->show($idCart);
+        return  view('templates.clients.cart.showCart',['product'=>$product,'idCart'=>$idCart]);
+
     }
 
-    /** Update product quantity */
-    public function update(CartRequest $request, $idCart)
-    {
-        $this->cartService->update($idCart, $request->input('qty'), $request->input('variants_items', []));
-        return response(
-            ['status' => 'success', __("Update :resource",['resource'=> __('Cart')])]
-        );
-        return response(
-            ['status' => 'success', __("Update :resource",['resource'=> __('Cart')]), 'product_total' => $productTotal]
-        );
-    }
 
-    /** get product total */
-    public function getProductTotal($rowId)
-    {
-        return getCartTotalItem($rowId);
-    }
-
-    /** get cart total amount */
-    public function cartTotal()
-    {
-        return response(getCartTotal());
-    }
-
-    /** clear all cart products */
-    public function clearCart()
-    {
-        \Cart::clear();
-
-        return response(['status' => 'success', 'message' => 'Cart cleared successfully']);
-    }
 
     /** Remove product form cart */
     public function destroy(Request $request, $rowId)
     {
         $this->cartService->destroy($rowId);
-        $message = __("The :resource was deleted!",['resource'=> __('Cart')]);
-        if ($request->ajax()) {
-            return response(['status' => 'success', 'message' => $message]);
-        } else {
-            toast()->success($message);
-            return redirect()->back();
-        }
+        return  view('templates.clients.home.cart');
+
     }
 
 //    /** Get cart count */

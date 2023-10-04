@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamps();
+
             $table->string('slug')->unique();
             $table->string('icon');
             $table->boolean('status') -> default(true);
