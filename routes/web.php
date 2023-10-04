@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\FeaturedProductController;
+use App\Http\Controllers\Frontend\GiaoHangNhanhController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\OrderTrackController;
@@ -62,7 +63,10 @@ Route::get('coupon/calculation', [CouponController::class, 'couponCalculation'])
 
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
-
+Route::get('contact', [PageController::class, 'contact'])->name('contact');
+Route::get('ghn/province',[GiaoHangNhanhController::class,'getProvince'])->name('ghn.province');
+Route::get('ghn/district',[GiaoHangNhanhController::class,'getDistrict'])->name('ghn.district');
+Route::get('ghn/ward',[GiaoHangNhanhController::class,'getWard'])->name('ghn.ward');
 
 
 

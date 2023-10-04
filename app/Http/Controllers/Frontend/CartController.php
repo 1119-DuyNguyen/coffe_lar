@@ -26,14 +26,9 @@ class CartController extends Controller
     /** Show cart page  */
     public function index(Request $request)
     {
-        $cartItems = \Cart::getContent();
-        if ($request->ajax()) {
-            $cart = $this->cartService->getListCart();
 
-            return response()->json(['cart' => $cart], 200);
-        }
 
-        return view('frontend.pages.cart-detail', compact('cartItems'));
+        return view('templates.clients.cart.index');
     }
 
     /** Add item to cart */
