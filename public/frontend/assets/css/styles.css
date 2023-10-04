@@ -4872,9 +4872,15 @@ div#mySearch {
 }
 
 .header_nav {
-    background: var(--radial-gradient-orange-1);
-}
 
+    background: var(--radial-gradient-orange-1);
+
+}
+.header-sticky{
+    position: sticky;
+    width: 100%;
+    top: 0;
+}
 /*--------------- cart Menu --------------*/
 .general_header .nav-menu > li > a {
     color: #fff;
