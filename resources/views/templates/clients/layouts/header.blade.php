@@ -36,7 +36,7 @@
         </div>
 
         <!-- Main header -->
-        <div class="header_nav">
+        <div class="header_nav" style="padding: 0.75rem 0;">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-md-2 col-sm-3 col-4">
@@ -44,43 +44,39 @@
                             <img src="{{ asset('img/logo.png')}}" class="logo" alt=""/>
                         </a>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-4 col-3">
-                        <nav id="navigation" class="navigation navigation-landscape">
-                            <div class="nav-header">
-                                <div class="nav-toggle"></div>
-                            </div>
-                            <div class="nav-menus-wrapper" style="transition-property: none;">
-                                <ul class="nav-menu">
-
-                                    <li class=""><a href="{{ route('product.index')}}">Đặt hàng<span
-                                                class="submenu-indicator"></span></a>
-                                    </li>
+                    <div class="col-lg-6 col-md-6 col-sm-4 col-3">
+{{--                        <nav id="navigation" class="navigation navigation-landscape">--}}
+{{--                            <div class="nav-header">--}}
+{{--                                <div class="nav-toggle"></div>--}}
+{{--                            </div>--}}
+{{--                            <div class="nav-menus-wrapper" style="transition-property: none;">--}}
+{{--                                <ul class="nav-menu">--}}
 
 
-                                    {{--                                    <li><a href="{{ route('about')}}">Cửa hàng<span--}}
-                                    {{--                                                class="submenu-indicator"></span></a>--}}
 
-                                    {{--                                    </li>--}}
+{{--                                    --}}{{--                                    <li><a href="{{ route('about')}}">Cửa hàng<span--}}
+{{--                                    --}}{{--                                                class="submenu-indicator"></span></a>--}}
+
+{{--                                    --}}{{--                                    </li>--}}
 
 
-                                    {{--                                    <li><a href="{{ route('get.all.promotion')}}">Khuyến mãi<span--}}
-                                    {{--                                                class="submenu-indicator"></span></a>--}}
-                                    {{--                                        <!-- <ul class="nav-dropdown nav-submenu">--}}
-                                    {{--                                            <li><a href="blog.html">...</a></li>--}}
+{{--                                    --}}{{--                                    <li><a href="{{ route('get.all.promotion')}}">Khuyến mãi<span--}}
+{{--                                    --}}{{--                                                class="submenu-indicator"></span></a>--}}
+{{--                                    --}}{{--                                        <!-- <ul class="nav-dropdown nav-submenu">--}}
+{{--                                    --}}{{--                                            <li><a href="blog.html">...</a></li>--}}
 
-                                    {{--                                        </ul> -->--}}
-                                    {{--                                    </li>--}}
+{{--                                    --}}{{--                                        </ul> -->--}}
+{{--                                    --}}{{--                                    </li>--}}
 
-                                </ul>
+{{--                                </ul>--}}
 
-                            </div>
-                        </nav>
+{{--                            </div>--}}
+{{--                        </nav>--}}
                     </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-5 col-5">
+                    <div class="col-lg-4 col-md-4 col-sm-5 col-5">
                         <div class="general_head_right">
                             <ul>
-                                <!-- <li><a class="border-icon" data-toggle="collapse" href="#mySearch" role="button" aria-expanded="false" aria-controls="mySearch"><i class="fas fa-search"></i></a></li> -->
                                 <li><a href="" class="dropdow-user border-icon ">
                                         @if(get_user('customer'))
                                             <i class="fas fa-user-circle mgr-10"></i>
@@ -89,7 +85,6 @@
                                             </h6>
                                         @else
                                             <i class="fas fa-user-circle"></i>
-                                            <h6 class=" text-user text-overflow">Đăng nhập</h6>
                                         @endif
                                     </a>
                                     <div class="user-dropdown">
@@ -132,7 +127,8 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="border-icon" href="javascript:void(0);" data-toggle="modal" data-target="#form-search" id="header-search">
+                                    <a class="border-icon" href="javascript:void(0);" data-toggle="modal"
+                                       data-target="#form-search" id="header-search">
                                         <i class="fas fa-search"></i>
                                     </a>
 
@@ -170,85 +166,88 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- End Navigation -->
-    <div class="clearfix"></div>
-    <!-- ============================================================== -->
-    <!-- Top header  -->
-    <!-- ============================================================== -->
-    <div class="modal fade" id="form-search" tabindex="-1" role="dialog" aria-labelledby="add-payment" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered align-items-center d-flex justify-content-center h-100" role="document">
-            <div class="modal-content h-75" id="view-product">
-                <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
-                <span class="header-search">Tìm kiếm</span>
-                <div class="modal-body">
-                    {{--                @livewire('product-search')--}}
-                    <livewire:product-search />
 
-                </div>
+</div>
+<!-- End Navigation -->
+<div class="clearfix"></div>
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+<div class="modal fade" id="form-search" tabindex="-1" role="dialog" aria-labelledby="add-payment"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered align-items-center d-flex justify-content-center h-100"
+         role="document">
+        <div class="modal-content h-75" id="view-product">
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
+            <span class="header-search">Tìm kiếm</span>
+            <div class="modal-body">
+                {{--                @livewire('product-search')--}}
+                <livewire:product-search/>
+
             </div>
         </div>
     </div>
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" id="view-product">
-                <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
-                <div class="modal-body">
-                    <div class="row align-items-center">
+</div>
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" id="view-product">
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
+            <div class="modal-body">
+                <div class="row align-items-center">
 
-                        <div class="login_signup ol-lg-12 col-md-12 col-sm-12">
-                            <h3 class="login_sec_title">Đăng nhập</h3>
+                    <div class="login_signup ol-lg-12 col-md-12 col-sm-12">
+                        <h3 class="login_sec_title">Đăng nhập</h3>
 
-                            <div class="massage">
-                                Tài khoản không chính xác
-                            </div>
-                            <form>
-
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" required class="form-control emailAcc">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Mật khẩu</label>
-                                    <input type="password" required class="form-control passwordAcc" name="password">
-                                </div>
-
-                                <div class="login_flex">
-                                    <div class="login_flex_1">
-                                        <a href="" id="forgetPassword" class="text-bold">Quên mật khẩu?</a>
-                                    </div>
-                                    <div class="login_flex_1">
-                                        <a href="{{ route('register')}}" class="text-bold">Đăng kí</a>
-                                    </div>
-                                    <div class="login_flex_2">
-                                        <div class="form-group mb-0">
-                                            <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng
-                                                nhập
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
-                            {{--                            <div class="login_flex_2 mrg-20">--}}
-                            {{--                                <div class="form-group mb-0 social facebook">--}}
-                            {{--                                    <a href="{{ route('login.facebook','facebook')}}" type="submit" class="btn btn-md ">--}}
-                            {{--                                        <i class="fab fa-facebook-square"></i>--}}
-                            {{--                                        Facebook--}}
-                            {{--                                    </a>--}}
-                            {{--                                </div>--}}
-                            {{--                                <div class="form-group mb-0 social google">--}}
-                            {{--                                    <a href="{{ route('login.facebook','google')}}" type="submit" class="btn btn-md ">--}}
-                            {{--                                        <i class="fab fa-google-plus-square"></i>--}}
-                            {{--                                        Google--}}
-                            {{--                                    </a>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
+                        <div class="massage">
+                            Tài khoản không chính xác
                         </div>
+                        <form>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" required class="form-control emailAcc">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mật khẩu</label>
+                                <input type="password" required class="form-control passwordAcc" name="password">
+                            </div>
+
+                            <div class="login_flex">
+                                <div class="login_flex_1">
+                                    <a href="" id="forgetPassword" class="text-bold">Quên mật khẩu?</a>
+                                </div>
+                                <div class="login_flex_1">
+                                    <a href="{{ route('register')}}" class="text-bold">Đăng kí</a>
+                                </div>
+                                <div class="login_flex_2">
+                                    <div class="form-group mb-0">
+                                        <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng
+                                            nhập
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        {{--                            <div class="login_flex_2 mrg-20">--}}
+                        {{--                                <div class="form-group mb-0 social facebook">--}}
+                        {{--                                    <a href="{{ route('login.facebook','facebook')}}" type="submit" class="btn btn-md ">--}}
+                        {{--                                        <i class="fab fa-facebook-square"></i>--}}
+                        {{--                                        Facebook--}}
+                        {{--                                    </a>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="form-group mb-0 social google">--}}
+                        {{--                                    <a href="{{ route('login.facebook','google')}}" type="submit" class="btn btn-md ">--}}
+                        {{--                                        <i class="fab fa-google-plus-square"></i>--}}
+                        {{--                                        Google--}}
+                        {{--                                    </a>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
