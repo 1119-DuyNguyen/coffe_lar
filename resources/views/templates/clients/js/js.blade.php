@@ -121,15 +121,6 @@ function loadCart(data) {
     }
 }
 
-// function loadCartItem(data) {
-//     $("#cart").empty();
-//     $("#cart").html(data);
-//     if ($('#totalCartQuantity').val()) {
-//         $('#priceTotal').text('(' + $("#totalQuanty1").val() + ' Món)');
-//     } else {
-//         $('#priceTotal').text(0);
-//     }
-// }
 $(document).on('click', '.quick-cart', function(e) {
     e.preventDefault();
 
@@ -259,30 +250,6 @@ $(document).on('click', '.reply_commment.delete', function(e) {
     });
 })
 
-$(document).on('click', '.filter .toolbar .search', function() {
-    let form_search = $('#form-search').modal('show')
-})
-$(document).on('input ', '#keyword_search', function(e) {
-    {{--e.preventDefault()--}}
-    {{--let keyword = $(this).val();--}}
-    {{--let page=1;--}}
-    {{--$.ajax({--}}
-    {{--    url: "{{ route('product.index')}}",--}}
-    {{--    type: 'get',--}}
-    {{--    data: {--}}
-    {{--        keyword: keyword,--}}
-    {{--        page:page--}}
-    {{--    },--}}
-    {{--    success: function(data) {--}}
-    {{--        if (data) {--}}
-    {{--            $('.list-search').empty()--}}
-    {{--            $('.list-search').fadeIn('slow')--}}
-    {{--            $('.list-search').html(data)--}}
-
-    {{--        }--}}
-    {{--    }--}}
-    {{--});--}}
-})
 
 
 $(document).on('click', '.up_user', function(e) {

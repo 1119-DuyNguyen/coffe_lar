@@ -91,12 +91,7 @@ window.fbAsyncInit = function() {
 
 <script>
 
-    function openFilterSearch() {
-        document.getElementById("filter_search").style.display = "block";
-    }
-    function closeFilterSearch() {
-        document.getElementById("filter_search").style.display = "none";
-    }
+
 
     function openRightMenu() {
         document.getElementById("rightMenu").style.display = "block";

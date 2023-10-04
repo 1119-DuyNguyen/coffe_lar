@@ -2621,86 +2621,100 @@ a.btn-trans-video i {
 
 /*----------- GLobal Settings: Pagination ------------------*/
 .pagination {
-    display: block;
+    display: flex;
     padding-left: 0;
     border-radius: 4px;
-    margin: 20px auto 0 !important;
     width: 100%;
-    text-align: center;
+    align-items: center;
+    /*text-align: center;*/
+
     justify-content: center;
 }
 
-.pagination > li > a,
-.pagination > li > a, .pagination > li > span {
-    position: relative;
-    float: left;
-    padding: 0;
-    margin: 5px;
-    color: #5a6f7c;
-    text-decoration: none;
+.pagination .page-item{
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    border-radius: 4px;
+    color:#000;
     background-color: #fff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    border: 1px solid #eaeff5;
+    border-color: #ccc;
 }
-
-.pagination > .active > a,
-.pagination > .active > a:focus,
-.pagination > .active > a:hover,
-.pagination > .active > span,
-.pagination > .active > span:focus,
-.pagination > .active > span:hover,
-.pagination > li > a:focus,
-.pagination > li > a:hover {
-    z-index: 2;
-    color: #ffffff;
-    cursor: pointer;
-    background-color: #5dbf13;
-    border-color: #5dbf13;
-}
-
-
-.pagination li:last-child a {
-    background: #35434e;
-    border: 1px solid #35434e;
-    border-radius: 50% !important;
-    color: #fff
-}
-
-.pagination > li {
-    display: inline;
-}
-
-.page-item.active .page-link {
-    z-index: 2;
+.pagination .page-item.active,
+.pagination .page-item:not(.disabled):hover{
     color: #fff;
-    background-color: #5dbf13;
-    border-color: #5dbf13;
+    background-color: rgb(250, 140, 22);
+    opacity: 1;
+    transform: scale(0.9);
+
 }
 
-.pagination .page-item.left .page-link, .pagination .page-item.right .page-link {
-    width: auto;
-    height: 42px;
-    border-radius: 50px !important;
-    padding: 0 22px !important;
-    display: flex;
-    align-items: center;
+.pagination .page-item .page-link{
+    color:inherit;
+    background-color: inherit;
+    border-color: #ccc;
+}
+.pagination .page-item:not(.active) .page-link{
+    cursor: pointer;
+    color:inherit;
+    background-color: inherit;
 }
 
-.pagination > li {
-    display: inline-block;
-}
+/*.pagination > .active > a,*/
+/*.pagination > .active > a:focus,*/
+/*.pagination > .active > a:hover,*/
+/*.pagination > .active > span,*/
+/*.pagination > .active > span:focus,*/
+/*.pagination > .active > span:hover,*/
+/*.pagination > li > a:focus,*/
+/*.pagination > li > a:hover {*/
+/*    z-index: 2;*/
+/*    color: #fff;*/
+/*    background-color: rgb(250, 140, 22);*/
+/*    opacity: 1;*/
+/*    transform: scale(0.9);*/
+/*}*/
 
-.pagination .page-item.left {
-    float: left !important;
-}
 
-.pagination .page-item.right {
-    float: right;
-}
+/*.pagination li:last-child a {*/
+/*    background: #35434e;*/
+/*    border: 1px solid #35434e;*/
+/*    border-radius: 50% !important;*/
+/*    color: #fff*/
+/*}*/
+
+/*.pagination > li {*/
+/*    display: inline;*/
+/*}*/
+/*.page-item .page-link{*/
+/*    color:#000;*/
+/*    background-color: #fff;*/
+/*}*/
+/*.page-item.active .page-link {*/
+/*    z-index: 2;*/
+/*    color: #fff;*/
+/*    background-color: rgb(250, 140, 22);*/
+/*    !*border-color: #5dbf13;*!*/
+/*}*/
+
+/*.pagination .page-item.left .page-link, .pagination .page-item.right .page-link {*/
+/*    width: auto;*/
+/*    height: 42px;*/
+/*    border-radius: 50px !important;*/
+/*    padding: 0 22px !important;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.pagination > li {*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.pagination .page-item.left {*/
+/*    float: left !important;*/
+/*}*/
+
+/*.pagination .page-item.right {*/
+/*    float: right;*/
+/*}*/
 
 /*----------- Global Settings: Custom Checkbox & Radio Button ----------------*/
 .checkbox-custom, .radio-custom {
@@ -6335,16 +6349,14 @@ ul.product.grid-5 .woo_product_cart ul li .woo_cart_btn {
     max-width: 350px;
     min-width: 290px;
     background-color: #fff;
-    position: fixed !important;
+    position: fixed ;
     top: 0;
-    z-index: +2000;
     overflow: auto;
     -webkit-box-shadow: 0 2px 10px 0 #d8dde6;
     box-shadow: 0 2px 10px 0 #d8dde6;
-    position: relative;
     animation: animateright .4s;
     right: 0;
-    z-index: 99999999;
+    z-index: 1000;
 }
 
 @keyframes animateright {

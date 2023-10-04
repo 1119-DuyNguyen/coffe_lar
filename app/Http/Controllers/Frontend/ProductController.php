@@ -12,15 +12,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-//    private function getMatchValue($array, $keyMatch, $valueMatch)
-//    {
-//        foreach ($array as $key => $value) {
-//            if ($array->{$keyMatch} == $valueMatch) {
-//                return $array->{$key};
-//            }
-//        }
-//        return null;
-//    }
 
     public function index(Request $request)
     {
@@ -64,7 +55,6 @@ class ProductController extends Controller
     {
         if($request->ajax())
         {
-
                 $product = Product::where('slug', $slug)->where('status', true)->first();
 //                $discount = 0;
 //                if (count($product->Coupon) > 0) {
