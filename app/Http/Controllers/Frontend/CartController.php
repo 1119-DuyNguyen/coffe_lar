@@ -19,10 +19,7 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function all()
-    {
-        return response(\Cart::getContent());
-    }
+
 
     /** Show cart page  */
     public function index(Request $request)

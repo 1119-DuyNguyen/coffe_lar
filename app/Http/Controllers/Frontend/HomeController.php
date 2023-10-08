@@ -18,13 +18,7 @@ class HomeController extends Controller
         //sản phẩm mới
         $productNew = $product
             ->sortByDesc('id')
-            ->slice(0, 7);
-
-        //sản phẩm khuyến mãi
-//        $promotion = Product::where('status', true)->get();
-//        $stack = $promotion->filter(function ($item) {
-//            return count($item->Coupon) > 0;
-//        })->values();
+            ->slice(0, 8);
 
 
         $danhmuc = Category::where('status', true)->get();

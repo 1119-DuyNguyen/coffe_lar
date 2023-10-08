@@ -50,10 +50,10 @@ Route::get('featured-product', [FeaturedProductController::class, 'index'])->nam
 
 /** Product route */
 Route::get('product', [ProductController::class, 'index'])->name('product.index');
+
 Route::get('product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
 /** Cart routes */
-Route::get('cart/all', [CartController::class, 'all'])->name('cart.all');
 
 Route::resource('cart',CartController::class);
 
@@ -68,5 +68,6 @@ Route::get('ghn/province',[GiaoHangNhanhController::class,'getProvince'])->name(
 Route::get('ghn/district/{idProvince}',[GiaoHangNhanhController::class,'getDistrict'])->name('ghn.district');
 Route::get('ghn/ward/{idDistrict}',[GiaoHangNhanhController::class,'getWard'])->name('ghn.ward');
 
+Route::get('ghn/price', [CartController::class, 'getPrice'])->name('ghn.price');
 
 

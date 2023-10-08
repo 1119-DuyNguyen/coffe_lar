@@ -42,7 +42,7 @@ class ProductSearch extends Component
             $to = $request->input('range-max');
             $products = $products->where('price', '>=', $from)->where('price', '<=', $to);
         }
-        $products = $products->orderBy('id', 'DESC')->paginate(6);
+        $products = $products->orderBy('id', 'DESC')->paginate(8);
 
         return view('livewire.product-search',[
             'products' => $products,

@@ -1,38 +1,37 @@
-<div class="row align-items-center">
-
-    <div class="input-search ol-lg-12 col-md-12 col-sm-12">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        <input type="text" class="form-control" id="searchTerm" name="searchTerm"
-               placeholder="Tìm tên sản phẩm mà bạn quan tâm" wire:model.lazy="searchTerm">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="sec-heading-flex ">
+                <div class="sec-heading-flex-one">
+                    <h2>Các sản Phẩm</h2>
+                </div>
+                <!-- <div class="sec-heading-flex-last">
+						<a href="{{route('product.index')}}" class="btn btn-theme">Xem thêm<i class="fas fa-arrow-right ml-2"></i></a>
+					</div> -->
+            </div>
+        </div>
     </div>
-    {{ $products->links() }}
 
-    <div class="row align-items-center list-search col-12">
+    <div class="row">
+        <div class="col-12 mb-4 mt-4">
+            <div class="form-group has-search input-search">
+                <i class="fa fa-search form-control-feedback" aria-hidden="true"></i>
+
+                <input type="text" class="form-control" id="searchTerm" name="searchTerm"
+                       placeholder="Tìm tên sản phẩm mà bạn quan tâm" wire:model.lazy="searchTerm">
+            </div>
+
+        </div>
+    </div>
+    <div class="row align-items-center">
+
         @if($products->count()>0)
             @foreach($products as $value)
 
-                <div class="col-lg-4 col-md-4 col-sm-6"  wire:key="item--search--product-{{ $value->id }}">
-                    <div class="item">
-                        <div class="woo_product_grid">
-                            <div class="l-product">
-                                <div class="woo_product_thumb">
-                                    <img src="{{ asset('uploads/product/'.$value->thumb_image)}}" class="img-fluid" alt="" />
-                                </div>
-                                <div class="woo_product_caption center">
-                                    <div class="woo_title">
-                                        <h4 class="woo_pro_title"><a href="{{route('product.show', $value->slug)}}">{{$value->name}}</a></h4>
-                                    </div>
-                                    <div class="woo_price ">
-                                        <h6>{{currency_format($value->price)}}<span class="less_price"></span></h6>
-                                        <a href="javascript:" class="btn-plus quickView" data-slug="{{$value->slug}}"><i
-                                                class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-12 col-md-6 col-lg-3" wire:key="item--search--product-{{ $value->id }}">
+                    <x-product :product="$value"></x-product>
 
 
-                        </div>
-                    </div>
                 </div>
             @endforeach
 
@@ -44,5 +43,11 @@
         @endif
 
     </div>
+    <div class="row">
+        <div class="col-12">
 
+        {{ $products->links() }}
+        </div>
+
+    </div>
 </div>

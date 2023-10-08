@@ -52,7 +52,6 @@
                             </div>
 
 
-
                             <div class="col-12">
                                 <div class="location_group form-group province">
                                     <label>Tỉnh /Thành phố</label>
@@ -86,6 +85,17 @@
 
                             </div>
                             <div class="col-12">
+
+{{--                                <div class="location_group form-group service">--}}
+{{--                                    <label>Phương thức vận chuyển</label>--}}
+{{--                                    <select type="text" value="" name="service" required--}}
+{{--                                            class="input_search service">--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+
+
+                            </div>
+                            <div class="col-12">
                                 <!-- Company Name -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require type="text"
@@ -114,45 +124,45 @@
                                 </div>
                             </div>
 
-{{--                            <div class="list-group-item">--}}
-{{--                                <!-- Radio -->--}}
-{{--                                <div class="custom-control custom-radio">--}}
-{{--                                    <!-- Input -->--}}
-{{--                                    <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment"--}}
-{{--                                           value="1" type="radio">--}}
-{{--                                    <!-- Label -->--}}
-{{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
-{{--                                           for="checkoutPaymentPaypal"><img--}}
-{{--                                            src="{{ asset('frontend/assets/img/paypal.png') }}" alt="...">--}}
-{{--                                        Paypal</label>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="list-group-item">--}}
+                            {{--                                <!-- Radio -->--}}
+                            {{--                                <div class="custom-control custom-radio">--}}
+                            {{--                                    <!-- Input -->--}}
+                            {{--                                    <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment"--}}
+                            {{--                                           value="1" type="radio">--}}
+                            {{--                                    <!-- Label -->--}}
+                            {{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
+                            {{--                                           for="checkoutPaymentPaypal"><img--}}
+                            {{--                                            src="{{ asset('frontend/assets/img/paypal.png') }}" alt="...">--}}
+                            {{--                                        Paypal</label>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
 
-{{--                            <div class="list-group-item">--}}
-{{--                                <!-- Radio -->--}}
-{{--                                <div class="custom-control custom-radio">--}}
-{{--                                    <!-- Input -->--}}
-{{--                                    <input class="custom-control-input" id="momo" name="payment" value="2"--}}
-{{--                                           type="radio">--}}
-{{--                                    <!-- Label -->--}}
-{{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
-{{--                                           for="momo"><img src="{{ asset('frontend/assets/img/momo.png') }}"--}}
-{{--                                                           alt="..."> Momo</label>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="list-group-item">--}}
+                            {{--                                <!-- Radio -->--}}
+                            {{--                                <div class="custom-control custom-radio">--}}
+                            {{--                                    <!-- Input -->--}}
+                            {{--                                    <input class="custom-control-input" id="momo" name="payment" value="2"--}}
+                            {{--                                           type="radio">--}}
+                            {{--                                    <!-- Label -->--}}
+                            {{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
+                            {{--                                           for="momo"><img src="{{ asset('frontend/assets/img/momo.png') }}"--}}
+                            {{--                                                           alt="..."> Momo</label>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
 
-{{--                            <div class="list-group-item">--}}
-{{--                                <!-- Radio -->--}}
-{{--                                <div class="custom-control custom-radio">--}}
-{{--                                    <!-- Input -->--}}
-{{--                                    <input class="custom-control-input" id="vnpay" name="payment" value="3"--}}
-{{--                                           type="radio">--}}
-{{--                                    <!-- Label -->--}}
-{{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
-{{--                                           for="vnpay"><img src="{{ asset('frontend/assets/img/vnpay.png') }}"--}}
-{{--                                                            alt="..."> Vnpay</label>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="list-group-item">--}}
+                            {{--                                <!-- Radio -->--}}
+                            {{--                                <div class="custom-control custom-radio">--}}
+                            {{--                                    <!-- Input -->--}}
+                            {{--                                    <input class="custom-control-input" id="vnpay" name="payment" value="3"--}}
+                            {{--                                           type="radio">--}}
+                            {{--                                    <!-- Label -->--}}
+                            {{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
+                            {{--                                           for="vnpay"><img src="{{ asset('frontend/assets/img/vnpay.png') }}"--}}
+                            {{--                                                            alt="..."> Vnpay</label>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-5">
@@ -223,6 +233,34 @@
                                 if (idDistrict) {
                                     this.getWard(idDistrict);
                                 }
+                            }
+                            if (e.target.parentElement.classList.contains('ward')) {
+                                let idDistrict = document.querySelector(
+                                    '.district .input_search').value;
+                                let idWard = document.querySelector(
+                                    '.ward .input_search').value;
+                                if (idWard&&idDistrict) {
+                                    let url = "{{ route('ghn.price') }}";
+                                    try {
+                                        $.ajax({
+                                            type: 'get',
+                                            url: url,
+                                            data:{
+                                                idDistrict:idDistrict,
+                                                idWard:idWard
+                                            },
+                                            success: function (data) {
+                                                loadCart(data);
+                                                loadCartItem(data);
+                                            }
+                                        });
+
+                                    } catch (error) {
+                                        console.error('location error')
+                                    }
+
+                                }
+
                             }
                         })
 
@@ -363,7 +401,7 @@
                     let className = type.toLowerCase();
 
                     if (data) {
-                        html+="<option value=''>Bạn chưa chọn</option>";
+                        html += "<option value=''>Bạn chưa chọn</option>";
                         // console.log(data);
                         //convert to search box
                         html += data.map(province => {
@@ -381,7 +419,8 @@
                         html = `<option>Không tồn tại dữ liệu.</option>`;
                     }
                     let select = document.querySelector(`.input_search.${className} `);
-                    select.innerHTML = html
+                    select.value = "";
+                    select.innerHTML = html;
                 },
                 start: function () {
                     this.handleEvent();
