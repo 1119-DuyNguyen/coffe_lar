@@ -53,47 +53,6 @@ $(document).ready(function () {
         drop.classList.remove("active");
     };
 
-    // const register = document.querySelector("#register");
-    // register.onclick = (e) => {
-    //     e.preventDefault();
-    //     $("#login").modal("hide");
-    //     $("#registerForm").modal("show");
-    // };
-
-    // const loginreg = document.querySelector(".login-btn");
-    // loginreg.onclick = (e) => {
-    //     e.preventDefault();
-    //     $("#registerForm").modal("hide");
-    //     $("#login").modal("show");
-    // };
-
-    const register = document.querySelector("#forgetPassword");
-    register.onclick = (e) => {
-        e.preventDefault();
-        $("#login").modal("hide");
-        $("#forgetPass").modal("show");
-    };
-
-    // const togglePassword = document.querySelector("#togglePassword");
-    // const password = document.querySelector(".repass");
-
-    // const togglePassword1 = document.querySelector("#togglePassword1");
-    // const password1 = document.querySelector(".repass1");
-
-    // togglePassword.addEventListener("click", function (e) {
-    //     const type =
-    //         password.getAttribute("type") === "password" ? "text" : "password";
-    //     password.setAttribute("type", type);
-    //     this.classList.toggle("fa-eye-slash");
-    // });
-
-	// togglePassword1.addEventListener("click", function (e) {
-    //     const type =
-	// 	password1.getAttribute("type") === "password" ? "text" : "password";
-    //     password1.setAttribute("type", type);
-    //     this.classList.toggle("fa-eye-slash");
-    // });
-
 
 
     const item_user = document.querySelectorAll(".item_user");

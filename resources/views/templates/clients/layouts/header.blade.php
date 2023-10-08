@@ -35,7 +35,7 @@
     </div>
 
 </div>
-<div class="header header-sticky" >
+<div class="header header-sticky">
 
     <!-- Main header -->
     <div class="header_nav" style="padding: 0.75rem 0;">
@@ -116,12 +116,19 @@
                                             </li>
                                         @else
 
-                                            <li>
-                                                <i class="fas fa-user"></i>
-                                                <a class="ml-2 " data-toggle="modal" data-target="#login">Đăng
-                                                    nhập</a>
+                                            <li data-toggle="modal" data-target="#login">
+                                                <i class=" fas fa-user"></i>
+                                                <a class=" ">Đăng nhập</a>
+                                            </li>
+                                            <li data-toggle="modal" data-target="#forgetPasswordForm">
+                                                <i class=" fas fa-key"></i>
+                                                <a href="#" class="">Quên mật khẩu ? </a>
                                             </li>
 
+                                            <li data-toggle="modal" data-target="#registerForm">
+                                                <i class=" fas fa-file-alt"></i>
+                                                <a href="#" class="">Đăng kí</a>
+                                            </li>
                                         @endif
 
 
@@ -215,12 +222,6 @@
                             </div>
 
                             <div class="login_flex">
-                                <div class="login_flex_1">
-                                    <a href="" id="forgetPassword" class="text-bold">Quên mật khẩu?</a>
-                                </div>
-                                <div class="login_flex_1">
-                                    <a href="{{ route('register')}}" class="text-bold">Đăng kí</a>
-                                </div>
                                 <div class="login_flex_2">
                                     <div class="form-group mb-0">
                                         <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng
@@ -251,3 +252,114 @@
         </div>
     </div>
 </div>
+<!-- End Modal -->
+<div class="modal fade" id="forgetPasswordForm">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
+            <div class="modal-body">
+                <div class="row align-items-center">
+
+                    <div class="login_signup ol-lg-12 col-md-12 col-sm-12">
+                        <h3 class="login_sec_title">Quên mật khẩu</h3>
+                        <form action=" {{ route('password.request')}}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label>Nhập Email tài khoản của bạn :</label>
+                                <input type="email" autocomplete="off" required class="form-control" name="emailforget">
+                                @if($errors->first('emailforget'))
+                                    <small class="text-danger">{{ $errors->first('emailforget') }}</small>
+                                @endif
+                            </div>
+                            <div class="login_flex">
+                                <div class="login_flex_1">
+                                    <button type="submit" class="btn btn-md btn-theme">Xác nhận</b>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registerForm">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="login_signup">
+                            <h3 class="login_sec_title">Tạo tài khoản</h3>
+                            <form action=" {{route('register')}}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Email *</label>
+                                            <input type="email" name="email" class="form-control">
+                                        </div>
+                                        @if($errors->first('email'))
+                                            <small class="text-danger">{{ $errors->first('email') }}</small>
+                                        @endif
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Mật Khẩu</label>
+                                            <input type="password" name="password" class="form-control">
+                                        </div>
+                                        @if($errors->first('password'))
+                                            <small class="text-danger">{{ $errors->first('password') }}</small>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Nhập Lại Mật Khẩu</label>
+                                            <input type="password" name="password_confirmation" class="form-control">
+                                        </div>
+                                        @if($errors->first('password_confirmation'))
+                                            <small
+                                                class="text-danger">{{ $errors->first('password_confirmation') }}</small>
+                                        @endif
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Họ Tên</label>
+                                            <input type="text" name="hoten" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Địa Chỉ</label>
+                                            <input type="text" name="diachi" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="login_flex">
+                                            <div class="login_flex_2">
+                                                <div class="form-group mb-0">
+                                                    <button type="submit" class="btn btn-md btn-theme">Đăng ký</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
