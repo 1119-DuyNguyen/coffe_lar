@@ -56,15 +56,6 @@ class ProductController extends Controller
         if($request->ajax())
         {
                 $product = Product::where('slug', $slug)->where('status', true)->first();
-//                $discount = 0;
-//                if (count($product->Coupon) > 0) {
-//                    if ($product->Coupon[0]->loaigiam === 1) {
-//                        $discount = $product->giaban *  $product->Coupon[0]->giamgia / 100;
-//                    } else {
-//                        $discount = $product->Coupon[0]->giamgia;
-//                    }
-//                }
-//                $product->giaban = ($product->giaban - $discount < 0) ? 0 : $product->giaban - $discount;
 
                 return view('templates.clients.home.quick-view', ['product' => $product]);
 

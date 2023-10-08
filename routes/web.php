@@ -1,16 +1,13 @@
 <?php
 
-use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CouponController;
-use App\Http\Controllers\Frontend\FeaturedProductController;
 use App\Http\Controllers\Frontend\GiaoHangNhanhController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\OrderTrackController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ProductController;
-use App\Http\Controllers\Frontend\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,7 +43,6 @@ require __DIR__.'/auth.php';
 
 //Route::get('admin/login', [DashboardController::class, 'login'])->name('admin.login');
 
-Route::get('featured-product', [FeaturedProductController::class, 'index'])->name('featured-product.index');
 
 /** Product route */
 Route::get('product', [ProductController::class, 'index'])->name('product.index');

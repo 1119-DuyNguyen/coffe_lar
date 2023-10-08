@@ -16,14 +16,14 @@
 
                         <div class="woo_product_caption center">
                             <div class="woo_title">
-                                <h4 class="woo_pro_title"><a
-                                        href="{{route('product.show', $product->slug)}}">
+                                <h4 class="woo_pro_title"><span
+                                        >
                                         <span  class="woo_product_thumb mb-3">
 
                                         <img src="{{ asset('uploads/product/'.$product->thumb_image)}}" class="img-fluid" alt="" />
                                         </span>
 
-                                        {{$product->name}}</a></h4>
+                                        {{$product->name}}</span></h4>
                             </div>
                             <div class="woo_price ">
                                 <h6>

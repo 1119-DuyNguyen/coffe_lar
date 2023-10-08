@@ -78,33 +78,6 @@
                     </fieldset>
                     @endif
 
-                    {{--                <div class="woo_pr_varient">--}}
-                    {{--                    <h6>Size:</h6>--}}
-                    {{--                </div>--}}
-{{--                    <div class="woo_colors_list pl-3">--}}
-{{--                        --}}{{--                @if(count($product->size) > 1)--}}
-{{--                        --}}{{--                @foreach($product->size as $key => $value)--}}
-{{--                        --}}{{--                <div class="custom-varient custom-size">--}}
-{{--                        --}}{{--                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioOne{{$value->id}}"--}}
-{{--                        --}}{{--                        value="{{$value->id}}" data-toggle="form-caption" data-target="#sizeCaption"--}}
-{{--                        --}}{{--                        {{($key == 0 ? "checked" : "")}}>--}}
-{{--                        --}}{{--                    <label class="custom-control-label" for="sizeRadioOne{{$value->id}}">{{ $value->size_name}}<span--}}
-{{--                        --}}{{--                            class="price-plus"> +--}}
-{{--                        --}}{{--                            {{currency_format($value->price) ?? '0đ'}}</span></label>--}}
-{{--                        --}}{{--                </div>--}}
-{{--                        --}}{{--                @endforeach--}}
-{{--                        --}}{{--                @else--}}
-{{--                        --}}{{--                @foreach($product->size as $key => $value)--}}
-{{--                        --}}{{--                <div class="custom-varient custom-size">--}}
-{{--                        --}}{{--                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioOne{{$value->id}}"--}}
-{{--                        --}}{{--                        value="{{$value->id}}" data-toggle="form-caption" data-target="#sizeCaption"--}}
-{{--                        --}}{{--                        {{($key == 0 ? "checked" : "")}}>--}}
-{{--                        --}}{{--                    <label class="custom-control-label" for="sizeRadioOne{{$value->id}}">{{ $value->size_name}}</label>--}}
-{{--                        --}}{{--                </div>--}}
-{{--                        --}}{{--                @endforeach--}}
-{{--                        --}}{{--                @endif--}}
-{{--                    </div>--}}
-
             @endforeach
 
 
