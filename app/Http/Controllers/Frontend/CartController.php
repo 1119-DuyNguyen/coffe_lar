@@ -7,6 +7,7 @@ use App\Http\Requests\Fronend\CartRequest;
 use App\Http\Services\CartService;
 use App\Models\Product;
 use App\Models\ProductVariantItem;
+use Cache;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -26,7 +27,6 @@ class CartController extends Controller
     /** Show cart page  */
     public function index(Request $request)
     {
-
 
         return view('templates.clients.cart.index');
     }

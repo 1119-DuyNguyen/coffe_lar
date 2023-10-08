@@ -51,6 +51,40 @@
                                 </div>
                             </div>
 
+
+
+                            <div class="col-12">
+                                <div class="location_group form-group province">
+                                    <label>Tỉnh /Thành phố</label>
+                                    <select type="text" value="" name="province"
+                                            class="input_search province" required>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+
+                                <div class="location_group form-group district">
+                                    <label>Quận</label>
+
+                                    <select type="text" value="" name="district" required
+                                            class="input_search district">
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+
+                                <div class="location_group form-group ward">
+                                    <label>Phường / Xã</label>
+                                    <select type="text" value="" name="ward" required
+                                            class="input_search ward">
+                                    </select>
+                                </div>
+
+
+                            </div>
                             <div class="col-12">
                                 <!-- Company Name -->
                                 <div class="form-group">
@@ -59,40 +93,6 @@
                                            placeholder="Địa chỉ chi tiết">
                                 </div>
                             </div>
-
-                            <div class="col-12">
-                                <div class="search_location">
-                                    <div class="location_group province">
-                                        <input type="hidden" value="" name="province"/>
-                                        <input type="text" value="" placeholder="Thành Phố / Tỉnh"
-                                               class="input_search"/>
-                                        <ul class="search_list">
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="location_group district">
-                                        <input type="text" value="" hidden name="district"/>
-                                        <input type="text" value="" placeholder="Quận / Huyện"
-                                               class="input_search"/>
-                                        <ul class="search_list">
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="location_group ward">
-                                        <input type="text" value="" hidden name="ward"/>
-                                        <input type="text" value="" placeholder="Phường / Xã"
-                                               class="input_search"/>
-                                        <ul class="search_list">
-
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
 
                         </div>
 
@@ -114,45 +114,45 @@
                                 </div>
                             </div>
 
-                            <div class="list-group-item">
-                                <!-- Radio -->
-                                <div class="custom-control custom-radio">
-                                    <!-- Input -->
-                                    <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment"
-                                           value="1" type="radio">
-                                    <!-- Label -->
-                                    <label class="custom-control-label font-size-sm text-body text-nowrap"
-                                           for="checkoutPaymentPaypal"><img
-                                            src="{{ asset('frontend/assets/img/paypal.png') }}" alt="...">
-                                        Paypal</label>
-                                </div>
-                            </div>
+{{--                            <div class="list-group-item">--}}
+{{--                                <!-- Radio -->--}}
+{{--                                <div class="custom-control custom-radio">--}}
+{{--                                    <!-- Input -->--}}
+{{--                                    <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment"--}}
+{{--                                           value="1" type="radio">--}}
+{{--                                    <!-- Label -->--}}
+{{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
+{{--                                           for="checkoutPaymentPaypal"><img--}}
+{{--                                            src="{{ asset('frontend/assets/img/paypal.png') }}" alt="...">--}}
+{{--                                        Paypal</label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="list-group-item">
-                                <!-- Radio -->
-                                <div class="custom-control custom-radio">
-                                    <!-- Input -->
-                                    <input class="custom-control-input" id="momo" name="payment" value="2"
-                                           type="radio">
-                                    <!-- Label -->
-                                    <label class="custom-control-label font-size-sm text-body text-nowrap"
-                                           for="momo"><img src="{{ asset('frontend/assets/img/momo.png') }}"
-                                                           alt="..."> Momo</label>
-                                </div>
-                            </div>
+{{--                            <div class="list-group-item">--}}
+{{--                                <!-- Radio -->--}}
+{{--                                <div class="custom-control custom-radio">--}}
+{{--                                    <!-- Input -->--}}
+{{--                                    <input class="custom-control-input" id="momo" name="payment" value="2"--}}
+{{--                                           type="radio">--}}
+{{--                                    <!-- Label -->--}}
+{{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
+{{--                                           for="momo"><img src="{{ asset('frontend/assets/img/momo.png') }}"--}}
+{{--                                                           alt="..."> Momo</label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="list-group-item">
-                                <!-- Radio -->
-                                <div class="custom-control custom-radio">
-                                    <!-- Input -->
-                                    <input class="custom-control-input" id="vnpay" name="payment" value="3"
-                                           type="radio">
-                                    <!-- Label -->
-                                    <label class="custom-control-label font-size-sm text-body text-nowrap"
-                                           for="vnpay"><img src="{{ asset('frontend/assets/img/vnpay.png') }}"
-                                                            alt="..."> Vnpay</label>
-                                </div>
-                            </div>
+{{--                            <div class="list-group-item">--}}
+{{--                                <!-- Radio -->--}}
+{{--                                <div class="custom-control custom-radio">--}}
+{{--                                    <!-- Input -->--}}
+{{--                                    <input class="custom-control-input" id="vnpay" name="payment" value="3"--}}
+{{--                                           type="radio">--}}
+{{--                                    <!-- Label -->--}}
+{{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
+{{--                                           for="vnpay"><img src="{{ asset('frontend/assets/img/vnpay.png') }}"--}}
+{{--                                                            alt="..."> Vnpay</label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-5">
@@ -192,172 +192,110 @@
 
             const submitOrder = document.querySelector('.submitOrder');
 
-            const inputSearch = document.querySelectorAll('.search_location .input_search');
-            const listSearch = document.querySelector('.search_location .search_list');
-
+            const inputSearch = document.querySelectorAll('.location_group .input_search');
 
             const app = {
 
                 dataLocation: [],
                 provinceName: "Province",
-                districtName: "district",
+                districtName: "District",
                 wardName: "Ward",
 
                 handleEvent: function () {
 
                     inputSearch.forEach(input => {
-                        input.addEventListener('click', (e) => {
+                        input.addEventListener('change', (e) => {
                             e.stopPropagation();
-
-                            if (e.target.parentElement.classList.contains('district')) {
-                                let idProvince = document.querySelector(
-                                    '.province .input_search').dataset.id;
-                                if (idProvince) {
-                                    this.getDistrict(idProvince, e.target.nextElementSibling);
-                                }
-
-
-                            }
-
-                            if (e.target.parentElement.classList.contains('ward')) {
-                                let idDistrict = document.querySelector(
-                                    '.district .input_search').dataset.id;
-                                if (idDistrict) {
-                                    this.getWard(idDistrict, e.target.nextElementSibling);
-                                }
-
-
-                            }
-                            input.nextElementSibling.classList.toggle('showSearch');
-                        })
-
-                        let listSearch = input.nextElementSibling;
-                        listSearch.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                        });
-
-                        submitOrder.addEventListener('submit', (e) => {
-                            const input = document.querySelector('.ward .input_search');
-                            const loca = document.querySelector('#checkFeeship');
-                            if (loca) {
-                                if (!input.value || !loca.value) {
-                                    e.preventDefault();
-                                    e.stopImmediatePropagation();
-                                    alert(
-                                        'Vui lòng nhập địa chỉ đầy đủ hoặc không vận chuyển.');
-                                    console.log(false);
-                                } else {
-                                    e.preventDefault();
-                                    e.stopImmediatePropagation();
-                                    {{--let url = "{{ route('invoice.confirm') }}";--}}
-                                    let url = "";
-
-                                    (async () => {
-                                        const response = await fetch(
-                                            url
-                                        );
-                                        if (response && response.status === 200) {
-                                            const res = await response.json();
-                                            $.confirm({
-                                                type: 'blue',
-                                                title: 'Xác nhận',
-                                                columnClass: 'col-md-8 col-md-offset-2',
-                                                content: res.invoice,
-                                                buttons: {
-                                                    'Huỷ': {
-                                                        btnClass: 'btn-red',
-                                                        action: function () {
-
-                                                        }
-                                                    },
-                                                    'Xác nhận': {
-                                                        btnClass: 'btn-orange',
-                                                        action: function () {
-                                                            console.log($(
-                                                                '.preloader'
-                                                            )
-                                                                .length)
-                                                            if ($(
-                                                                '.preloader')
-                                                                .length) {
-                                                                $('.preloader')
-                                                                    .show();
-                                                            }
-                                                            submitOrder
-                                                                .submit();
-                                                        }
-
-
-                                                    },
-                                                }
-                                            });
-
-                                        } else {
-                                            alert('laasy du lieu that bai !!!')
-                                        }
-                                    })();
-
-
-                                }
-                            } else {
-                                e.preventDefault();
-                            }
-
-                        })
-
-                    })
-                    //search data with input
-                    inputSearch.forEach(input => {
-
-                        input.addEventListener('input', (e) => {
-                            let keyword = e.target.value;
 
                             if (e.target.parentElement.classList.contains('province')) {
-                                let filter = this.dataLocation.province.filter(province => {
-                                    return province[`${app.provinceName}Name`].toLowerCase()
-                                        .includes(
-                                            keyword.toLowerCase());
-                                })
-                                this.renderLocationData(filter, 'province');
+                                let idProvince = document.querySelector(
+                                    '.province .input_search').value;
+                                if (idProvince) {
+                                    this.getDistrict(idProvince);
+                                }
+
 
                             }
 
                             if (e.target.parentElement.classList.contains('district')) {
-                                let filter = this.dataLocation.district.filter(district => {
-                                    return district.district_name.toLowerCase()
-                                        .includes(
-                                            keyword);
-                                })
-                                this.renderLocationData(filter, 'district', e.target
-                                    .nextElementSibling);
+                                let idDistrict = document.querySelector(
+                                    '.district .input_search').value;
+                                if (idDistrict) {
+                                    this.getWard(idDistrict);
+                                }
                             }
-
-                            if (e.target.parentElement.classList.contains('ward')) {
-                                let filter = this.dataLocation.ward.filter(ward => {
-                                    return ward.ward_name.toLowerCase().includes(
-                                        keyword);
-                                })
-
-                                this.renderLocationData(filter, 'ward', e.target
-                                    .nextElementSibling);
-
-                            }
-
-
                         })
 
-                    })
 
-                    document.addEventListener('click', () => {
+                        {{--submitOrder.addEventListener('submit', (e) => {--}}
+                        {{--    const input = document.querySelector('.ward .input_search');--}}
+                        {{--    const loca = document.querySelector('#checkFeeship');--}}
+                        {{--    if (loca) {--}}
+                        {{--        if (!input.value || !loca.value) {--}}
+                        {{--            e.preventDefault();--}}
+                        {{--            e.stopImmediatePropagation();--}}
+                        {{--            alert(--}}
+                        {{--                'Vui lòng nhập địa chỉ đầy đủ hoặc không vận chuyển.');--}}
+                        {{--            console.log(false);--}}
+                        {{--        } else {--}}
+                        {{--            e.preventDefault();--}}
+                        {{--            e.stopImmediatePropagation();--}}
+                        {{--            --}}{{--let url = "{{ route('invoice.confirm') }}";--}}
+                        {{--            let url = "";--}}
 
-                        const blockSearch = document.querySelectorAll('.search_location .search_list');
-                        if (blockSearch) {
-                            blockSearch.forEach(search => {
-                                if (search.classList.contains('showSearch')) {
-                                    search.classList.remove('showSearch')
-                                }
-                            })
-                        }
+                        {{--            (async () => {--}}
+                        {{--                const response = await fetch(--}}
+                        {{--                    url--}}
+                        {{--                );--}}
+                        {{--                if (response && response.status === 200) {--}}
+                        {{--                    const res = await response.json();--}}
+                        {{--                    $.confirm({--}}
+                        {{--                        type: 'blue',--}}
+                        {{--                        title: 'Xác nhận',--}}
+                        {{--                        columnClass: 'col-md-8 col-md-offset-2',--}}
+                        {{--                        content: res.invoice,--}}
+                        {{--                        buttons: {--}}
+                        {{--                            'Huỷ': {--}}
+                        {{--                                btnClass: 'btn-red',--}}
+                        {{--                                action: function () {--}}
+
+                        {{--                                }--}}
+                        {{--                            },--}}
+                        {{--                            'Xác nhận': {--}}
+                        {{--                                btnClass: 'btn-orange',--}}
+                        {{--                                action: function () {--}}
+                        {{--                                    console.log($(--}}
+                        {{--                                        '.preloader'--}}
+                        {{--                                    )--}}
+                        {{--                                        .length)--}}
+                        {{--                                    if ($(--}}
+                        {{--                                        '.preloader')--}}
+                        {{--                                        .length) {--}}
+                        {{--                                        $('.preloader')--}}
+                        {{--                                            .show();--}}
+                        {{--                                    }--}}
+                        {{--                                    submitOrder--}}
+                        {{--                                        .submit();--}}
+                        {{--                                }--}}
+
+
+                        {{--                            },--}}
+                        {{--                        }--}}
+                        {{--                    });--}}
+
+                        {{--                } else {--}}
+                        {{--                    alert('laasy du lieu that bai !!!')--}}
+                        {{--                }--}}
+                        {{--            })();--}}
+
+
+                        {{--        }--}}
+                        {{--    } else {--}}
+                        {{--        e.preventDefault();--}}
+                        {{--    }--}}
+
+                        {{--})--}}
+
                     })
 
 
@@ -372,9 +310,8 @@
                             type: 'get',
                             url: url,
                             success: function (data) {
-                                _this.dataLocation[app.provinceName] = data.data.data;
 
-                                _this.renderLocationData(_this.dataLocation[app.provinceName], app.provinceName);
+                                _this.renderLocationData(data.data.data, app.provinceName);
                             }
                         });
 
@@ -383,99 +320,68 @@
                     }
 
                 },
-                getDistrict: function (province, block) {
-                    let url = "{{ asset('/') }}";
-                    (async () => {
-                        const response = await fetch(
-                            `${url}province/district/${province}`);
-                        if (response && response.status === 200) {
-                            const district = await response.json();
-                            this.dataLocation['district'] = district;
-                            this.renderLocationData(this.dataLocation.district, 'district', block);
-                        } else {
-                            alert('laasy du lieu that bai !!!')
-                        }
-                    })();
+                getDistrict: function (province) {
+                    let url = "{{ route('ghn.district', ":idProvince") }}";
+                    url = url.replace(':idProvince', province);
+                    let _this = this;
+                    try {
+                        $.ajax({
+                            type: 'get',
+                            url: url,
+                            success: function (data) {
+
+                                _this.renderLocationData(data.data.data, app.districtName);
+                            }
+                        });
+
+                    } catch (error) {
+                        console.error('location error')
+                    }
                 },
 
-                getWard:  (district, block)=> {
-                    let url = "{{ asset('/') }}";
-                    (async () => {
-                        const response = await fetch(
-                            `${url}province/ward/${district}`);
-                        if (response && response.status === 200) {
-                            const ward = await response.json();
-                            this.dataLocation['ward'] = ward;
-                            this.renderLocationData(this.dataLocation.ward, 'ward', block);
-                        } else {
-                            alert('laasy du lieu that bai !!!')
-                        }
-                    })();
+                getWard: function (district) {
+                    let url = "{{ route('ghn.ward', ":idDistrict") }}";
+                    url = url.replace(':idDistrict', district);
+                    let _this = this;
+                    try {
+                        $.ajax({
+                            type: 'get',
+                            url: url,
+                            success: function (data) {
+
+                                _this.renderLocationData(data.data.data, app.wardName);
+                            }
+                        });
+
+                    } catch (error) {
+                        console.error('location error')
+                    }
                 },
 
-                renderLocationData:  (data, type='', divRender = listSearch) =>{
+                renderLocationData: (data, type = '') => {
                     let html = '';
+                    let className = type.toLowerCase();
+
                     if (data) {
+                        html+="<option value=''>Bạn chưa chọn</option>";
                         // console.log(data);
                         //convert to search box
-                        html = data.map(province => {
+                        html += data.map(province => {
                             return (
                                 `
-                            <li class="search_item" data-id='${province[`${type}ID`]}'>
+                            <option class="search_item" value='${province[`${type}ID`]}'>
                                 ${province[`${type}Name`]}
-                            </li>
+                            </option>
                         `
                             )
-                        }).join('');
-                        if (html) {
-                            divRender.innerHTML = html;
-                        } else {
-                            divRender.innerHTML = `Dữ liệu không có.`;
-                        }
-                        //
-                        const listProvinces = document.querySelectorAll(`.location_group.${type.toLowerCase()} .search_item`);
-                        let className=type.toLowerCase();
-                        console.log(className);
-                        listProvinces.forEach(prov => {
-                            prov.onclick = (e) => {
-                                e.preventDefault();
-
-                                let id = e.target.dataset.id;
-                                let pro = app.dataLocation[`${type}`].find(data => {
-                                    return data[`${type}ID`] == id
-                                });
-                                console.log(`.${className} input[name="${className}"]`, document.querySelector(`.${className} input[name="${className}"]`));
-                                //assign value to hidden input
-                                document.querySelector(`.${className} input[name="${className}"]`).value = pro[`${type}ID`];
-                                //assign value to search input
-                                document.querySelector(`.${className} .input_search`).value = pro[`${type}Name`];
-                                document.querySelector(`.${className} .input_search`).setAttribute('data-id', pro[`${type}ID`])
-
-                                {{--if (type === 'ward') {--}}
-                                {{--    (async () => {--}}
-                                {{--        let url = "{{ asset('/getprice/') }}";--}}
-                                {{--        const response = await fetch(--}}
-                                {{--            `${url}/${id}`--}}
-                                {{--        );--}}
-                                {{--        if (response && response.status === 200) {--}}
-                                {{--            const check = await response.json();--}}
-                                {{--            if (check) {--}}
-                                {{--                loadCart(check);--}}
-                                {{--                loadCartItem(check);--}}
-                                {{--            }--}}
-                                {{--        } else {--}}
-                                {{--            alert('laasy du lieu that bai !!!')--}}
-                                {{--        }--}}
-                                {{--    })();--}}
-                                {{--}--}}
-
-                            }
-                        })
+                        }).join('')
 
 
                     } else {
-                        listSearch.innerHTML = `Không tồn tại dữ liệu.`;
+                        html = `<option>Không tồn tại dữ liệu.</option>`;
                     }
+                    let select = document.querySelector(`.input_search.${className} `);
+                    select.innerHTML = html
                 },
                 start: function () {
                     this.handleEvent();

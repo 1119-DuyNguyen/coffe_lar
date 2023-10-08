@@ -65,8 +65,8 @@ Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::get('ghn/province',[GiaoHangNhanhController::class,'getProvince'])->name('ghn.province');
-Route::get('ghn/district',[GiaoHangNhanhController::class,'getDistrict'])->name('ghn.district');
-Route::get('ghn/ward',[GiaoHangNhanhController::class,'getWard'])->name('ghn.ward');
+Route::get('ghn/district/{idProvince}',[GiaoHangNhanhController::class,'getDistrict'])->name('ghn.district');
+Route::get('ghn/ward/{idDistrict}',[GiaoHangNhanhController::class,'getWard'])->name('ghn.ward');
 
 
 
