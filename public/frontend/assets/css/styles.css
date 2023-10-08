@@ -6368,6 +6368,7 @@ ul.product.grid-5 .woo_product_cart ul li .woo_cart_btn {
 .modal-dialog.modal-dialog-centered .modal-content{
     height: 75%;
     overflow: auto;
+    width: 100%;
 }
 /*---------------- Modal View Product ----------------*/
 #viewproduct-over .modal-dialog.modal-dialog-centered {
