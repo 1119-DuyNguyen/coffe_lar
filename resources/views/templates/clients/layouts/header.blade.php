@@ -14,8 +14,8 @@
 
                 <div class="col-lg-9 col-md-6 col-sm-6 col-4">
                         <span class="t-14 ">
-                            {{$settings->name}} - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - ĐIỆN THOẠI:
-                            {{$settings->contact_phone ?? ""}}
+{{--                            {{$settings->name}} - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - ĐIỆN THOẠI:--}}
+                            {{--                            {{$settings->contact_phone ?? ""}}--}}
                         </span>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-8">
@@ -96,23 +96,26 @@
                                         {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
                                         {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
                                         {{--                                            </li>--}}
-                                        @if( get_user('customer'))
+                                        @if( \Illuminate\Support\Facades\Auth::check())
                                             <li>
                                                 <i class="fas fa-user"></i>
-                                                <a class="ml-2" href=" {{ route('get.infouser', 'info')}}">Thông tin
+                                                <a class="ml-2" href="{{ route('user.dashboard')}}">
+                                                    Thông tin
                                                     tài
                                                     khoản</a>
                                             </li>
                                             @if(!get_user('customer','type_social'))
                                                 <li>
                                                     <i class="fas fa-sync"></i>
-                                                    <a class="ml-2" href="{{ route('change.pass')}}">Đổi mật
+                                                    <a class="ml-2" href="{{ route('user.profile')}}">
+                                                        Đổi mật
                                                         khẩu</a>
                                                 </li>
                                             @endif
                                             <li>
                                                 <i class="fas fa-sign-out-alt"></i>
-                                                <a class="ml-2" href="{{ route('logout')}}">Đăng xuất</a>
+                                                <a class="ml-2" href="{{ route('logout')}}">
+                                                    Đăng xuất</a>
                                             </li>
                                         @else
 
@@ -204,27 +207,28 @@
             <div class="modal-body">
                 <div class="row align-items-center">
 
-                    <form method="POST" action=" {{ route('login')}}" class="login_signup ol-lg-12 col-md-12 col-sm-12 form-account" method="post">
+                    <form method="POST" action=" {{ route('login')}}"
+                          class="login_signup ol-lg-12 col-md-12 col-sm-12 form-account" method="post">
                         @csrf
                         <h3 class="login_sec_title">Đăng nhập</h3>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" required class="form-control emailAcc">
-                            </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" required class="form-control emailAcc">
+                        </div>
 
-                            <div class="form-group">
-                                <label>Mật khẩu</label>
-                                <input type="password" required class="form-control passwordAcc" name="password">
-                            </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" required class="form-control passwordAcc" name="password">
+                        </div>
 
-                            <div class="login_flex">
-                                <div class="login_flex_2">
-                                    <div class="form-group mb-0">
-                                        <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng nhập
-                                        </button>
-                                    </div>
+                        <div class="login_flex">
+                            <div class="login_flex_2">
+                                <div class="form-group mb-0">
+                                    <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng nhập
+                                    </button>
                                 </div>
                             </div>
+                        </div>
 
                         {{--                            <div class="login_flex_2 mrg-20">--}}
                         {{--                                <div class="form-group mb-0 social facebook">--}}
@@ -387,16 +391,15 @@
                         $(document).find('span.error-text').text('');
                     },
                     statusCode: {
-                        422: function(responseObject, textStatus, jqXHR) {
+                        422: function (responseObject, textStatus, jqXHR) {
                             // validation error fails
-                            if(responseObject.responseJSON)
-                            {
-                                let errors=responseObject.responseJSON.errors;
+                            if (responseObject.responseJSON) {
+                                let errors = responseObject.responseJSON.errors;
                                 console.log(errors)
-                                if(errors){
+                                if (errors) {
                                     for (const [prefix, value] of Object.entries(errors)) {
-                                        let span=form.querySelector('span.' + prefix + '_error');
-                                        span.innerText=value
+                                        let span = form.querySelector('span.' + prefix + '_error');
+                                        span.innerText = value
 
                                         let input = form.querySelector('input[name=' + prefix + ']');
                                         input.focus();
@@ -406,7 +409,7 @@
                             }
 
                         },
-                        503: function(responseObject, textStatus, errorThrown) {
+                        503: function (responseObject, textStatus, errorThrown) {
                             // Service Unavailable (503)
                             // This code will be executed if the server returns a 503 response
                         }

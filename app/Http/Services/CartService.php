@@ -3,13 +3,13 @@
 namespace App\Http\Services;
 
 use App\Enums\VariantOption;
+use App\Models\Cart;
 use App\Models\Product;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Validation\ValidationException;
-use App\Cart;
 
 // Import the Cart model
 /*
