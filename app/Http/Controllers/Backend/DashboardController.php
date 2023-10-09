@@ -37,7 +37,6 @@ class DashboardController extends Controller
             ->sum('sub_total');
 
 
-        $totalBrands = Brand::count();
         $totalCategories = Category::count();
 
         $totalUsers = User::count();
@@ -53,7 +52,6 @@ class DashboardController extends Controller
             'todaysEarnings',
             'monthEarnings',
             'yearEarnings',
-            'totalBrands',
             'totalCategories',
 
             'totalUsers'

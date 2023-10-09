@@ -175,6 +175,7 @@
             </div>
         </div>
     </div>
+
 </div>
 <!-- End Navigation -->
 <div class="clearfix"></div>
@@ -203,17 +204,12 @@
             <div class="modal-body">
                 <div class="row align-items-center">
 
-                    <div class="login_signup ol-lg-12 col-md-12 col-sm-12">
+                    <form method="POST" action=" {{ route('login')}}" class="login_signup ol-lg-12 col-md-12 col-sm-12 form-account" method="post">
+                        @csrf
                         <h3 class="login_sec_title">Đăng nhập</h3>
-
-                        <div class="massage">
-                            Tài khoản không chính xác
-                        </div>
-                        <form>
-
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" required class="form-control emailAcc">
+                                <input type="email" name="email" required class="form-control emailAcc">
                             </div>
 
                             <div class="form-group">
@@ -224,14 +220,12 @@
                             <div class="login_flex">
                                 <div class="login_flex_2">
                                     <div class="form-group mb-0">
-                                        <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng
-                                            nhập
+                                        <button type="submit" id="loginAcc" class="btn btn-md btn-theme">Đăng nhập
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                        </form>
                         {{--                            <div class="login_flex_2 mrg-20">--}}
                         {{--                                <div class="form-group mb-0 social facebook">--}}
                         {{--                                    <a href="{{ route('login.facebook','facebook')}}" type="submit" class="btn btn-md ">--}}
@@ -246,7 +240,7 @@
                         {{--                                    </a>--}}
                         {{--                                </div>--}}
                         {{--                            </div>--}}
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -262,7 +256,7 @@
 
                     <div class="login_signup ol-lg-12 col-md-12 col-sm-12">
                         <h3 class="login_sec_title">Quên mật khẩu</h3>
-                        <form action=" {{ route('password.request')}}" method="post">
+                        <form action=" {{ route('password.request')}}" method="post" class="form-account">
                             @csrf
                             <div class="form-group">
                                 <label>Nhập Email tài khoản của bạn :</label>
@@ -294,7 +288,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="login_signup">
                             <h3 class="login_sec_title">Tạo tài khoản</h3>
-                            <form action=" {{route('register')}}" method="post">
+                            <form action=" {{route('register')}}" method="post" class="form-account">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
@@ -363,3 +357,80 @@
     </div>
 </div>
 
+@push('scripts')
+    <script>
+        var forms = document.querySelectorAll(".form-account");
+        console.log(forms)
+
+        //init span error message
+        forms.forEach(form => {
+            let inputs = form.querySelectorAll('input');
+            inputs.forEach(input => {
+                let parent = input.parentElement;
+                let span = document.createElement('div');
+                span.innerHTML = `
+                    <span class="text-danger error-text ${input.name}_error"
+                    style="color: red"></span>`;
+
+                parent.insertAdjacentHTML('afterend', span.outerHTML);
+            })
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var all = $(this).serialize();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    data: all,
+                    beforeSend: function () {
+
+                        $(document).find('span.error-text').text('');
+                    },
+                    statusCode: {
+                        422: function(responseObject, textStatus, jqXHR) {
+                            // validation error fails
+                            if(responseObject.responseJSON)
+                            {
+                                let errors=responseObject.responseJSON.errors;
+                                console.log(errors)
+                                if(errors){
+                                    for (const [prefix, value] of Object.entries(errors)) {
+                                        let span=form.querySelector('span.' + prefix + '_error');
+                                        span.innerText=value
+
+                                        let input = form.querySelector('input[name=' + prefix + ']');
+                                        input.focus();
+                                    }
+
+                                }
+                            }
+
+                        },
+                        503: function(responseObject, textStatus, errorThrown) {
+                            // Service Unavailable (503)
+                            // This code will be executed if the server returns a 503 response
+                        }
+                    },
+                    success: function (data) {
+
+                        window.location.replace(
+                            '{{Redirect::intended(route("home"))->getTargetUrl()}}'
+                        );
+                        // } else if (data == 2) {
+                        //
+                        //     $("#show_error").hide().html("Invalid login details");
+                        // }
+
+                    }
+
+
+                })
+
+            });
+
+        })
+
+
+    </script>
+
+@endpush

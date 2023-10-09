@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-<x-test :user="$user" rule:="$rule" :fillable="$fillable"></x-test>
 @section('content')
       <!-- Main Content -->
         <section class="section">

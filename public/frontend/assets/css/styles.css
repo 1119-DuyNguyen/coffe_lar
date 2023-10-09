@@ -44,14 +44,14 @@
 /*------------------------------------
 	Fonts
 ------------------------------------*/
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,600,700');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');*/
+/*@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap');*/
+/*@import url('https://fonts.googleapis.com/css?family=Muli:300,400,600,700');*/
+/*@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;500;600;700&display=swap');*/
+/*@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');*/
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap');*/
+/*@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');*/
 
 
 /*------------------------------------
@@ -234,8 +234,8 @@ html {
 body {
     background: #ffffff;
     color: #5b687b;
-    font-size: 15px;
-    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-family: 'Verdana', sans-serif;
     margin: 0;
     overflow-x: hidden !important;
     font-weight: 400;
@@ -417,7 +417,7 @@ h6 {
     color: #2D3954;
     font-weight: 500;
     text-transform: capitalize;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Verdana', sans-serif;
 }
 
 .cl_2 {
@@ -6161,7 +6161,7 @@ ul.product.grid-5 .woo_product_cart ul li .woo_cart_btn {
 
 .woo_category_box.border_style .woo_cat_caption h4 {
     font-size: 14px;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Verdana', sans-serif;
     font-weight: 600;
     color: #666;
     letter-spacing: 0.5px;

@@ -18,7 +18,7 @@
     <title>
         @yield('title',"e-commerce")
     </title>
-    <link rel="icon" type="image/png" href="{{asset($logoSetting->favicon)}}">
+{{--    <link rel="icon" type="image/png" href="{{asset($logoSetting->favicon)}}">--}}
     <link rel="stylesheet" href="{{asset('frontend/css/all.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
@@ -40,9 +40,9 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @if($settings->layout=="RTL")
-        <link rel="stylesheet" href="{{asset("frontend/css/rtl.css")}}">
-    @endif
+{{--    @if($settings->layout=="RTL")--}}
+{{--        <link rel="stylesheet" href="{{asset("frontend/css/rtl.css")}}">--}}
+{{--    @endif--}}
     <style >
         .dataTables_wrapper{
             overflow-x: auto;
@@ -60,7 +60,7 @@
 <!--============================
     HEADER START
 ==============================-->
-@include('frontend.layouts.header')
+{{--@include('frontend.layouts.header')--}}
 <!--============================
     HEADER END
 ==============================-->
@@ -152,7 +152,7 @@
 ==============================-->
 
 
-@include('frontend.layouts.footer')
+{{--@include('frontend.layouts.footer')--}}
 <!--============================
     FOOTER PART END
 ==============================-->

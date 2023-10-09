@@ -134,80 +134,80 @@
 @endsection
 
 @push('scripts')
-    <script>
-        var forms = document.querySelectorAll("#wsus__login_register form");
-        // console.log(forms)
+{{--    <script>--}}
+{{--        var forms = document.querySelectorAll("#wsus__login_register form");--}}
+{{--        // console.log(forms)--}}
 
-        //init span error message
-        forms.forEach(form => {
-            let inputs = form.querySelectorAll('input');
-            inputs.forEach(input => {
-                let parent = input.parentElement;
-                let span = document.createElement('div');
-                span.innerHTML = `
-                    <span class="text-danger error-text ${input.name}_error"
-                    style="color: red"></span>`;
+{{--        //init span error message--}}
+{{--        forms.forEach(form => {--}}
+{{--            let inputs = form.querySelectorAll('input');--}}
+{{--            inputs.forEach(input => {--}}
+{{--                let parent = input.parentElement;--}}
+{{--                let span = document.createElement('div');--}}
+{{--                span.innerHTML = `--}}
+{{--                    <span class="text-danger error-text ${input.name}_error"--}}
+{{--                    style="color: red"></span>`;--}}
 
-                parent.insertAdjacentHTML('afterend', span.outerHTML);
-            })
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
+{{--                parent.insertAdjacentHTML('afterend', span.outerHTML);--}}
+{{--            })--}}
+{{--            form.addEventListener('submit', function (e) {--}}
+{{--                e.preventDefault();--}}
 
-                var all = $(this).serialize();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: "POST",
-                    data: all,
-                    beforeSend: function () {
+{{--                var all = $(this).serialize();--}}
+{{--                $.ajax({--}}
+{{--                    url: $(this).attr('action'),--}}
+{{--                    type: "POST",--}}
+{{--                    data: all,--}}
+{{--                    beforeSend: function () {--}}
 
-                        $(document).find('span.error-text').text('');
-                    },
-                    statusCode: {
-                        422: function(responseObject, textStatus, jqXHR) {
-                            // validation error fails
-                            if(responseObject.responseJSON)
-                            {
-                                let errors=responseObject.responseJSON.errors;
-                                if(errors){
-                                    for (const [prefix, value] of Object.entries(errors)) {
-                                        let span=form.querySelector('span.' + prefix + '_error');
-                                        span.innerText=value
+{{--                        $(document).find('span.error-text').text('');--}}
+{{--                    },--}}
+{{--                    statusCode: {--}}
+{{--                        422: function(responseObject, textStatus, jqXHR) {--}}
+{{--                            // validation error fails--}}
+{{--                            if(responseObject.responseJSON)--}}
+{{--                            {--}}
+{{--                                let errors=responseObject.responseJSON.errors;--}}
+{{--                                if(errors){--}}
+{{--                                    for (const [prefix, value] of Object.entries(errors)) {--}}
+{{--                                        let span=form.querySelector('span.' + prefix + '_error');--}}
+{{--                                        span.innerText=value--}}
 
-                                        let input = form.querySelector('input[name=' + prefix + ']');
-                                        input.focus();
-                                    }
+{{--                                        let input = form.querySelector('input[name=' + prefix + ']');--}}
+{{--                                        input.focus();--}}
+{{--                                    }--}}
 
-                                }
-                            }
+{{--                                }--}}
+{{--                            }--}}
 
-                        },
-                        503: function(responseObject, textStatus, errorThrown) {
-                            // Service Unavailable (503)
-                            // This code will be executed if the server returns a 503 response
-                        }
-                    },
-                    success: function (data) {
+{{--                        },--}}
+{{--                        503: function(responseObject, textStatus, errorThrown) {--}}
+{{--                            // Service Unavailable (503)--}}
+{{--                            // This code will be executed if the server returns a 503 response--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    success: function (data) {--}}
 
-                            window.location.replace(
-                                '{{Redirect::intended(route("home"))->getTargetUrl()}}'
-                            );
-                        // } else if (data == 2) {
-                        //
-                        //     $("#show_error").hide().html("Invalid login details");
-                        // }
+{{--                            window.location.replace(--}}
+{{--                                '{{Redirect::intended(route("home"))->getTargetUrl()}}'--}}
+{{--                            );--}}
+{{--                        // } else if (data == 2) {--}}
+{{--                        //--}}
+{{--                        //     $("#show_error").hide().html("Invalid login details");--}}
+{{--                        // }--}}
 
-                    }
-                    ,
-                    errors: function (data) {
+{{--                    }--}}
+{{--                    ,--}}
+{{--                    errors: function (data) {--}}
 
-                    }
-                })
+{{--                    }--}}
+{{--                })--}}
 
-            });
+{{--            });--}}
 
-        })
+{{--        })--}}
 
 
-    </script>
+{{--    </script>--}}
 
 @endpush

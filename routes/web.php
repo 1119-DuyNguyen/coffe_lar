@@ -41,7 +41,7 @@ Route::get('/quickview', [HomeController::class, 'quickView'])->name('quickview'
 
 require __DIR__.'/auth.php';
 
-//Route::get('admin/login', [DashboardController::class, 'login'])->name('admin.login');
+Route::get('admin/login', [\App\Http\Controllers\Backend\DashboardController::class, 'login'])->name('admin.login');
 
 
 /** Product route */

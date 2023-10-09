@@ -22,18 +22,21 @@
         ['name'=>'Create Role','icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.role.create' ],
     ]],
     ['title'=>'Ecommerce'],
-    ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','child'=>
-    [
-        ['name'=>'Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
-        ['name'=>'Sub Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.sub-category.index' ],
-        ['name'=>'Child Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.child-category.index']
-    ]],
-    ['name'=>'Manage Products','icon'=>'<i class="fas fa-box"></i>','child'=>[
-        ['name'=>'Brands','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.brand.index' ],
-        ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'  ],
-        ['name'=>'Featured Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.featured-product.index'],
-    ['name'=>'Coupons','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.coupon.index' ],
-]],
+      ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.category.index'  ],
+//    ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','child'=>
+//    [
+//        ['name'=>'Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
+//        ['name'=>'Sub Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.sub-category.index' ],
+//        ['name'=>'Child Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.child-category.index']
+//    ]],
+       ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'  ],
+
+//    ['name'=>'Manage Products','icon'=>'<i class="fas fa-box"></i>','child'=>[
+//        ['name'=>'Brands','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.brand.index' ],
+//        ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'  ],
+//        ['name'=>'Featured Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.featured-product.index'],
+//    ['name'=>'Coupons','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.coupon.index' ],
+//]],
 
     ['name'=>'Orders','icon'=>'<i class="fas fa-cart-plus"></i>','routeName'=>'admin.order.index' ,'child'=>[]],
     ['title'=>'Settings & More'],
@@ -106,7 +109,6 @@
                 @endif
             @endif
         @endforeach
-
 
 
     </ul>

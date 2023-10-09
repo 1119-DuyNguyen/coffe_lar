@@ -66,13 +66,13 @@ Route::middleware('hasPermission')->group(function () {
     Route::resource('category', CategoryController::class);
 
     /** Sub Category Route */
-    Route::put('sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('sub-category.change-status');
-    Route::resource('sub-category', SubCategoryController::class);
-
-
-    /** Child Category Route */
-    Route::put('child-category/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child-category.change-status');
-    Route::resource('child-category', ChildCategoryController::class);
+//    Route::put('sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('sub-category.change-status');
+//    Route::resource('sub-category', SubCategoryController::class);
+//
+//
+//    /** Child Category Route */
+//    Route::put('child-category/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child-category.change-status');
+//    Route::resource('child-category', ChildCategoryController::class);
 
     /** Brand routes */
     Route::put('brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');

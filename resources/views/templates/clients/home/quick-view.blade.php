@@ -94,7 +94,8 @@
                         Vào Giỏ <i class="fas fa-shopping-basket ml-2"></i></button>
                 </div>
                 <div class="col-12 pl-0">
-                    <a href="{{route('user.wishlist.store', $product->id)}}"
+
+                    <a href=""  class="add_to_wishlist" data-id="{{$product->id}}"
                        class="btn btn-theme btn-block mb-2 btn-wishlist">Yêu Thích <i class="fas fa-heart ml-2"></i></a>
                 </div>
             </div>

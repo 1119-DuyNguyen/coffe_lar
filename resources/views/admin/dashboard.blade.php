@@ -167,26 +167,6 @@
             </div>
 
 
-
-
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <a href="{{route('admin.brand.index')}}">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-info">
-                            <i class="fas fa-copyright"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Brands</h4>
-                            </div>
-                            <div class="card-body">
-                                {{ $totalBrands }}
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{route('admin.category.index')}}">
                     <div class="card card-statistic-1">
