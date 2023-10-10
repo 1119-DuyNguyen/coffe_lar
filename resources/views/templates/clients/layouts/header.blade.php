@@ -1,3 +1,4 @@
+
 <div id="preloader">
     <div class="preloader"><span></span><span></span></div>
 </div>
@@ -79,65 +80,100 @@
                 <div class="col-lg-4 col-md-4 col-sm-5 col-5">
                     <div class="general_head_right">
                         <ul>
-                            <li><a href="" class="dropdow-user border-icon ">
-                                    @if(get_user('customer'))
-                                        <i class="fas fa-user-circle mgr-10"></i>
-                                        <h6 class="text-user text-overflow">
-                                            {{ (get_user('customer','ten')) ? get_user('customer','ten') : 'Khách hàng' }}
-                                        </h6>
-                                    @else
+                            @if(Auth::check())
+                                <li><a href="" class="dropdow-user border-icon ">
                                         <i class="fas fa-user-circle"></i>
-                                    @endif
-                                </a>
-                                <div class="user-dropdown">
-                                    <i class="fas fa-times dropexit"></i>
-                                    <ul>
-                                        {{--                                            <li>--}}
-                                        {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
-                                        {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
-                                        {{--                                            </li>--}}
-                                        @if( \Illuminate\Support\Facades\Auth::check())
-                                            <li>
-                                                <i class="fas fa-user"></i>
-                                                <a class="ml-2" href="{{ route('user.dashboard')}}">
-                                                    Thông tin
-                                                    tài
-                                                    khoản</a>
-                                            </li>
-                                            @if(!get_user('customer','type_social'))
-                                                <li>
-                                                    <i class="fas fa-sync"></i>
-                                                    <a class="ml-2" href="{{ route('user.profile')}}">
-                                                        Đổi mật
-                                                        khẩu</a>
-                                                </li>
-                                            @endif
-                                            <li>
-                                                <i class="fas fa-sign-out-alt"></i>
-                                                <a class="ml-2" href="{{ route('logout')}}">
-                                                    Đăng xuất</a>
-                                            </li>
-                                        @else
 
-                                            <li data-toggle="modal" data-target="#login">
+                                    </a>
+                                    <div class="user-dropdown">
+                                        <i class="fas fa-times dropexit"></i>
+                                        <h4 class=" text-center text-bold">
+                                            {{ Auth::user()->name?? 'Khách hàng' }}
+                                        </h4>
+                                        <ul>
+                                            {{--                                            <li>--}}
+                                            {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
+                                            {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
+                                            {{--                                            </li>--}}
+
+                                            @can('user.dashboard.index')
+                                                <li class="dropdown-item">
+                                                    <i
+                                                        class="fas fa-chart-bar"></i>
+                                                    <a href="{{route('user.dashboard.index')}}">
+                                                        Thông tin
+                                                        người dùng</a>
+
+                                                </li>
+                                            @endcan
+                                            @can('admin.dashboard.index')
+
+                                                <li class="dropdown-item">
+                                                    <i class="fas fa-chart-bar"></i>
+                                                    <a href="{{route('admin.dashboard.index')}}">
+                                                        Thông tin người quản trị</a>
+                                                </li>
+                                            @endcan
+                                            @can('user.order.index')
+                                                <li class="dropdown-item">
+                                                    <i class="fas fa-file-invoice"></i>
+                                                    <a class="" href="{{route('user.order.index')}}">
+                                                        {{__("Order")}}</a></li>
+                                            @endcan
+
+                                            <li class="dropdown-item">
+                                                <i class="fas fa-sync"></i>
+                                                <a class="" href="{{ route('user.profile')}}">
+                                                    Đổi mật
+                                                    khẩu</a>
+                                            </li>
+                                            <form action="{{route('logout')}}" method="POST">
+                                                @csrf
+
+                                                <li class="dropdown-item">
+                                                    <i class="fas fa-sign-out-alt"></i>
+                                                    <a href="#" onclick="this.closest('form').submit();return false;"
+                                                       class=""> Đăng xuất</a>
+
+                                                </li>
+                                            </form>
+
+
+                                        </ul>
+                                    </div>
+                                </li>
+                            @else
+                                <li><a href="" class="dropdow-user border-icon ">
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="user-dropdown">
+                                        <i class="fas fa-times dropexit"></i>
+                                        <ul>
+                                            {{--                                            <li>--}}
+                                            {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
+                                            {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
+                                            {{--                                            </li>--}}
+
+
+                                            <li class="dropdown-item" data-toggle="modal" data-target="#login">
                                                 <i class=" fas fa-user"></i>
                                                 <a class=" ">Đăng nhập</a>
                                             </li>
-                                            <li data-toggle="modal" data-target="#forgetPasswordForm">
+                                            <li class="dropdown-item" data-toggle="modal"
+                                                data-target="#forgetPasswordForm">
                                                 <i class=" fas fa-key"></i>
                                                 <a href="#" class="">Quên mật khẩu ? </a>
                                             </li>
 
-                                            <li data-toggle="modal" data-target="#registerForm">
+                                            <li class="dropdown-item" data-toggle="modal" data-target="#registerForm">
                                                 <i class=" fas fa-file-alt"></i>
                                                 <a href="#" class="">Đăng kí</a>
                                             </li>
-                                        @endif
 
-
-                                    </ul>
-                                </div>
-                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endif
                             <li>
                                 <a class="border-icon" href="javascript:void(0);" data-toggle="modal"
                                    data-target="#form-search" id="header-search">

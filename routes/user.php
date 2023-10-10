@@ -19,7 +19,7 @@ Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
 /** Wishlist routes */
 Route::middleware('hasPermission')->group(function () {
 
-    Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
     /** Order Routes */
     Route::get('orders', [UserOrderController::class, 'index'])->name('order.index');
     Route::get('orders/{id}', [UserOrderController::class, 'show'])->name('order.show');

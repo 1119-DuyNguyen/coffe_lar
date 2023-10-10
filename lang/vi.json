@@ -1,4 +1,5 @@
 {
+    "Order": "Đơn hàng",
     "Update Cart": "Cập nhập giỏ hàng",
     "Quantity is not valid": "Số lượng sản phẩm không hợp lệ",
     "order_status": {
