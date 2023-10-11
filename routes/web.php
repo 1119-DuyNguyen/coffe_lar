@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\GiaoHangNhanhController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\NewsletterController;
-use App\Http\Controllers\Frontend\OrderTrackController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -52,9 +49,6 @@ Route::get('product/{slug}', [ProductController::class, 'show'])->name('product.
 /** Cart routes */
 
 Route::resource('cart',CartController::class);
-
-Route::post('coupon/apply', [CouponController::class, 'applyCoupon'])->name('coupon.apply');
-Route::get('coupon/calculation', [CouponController::class, 'couponCalculation'])->name('coupon.calculation');
 
 
 Route::get('contact', [PageController::class, 'contact'])->name('contact');

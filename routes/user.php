@@ -2,14 +2,11 @@
 
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\PaymentController;
-use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
-use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('wishlist', WishlistController::class)->only(['index', 'store', 'destroy']);
 /** Profile Routes */
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
