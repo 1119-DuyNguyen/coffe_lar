@@ -12,14 +12,15 @@ class UserDashboardController extends Controller
     {
         $id=Auth::user()->id;
 
+        $main='info';
+//        $totalOrders = Order::count();
+//        $totalPendingOrders = Order::where('order_status', 'pending')->where('user_id',  $id)->count();
+//        $totalCanceledOrders = Order::where('order_status', 'canceled')->where('user_id',  $id)->count();
+//        $totalCompleteOrders = Order::where('order_status', 'delivered')->where('user_id',  $id)->count();
 
-        $totalOrders = Order::count();
-        $totalPendingOrders = Order::where('order_status', 'pending')->where('user_id',  $id)->count();
-        $totalCanceledOrders = Order::where('order_status', 'canceled')->where('user_id',  $id)->count();
-        $totalCompleteOrders = Order::where('order_status', 'delivered')->where('user_id',  $id)->count();
 
-
-
+        $user=auth()->user();
+        return view('templates.clients.account.index',compact('user','main'));
 
 
         return view('frontend.dashboard.dashboard', compact(

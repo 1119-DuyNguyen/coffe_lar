@@ -1,11 +1,14 @@
-@extends('frontend.layouts.master')
+{{--@extends('frontend.layouts.master')--}}
+@extends('templates.clients.frontend')
 
-@section('title')
-    {{$settings->site_name}}
-@endsection
+{{--@section('title')--}}
+{{--    {{$settings->site_name}}--}}
+{{--@endsection--}}
 
 @section('content')
-    <div class="container-fluid p-4">
+    <section class="gray h-100">
+        <div class="container">
+            <div class="row">
         <div class="row mb-4">
             <div class="col-12">
                 <div class="form-group">
@@ -43,14 +46,15 @@
 
     </div>
 
-
+        </div>
+    </section>
 
 @endsection
 
-@push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+{{--@push('scripts')--}}
+{{--    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}--}}
 
-@endpush
+{{--@endpush--}}
 
 {{--@section('content')--}}
 {{--  <!--=============================--}}

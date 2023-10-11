@@ -249,66 +249,6 @@
     {{--        }--}}
     {{--    });--}}
     {{--})--}}
-    $('.add_to_wishlist').on('click', function (e) {
-        e.preventDefault();
-        let id = $(this).data('id');
 
-        $.ajax({
-            method: 'POST',
-            url: "{{route('user.wishlist.store')}}",
-            data: {id: id},
-            success: function (data) {
-                if (data.status === 'success') {
-                    $('#wishlist_count').text(data.count)
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: data.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                } else if (data.status === 'error') {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: data.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            },
-            error: function (data) {
-                // console.log(data);
 
-                if (data.status == 401 && data?.responseJSON?.message) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: data.responseJSON.message,
-                        text: "You must login to account for this action.",
-                        showCancelButton: true,
-                        confirmButtonText: 'Login',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "{{route('login')}}";
-                        } else {
-                        }
-                    })
-                }
-
-            }
-        })
-    })
-    $(document).on('click', '.btn-wishlist', function (e) {
-        e.preventDefault()
-        let url = $(this).attr('href')
-        console.log(url)
-        $.ajax({
-            method: 'post',
-            url: url,
-        })
-            .done(function (results) {
-                toastr.info(results.message);
-            });
-    });
 </script>

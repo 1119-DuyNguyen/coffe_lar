@@ -16,8 +16,8 @@
 
                 <div class="col-lg-9 col-md-6 col-sm-6 col-4">
                         <span class="t-14 ">
-{{--                            {{$settings->name}} - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - ĐIỆN THOẠI:--}}
-                            {{--                            {{$settings->contact_phone ?? ""}}--}}
+                            {{$settings->name}} - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - ĐIỆN THOẠI:
+                                                        {{$settings->contact_phone ?? ""}}
                         </span>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-8">
@@ -86,8 +86,8 @@
                                         <i class="fas fa-user-circle"></i>
 
                                     </a>
-                                    <div class="user-dropdown">
-                                        <i class="fas fa-times dropexit"></i>
+                                    <div class="user-dropdown" >
+                                        <i class="fas fa-times dropexit d-lg-none"></i>
                                         <h4 class=" text-center text-bold">
                                             {{ Auth::user()->name?? 'Khách hàng' }}
                                         </h4>
@@ -99,9 +99,10 @@
 
                                             @can('user.dashboard.index')
                                                 <li class="dropdown-item">
-                                                    <i
-                                                        class="fas fa-chart-bar"></i>
-                                                    <a href="{{route('user.dashboard.index')}}">
+{{--                                                    <i--}}
+{{--                                                        class="fas fa-chart-bar"></i>--}}
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <a href="{{route('user.profile')}}">
                                                         Thông tin
                                                         người dùng</a>
 
@@ -122,12 +123,12 @@
                                                         {{__("Order")}}</a></li>
                                             @endcan
 
-                                            <li class="dropdown-item">
-                                                <i class="fas fa-sync"></i>
-                                                <a class="" href="{{ route('user.profile')}}">
-                                                    Đổi mật
-                                                    khẩu</a>
-                                            </li>
+{{--                                            <li class="dropdown-item">--}}
+{{--                                                <i class="fas fa-sync"></i>--}}
+{{--                                                <a class="" href="{{ route('user.profile')}}">--}}
+{{--                                                    Đổi mật--}}
+{{--                                                    khẩu</a>--}}
+{{--                                            </li>--}}
                                             <form action="{{route('logout')}}" method="POST">
                                                 @csrf
 

@@ -8,10 +8,10 @@
         <i class="fa fa-history" aria-hidden="true"></i>
             Lịch sử
         </a>
-        <a class="list-group-item item_user {{$main == 'wishlist' ? 'active' : ''}}" href="#" data-nav="whishlist">
-        <i class="fa fa-heart" aria-hidden="true"></i>
-            Yêu thích
-        </a>
+{{--        <a class="list-group-item item_user {{$main == 'wishlist' ? 'active' : ''}}" href="#" data-nav="whishlist">--}}
+{{--        <i class="fa fa-heart" aria-hidden="true"></i>--}}
+{{--            Yêu thích--}}
+{{--        </a>--}}
 
     </div>
 </nav>

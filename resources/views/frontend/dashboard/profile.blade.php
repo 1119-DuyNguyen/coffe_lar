@@ -1,4 +1,5 @@
-@extends('admin.layouts.master')
+{{--@extends('admin.layouts.master')--}}
+@extends('templates.clients.frontend')
 
 @section('content')
     <section class="section">
