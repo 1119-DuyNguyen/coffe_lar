@@ -16,7 +16,6 @@ trait CrudTrait
 
     abstract protected function model(): string;
 
-
     public function index()
     {
         return $this->model()::all();

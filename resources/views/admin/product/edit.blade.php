@@ -35,22 +35,13 @@
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="name" value="{{$product->name}}">
                                 </div>
-                                <x-input-child-category :categories="$categories"
-                                                        :subCategories="$subCategories"
-                                                        :childCategories="$childCategories"
-                                                        :product="$product"></x-input-child-category>
+{{--                                <x-input-child-category :categories="$categories"--}}
+{{--                                                        :subCategories="$subCategories"--}}
+{{--                                                        :childCategories="$childCategories"--}}
+{{--                                                        :product="$product"></x-input-child-category>--}}
 
 
-                                <div class="form-group">
-                                    <label for="inputState">Brand</label>
-                                    <select id="inputState" class="form-control" name="brand_id">
-                                        <option value="">Select</option>
-                                        @foreach ($brands as $brand)
-                                            <option
-                                                {{$brand->id == $product->brand_id ? 'selected' : ''}} value="{{$brand->id}}">{{$brand->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>Price</label>

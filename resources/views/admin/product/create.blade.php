@@ -28,18 +28,10 @@
                             <label>Name</label>
                             <input type="text" class="form-control" name="name" value="{{old('name')}}">
                         </div>
-                        <x-input-child-category :categories="$categories"></x-input-child-category>
+{{--                        <x-input-child-category :categories="$categories"></x-input-child-category>--}}
 
 
-                        <div class="form-group">
-                            <label for="inputState">Brand</label>
-                            <select id="inputState" class="form-control" name="brand_id">
-                                <option value="">Select</option>
-                                @foreach ($brands as $brand)
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
 
 
                         <div class="form-group">
@@ -71,7 +63,7 @@
                             <label>Stock Quantity</label>
                             <input type="number" min="0" class="form-control" name="qty" value="{{old('qty')}}">
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Short Description</label>
                             <textarea name="short_description" class="form-control" value="{{old('short_description')}}"></textarea>

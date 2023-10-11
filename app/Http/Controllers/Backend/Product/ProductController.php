@@ -57,8 +57,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $brands = Brand::all();
-        return view('admin.product.create', compact('categories', 'brands'));
+        return view('admin.product.create', compact('categories'));
     }
 
 
@@ -70,11 +69,8 @@ class ProductController extends Controller
     {
 
         $product = Product::findOrFail($id);
-        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
-        $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
-        $categories = Category::all();
-        $brands = Brand::all();
-        return view('admin.product.edit', compact('product', 'categories', 'brands', 'subCategories', 'childCategories'));
+     $categories = Category::all();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     /**
