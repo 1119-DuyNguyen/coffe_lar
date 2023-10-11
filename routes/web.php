@@ -64,6 +64,6 @@ Route::get('ghn/province',[GiaoHangNhanhController::class,'getProvince'])->name(
 Route::get('ghn/district/{idProvince}',[GiaoHangNhanhController::class,'getDistrict'])->name('ghn.district');
 Route::get('ghn/ward/{idDistrict}',[GiaoHangNhanhController::class,'getWard'])->name('ghn.ward');
 
-Route::get('ghn/price', [CartController::class, 'getPrice'])->name('ghn.price');
+Route::get('ghn/price', [GiaoHangNhanhController::class, 'getPrice'])->name('ghn.price');
 
 

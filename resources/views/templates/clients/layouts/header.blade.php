@@ -149,7 +149,7 @@
                                         <i class="fas fa-user-circle"></i>
                                     </a>
                                     <div class="user-dropdown">
-                                        <i class="fas fa-times dropexit"></i>
+                                        <i class="fas fa-times dropexit d-lg-none"></i>
                                         <ul>
                                             {{--                                            <li>--}}
                                             {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
