@@ -20,8 +20,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->noActionOnDelete();
             $table->text('description');
             $table->text('content');
-            //trigger if 0 => price
-            $table->double('price_origin')->unsigned()->default(0);
+
 
             $table->double('price')->unsigned();
 

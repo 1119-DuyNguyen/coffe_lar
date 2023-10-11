@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $file_path = [
             __DIR__.'/seeder-product.sql',
             __DIR__.'/seeder.sql',
-//            __DIR__.'/seeder-coupon.sql',
+            __DIR__.'/seeder-order.sql',
             ];
         foreach ($file_path as $file)
         {

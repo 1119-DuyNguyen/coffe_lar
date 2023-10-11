@@ -38,7 +38,7 @@
 //    ['name'=>'Coupons','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.coupon.index' ],
 //]],
 
-    ['name'=>'Orders','icon'=>'<i class="fas fa-cart-plus"></i>','routeName'=>'admin.order.index' ,'child'=>[]],
+    ['name'=>'Order','icon'=>'<i class="fas fa-cart-plus"></i>','routeName'=>'admin.order.index' ,'child'=>[]],
     ['title'=>'Settings & More'],
 
    ['name'=>'Settings','icon'=>'<i class="fas fa-wrench"></i>','routeName'=>'admin.setting.index'  ],
@@ -63,7 +63,7 @@
                         <li><a class="nav-link "
                                href="{{route($nav['routeName'])}}">
                                 {!!  $nav['icon']!!}
-                                <span>{{$nav['name']}}</span></a></li>
+                                <span>{{__($nav['name'])}}</span></a></li>
                     @endcan
                 @else
                     <li
@@ -81,7 +81,7 @@
                             $html.='                                 <li><a class="nav-link "
                                            href="'.route($child['routeName']).'">
 
-                                            <span>'.$child['icon'].$child['name'].'</span></a></li>';
+                                            <span>'.$child['icon'].__($child['name']).'</span></a></li>';
 
                                 }
                                 }
@@ -89,18 +89,10 @@
                         @canany($nameRouteList)
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                                 {!!  $nav['icon']!!}
-                                <span>    {{$nav['name']}}</span></a>
+                                <span>    {{__($nav['name'])}}</span></a>
                             <ul class="dropdown-menu">
                                 {!! $html !!}
-                                {{--                            @foreach($nav['child'] as $child)--}}
-                                {{--                                @can(GateService::getGateDefineFromRouteName($child['routeName']))--}}
 
-                                {{--                                    <li><a class="nav-link "--}}
-                                {{--                                           href="{{route($child['routeName'])}}">--}}
-
-                                {{--                                            <span>{{$child['icon']}}{{$child['name']}}</span></a></li>--}}
-                                {{--                                @endcan--}}
-                                {{--                            @endforeach--}}
                             </ul>
                         @endcan
 

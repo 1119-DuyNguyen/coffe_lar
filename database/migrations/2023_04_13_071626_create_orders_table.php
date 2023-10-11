@@ -19,10 +19,11 @@ return new class extends Migration
             $table->text('address_receiver');
             $table->string('phone_receiver');
             $table->string('email_receiver');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->double('sub_total');
+            $table->double('fee_ship')->default(0);
             $table->double('total');
-            $table->double('total_profit');
+            // thanh toán hay chưa
             $table->boolean('payment_status')->default(false);
             $table->tinyInteger('order_status')->default(OrderStatus::pending);
             $table->timestamps();

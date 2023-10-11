@@ -24,7 +24,6 @@ class ProductVariantSeeder extends Seeder
                     'product_variant_id' => $variant->id,
                     'name' => $key,
                     'price' => $value,
-                    'price_origin' => $value*80/100,
                     'status' => true,
                 ]
             );

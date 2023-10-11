@@ -1,4 +1,17 @@
 {
+    "Dashboard": "Trang chủ",
+    "User": "Tài khoản",
+    "User List": "Danh sách",
+    "Create User":"Thêm mới",
+    "Role": "Vai trò",
+    "Create Role":"Thêm mới",
+
+    "Role List": "Danh sách",
+    "Ecommerce": "Thương mại điện tử",
+    "Category": "Danh mục",
+    "Products": "Sản phẩm",
+
+    "create role":"Thêm mới vai trò",
     "Order": "Đơn hàng",
     "Update Cart": "Cập nhập giỏ hàng",
     "Quantity is not valid": "Số lượng sản phẩm không hợp lệ",

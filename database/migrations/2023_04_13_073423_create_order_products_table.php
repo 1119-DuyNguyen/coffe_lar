@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->noActionOnDelete();
             $table->foreignId('product_id')->constrained()->noActionOnDelete();
-            $table->json('variants');
             $table->double('variant_total_price')->unsigned();
-            $table->double('variant_total_price_origin')->unsigned();
             $table->double('product_price')->unsigned();
-            $table->double('product_price_origin')->unsigned();
+            $table->string('product_name');
             $table->integer('qty')->unsigned();
-            $table->unique(['order_id', 'product_id']);
             $table->timestamps();
         });
     }

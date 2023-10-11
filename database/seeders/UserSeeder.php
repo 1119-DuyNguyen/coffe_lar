@@ -21,17 +21,24 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
                 'password' => bcrypt('123')
             ],
-            [
-                'name' => 'Vendor user',
-                'username' => 'vendor',
-                'email' => 'vendor@gmail.com',
-                'role_id' => 2,
-                'password' => bcrypt('123')
-            ],
+//            [
+//                'name' => 'Vendor user',
+//                'username' => 'vendor',
+//                'email' => 'vendor@gmail.com',
+//                'role_id' => 2,
+//                'password' => bcrypt('123')
+//            ],
             [
                 'name' => 'user',
                 'username' => 'user',
                 'email' => 'user@gmail.com',
+                'role_id' =>2,
+                'password' => bcrypt('123')
+            ],
+            [
+                'name' => 'girl',
+                'username' => 'girl',
+                'email' => 'girl@gmail.com',
                 'role_id' =>2,
                 'password' => bcrypt('123')
             ]

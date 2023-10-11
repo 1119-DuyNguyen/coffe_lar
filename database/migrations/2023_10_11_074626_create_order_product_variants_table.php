@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_variant_items', function (Blueprint $table) {
+        Schema::create('order_product_variants', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_product_id')->constrained()->noActionOnDelete();
             $table->foreignId('product_variant_id')->constrained()->noActionOnDelete();
-            $table->string('name');
-            $table->double('price');
-            $table->double('max_qty' )->default(0);
-            $table->boolean('status') -> default(true);
+            $table->string('variant_name');
+            $table->unique('order_product_id','product_variant_id');
+
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_variant_items');
+        Schema::dropIfExists('order_product_variants');
     }
 };

@@ -177,11 +177,11 @@ class CartService
         // filter true data, remove fake data
         if (!empty($productVariants)) {
             foreach ($productVariants as $variant) {
-                $arrayDataItems = $variants_items[$variant->id];
+                $arrayDataItems = $variants_items[$variant->id] ??[];
 
                 if (empty($arrayDataItems)) {
                     // continue if variant dont have item
-                    if ($variant->must_have = true) {
+                    if ($variant->must_have == true) {
                         throw ValidationException::withMessages(['Bạn chưa chọn ' . $variant->name]);
                     } else {
                         continue;
