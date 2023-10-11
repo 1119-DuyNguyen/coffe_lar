@@ -253,5 +253,16 @@ class CartService
             Session::put('cart', $cartItems);
         }
     }
+    public static function countCart():int{
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cart = Cart::where('user_id', $user->id)->first();
+            $cartItems = $cart ? json_decode($cart->cart_items, true) : [];
+        } else {
+            $cartItems = Session::get('cart', []);
+        }
+        return count($cartItems??0);
+
+    }
 
 }

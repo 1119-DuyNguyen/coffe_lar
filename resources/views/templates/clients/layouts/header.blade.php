@@ -1,4 +1,5 @@
 
+@php use App\Http\Services\CartService; @endphp
 <div id="preloader">
     <div class="preloader"><span></span><span></span></div>
 </div>
@@ -187,11 +188,7 @@
                                     <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i
                                             class="fas fa-cart-plus"></i><span class="cart_counter"
                                                                                id="header-cart-quantity">
-                                            @if(Session::has('cart') != null)
-                                                {{ count(Session::get('cart')) }}
-                                            @else
-                                                0
-                                            @endif
+                                            {{CartService::countCart()}}
                                         </span></a>
 
                                 @endif
