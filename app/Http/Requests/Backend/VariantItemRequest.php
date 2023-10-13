@@ -29,7 +29,7 @@ class VariantItemRequest extends FormRequest
             'product_variant_id' => ['exists:product_variants,id', 'required'],
             'name' => ['required', 'max:200'],
             'price' => ['integer', 'required'],
-            'is_default' => ['required'],
+            'max_qty' => ['required', 'integer'],
             'status' => ['required','integer']
         ];
     }

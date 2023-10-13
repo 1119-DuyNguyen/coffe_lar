@@ -28,6 +28,8 @@ class VariantRequest extends FormRequest
         return [
             'product_id' => ['exists:products,id', 'required'],
             'name' => ['required', 'max:200'],
+            'type' => ['required','integer'],
+            'must_have' => ['required','integer'],
             'status' => ['required','integer']
         ];
     }

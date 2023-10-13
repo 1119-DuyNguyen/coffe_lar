@@ -24,7 +24,9 @@ class ProductVariantRequest extends FormRequest
         return [
             'product_id' => ['integer', 'required'],
             'name' => ['required', 'max:200'],
-            'status' => ['required']
+            'type' => ['required','integer'],
+            'must_have' => ['required','integer'],
+            'status' => ['required','integer']
         ];
     }
 }
