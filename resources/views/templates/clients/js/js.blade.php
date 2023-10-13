@@ -1,5 +1,20 @@
 <script>
+    function error(){
 
+        {{--Swal.fire({--}}
+        {{--    position: 'top-end',--}}
+        {{--    icon: 'error',--}}
+        {{--    title: data.responseJSON.message,--}}
+        {{--    text: "You must login to account for this action.",--}}
+        {{--    showCancelButton: true,--}}
+        {{--    confirmButtonText: 'Login',--}}
+        {{--}).then((result)=> {--}}
+        {{--    if (result.isConfirmed) {--}}
+        {{--    window.location.href = "{{route('login')}}";--}}
+        {{--    } else {--}}
+        {{--    }--}}
+        {{--})--}}
+    }
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

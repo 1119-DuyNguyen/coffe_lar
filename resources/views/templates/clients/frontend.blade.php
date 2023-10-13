@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/semantic.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/bootstrap.css') }}" /> -->
     @livewireStyles
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>--}}
 </head>
 
 <body class="grocery-theme">
@@ -60,9 +60,9 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script> -->
-<script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1056375581823890&autoLogAppEvents=1"
-        nonce="JhpQ55Gl"></script>
+{{--<script async defer crossorigin="anonymous"--}}
+{{--        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1056375581823890&autoLogAppEvents=1"--}}
+{{--        nonce="JhpQ55Gl"></script>--}}
 @include('templates.clients.layouts.header')
 @yield('content')
 <!--========= JS Here =========-->
@@ -76,13 +76,16 @@ window.fbAsyncInit = function() {
 <script src="{{ asset('frontend/assets/js/jquery-rating.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/jQuery.style.switcher.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
-<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+{{--<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>--}}
 <script src="{{ asset('frontend/assets/js/firebase.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/js.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>--}}
 <!-- js confirm -->
+<link rel="stylesheet" href="{{asset('lib/sweetalert/sweetalert.all.min.css')}}">
+
 <link href="{!! asset('jsconfirm/jquery-confirm.min.css') !!}" rel="stylesheet">
 <script src="{!! asset('jsconfirm/jquery-confirm.min.js') !!}"></script>
+<script src="{{asset('lib/sweetalert/sweetalert.all.min.js')}}"></script>
 
 @include('templates.clients.layouts.footer')
 

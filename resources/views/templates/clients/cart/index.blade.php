@@ -1,10 +1,12 @@
 @extends('templates.clients.frontend')
 @section('content')
-
+@php
+$user=\Illuminate\Support\Facades\Auth::user();
+@endphp
     <!-- =========================== Billing Section =================================== -->
     <section>
         <div class="container">
-            <form action="{{ route('user.checkout') }}" method="POST" class="submitOrder">
+            <form action="{{ route('user.cod.payment') }}" method="POST" class="submitOrder">
                 @csrf
                 <div class="row">
 
@@ -19,7 +21,7 @@
                                 <!-- Email -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require name="name"
-                                           value="{{ get_user('customer', 'ten') ?? '' }}" type="text"
+                                           value="{{ $user->name??"" }}" type="text"
                                            placeholder="Họ tên"
                                            required="">
                                 </div>
@@ -29,7 +31,7 @@
                                 <!-- Email -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require type="number"
-                                           value="{{ get_user('customer', 'sodienthoai') ?? '' }}" name="phone"
+                                           value="{{ $user->phone ?? '' }}" name="phone"
                                            placeholder="Số điện thoại" required="">
                                 </div>
                             </div>
@@ -38,7 +40,7 @@
                                 <!-- Company Name -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require type="email"
-                                           value="{{ get_user('customer', 'email') ?? '' }}" name="email"
+                                           value="{{ $user->email??"" }}" name="email"
                                            placeholder="Email">
                                 </div>
                             </div>
