@@ -10,15 +10,10 @@ class ProductVariantItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_variant_id'
-        ,
-        'name'
-        ,
+        'product_variant_id',
+        'name',
         'price',
-        'price_origin',
-        
-        'is_default'
-        ,
+        'max_qty',
         'status'
     ];
 
