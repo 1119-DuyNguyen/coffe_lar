@@ -20,12 +20,11 @@ class OrderService
             'name' => ['required', 'max:200'],
             'email' => ['required', 'max:200', 'email'],
             'phone' => ['required', 'max:200'],
-            'country' => ['required', 'max:200'],
-            'state' => ['required', 'max:200'],
-            'city' => ['required', 'max:200'],
-            'zip' => ['required', 'max:200'],
+            'province' => ['required', 'max:200'],
+            'district' => ['required', 'max:200'],
+            'ward' => ['required', 'max:200'],
             'address' => ['required'],
-        ]);
+        ]);dd(1);
 
         $address = [];
         $address['user_id'] = Auth::user()->id;

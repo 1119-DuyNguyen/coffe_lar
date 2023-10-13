@@ -25,7 +25,9 @@ class PaymentController extends Controller
     /** pay with cod */
     public function payWithCod(Request $request)
     {
+        dd($request->all());
         $this->orderService->checkOutFormSubmit($request);
+        dd(1);
         $setting = SettingService::getGeneralSetting();
 
         // amount calculation
