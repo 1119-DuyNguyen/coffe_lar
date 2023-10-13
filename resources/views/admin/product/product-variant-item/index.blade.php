@@ -4,7 +4,7 @@
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
-            <h1>Product Variant Items</h1>
+            <h1>Lựa chọn của biến thế</h1>
           </div>
           <div class="mb-3">
             <a href="{{route('admin.product.product-variant.index', ['product' => $product->id])}}" class="btn btn-primary">Back</a>
@@ -15,9 +15,9 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Variant: {{$variant->name}} </h4>
+                    <h4>Tên biến thể: {{$variant->name}} </h4>
                     <div class="card-header-action">
-                        <a href="{{route('admin.product.product-variant.product-variant-item.create', ['product' => $product->id, 'product_variant' => $variant->id])}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
+                        <a href="{{route('admin.product.product-variant.product-variant-item.create', ['product' => $product->id, 'product_variant' => $variant->id])}}" class="btn btn-primary"><i class="fas fa-plus"></i> Tạo mưới</a>
                     </div>
                   </div>
                   <div class="card-body">
