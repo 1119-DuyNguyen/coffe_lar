@@ -4,7 +4,7 @@
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
-            <h1>Category</h1>
+            <h1>Chuyên mục</h1>
           </div>
 
           <div class="section-body">
@@ -13,7 +13,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Edit Category</h4>
+                    <h4>Chỉnh sửa chuyên mục</h4>
 
                   </div>
                   <div class="card-body">
@@ -29,17 +29,17 @@
 
                         </div>
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name" value="{{$category->name}}">
                         </div>
                         <div class="form-group">
-                            <label for="inputState">Status</label>
+                            <label for="inputState">Trạng thái</label>
                             <select id="inputState" class="form-control" name="status">
-                              <option {{$category->status == 1 ? 'selected': ''}} value="1">Active</option>
-                              <option {{$category->status == 0 ? 'selected': ''}} value="0">Inactive</option>
+                              <option {{$category->status == 1 ? 'selected': ''}} value="1">Bật</option>
+                              <option {{$category->status == 0 ? 'selected': ''}} value="0">Tắt</option>
                             </select>
                         </div>
-                        <button type="submmit" class="btn btn-primary">Update</button>
+                        <button type="submmit" class="btn btn-primary">Cập nhật</button>
                     </form>
                   </div>
 

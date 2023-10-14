@@ -20,6 +20,8 @@ class ProfileRegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'phone' => ['numeric'],
+            'address' => ['string', 'max:255'],
             'password' => ['required', 'confirmed', Password::defaults()],
             'role'=> ['required','exists:roles,id']
         ];

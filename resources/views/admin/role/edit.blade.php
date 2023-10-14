@@ -4,7 +4,7 @@
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
-            <h1>Manage Role</h1>
+            <h1>Quản lý vai trò</h1>
           </div>
 
           <div class="section-body container">
@@ -13,7 +13,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Create Role</h4>
+                    <h4>Cập nhật thông tin vai trò</h4>
 
                   </div>
                   <div class="card-body container">
@@ -22,17 +22,17 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name" value="{{$role->name}}">
                         </div>
 
                         <div class="form-group">
-                            <label>Description</label>
+                            <label>Mô tả</label>
                             <input type="text" class="form-control" name="description" value="{{$role->description}}">
                         </div>
 
                         <div class="form-group container">
-                            <label for="inputState">Permission</label>
+                            <label for="inputState">Quyền</label>
                             <div class="row">
                                 @foreach($permissionList as $permission)
 
@@ -44,7 +44,7 @@
                             </div>
 
                         </div>
-                        <button type="submmit" class="btn btn-primary">Update</button>
+                        <button type="submmit" class="btn btn-primary">Cập nhật</button>
                     </form>
                   </div>
 

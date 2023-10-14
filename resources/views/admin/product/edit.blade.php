@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>Product</h1>
+            <h1>Sản phẩm</h1>
 
         </div>
 
@@ -14,7 +14,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Update Product</h4>
+                            <h4>Cập nhật sản phẩm</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{route('admin.product.update', $product->id)}}" method="POST"
@@ -22,17 +22,17 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label>Preview</label>
+                                    <label>Xem trước</label>
                                     <br>
                                     <img src="{{asset($product->thumb_image)}}" style="width:200px" alt="">
                                 </div>
                                 <div class="form-group">
-                                    <label>Image</label>
+                                    <label>Ảnh</label>
                                     <input type="file" class="form-control" name="thumb_image">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Name</label>
+                                    <label>Tên</label>
                                     <input type="text" class="form-control" name="name" value="{{$product->name}}">
                                 </div>
 {{--                                <x-input-child-category :categories="$categories"--}}
@@ -41,66 +41,44 @@
 {{--                                                        :product="$product"></x-input-child-category>--}}
 
 
-
-
                                 <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="text" class="form-control" name="price" value="{{$product->price}}">
-                                </div>
+                                    <label for="inputCategory">Chuyên mục</label>
 
-                                <div class="form-group">
-                                    <label>Offer Price</label>
-                                    <input type="text" class="form-control" name="offer_price"
-                                           value="{{$product->offer_price}}">
-                                </div>
+                                    <select id="inputCategory" class="form-control" name="category_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}" {{$category->id==$product->category_id ? 'selected': ""}} >{{$category->name}}</option>
+                                    @endforeach
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Offer Start Date</label>
-                                            <input type="text" class="form-control datepicker" name="offer_start_date"
-                                                   value="{{$product->offer_start_date}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Offer End Date</label>
-                                            <input type="text" class="form-control datepicker" name="offer_end_date"
-                                                   value="{{$product->offer_end_date}}">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Stock Quantity</label>
-                                    <input type="number" min="0" class="form-control" name="qty"
-                                           value="{{$product->qty}}">
-                                </div>
-
-
-
-                                <div class="form-group">
-                                    <label>Short Description</label>
-                                    <textarea name="short_description"
-                                              class="form-control">{!! $product->short_description !!}</textarea>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label>Long Description</label>
-                                    <textarea name="long_description"
-                                              class="form-control summernote">{!! $product->long_description !!}</textarea>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="inputState">Status</label>
-                                    <select id="inputState" class="form-control" name="status">
-                                        <option {{$product->status == 1 ? 'selected' : ''}} value="1">Active</option>
-                                        <option {{$product->status == 0 ? 'selected' : ''}} value="0">Inactive</option>
                                     </select>
                                 </div>
-                                <button type="submmit" class="btn btn-primary">Update</button>
+
+                                <div class="form-group">
+                                    <label>Giá</label>
+                                    <input type="text" class="form-control" name="price" value="{{$product->price}}">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Mô tả ngắn</label>
+                                    <textarea name="description"
+                                              class="form-control">{!! $product->description !!}</textarea>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Mô tả chi tiết</label>
+                                    <textarea name="content"
+                                              class="form-control summernote">{!! $product->content !!}</textarea>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputState">Trạng thái</label>
+                                    <select id="inputState" class="form-control" name="status">
+                                        <option {{$product->status == 1 ? 'selected' : ''}} value="1">Bật</option>
+                                        <option {{$product->status == 0 ? 'selected' : ''}} value="0">Tắt</option>
+                                    </select>
+                                </div>
+                                <button type="submmit" class="btn btn-primary">Cập nhật</button>
                             </form>
                         </div>
 
