@@ -1,19 +1,26 @@
 <script>
-    function error(){
-
-        {{--Swal.fire({--}}
-        {{--    position: 'top-end',--}}
-        {{--    icon: 'error',--}}
-        {{--    title: data.responseJSON.message,--}}
-        {{--    text: "You must login to account for this action.",--}}
-        {{--    showCancelButton: true,--}}
-        {{--    confirmButtonText: 'Login',--}}
-        {{--}).then((result)=> {--}}
-        {{--    if (result.isConfirmed) {--}}
-        {{--    window.location.href = "{{route('login')}}";--}}
-        {{--    } else {--}}
-        {{--    }--}}
-        {{--})--}}
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    function errorToast(message){
+        Toast.fire({
+            icon: 'error',
+            title: message
+        })
+    }
+    function successToast(message){
+        Toast.fire({
+            icon: 'success',
+            title: message
+        })
     }
     $.ajaxSetup({
         headers: {
@@ -40,23 +47,23 @@
 
             },
             0: function (responseObject, textStatus, errorThrown) {
-                toastr.error('Không có kết nối mạng. Vui lòng thử lại sau');
+                errorToast('Không có kết nối mạng. Vui lòng thử lại sau');
 
             },
             404: function (responseObject, textStatus, errorThrown) {
-                toastr.error('Yêu cầu gửi tới trang không tồn tại');
+                errorToast('Yêu cầu gửi tới trang không tồn tại');
             },
             500: function (responseObject, textStatus, errorThrown) {
-                toastr.error('Máy chủ bận. Vui lòng thử lại sau');
+                errorToast('Máy chủ bận. Vui lòng thử lại sau');
                 // Service Unavailable (503)
                 // This code will be executed if the server returns a 503 response
             },
             419: function (responseObject, textStatus, errorThrown) {
                 let message = responseObject.responseJSON.message;
                 if (message) {
-                    toastr.error(message);
+                    errorToast(message);
 
-                } else toastr.error('Hãy bấm F5 để làm mới trang');
+                } else errorToast('Hãy bấm F5 để làm mới trang');
             },
             503: function (responseObject, textStatus, errorThrown) {
                 // Service Unavailable (503)
@@ -140,8 +147,8 @@
                 loadCart(data);
                 // loadCartItem(data);
                 $('#viewproduct-over').modal('hide');
-                toastr.options.timeOut = 30;
-                toastr.success('Thao tác thành công');
+
+                successToast('Thao tác thành công');
             }
         });
 
@@ -158,12 +165,7 @@
             success(data) {
                 loadCart(data);
                 // loadCartItem(data);
-                toastr.options.timeOut = 30;
-                toastr.options = {
-                    "timeout": 30,
-                    "positionClass": "toast-top-left",
-                }
-                toastr.error('Đã xoá món');
+                errorToast('Đã xoá món');
 
             }
         })
