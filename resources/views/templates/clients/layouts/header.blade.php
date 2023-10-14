@@ -299,13 +299,11 @@
                             <div class="form-group">
                                 <label>Nhập Email tài khoản của bạn :</label>
                                 <input type="email" autocomplete="off" required class="form-control" name="emailforget">
-                                @if($errors->first('emailforget'))
-                                    <small class="text-danger">{{ $errors->first('emailforget') }}</small>
-                                @endif
+
                             </div>
                             <div class="login_flex">
                                 <div class="login_flex_1">
-                                    <button type="submit" class="btn btn-md btn-theme">Xác nhận</b>
+                                    <button type="submit" class="btn btn-md btn-theme">Xác nhận</button>
                                 </div>
                             </div>
 
@@ -331,21 +329,24 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Email *</label>
+                                            <label>Email </label>
                                             <input type="email" name="email" class="form-control">
                                         </div>
-                                        @if($errors->first('email'))
-                                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                                        @endif
+
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Số điện thoại </label>
+                                            <input type="text" name="phone" class="form-control">
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>Mật Khẩu</label>
                                             <input type="password" name="password" class="form-control">
                                         </div>
-                                        @if($errors->first('password'))
-                                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                                        @endif
+
                                     </div>
 
                                     <div class="col-lg-6 col-md-6">
@@ -353,21 +354,18 @@
                                             <label>Nhập Lại Mật Khẩu</label>
                                             <input type="password" name="password_confirmation" class="form-control">
                                         </div>
-                                        @if($errors->first('password_confirmation'))
-                                            <small
-                                                class="text-danger">{{ $errors->first('password_confirmation') }}</small>
-                                        @endif
+
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Họ Tên</label>
-                                            <input type="text" name="hoten" class="form-control">
+                                            <label>Tên</label>
+                                            <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
                                             <label>Địa Chỉ</label>
-                                            <input type="text" name="diachi" class="form-control">
+                                            <input type="text" name="address" class="form-control">
                                         </div>
                                     </div>
 

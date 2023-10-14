@@ -21,9 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'phone',
-        'address',
         'password',
+        'address',
+        'phone',
         'role_id',
     ];
 
@@ -46,10 +46,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
+
     public function carts()
     {
         return $this->hasMany(Cart::class);

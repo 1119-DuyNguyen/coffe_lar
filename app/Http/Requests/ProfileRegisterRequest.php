@@ -17,14 +17,25 @@ class ProfileRegisterRequest extends FormRequest
      */
     public function rules(): array
     {
+        if(!$this->has('role'))
+        {
+            $this->merge(['role'=>2]);
+        }
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'phone' => ['numeric'],
-            'address' => ['string', 'max:255'],
+            'phone' => ['required', 'numeric','regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
+            'address' => ['required','string', 'max:255'],
             'password' => ['required', 'confirmed', Password::defaults()],
-            'role'=> ['required','exists:roles,id']
+            'role_id'=> ['required','exists:roles,id']
         ];
 
     }
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'role_id' => $this->input('role_id') ?? 2,
+        ]);
+    }
+
 }
