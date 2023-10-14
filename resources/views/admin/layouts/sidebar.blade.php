@@ -39,14 +39,15 @@
 //]],
 
     ['name'=>'Order','icon'=>'<i class="fas fa-cart-plus"></i>','routeName'=>'admin.order.index' ,'child'=>[]],
-    ['title'=>'Settings & More'],
 
-   ['name'=>'Settings','icon'=>'<i class="fas fa-wrench"></i>','routeName'=>'admin.setting.index'  ],
-    ['name'=>'Manage Website','icon'=>'<i class="fas fa-pager"></i>','child'=>[
-                ['name'=>'Slider','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.slider.index' ],
-
-
-]],
+//    ['title'=>'Settings & More'],
+//
+//   ['name'=>'Settings','icon'=>'<i class="fas fa-wrench"></i>','routeName'=>'admin.setting.index'  ],
+//    ['name'=>'Manage Website','icon'=>'<i class="fas fa-pager"></i>','child'=>[
+//                ['name'=>'Slider','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.slider.index' ],
+//
+//
+//]],
 
     ] as $nav
     )
@@ -101,7 +102,10 @@
                 @endif
             @endif
         @endforeach
-
+        <li><a class="nav-link "
+               href="{{route('home')}}" >
+                <i class="fas fa-arrow-left"></i>
+                <span>Quay lại</span></a></li>
 
     </ul>
 

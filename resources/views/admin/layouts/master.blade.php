@@ -12,11 +12,12 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>General Dashboard &mdash; Stisla</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{asset("backend/assets/modules/bootstrap/css/bootstrap.min.css")}}">
 {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/fontawesome/css/all.min.css")}}">--}}
     <link rel="stylesheet" href="{{asset('lib/fontawesome/css/all.min.css')}}">
+    <title>{{ $setting->name ?? "Drinks Order"}}</title>
+    <link rel="icon" href="{{ asset('img/logo.png')}}" type="image/gif" sizes="16x16">
 
     <!-- CSS Libraries -->
     {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/jqvmap/dist/jqvmap.min.css")}}">--}}
@@ -38,12 +39,7 @@
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>
-        @yield('title')
-    </title>
-    @if($settings->layout=="RTL")
-        <link rel="stylesheet" href="{{asset("backend/assets/css/rtl.css")}}">
-    @endif
+
     <script>
         window.dataLayer = window.dataLayer || [];
 
