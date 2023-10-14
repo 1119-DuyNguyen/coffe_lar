@@ -20,9 +20,9 @@ class ManageRoleController extends Controller
         return Role::class;
     }
 
-    protected function getFormRequest(): FormRequest
+    protected function getFormRequest():  string|null
     {
-        return new RoleRequest();
+        return RoleRequest::class;
     }
 
     public function index(RoleDataTable $dataTable)
@@ -46,7 +46,7 @@ class ManageRoleController extends Controller
 
         $role=Role::create($request->all());
         $role->permissions()->attach($request->input('permissions'));
-        toast()->success('Created Successfully!');
+        toast()->success('Khởi tạo dữ liệu thành công');
 
         return redirect()->back();
 
@@ -58,14 +58,14 @@ class ManageRoleController extends Controller
         $permissionList=$request->input('permissions');
         $role->fill($request->all())->save();
         $role->permissions()->sync($permissionList);
-        toast()->success('Updated Successfully!');
+        toast()->success('Cập nhập dữ liệu thành công!');
 
         return redirect()->back();
     }
     public function destroy($resource_id)
     {
         if($resource_id==0) return redirect()->back();
-        
+
         $resource = $this->model()::findOrFail($resource_id);
 
         try {

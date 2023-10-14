@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -18,10 +19,11 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'image' => ['image', 'max:2048'],
-            'phone' => ['numeric'],
-            'address' => ['string', 'max:255'],
+            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->route()->user ??"")],
+            'phone' => ['required', 'numeric','regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
+            'address' => ['required','string', 'max:255'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+            'role_id'=> ['required','exists:roles,id']
         ];
 
     }

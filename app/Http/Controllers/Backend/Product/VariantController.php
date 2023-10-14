@@ -18,8 +18,8 @@ class VariantController extends Controller
     {
         return ProductVariant::class;
     }
-    protected function getFormRequest(): FormRequest
+    protected function getFormRequest():  string|null
     {
-        return new VariantRequest();
+        return  VariantRequest::class;
     }
 }

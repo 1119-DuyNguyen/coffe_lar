@@ -17,20 +17,36 @@ class ProfileRegisterRequest extends FormRequest
      */
     public function rules(): array
     {
-        if(!$this->has('role'))
-        {
-            $this->merge(['role'=>2]);
-        }
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'phone' => ['required', 'numeric','regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
-            'address' => ['required','string', 'max:255'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'role_id'=> ['required','exists:roles,id']
-        ];
+        switch ($this->method()) {
+            case 'POST':
+            {
+                [
+                    'name' => ['required','string', 'max:255'],
+                    'email' => ['required','email', 'max:255', Rule::unique(User::class)->ignore($this->route()->user ?? "")],
+                    'phone' => ['nullable', 'numeric', 'regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
+                    'address' => ['nullable', 'string', 'max:255'],
+                    'password' => ['required', 'confirmed', Password::defaults()],
+                    'role_id' => ['required', 'exists:roles,id']
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'name' => ['required','string', 'max:255'],
+                    'email' => ['required','email', 'max:255', Rule::unique(User::class)->ignore($this->route()->user ?? "")],
+                    'phone' => ['sometimes','nullable', 'numeric', 'regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
+                    'address' => ['sometimes','nullable', 'string', 'max:255'],
+                    'password' => ['sometimes','nullable', 'confirmed', Password::defaults()],
+                    'role_id' => ['required', 'exists:roles,id']
+                ];
+            }
+            default:
+                return [];
 
+        }
     }
+
     public function prepareForValidation()
     {
         $this->merge([

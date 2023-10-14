@@ -30,8 +30,9 @@ class ProductRequest extends FormRequest
             'name' => ['required', 'max:200', Rule::unique(Product::class,'slug')->ignore(Str::slug($this->input('name')),'slug')],
             'category_id' => ['required'],
             'price' => ['required'],
-            'description' => ['required', 'max: 600'],
-            'content' => ['required'],
+            'qty' => ['required'],
+            'short_description' => ['required', 'max: 600'],
+            'long_description' => ['required'],
             'status' => ['required']
         ];
     }

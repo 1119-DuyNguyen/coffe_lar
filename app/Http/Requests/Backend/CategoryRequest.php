@@ -26,15 +26,10 @@ class CategoryRequest extends FormRequest
     {
 
         return [
-            'icon' => ['required', 'not_in:empty'],
-            'name' => ['required', 'max:200', Rule::unique(Category::class,'slug')->ignore(Str::slug($this->input('name')),'slug')],
+            'icon' => ['required', 'string'],
+            'name' => ['required', 'max:200','string', Rule::unique(Category::class,'slug')->ignore(Str::slug($this->input('name')),'slug')],
             'status' => ['required']
         ];
     }
-    public function messages()
-    {
-        return [
-            'name.unique' => 'Slug name has already been taken. Please try another name !!!',
-        ];
-    }
+
 }

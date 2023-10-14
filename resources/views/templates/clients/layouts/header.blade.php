@@ -427,7 +427,7 @@
                             // validation error fails
                             if (responseObject.responseJSON) {
                                 let errors = responseObject.responseJSON.errors;
-                                console.log(errors)
+                                // console.log(errors)
                                 if (errors) {
                                     for (const [prefix, value] of Object.entries(errors)) {
                                         let span = form.querySelector('span.' + prefix + '_error');
@@ -447,7 +447,9 @@
                         }
                     },
                     success: function (data) {
-                        $('#login').modal('toggle');
+                        $('#login').modal('hide');
+                        $('#registerForm').modal('hide');
+
                         Swal.fire(
                             'Đăng nhập thành công',
                             '',

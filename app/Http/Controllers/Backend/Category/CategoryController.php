@@ -16,9 +16,9 @@ class CategoryController extends Controller
     {
         return Category::class;
     }
-    protected function getFormRequest(): FormRequest
+    protected function getFormRequest(): string|null
     {
-        return new CategoryRequest();
+        return CategoryRequest::class;
     }
     protected function getInputSlug():string{
         return 'name';

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 
+use App\Http\Requests\ProfileRegisterRequest;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
@@ -29,7 +30,7 @@ trait InputHandlerTrait
         return '';
     }
 
-    protected function getFormRequest(): FormRequest|null
+    protected function getFormRequest(): string|null
     {
         return null;
     }
@@ -56,13 +57,14 @@ trait InputHandlerTrait
      */
     protected function handleDataInput(Request $request, $oldPath = null)
     {
+
         $rawData = array_merge($request->all(), $this->addAutoInput($request));
         // transform slug
         if (!empty($this->getInputSlug())) {
             $rawData['slug'] = Str::slug($this->getInputSlug());
         }
 
-        $this->validateRequest($rawData);
+        $this->validateRequest($rawData,$request);
         $storageImage = 'uploads/' . ($this->getImagePath() ?? "");
         // transform a image file
         $imagePath = $this->updateImage($request, $this->getImageInput(),
@@ -74,10 +76,12 @@ trait InputHandlerTrait
         return $rawData;
     }
 
-    protected function validateRequest($data)
+    protected function validateRequest($data,$request)
     {
-        if (empty($this->getFormRequest())) return [];
-        $formRequest = $this->getFormRequest();
+
+        $formRequest = $this->getFormRequest()::createFrom($request);
+//        dd($formRequest->method(),$formRequest->rules());
+        if (empty($formRequest)) return [];
         $rules = $formRequest->rules();
 
         if (!empty($this->getImageInput())) {

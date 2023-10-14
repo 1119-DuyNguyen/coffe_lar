@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 class ManageUserController extends Controller
 {
     use CrudTrait;
+    protected function unsetUpdateEmptyField(): array
+    {
+        return ['password'];
+    }
+
     protected function model(): string
     {
         return User::class;
@@ -23,9 +28,9 @@ class ManageUserController extends Controller
         $role_id=$request->input('role',[]) ;
         return ['role_id'=>$role_id];
     }
-    protected function getFormRequest(): FormRequest
+    protected function getFormRequest(): string|null
     {
-        return new ProfileRegisterRequest();
+        return ProfileRegisterRequest::class;
     }
     public function index(UserListDataTable $dataTable)
     {

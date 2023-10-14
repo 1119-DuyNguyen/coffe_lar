@@ -32,10 +32,5 @@ class RoleRequest extends FormRequest
             'permissions'=>['required','array'],
             ];
     }
-    public function messages()
-    {
-        return [
-            'name.unique' => 'Slug name has already been taken. Please try another name !!!',
-        ];
-    }
+
 }

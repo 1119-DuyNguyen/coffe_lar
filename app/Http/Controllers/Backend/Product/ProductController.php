@@ -30,9 +30,9 @@ class ProductController extends Controller
         return ['vendor_id'=>Auth::user()->id];
     }
 
-    protected function getFormRequest(): FormRequest
+    protected function getFormRequest():  string|null
     {
-        return new ProductRequest();
+        return ProductRequest::class;
     }
     protected function getImageInput(): string|null
     {

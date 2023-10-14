@@ -15,7 +15,10 @@ trait CrudTrait
     use InputHandlerTrait;
 
     abstract protected function model(): string;
-
+    protected function unsetUpdateEmptyField(): array
+    {
+        return [];
+    }
     public function index()
     {
         return $this->model()::all();
@@ -26,7 +29,8 @@ trait CrudTrait
         $data = $this->handleDataInput($request);
 
         $this->model()::create($data);
-        toast()->success('Created Successfully!');
+//        toast()->success('Created Successfully!');
+        toast()->success('Khởi tạo dữ liệu thành công');
 
         return redirect()->back();
     }
@@ -44,9 +48,16 @@ trait CrudTrait
             !empty($this->getImageInput())
                 ? $resource->{$this->getImageInput()}
                 : null);
+        foreach ($this->unsetUpdateEmptyField() as $field)
+        {
+            if(empty($data[$field]))
+            {
+                unset($data[$field]);
+            }
+        }
+        $resource->update($data);
+        toast()->success('Cập nhập dữ liệu thành công!');
 
-        $resource->fill($data)->save();
-        toast()->success('Updated Successfully!');
 
         return redirect()->back();
     }

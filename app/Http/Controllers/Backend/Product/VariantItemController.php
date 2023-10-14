@@ -18,8 +18,8 @@ class VariantItemController extends Controller
     {
         return ProductVariantItem::class;
     }
-    protected function getFormRequest(): FormRequest
+    protected function getFormRequest():  string|null
     {
-        return new VariantItemRequest();
+        return VariantItemRequest::class;
     }
 }
