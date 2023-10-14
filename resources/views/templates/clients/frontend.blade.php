@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,48 +22,19 @@
     <!-- <script src="{{ asset('backend/assets/alert/alertify.min.js') }}"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/themify-icons/themify-icons.css')}}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/themify-icons/themify-icons.css')}}"/>
 
     <!-- <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/alertify.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/semantic.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/bootstrap.css') }}" /> -->
     @livewireStyles
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>--}}
+    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>--}}
 </head>
 
 <body class="grocery-theme">
 
-<body>
-<div id="fb-root"></div>
-<!-- <div id="fb-customer-chat" class="fb-customerchat">
-</div>
 
-<script>
-var chatbox = document.getElementById('fb-customer-chat');
-chatbox.setAttribute("page_id", "109823691782418");
-chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-<script>
-window.fbAsyncInit = function() {
-    FB.init({
-        xfbml: true,
-        version: 'v14.0'
-    });
-};
-
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script> -->
-{{--<script async defer crossorigin="anonymous"--}}
-{{--        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1056375581823890&autoLogAppEvents=1"--}}
-{{--        nonce="JhpQ55Gl"></script>--}}
 @include('templates.clients.layouts.header')
 @yield('content')
 <!--========= JS Here =========-->
@@ -95,7 +67,6 @@ window.fbAsyncInit = function() {
 <script>
 
 
-
     function openRightMenu() {
         document.getElementById("rightMenu").style.display = "block";
     }
@@ -109,6 +80,7 @@ window.fbAsyncInit = function() {
 @include('templates.clients.js.notification')
 @stack('scripts')
 
+@include('sweetalert::alert')
 
 </body>
 

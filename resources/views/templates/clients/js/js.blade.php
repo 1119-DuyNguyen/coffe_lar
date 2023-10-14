@@ -1,9 +1,10 @@
+@php use Illuminate\Support\Facades\Session; @endphp
 <script>
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 4000,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -22,6 +23,12 @@
             title: message
         })
     }
+    @if(Session::has('success'))
+    successToast("{{Session::get('success')}}")
+    @php
+    Session::remove('success')
+    @endphp
+    @endif
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
