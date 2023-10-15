@@ -61,8 +61,7 @@
                                                        name="variants_items[{{$variant->id}}][]"
                                                        id="sizeRadioOne{{$value->id}}"
                                                        value="{{$value->id}}" data-toggle="form-caption"
-                                                    {{--                                                       data-target="#sizeCaption"--}}
-                                                    {{($key == 0 ? "checked" : "")}}>
+                                                    {{($value->isHave ? "checked" : "")}}>
                                                 <label class="custom-control-label"
                                                        for="sizeRadioOne{{$value->id}}">{{ $value->name}}<span
                                                         class="price-plus"> +
@@ -110,7 +109,7 @@
 
             <div class="woo_btn_action d-inline-block">
                 <div class="col-12 pl-0">
-                    <input type="number" name="qty" min="1" class="form-control mb-2 full-width" value="1"/>
+                    <input type="number" name="qty" min="1" class="form-control mb-2 full-width" value="{{$product->quantity?? 1}}"/>
                     <input type="hidden" name="idOldCart" value="{{$idCart??""}}">
                 </div>
             </div>

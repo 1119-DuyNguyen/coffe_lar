@@ -441,30 +441,30 @@ $user=\Illuminate\Support\Facades\Auth::user();
             //         $('#header-cart-quantity').text(0);
             //     }
             // }
-            function loadCart(data) {
-                $(".item-cart").empty();
-                $(".item-cart").html(data);
-                if ($('#totalQuanty').val()) {
-                    $('.cart_counter').text($("#totalQuanty").val());
-                } else {
-                    $('.cart_counter').text(0);
-                }
-                if ($('#totalPrice').data('price')) {
-                    $('.carsub').text($('#totalPrice').data('price'));
-                } else {
-                    $('.carsub').text(' 0đ');
-                }
-            }
-
-            function loadCartItem(data) {
-                $("#cart").empty();
-                $("#cart").html(data);
-                if ($('#totalQuanty1').val()) {
-                    $('#priceTotal').text('(' + $("#totalQuanty1").val() + ' Món)');
-                } else {
-                    $('#priceTotal').text(0);
-                }
-            }
+            // function loadCart(data) {
+            //     $(".item-cart").empty();
+            //     $(".item-cart").html(data);
+            //     if ($('#totalQuanty').val()) {
+            //         $('.cart_counter').text($("#totalQuanty").val());
+            //     } else {
+            //         $('.cart_counter').text(0);
+            //     }
+            //     if ($('#totalPrice').data('price')) {
+            //         $('.carsub').text($('#totalPrice').data('price'));
+            //     } else {
+            //         $('.carsub').text(' 0đ');
+            //     }
+            // }
+            //
+            // function loadCartItem(data) {
+            //     $("#cart").empty();
+            //     $("#cart").html(data);
+            //     if ($('#totalQuanty1').val()) {
+            //         $('#priceTotal').text('(' + $("#totalQuanty1").val() + ' Món)');
+            //     } else {
+            //         $('#priceTotal').text(0);
+            //     }
+            // }
 
         }
     </script>

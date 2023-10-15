@@ -11,22 +11,25 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-    function errorToast(message){
+
+    function errorToast(message) {
         Toast.fire({
             icon: 'error',
             title: message
         })
     }
-    function successToast(message){
+
+    function successToast(message) {
         Toast.fire({
             icon: 'success',
             title: message
         })
     }
+
     @if(Session::has('success'))
     successToast("{{Session::get('success')}}")
     @php
-    Session::remove('success')
+        Session::remove('success')
     @endphp
     @endif
     $.ajaxSetup({
@@ -37,20 +40,18 @@
         statusCode: {
             422: function (responseObject, textStatus, jqXHR) {
                 // validation error fails
+                let message = "Máy chủ không thể xử lý yêu cầu. Vui lòng thử lại sau";
                 if (responseObject.responseJSON) {
-                    let errors = responseObject.responseJSON.errors;
-                    console.log(errors)
-                    if (errors) {
-                        for (const [prefix, value] of Object.entries(errors)) {
-                            let span = form.querySelector('span.' + prefix + '_error');
-                            span.innerText = value
+                    let messageRes = responseObject.responseJSON.message;
 
-                            let input = form.querySelector('input[name=' + prefix + ']');
-                            input.focus();
-                        }
+
+                    if (messageRes) {
+                        message = messageRes
 
                     }
+
                 }
+                errorToast(message);
 
             },
             0: function (responseObject, textStatus, errorThrown) {
@@ -179,6 +180,12 @@
     })
 
     function loadCart(data) {
+        let cartPage = $("#cart");
+        if (cartPage) {
+            console.log(cart);
+            cartPage.empty();
+            cartPage.html(data);
+        }
         $("#cart-sidebar").empty();
         $("#cart-sidebar").html(data);
         if ($('#totalCartQuantity').val()) {
@@ -209,37 +216,6 @@
             }
         })
     })
-
-
-    //đăng nhập với tài khoản
-    {{--$(document).on('click', '#loginAcc', function(e) {--}}
-    {{--    e.preventDefault();--}}
-    {{--    let email = $('.emailAcc').val();--}}
-    {{--    let password = $('.passwordAcc').val();--}}
-    {{--    $.ajax({--}}
-    {{--        url: "{{ route('login')}}",--}}
-    {{--        type: 'post',--}}
-    {{--        data: {--}}
-    {{--            email: email,--}}
-    {{--            password: password--}}
-
-    {{--        },--}}
-    {{--        success: function(data) {--}}
-    {{--            if (data == true) {--}}
-    {{--                location.reload();--}}
-    {{--                toastr.options.timeOut = 30;--}}
-    {{--                toastr.success('Đăng nhập thành công');--}}
-    {{--            } else {--}}
-    {{--                $('.massage').empty()--}}
-    {{--                $('.massage').append(data.loginAcc)--}}
-    {{--                $('.massage').show().delay(3000).fadeOut()--}}
-    {{--            }--}}
-
-    {{--        }--}}
-    {{--    });--}}
-    {{--})--}}
-
-
 
 
     $(document).on('click', '.up_user', function (e) {

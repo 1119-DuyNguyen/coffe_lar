@@ -107,6 +107,7 @@ class CartService
         if (empty($product)) {
             return [];
         }
+        $product->quantity=$cart['quantity'];
         $variantTotalAmount = 0;
         $productVariants = $product->variants;
         // show exist cart of product
