@@ -2,14 +2,14 @@
 <script>
     const Toast = Swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: 'top-start',
         showConfirmButton: false,
         timer: 4000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
+        // timerProgressBar: true,
+        // didOpen: (toast) => {
+        //     toast.addEventListener('mouseenter', Swal.stopTimer)
+        //     toast.addEventListener('mouseleave', Swal.resumeTimer)
+        // }
     })
 
     function errorToast(message) {
@@ -82,53 +82,10 @@
                 // This code will be executed if the server returns a 503 response
             },
         },
-        // error: function (jqXHR, exception) {
-        //     if (jqXHR.status === 0) {
-        //         toastr.error('Không có kết nối mạng. Vui lòng thử lại sau');
-        //
-        //     } else if (jqXHR.status == 404) {
-        //         toastr.error('Yêu cầu gửi tới trang không tồn tại');
-        //
-        //     } else if (jqXHR.status == 500) {
-        //         toastr.error('Máy chủ bận. Vui lòng thử lại sau');
-        //
-        //     } else if (jqXHR.status = 419) {
-        //         let message = JSON.parse(jqXHR.responseText).message;
-        //         if (message) {
-        //             toastr.error(JSON.parse(jqXHR.responseText).message);
-        //
-        //         } else toastr.error('Hãy bấm F5 để làm mới trang');
-        //
-        //     }
-        //         // else if(jqXHR.status == 422){
-        //         //     toastr.error( JSON.parse(jqXHR.responseText).message);
-        //         //
-        //     // }
-        //     else if (exception === 'parsererror') {
-        //         // alert('Requested JSON parse failed.');
-        //         toastr.error('Dữ liệu bị lỗi. Vui lòng thử lại sau');
-        //
-        //     } else if (exception === 'timeout') {
-        //         // alert('Time out error.');
-        //         toastr.error('Yêu cầu gửi quá thời gian ');
-        //     } else if (exception === 'abort') {
-        //         // alert('Ajax request aborted.');
-        //         toastr.error('Yêu cầu bị máy chủ từ chối ');
-        //
-        //     } else {
-        //         toastr.error('Có lỗi đang xảy ra. Vui lòng thử lại sau ');
-        //         // alert(jqXHR.responseText);
-        //         // alert('Uncaught Error.\n' + jqXHR.responseText);
-        //
-        //     }
-        // }
-        // statusCode: {
-        //     401: function() {
-        //         alert("401");
-        //     }
-        // }
+
     });
-    $(document).on('click', '.quickView', function () {
+    $(document).on('click', '.quickView', function (e) {
+        e.preventDefault();
         let slug = $(this).data('slug');
         let url = "{{ route('product.show', ":slug") }}";
         url = url.replace(':slug', slug);
@@ -144,7 +101,7 @@
             }
         });
     })
-    $(document).on('click', '#addCart,#updateCart', function (e) {
+    $(document).on('click', '#addCart,#updateCart,.add-cart', function (e) {
         e.preventDefault();
         var frm = $(this).closest('form');
         $.ajax({
@@ -152,6 +109,7 @@
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
+                console.log(data)
                 loadCart(data);
                 // loadCartItem(data);
                 $('#viewproduct-over').modal('hide');
@@ -182,7 +140,7 @@
     function loadCart(data) {
         let cartPage = $("#cart");
         if (cartPage) {
-            console.log(cart);
+            console.log(cartPage);
             cartPage.empty();
             cartPage.html(data);
         }

@@ -36,14 +36,13 @@
 {{--        <input id="totalPrice" hidden type="number"--}}
 {{--               data-price="{{currency_format(Session::get('cart')->totalPrice, 'đ')}}"--}}
 {{--               value="">--}}
-{{--        <input id="totalCartQuantity" hidden type="number" value="{{ count($cartList)}}">--}}
+        <input id="totalCartQuantity" hidden type="number" value="{{ count($cartList)}}">
     </div>
     <div class="cart_select_items">
         @foreach($cartList as $key => $cart)
             @php
 
                 $product=$cart['product-data'];
-                $variantList=$product->variants;
             @endphp
             <div class="cart_selected_single">
                 <div class="cart_selected_single_thumb">
@@ -56,18 +55,18 @@
                         <h4 class="product_title">{{$product->name}}</h4>
                     </a>
                     <span class="numberof_item">Số lượng : {{$product->quantity}}</span>
-                    @foreach($variantList as $variant)
+{{--                    @foreach($variantList as $variant)--}}
 
-                        <span class="sizeof_item">{{$variant->name}} :
-                            <span class="sizeof_item">
+{{--                        <span class="sizeof_item">{{$variant->name}} :--}}
+{{--                            <span class="sizeof_item">--}}
 
-                                    {{ $variant->productVariantItems->implode('name',',')}}
+{{--                                    {{ $variant->productVariantItems->implode('name',',')}}--}}
 
-                            <br>
-                               </span>
-                            </span>
-                    @endforeach
-                    <strong>{{ currency_format($product->price + $product->variantTotalAmount)}}</strong>
+{{--                            <br>--}}
+{{--                               </span>--}}
+{{--                            </span>--}}
+{{--                    @endforeach--}}
+                    <strong>{{ currency_format($product->price )}}</strong>
 
                     <a href="#" class="text-danger btn-cart-del mt-1" id="delItemCart" data-id="{{$key}}">Xoá</a>
                 </div>

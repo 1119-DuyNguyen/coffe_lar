@@ -32,7 +32,7 @@ class CartController extends Controller
     public function store(CartRequest $request)
     {
 
-        $this->cartService->store($request->input('product_id'), $request->input('qty'), $request->input('variants_items', []),$request->input('idOldCart',''));
+        $this->cartService->store($request->input('product_id'), $request->input('qty'), $request->input('idOldCart',''));
         return  view('templates.clients.home.cart');
 //        return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
     }
