@@ -16,38 +16,49 @@ use Illuminate\Validation\ValidationException;
 
 class OrderService
 {
-    private function isInsideArrayKey($valueCheck,$keyCheck,$array){
-        foreach ($array as $key => $value){
-            if(isset($value[$keyCheck])&&$value[$keyCheck]==$valueCheck) return true;
-
+    private function isInsideArrayKey($valueCheck, $keyCheck, $array)
+    {
+        foreach ($array as $key => $value) {
+            if (isset($value[$keyCheck]) && $value[$keyCheck] == $valueCheck) {
+                return true;
+            }
         }
         return false;
-
     }
+
+    private function getValueInsideArrayKey($valueCheck, $keyCheck,$keyValue, $array)
+    {
+        foreach ($array as $key => $value) {
+            if (isset($value[$keyCheck]) && $value[$keyCheck] == $valueCheck) {
+                return $value[$keyValue];
+            }
+        }
+        return '';
+    }
+
     public function checkOutFormSubmit(Request $request)
     {
+        $idProvince = $request->input("province");
+        $idDistrict = $request->input("district");
+        $idWard = $request->input("ward");
+        $dataProvince = Cache::get('province')['data'] ?? [];
 
-        $idProvince=$request->input("province");
-        $idDistrict=$request->input("district");
-        $idWard=$request->input("ward");
-        $dataProvince=Cache::get('province')['data'] ??[];
-
-        if(empty($dataProvince)||!$this->isInsideArrayKey($idProvince,'ProvinceID',$dataProvince))
-        {
-            throw ValidationException::withMessages(['province'=>"Dữ liệu trường tỉnh/thành phố không hợp lệ "]);
-
+        if (empty($dataProvince) || !$this->isInsideArrayKey($idProvince, 'ProvinceID', $dataProvince)) {
+            throw ValidationException::withMessages(['province' => "Dữ liệu trường tỉnh/thành phố không hợp lệ "]);
         }
-        $dataDistrict=Cache::get('district-'.$idProvince)['data']??[];
-        if(empty($dataDistrict)||!$this->isInsideArrayKey($idDistrict,'DistrictID',$dataDistrict))
-        {
-            throw ValidationException::withMessages(['district'=>"Dữ liệu trường quận/huyện không hợp lệ"]);
+        $dataDistrict = Cache::get('district-' . $idProvince)['data'] ?? [];
+        if (empty($dataDistrict) || !$this->isInsideArrayKey($idDistrict, 'DistrictID', $dataDistrict)) {
+            throw ValidationException::withMessages(['district' => "Dữ liệu trường quận/huyện không hợp lệ"]);
+        }
+        $dataWard = Cache::get('ward-' . $idDistrict)['data'] ?? [];
+        if (empty($dataWard) || !$this->isInsideArrayKey($idWard, 'WardCode', $dataWard)) {
+            throw ValidationException::withMessages(['ward' => "Dữ liệu trường phường/xã không hợp lệ"]);
+        }
+        $nameProvince=$this->getValueInsideArrayKey($idProvince, 'ProvinceID','ProvinceName', $dataProvince);
+        $nameDistrict=$this->getValueInsideArrayKey($idDistrict, 'DistrictID','DistrictName', $dataDistrict);
+        $nameWard=$this->getValueInsideArrayKey($idWard, 'WardCode','WardName', $dataWard);
+        $nameAddresss=$request->input('address','');
 
-        }
-        $dataWard=Cache::get('ward-'.$idDistrict)['data']??[];
-        if(empty($dataWard)||!$this->isInsideArrayKey($idWard,'WardCode',$dataWard))
-        {
-            throw ValidationException::withMessages(['ward'=>"Dữ liệu trường phường/xã không hợp lệ"]);
-        }
         DB::beginTransaction();
         try {
             $order = new Order();
@@ -61,10 +72,10 @@ class OrderService
             $order['phone_receiver'] = $request->input("phone");
             $order['email_receiver'] = $request->input("email");
             $order['note'] = $request->input("note");
-            $realAddress=$request->input("province").$request->input("district");
+            $realAddress = $nameProvince.', ' . $nameDistrict.', '.$nameWard.($nameAddresss ? ', '.$nameAddresss: $nameAddresss);
             $order['address_receiver'] = $realAddress;
-            $order = new Order();
             $order->save();
+            dd($realAddress);
             // store order products
             $productQuantity = [];
 
@@ -108,8 +119,7 @@ class OrderService
             toast()->error($ex->getMessage());
             return Redirect::to(route('cart.index'));
         }
-        dd($dataDistrict,$dataWard);
-
+        dd($dataDistrict, $dataWard);
     }
 
     public function clearSession()
