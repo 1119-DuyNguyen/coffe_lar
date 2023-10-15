@@ -198,53 +198,53 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
     <!-- ============================ Call To Action ================================== -->
 
+    @push('scripts')
+        <script>
+            window.onload = () => {
 
-    <script>
-        window.onload = () => {
+                const submitOrder = document.querySelector('.submitOrder');
 
-            const submitOrder = document.querySelector('.submitOrder');
+                const inputSearch = document.querySelectorAll('.location_group .input_search');
 
-            const inputSearch = document.querySelectorAll('.location_group .input_search');
+                const app = {
 
-            const app = {
+                    dataLocation: [],
+                    provinceName: "Province",
+                    districtName: "District",
+                    wardName: "Ward",
 
-                dataLocation: [],
-                provinceName: "Province",
-                districtName: "District",
-                wardName: "Ward",
+                    handleEvent: function () {
 
-                handleEvent: function () {
+                        inputSearch.forEach(input => {
+                            input.addEventListener('change', (e) => {
+                                e.stopPropagation();
 
-                    inputSearch.forEach(input => {
-                        input.addEventListener('change', (e) => {
-                            e.stopPropagation();
+                                if (e.target.parentElement.classList.contains('province')) {
+                                    let idProvince = document.querySelector(
+                                        '.province .input_search').value;
+                                    if (idProvince) {
+                                        this.getDistrict(idProvince);
+                                    }
 
-                            if (e.target.parentElement.classList.contains('province')) {
-                                let idProvince = document.querySelector(
-                                    '.province .input_search').value;
-                                if (idProvince) {
-                                    this.getDistrict(idProvince);
+
                                 }
 
-
-                            }
-
-                            if (e.target.parentElement.classList.contains('district')) {
-                                let idDistrict = document.querySelector(
-                                    '.district .input_search').value;
-                                if (idDistrict) {
-                                    this.getWard(idDistrict);
+                                if (e.target.parentElement.classList.contains('district')) {
+                                    let idDistrict = document.querySelector(
+                                        '.district .input_search').value;
+                                    if (idDistrict) {
+                                        this.getWard(idDistrict);
+                                    }
                                 }
-                            }
-                            if (e.target.parentElement.classList.contains('ward')) {
-                                let idDistrict = document.querySelector(
-                                    '.district .input_search').value;
-                                let idWard = document.querySelector(
-                                    '.ward .input_search').value;
-                                console.log(idWard,document.querySelector(
-                                    '.ward .input_search'));
-                                if (idWard&&idDistrict) {
-                                    let url = "{{ route('ghn.price') }}";
+                                if (e.target.parentElement.classList.contains('ward')) {
+                                    let idDistrict = document.querySelector(
+                                        '.district .input_search').value;
+                                    let idWard = document.querySelector(
+                                        '.ward .input_search').value;
+                                    console.log(idWard,document.querySelector(
+                                        '.ward .input_search'));
+                                    if (idWard&&idDistrict) {
+                                        let url = "{{ route('ghn.price') }}";
 
                                         $.ajax({
                                             type: 'get',
@@ -261,229 +261,141 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
 
 
-                                }
+                                    }
 
-                            }
+                                }
+                            })
+
                         })
 
 
-                        {{--submitOrder.addEventListener('submit', (e) => {--}}
-                        {{--    const input = document.querySelector('.ward .input_search');--}}
-                        {{--    const loca = document.querySelector('#checkFeeship');--}}
-                        {{--    if (loca) {--}}
-                        {{--        if (!input.value || !loca.value) {--}}
-                        {{--            e.preventDefault();--}}
-                        {{--            e.stopImmediatePropagation();--}}
-                        {{--            alert(--}}
-                        {{--                'Vui lòng nhập địa chỉ đầy đủ hoặc không vận chuyển.');--}}
-                        {{--            console.log(false);--}}
-                        {{--        } else {--}}
-                        {{--            e.preventDefault();--}}
-                        {{--            e.stopImmediatePropagation();--}}
-                        {{--            --}}{{--let url = "{{ route('invoice.confirm') }}";--}}
-                        {{--            let url = "";--}}
-
-                        {{--            (async () => {--}}
-                        {{--                const response = await fetch(--}}
-                        {{--                    url--}}
-                        {{--                );--}}
-                        {{--                if (response && response.status === 200) {--}}
-                        {{--                    const res = await response.json();--}}
-                        {{--                    $.confirm({--}}
-                        {{--                        type: 'blue',--}}
-                        {{--                        title: 'Xác nhận',--}}
-                        {{--                        columnClass: 'col-md-8 col-md-offset-2',--}}
-                        {{--                        content: res.invoice,--}}
-                        {{--                        buttons: {--}}
-                        {{--                            'Huỷ': {--}}
-                        {{--                                btnClass: 'btn-red',--}}
-                        {{--                                action: function () {--}}
-
-                        {{--                                }--}}
-                        {{--                            },--}}
-                        {{--                            'Xác nhận': {--}}
-                        {{--                                btnClass: 'btn-orange',--}}
-                        {{--                                action: function () {--}}
-                        {{--                                    console.log($(--}}
-                        {{--                                        '.preloader'--}}
-                        {{--                                    )--}}
-                        {{--                                        .length)--}}
-                        {{--                                    if ($(--}}
-                        {{--                                        '.preloader')--}}
-                        {{--                                        .length) {--}}
-                        {{--                                        $('.preloader')--}}
-                        {{--                                            .show();--}}
-                        {{--                                    }--}}
-                        {{--                                    submitOrder--}}
-                        {{--                                        .submit();--}}
-                        {{--                                }--}}
+                    },
 
 
-                        {{--                            },--}}
-                        {{--                        }--}}
-                        {{--                    });--}}
+                    getProvince: function () {
+                        let url = "{{ route('ghn.province') }}";
+                        let _this = this;
+                        try {
+                            $.ajax({
+                                type: 'get',
+                                url: url,
+                                success: function (data) {
 
-                        {{--                } else {--}}
-                        {{--                    alert('laasy du lieu that bai !!!')--}}
-                        {{--                }--}}
-                        {{--            })();--}}
+                                    _this.renderLocationData(data.data.data, app.provinceName);
+                                }
+                            });
 
+                        } catch (error) {
+                            console.error('location error')
+                        }
 
-                        {{--        }--}}
-                        {{--    } else {--}}
-                        {{--        e.preventDefault();--}}
-                        {{--    }--}}
+                    },
+                    getDistrict: function (province) {
+                        let url = "{{ route('ghn.district', ":idProvince") }}";
+                        url = url.replace(':idProvince', province);
+                        let _this = this;
+                        try {
+                            $.ajax({
+                                type: 'get',
+                                url: url,
+                                success: function (data) {
 
-                        {{--})--}}
+                                    _this.renderLocationData(data.data.data, app.districtName);
+                                }
+                            });
 
-                    })
+                        } catch (error) {
+                            console.error('location error')
+                        }
+                    },
 
+                    getWard: function (district) {
+                        let url = "{{ route('ghn.ward', ":idDistrict") }}";
+                        url = url.replace(':idDistrict', district);
+                        let _this = this;
+                        try {
+                            $.ajax({
+                                type: 'get',
+                                url: url,
+                                success: function (data) {
 
-                },
+                                    _this.renderLocationData(data.data.data, app.wardName);
+                                }
+                            });
 
+                        } catch (error) {
+                            console.error('location error')
+                        }
+                    },
+                    getService: function (district,ward) {
+                        let url = "{{ route('ghn.ward', ":idDistrict") }}";
+                        url = url.replace(':idDistrict', district);
+                        let _this = this;
+                        try {
+                            $.ajax({
+                                type: 'get',
+                                url: url,
+                                success: function (data) {
 
-                getProvince: function () {
-                    let url = "{{ route('ghn.province') }}";
-                    let _this = this;
-                    try {
-                        $.ajax({
-                            type: 'get',
-                            url: url,
-                            success: function (data) {
+                                    _this.renderLocationData(data.data.data, app.wardName);
+                                }
+                            });
 
-                                _this.renderLocationData(data.data.data, app.provinceName);
-                            }
-                        });
+                        } catch (error) {
+                            console.error('location error')
+                        }
+                    },
+                    renderLocationData: (data, type = '') => {
+                        let html = '';
+                        let className = type.toLowerCase();
 
-                    } catch (error) {
-                        console.error('location error')
-                    }
-
-                },
-                getDistrict: function (province) {
-                    let url = "{{ route('ghn.district', ":idProvince") }}";
-                    url = url.replace(':idProvince', province);
-                    let _this = this;
-                    try {
-                        $.ajax({
-                            type: 'get',
-                            url: url,
-                            success: function (data) {
-
-                                _this.renderLocationData(data.data.data, app.districtName);
-                            }
-                        });
-
-                    } catch (error) {
-                        console.error('location error')
-                    }
-                },
-
-                getWard: function (district) {
-                    let url = "{{ route('ghn.ward', ":idDistrict") }}";
-                    url = url.replace(':idDistrict', district);
-                    let _this = this;
-                    try {
-                        $.ajax({
-                            type: 'get',
-                            url: url,
-                            success: function (data) {
-
-                                _this.renderLocationData(data.data.data, app.wardName);
-                            }
-                        });
-
-                    } catch (error) {
-                        console.error('location error')
-                    }
-                },
-                getService: function (district,ward) {
-                    let url = "{{ route('ghn.ward', ":idDistrict") }}";
-                    url = url.replace(':idDistrict', district);
-                    let _this = this;
-                    try {
-                        $.ajax({
-                            type: 'get',
-                            url: url,
-                            success: function (data) {
-
-                                _this.renderLocationData(data.data.data, app.wardName);
-                            }
-                        });
-
-                    } catch (error) {
-                        console.error('location error')
-                    }
-                },
-                renderLocationData: (data, type = '') => {
-                    let html = '';
-                    let className = type.toLowerCase();
-
-                    if (data) {
-                        html += "<option value=''>Bạn chưa chọn</option>";
-                        // console.log(data);
-                        //convert to search box
-                        html += data.map(province => {
-                            return (
-                                `
+                        if (data) {
+                            html += "<option value=''>Bạn chưa chọn</option>";
+                            // console.log(data);
+                            //convert to search box
+                            html += data.map(province => {
+                                return (
+                                    `
                             <option class="search_item" value='${province[`${type}ID`]||province[`${type}Code`]}'>
                                 ${province[`${type}Name`]}
                             </option>
                         `
-                            )
-                        }).join('')
+                                )
+                            }).join('')
 
 
-                    } else {
-                        html = `<option>Không hỗ trợ khu vực </option>`;
+                        } else {
+                            html = `<option>Không hỗ trợ khu vực </option>`;
+                        }
+                        let select = document.querySelector(`.input_search.${className} `);
+                        select.value = "";
+                        select.innerHTML = html;
+                    },
+                    start: function () {
+                        this.handleEvent();
+                        this.getProvince();
                     }
-                    let select = document.querySelector(`.input_search.${className} `);
-                    select.value = "";
-                    select.innerHTML = html;
-                },
-                start: function () {
-                    this.handleEvent();
-                    this.getProvince();
                 }
+
+
+                app.start();
+
             }
 
+            formAjax('.submitOrder',(data)=>{
+                    Swal.fire(
+                        'Thanh toán thành công',
+                        '',
+                        'success'
+                    ).then((result)=>{
+                        // window.location.reload();
 
-            app.start();
-            // function loadCart(data) {
-            //     $("#cart-sidebar").empty();
-            //     $("#cart-sidebar").html(data);
-            //     if ($('#totalCartQuantity').val()) {
-            //         $('#header-cart-quantity').text($("#totalCartQuantity").val());
-            //     } else {
-            //         $('#header-cart-quantity').text(0);
-            //     }
-            // }
-            // function loadCart(data) {
-            //     $(".item-cart").empty();
-            //     $(".item-cart").html(data);
-            //     if ($('#totalQuanty').val()) {
-            //         $('.cart_counter').text($("#totalQuanty").val());
-            //     } else {
-            //         $('.cart_counter').text(0);
-            //     }
-            //     if ($('#totalPrice').data('price')) {
-            //         $('.carsub').text($('#totalPrice').data('price'));
-            //     } else {
-            //         $('.carsub').text(' 0đ');
-            //     }
-            // }
-            //
-            // function loadCartItem(data) {
-            //     $("#cart").empty();
-            //     $("#cart").html(data);
-            //     if ($('#totalQuanty1').val()) {
-            //         $('#priceTotal').text('(' + $("#totalQuanty1").val() + ' Món)');
-            //     } else {
-            //         $('#priceTotal').text(0);
-            //     }
-            // }
+                    })
+            });
+        </script>
 
-        }
-    </script>
+
+    @endpush
+
 
 @stop

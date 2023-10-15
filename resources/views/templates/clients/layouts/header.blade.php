@@ -396,7 +396,6 @@
 @push('scripts')
     <script>
         var forms = document.querySelectorAll(".form-account");
-        console.log(forms)
 
         //init span error message
         forms.forEach(form => {
@@ -458,31 +457,6 @@
                             window.location.reload();
 
                         })
-                        // Swal.fire({
-                        //     title: 'Are you sure?',
-                        //     text: "You won't be able to revert this!",
-                        //     icon: 'warning',
-                        //     showCancelButton: true,
-                        //     confirmButtonColor: '#3085d6',
-                        //     cancelButtonColor: '#d33',
-                        //     confirmButtonText: 'Yes, delete it!'
-                        // }).then((result) => {
-                        //     if (result.isConfirmed) {
-                        //         Swal.fire(
-                        //             'Deleted!',
-                        //             'Your file has been deleted.',
-                        //             'success'
-                        //         )
-                        //     }
-                        // })
-                        {{--window.location.replace(--}}
-                        {{--    '{{Redirect::intended(route("home"))->getTargetUrl()}}'--}}
-                        {{--);--}}
-                        // } else if (data == 2) {
-                        //
-                        //     $("#show_error").hide().html("Invalid login details");
-                        // }
-
                     }
 
 

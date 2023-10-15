@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Fronend\PaymentRequest;
 use App\Http\Services\OrderService;
 use App\Http\Services\SettingService;
 use Illuminate\Http\Request;
@@ -23,9 +24,8 @@ class PaymentController extends Controller
 
 
     /** pay with cod */
-    public function payWithCod(Request $request)
+    public function payWithCod(PaymentRequest $request)
     {
-        dd($request->all());
         $this->orderService->checkOutFormSubmit($request);
         dd(1);
         $setting = SettingService::getGeneralSetting();

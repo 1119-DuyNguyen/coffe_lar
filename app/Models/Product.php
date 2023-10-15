@@ -37,23 +37,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function variants()
-    {
-        return $this->hasMany(ProductVariant::class);
-    }
 
 
 
-    /** Check if product have discount */
-    public function checkDiscount(): bool
-    {
-        $currentDate = date('Y-m-d');
-
-        if ($this->offer_price > 0 && $currentDate >= $this->offer_start_date && $currentDate <= $this->offer_end_date) {
-            return true;
-        }
-
-        return false;
-    }
 
 }
