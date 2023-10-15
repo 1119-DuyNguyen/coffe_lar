@@ -88,12 +88,12 @@ $user=\Illuminate\Support\Facades\Auth::user();
                             </div>
                             <div class="col-12">
 
-{{--                                <div class="location_group form-group service">--}}
-{{--                                    <label>Phương thức vận chuyển</label>--}}
-{{--                                    <select type="text" value="" name="service" required--}}
-{{--                                            class="input_search service">--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
+                                <div class="location_group form-group service">
+                                    <label>Phương thức vận chuyển</label>
+                                    <select type="text" value="" name="service" required
+                                            class="input_search service">
+                                    </select>
+                                </div>
 
 
                             </div>
@@ -432,7 +432,15 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
 
             app.start();
-
+            // function loadCart(data) {
+            //     $("#cart-sidebar").empty();
+            //     $("#cart-sidebar").html(data);
+            //     if ($('#totalCartQuantity').val()) {
+            //         $('#header-cart-quantity').text($("#totalCartQuantity").val());
+            //     } else {
+            //         $('#header-cart-quantity').text(0);
+            //     }
+            // }
             function loadCart(data) {
                 $(".item-cart").empty();
                 $(".item-cart").html(data);

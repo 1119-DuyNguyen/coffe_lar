@@ -36,7 +36,7 @@ class GiaoHangNhanhController extends Controller
         $idDistrict= $request->input('idDistrict');
         $idWard= $request->input('idWard');
 
-        return  view('templates.clients.home.cart');
+        return $this->giaoHangNhanhService->getExternalApi('https://online-gateway.ghn.vn/shiip/public-api/master-data/ward', 'ward-'.$idDistrict,['district_id'=>$idDistrict]);
 
     }
 

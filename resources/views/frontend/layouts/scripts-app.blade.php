@@ -148,57 +148,57 @@
         {{--ajaxCartStoreFunction('.shopping-cart-form');--}}
 
         // add product to wishlist
-        $('.add_to_wishlist').on('click', function(e){
-            e.preventDefault();
-            let id = $(this).data('id');
+        {{--$('.add_to_wishlist').on('click', function(e){--}}
+        {{--    e.preventDefault();--}}
+        {{--    let id = $(this).data('id');--}}
 
-            $.ajax({
-                method: 'POST',
-                url: "{{route('user.wishlist.store')}}",
-                data: {id:id},
-                success:function(data){
-                    if(data.status === 'success'){
-                        $('#wishlist_count').text(data.count)
-                        // Swal.fire({
-                        //     position: 'top-end',
-                        //     icon: 'success',
-                        //     title: data.message,
-                        //     showConfirmButton: false,
-                        //     timer: 1500
-                        // })
-                    }else if(data.status === 'error'){
-                        // Swal.fire({
-                        //     position: 'top-end',
-                        //     icon: 'error',
-                        //     title: data.message,
-                        //     showConfirmButton: false,
-                        //     timer: 1500
-                        // })
-                    }
-                },
-                error: function(data){
-                    // console.log(data);
+        {{--    $.ajax({--}}
+        {{--        method: 'POST',--}}
+        {{--        url: "{{route('user.wishlist.store')}}",--}}
+        {{--        data: {id:id},--}}
+        {{--        success:function(data){--}}
+        {{--            if(data.status === 'success'){--}}
+        {{--                $('#wishlist_count').text(data.count)--}}
+        {{--                // Swal.fire({--}}
+        {{--                //     position: 'top-end',--}}
+        {{--                //     icon: 'success',--}}
+        {{--                //     title: data.message,--}}
+        {{--                //     showConfirmButton: false,--}}
+        {{--                //     timer: 1500--}}
+        {{--                // })--}}
+        {{--            }else if(data.status === 'error'){--}}
+        {{--                // Swal.fire({--}}
+        {{--                //     position: 'top-end',--}}
+        {{--                //     icon: 'error',--}}
+        {{--                //     title: data.message,--}}
+        {{--                //     showConfirmButton: false,--}}
+        {{--                //     timer: 1500--}}
+        {{--                // })--}}
+        {{--            }--}}
+        {{--        },--}}
+        {{--        error: function(data){--}}
+        {{--            // console.log(data);--}}
 
-                    if(data.status== 401 && data?.responseJSON?.message)
-                    {
-                        {{--Swal.fire({--}}
-                        {{--    position: 'top-end',--}}
-                        {{--    icon: 'error',--}}
-                        {{--    title: data.responseJSON.message,--}}
-                        {{--    text: "You must login to account for this action.",--}}
-                        {{--    showCancelButton: true,--}}
-                        {{--    confirmButtonText: 'Login',--}}
-                        {{--}).then((result)=> {--}}
-                        {{--    if (result.isConfirmed) {--}}
-                        {{--    window.location.href = "{{route('login')}}";--}}
-                        {{--    } else {--}}
-                        {{--    }--}}
-                        {{--})--}}
-                    }
+        {{--            if(data.status== 401 && data?.responseJSON?.message)--}}
+        {{--            {--}}
+        {{--                --}}{{--Swal.fire({--}}
+        {{--                --}}{{--    position: 'top-end',--}}
+        {{--                --}}{{--    icon: 'error',--}}
+        {{--                --}}{{--    title: data.responseJSON.message,--}}
+        {{--                --}}{{--    text: "You must login to account for this action.",--}}
+        {{--                --}}{{--    showCancelButton: true,--}}
+        {{--                --}}{{--    confirmButtonText: 'Login',--}}
+        {{--                --}}{{--}).then((result)=> {--}}
+        {{--                --}}{{--    if (result.isConfirmed) {--}}
+        {{--                --}}{{--    window.location.href = "{{route('login')}}";--}}
+        {{--                --}}{{--    } else {--}}
+        {{--                --}}{{--    }--}}
+        {{--                --}}{{--})--}}
+        {{--            }--}}
 
-                }
-            })
-        })
+        {{--        }--}}
+        {{--    })--}}
+        {{--})--}}
 
         // newsletter
         {{--$('#newsletter').on('submit', function(e){--}}
