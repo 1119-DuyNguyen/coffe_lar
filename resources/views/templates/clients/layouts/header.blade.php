@@ -362,12 +362,12 @@
                                             <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group">
-                                            <label>Địa Chỉ</label>
-                                            <input type="text" name="address" class="form-control">
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-lg-12 col-md-12">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label>Địa Chỉ</label>--}}
+{{--                                            <input type="text" name="address" class="form-control">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
 
                                     <div class="col-lg-12 col-md-12">
@@ -447,7 +447,7 @@
                     },
                     success: function (data) {
                         $('#login').modal('hide');
-                        $('#registerForm').modal('hide');
+                        // $('#registerForm').modal('hide');
 
                         Swal.fire(
                             'Đăng nhập thành công',

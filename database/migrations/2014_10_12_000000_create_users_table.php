@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
-
+//            $table->string('address')->nullable();
             //            $table->string('image')->default('default/no_image.jpg');
             $table->string('email')->unique();
             $table->boolean('status')->default(true);

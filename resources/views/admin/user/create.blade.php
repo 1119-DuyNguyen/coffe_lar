@@ -34,10 +34,10 @@
                             <input type="text" class="form-control" name="phone" value="">
                         </div>
 
-                        <div class="form-group">
-                            <label>Địa chỉ</label>
-                            <input type="text" class="form-control" name="address" value="">
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label>Địa chỉ</label>--}}
+{{--                            <input type="text" class="form-control" name="address" value="">--}}
+{{--                        </div>--}}
 
                         <div class="row">
                             <div class="col-md-6">
