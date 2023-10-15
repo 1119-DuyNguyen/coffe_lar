@@ -16,7 +16,8 @@
                     <h4>Danh sách vai trò</h4>
                   </div>
                   <div class="card-body">
-                    {{ $dataTable->table() }}
+{{--                    {{ $dataTable->table() }}--}}
+                      @livewire('role-table')
                   </div>
 
                 </div>
