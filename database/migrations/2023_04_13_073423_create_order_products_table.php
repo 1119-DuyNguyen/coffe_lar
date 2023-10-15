@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->noActionOnDelete();
             $table->foreignId('product_id')->constrained()->noActionOnDelete();
-            $table->double('variant_total_price')->unsigned();
+//            $table->double('variant_total_price')->unsigned();
             $table->double('product_price')->unsigned();
             $table->string('product_name');
             $table->integer('qty')->unsigned();

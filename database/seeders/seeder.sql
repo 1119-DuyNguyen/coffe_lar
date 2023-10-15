@@ -41,21 +41,6 @@ SET time_zone = "+00:00";
     --
 
 
-
-
-
-
---
--- Đang đổ dữ liệu cho bảng `wishlists`
---
-
-INSERT INTO `wishlists` (`id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(2, 4, 1, '2023-04-26 00:59:21', '2023-04-26 00:59:21'),
-(3, 5, 1, '2023-04-26 03:01:20', '2023-04-26 03:01:20'),
-(4, 6, 1, '2023-04-26 03:12:40', '2023-04-26 03:12:40'),
-(5, 7, 1, '2023-04-26 03:17:17', '2023-04-26 03:17:17');
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

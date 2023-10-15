@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         }
 
 //         data all
-        $this->call(ProductVariantSeeder::class);
+//        $this->call(ProductVariantSeeder::class);
 
     }
 }

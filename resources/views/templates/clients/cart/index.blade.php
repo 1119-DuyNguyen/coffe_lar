@@ -243,7 +243,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                                     '.ward .input_search').value;
                                 if (idWard&&idDistrict) {
                                     let url = "{{ route('ghn.price') }}";
-                                    try {
+
                                         $.ajax({
                                             type: 'get',
                                             url: url,
@@ -257,9 +257,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                                             }
                                         });
 
-                                    } catch (error) {
-                                        console.error('location error')
-                                    }
+
 
                                 }
 
@@ -397,7 +395,24 @@ $user=\Illuminate\Support\Facades\Auth::user();
                         console.error('location error')
                     }
                 },
+                getService: function (district,ward) {
+                    let url = "{{ route('ghn.ward', ":idDistrict") }}";
+                    url = url.replace(':idDistrict', district);
+                    let _this = this;
+                    try {
+                        $.ajax({
+                            type: 'get',
+                            url: url,
+                            success: function (data) {
 
+                                _this.renderLocationData(data.data.data, app.wardName);
+                            }
+                        });
+
+                    } catch (error) {
+                        console.error('location error')
+                    }
+                },
                 renderLocationData: (data, type = '') => {
                     let html = '';
                     let className = type.toLowerCase();

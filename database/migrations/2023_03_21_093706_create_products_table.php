@@ -20,7 +20,9 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->noActionOnDelete();
             $table->text('description');
             $table->text('content');
-
+            $table->integer('qty')->unsigned();
+            //Khối lượng (gram)
+            $table->integer('weight')->unsigned();
 
             $table->double('price')->unsigned();
 
