@@ -39,19 +39,22 @@ class CartService
         }
 
         $productList = Product::whereIn('id', $idProduct)->get();
-        $totalAmount = 0;
+        $subtotal = 0;
+        $weight=0;
         foreach ($cartItems as $key => &$cart) {
             // clone data without reference
-            $product =  $productList->firstWhere('id', $cart['id_product'])->replicate();
+            $product =  $productList->firstWhere('id', $cart['id_product']);
             if (empty($product)) {
                 continue;
             }
 
             $product->quantity=$cart['quantity'];
-            $totalAmount += ($product->price ) * $cart['quantity'];
+            $subtotal += ($product->price ) * $cart['quantity'];
             $cart['product-data'] = $product;
+//            dd($product);
+            $weight+=  ($product->weight ?? 0);
         }
-        return ['cartList' => $cartItems, 'productList' => $productList, 'total' => $totalAmount];
+        return ['cartList' => $cartItems, 'productList' => $productList, 'weight'=>$weight,'subtotal'=>$subtotal];
 //        return $this->cart;
     }
 
@@ -125,17 +128,17 @@ class CartService
             $cart = Cart::firstOrNew(['user_id' => $user->id]);
 
             $cartItems = json_decode($cart->cart_items, true);
-            if (isset($cartItems[$idProduct])) {
+            if (isset($cartItems[$idProduct]) && empty($idOldCart)) {
                 $productCart['quantity'] = $qty + $cartItems[$idProduct]['quantity'];
             } else {
                 $productCart['quantity'] = $qty;
             }
 
             $cartItems[$idCart] = $productCart ?? [];
-            if($idCart!=$idOldCart)
-            {
-                unset($cartItems[$idOldCart]);
-            }
+//            if(!empty($idOldCart))
+//            {
+//                unset($cartItems[$idOldCart]);
+//            }
             $cart->user_id = $user->id;
             $cart->cart_items = json_encode($cartItems);
             $cart->save();

@@ -19,6 +19,7 @@ class Product extends Model
         "content",
         "price",
         "status",
+        "weight"
     ];
     public static function boot()
     {

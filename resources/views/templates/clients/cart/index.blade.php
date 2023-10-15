@@ -57,7 +57,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                             <div class="col-12">
                                 <div class="location_group form-group province">
                                     <label>Tỉnh /Thành phố</label>
-                                    <select type="text" value="" name="province"
+                                    <select value="" name="province"
                                             class="input_search province" required>
                                     </select>
                                 </div>
@@ -68,7 +68,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                                 <div class="location_group form-group district">
                                     <label>Quận</label>
 
-                                    <select type="text" value="" name="district" required
+                                    <select value="" name="district" required
                                             class="input_search district">
 
                                     </select>
@@ -79,24 +79,24 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
                                 <div class="location_group form-group ward">
                                     <label>Phường / Xã</label>
-                                    <select type="text" value="" name="ward" required
+                                    <select value="" name="ward" required
                                             class="input_search ward">
                                     </select>
                                 </div>
 
 
                             </div>
-                            <div class="col-12">
+{{--                            <div class="col-12">--}}
 
-                                <div class="location_group form-group service">
-                                    <label>Phương thức vận chuyển</label>
-                                    <select type="text" value="" name="service" required
-                                            class="input_search service">
-                                    </select>
-                                </div>
+{{--                                <div class="location_group form-group service">--}}
+{{--                                    <label>Phương thức vận chuyển</label>--}}
+{{--                                    <select type="text" value="" name="service" required--}}
+{{--                                            class="input_search service">--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
 
 
-                            </div>
+{{--                            </div>--}}
                             <div class="col-12">
                                 <!-- Company Name -->
                                 <div class="form-group">
@@ -241,6 +241,8 @@ $user=\Illuminate\Support\Facades\Auth::user();
                                     '.district .input_search').value;
                                 let idWard = document.querySelector(
                                     '.ward .input_search').value;
+                                console.log(idWard,document.querySelector(
+                                    '.ward .input_search'));
                                 if (idWard&&idDistrict) {
                                     let url = "{{ route('ghn.price') }}";
 
@@ -424,7 +426,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                         html += data.map(province => {
                             return (
                                 `
-                            <option class="search_item" value='${province[`${type}ID`]}'>
+                            <option class="search_item" value='${province[`${type}ID`]||province[`${type}Code`]}'>
                                 ${province[`${type}Name`]}
                             </option>
                         `
@@ -433,7 +435,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
 
                     } else {
-                        html = `<option>Không tồn tại dữ liệu.</option>`;
+                        html = `<option>Không hỗ trợ khu vực </option>`;
                     }
                     let select = document.querySelector(`.input_search.${className} `);
                     select.value = "";

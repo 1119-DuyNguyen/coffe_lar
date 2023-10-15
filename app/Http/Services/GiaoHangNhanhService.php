@@ -34,17 +34,26 @@ class GiaoHangNhanhService
             return response()->json(['data' => $data]);
         }
     }
-    public function calculatePrice($url,$parameter){
-        $response = Http::withHeader(
-            'token',
-            $this->token,
-        )->acceptJson()->get($url, $parameter);
-        if ($response->ok()) {
-            $data = $response->json();
-            return response()->json(['data' => $data]);
-        } else {
-            return response()->json(['message' => "Lấy dữ liệu bị lỗi, hãy bấm F5"], 500);
+    public function calculatePrice($url, $nameCache, $parameter = []){
+
+        if (!Cache::has($nameCache)) {
+            $response = Http::withHeader(
+                'token',
+                $this->token,
+            )->acceptJson()->get($url, $parameter);
+            if ($response->ok()) {
+
+                $data = $response->json();
+                Cache::forever($nameCache,$data);
+
+            } else {
+                return 0;
+            }
         }
-        return  view('templates.clients.home.cart');
+        else {
+            $data= Cache::get($nameCache);
+        }
+        return  $data['data']['total'] ?? 0;
+
     }
 }

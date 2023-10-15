@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('content');
             $table->integer('qty')->unsigned()->default(100);
             //Khối lượng (gram)
-            $table->integer('weight')->unsigned();
+            $table->integer('weight')->unsigned()->default(500);
 
             $table->double('price')->unsigned();
 

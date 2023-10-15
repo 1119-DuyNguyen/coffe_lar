@@ -133,7 +133,7 @@
         <div class="modal-content" id="view-product">
             <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
             <div class="modal-body">
-                <div class="row align-items-center data-quickview">
+                <div class="row align-items-start data-quickview">
 
                 </div>
             </div>
