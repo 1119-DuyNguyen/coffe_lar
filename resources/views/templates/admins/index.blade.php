@@ -157,7 +157,7 @@ const formatCurrency = (x) => {
     });
     return x;
 }
-// thong ke theo nam 
+// thong ke theo nam
 var nowYear = new Date();
 var getNowYear = nowYear.getFullYear();
 let statisByYear = document.querySelector('#container-staticbyyear').getAttribute('data-staticbyyear');

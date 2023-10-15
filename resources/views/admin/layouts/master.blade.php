@@ -63,6 +63,8 @@
             white-space: nowrap;
         }
     </style>
+    @stack('head')
+
     <!-- /END GA -->
 {{--    vendor--}}
    {{--    @include('sweetalert::alert')--}}
