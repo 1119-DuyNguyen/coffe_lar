@@ -25,9 +25,9 @@ final class RoleTable extends PowerGridComponent
 //        $this->showCheckBox();
 
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+//            Exportable::make('export')
+//                ->striped()
+//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -58,27 +58,27 @@ final class RoleTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Name', 'name')
+            Column::make('Tên Vai Trò', 'name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Description', 'description')
+            Column::make('Mô Tả', 'description')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::action('Action')
+            Column::action('Thao Tác')
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::datetimepicker('created_at'),
-        ];
-    }
+//    public function filters(): array
+//    {
+//        return [
+//            Filter::datetimepicker('created_at'),
+//        ];
+//    }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void

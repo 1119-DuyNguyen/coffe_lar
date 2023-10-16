@@ -25,9 +25,9 @@ final class UserTable extends PowerGridComponent
 //        $this->showCheckBox();
 
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+//            Exportable::make('export')
+//                ->striped()
+//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -37,7 +37,7 @@ final class UserTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::query();
+        return User::query()->with('role');
     }
 
     public function relationSearch(): array
@@ -55,7 +55,9 @@ final class UserTable extends PowerGridComponent
             ->addColumn('email')
             ->addColumn('address')
             ->addColumn('phone')
-            ->addColumn('role_id')
+            ->addColumn('role_id', function ($model){
+                return $model->role->name;
+            })
             ->addColumn('created_at_formatted', fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
@@ -63,7 +65,7 @@ final class UserTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Name', 'name')
+            Column::make('Tên', 'name')
                 ->sortable()
                 ->searchable(),
 
@@ -71,32 +73,32 @@ final class UserTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Address', 'address')
+            Column::make('Địa Chỉ', 'address')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Phone', 'phone')
+            Column::make('Điện Thoại', 'phone')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Role id', 'role_id'),
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Vai Trò', 'role_id'),
+            Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::action('Action')
+            Column::action('Thao Tác')
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::inputText('name')->operators(['contains']),
-            Filter::inputText('email')->operators(['contains']),
-            Filter::inputText('address')->operators(['contains']),
-            Filter::inputText('phone')->operators(['contains']),
-            Filter::datetimepicker('created_at'),
-        ];
-    }
+//    public function filters(): array
+//    {
+//        return [
+//            Filter::inputText('name')->operators(['contains']),
+//            Filter::inputText('email')->operators(['contains']),
+//            Filter::inputText('address')->operators(['contains']),
+//            Filter::inputText('phone')->operators(['contains']),
+//            Filter::datetimepicker('created_at'),
+//        ];
+//    }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void

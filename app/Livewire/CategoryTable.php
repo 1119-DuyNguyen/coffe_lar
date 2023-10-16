@@ -25,9 +25,9 @@ final class CategoryTable extends PowerGridComponent
 //        $this->showCheckBox();
 
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+//            Exportable::make('export')
+//                ->striped()
+//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -56,7 +56,7 @@ final class CategoryTable extends PowerGridComponent
 
             ->addColumn('icon')
             ->addColumn('status')
-            ->addColumn('slug')
+//            ->addColumn('slug')
             ->addColumn('created_at_formatted', fn (Category $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
@@ -64,38 +64,38 @@ final class CategoryTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Name', 'name')
+            Column::make('Tên Danh Mục', 'name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Icon', 'icon')
+            Column::make('Biểu Tượng', 'icon')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Status', 'status')
+            Column::make('Trạng Thái', 'status')
                 ->toggleable(),
+//
+//            Column::make('Slug', 'slug')
+//                ->sortable()
+//                ->searchable(),
 
-            Column::make('Slug', 'slug')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::action('Action')
+            Column::action('Thao Tác')
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::inputText('name')->operators(['contains']),
-            Filter::inputText('icon')->operators(['contains']),
-            Filter::boolean('status'),
-            Filter::inputText('slug')->operators(['contains']),
-            Filter::datetimepicker('created_at'),
-        ];
-    }
+//    public function filters(): array
+//    {
+//        return [
+//            Filter::inputText('name')->operators(['contains']),
+//            Filter::inputText('icon')->operators(['contains']),
+//            Filter::boolean('status'),
+//            Filter::inputText('slug')->operators(['contains']),
+//            Filter::datetimepicker('created_at'),
+//        ];
+//    }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void

@@ -25,9 +25,9 @@ final class ProductTable extends PowerGridComponent
 //        $this->showCheckBox();
 
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+//            Exportable::make('export')
+//                ->striped()
+//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -37,7 +37,7 @@ final class ProductTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Product::query();
+        return Product::query()->with('category');
     }
 
     public function relationSearch(): array
@@ -55,8 +55,8 @@ final class ProductTable extends PowerGridComponent
            /** Example of custom column using a closure **/
             ->addColumn('name_lower', fn (Product $model) => strtolower(e($model->name)))
 
-            ->addColumn('slug')
-            ->addColumn('category_id')
+//            ->addColumn('slug')
+            ->addColumn('category_id', fn ($model) => $model->category->name)
             ->addColumn('description')
             ->addColumn('content')
             ->addColumn('price')
@@ -68,50 +68,50 @@ final class ProductTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Thumb image', 'thumb_image')
+            Column::make('Ảnh Nền', 'thumb_image')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Name', 'name')
+            Column::make('Tên Sản Phẩm', 'name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Slug', 'slug')
+//            Column::make('Slug', 'slug')
+//                ->sortable()
+//                ->searchable(),
+
+            Column::make('Loại Sản Phẩm', 'category_id'),
+            Column::make('Mô Tả', 'description')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Category id', 'category_id'),
-            Column::make('Description', 'description')
+            Column::make('Nội Dung', 'content')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Content', 'content')
+            Column::make('Đơn Giá', 'price')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Price', 'price')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Status', 'status')
+            Column::make('Trạng Thái', 'status')
                 ->toggleable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::action('Action')
+            Column::action('Thao Tác')
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::inputText('name')->operators(['contains']),
-            Filter::inputText('slug')->operators(['contains']),
-            Filter::boolean('status'),
-            Filter::datetimepicker('created_at'),
-        ];
-    }
+//    public function filters(): array
+//    {
+//        return [
+//            Filter::inputText('name')->operators(['contains']),
+//            Filter::inputText('slug')->operators(['contains']),
+//            Filter::boolean('status'),
+//            Filter::datetimepicker('created_at'),
+//        ];
+//    }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void

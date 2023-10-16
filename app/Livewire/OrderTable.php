@@ -25,9 +25,9 @@ final class OrderTable extends PowerGridComponent
 //        $this->showCheckBox();
 
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+//            Exportable::make('export')
+//                ->striped()
+//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -49,31 +49,62 @@ final class OrderTable extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('created_at_formatted', fn (Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->addColumn('total')
+            ->addColumn('payment_status', function ($model) {
+                switch ($model->payment_status) :
+                    case '0':
+                        return 'Đã thanh toán';
+                    case '1':
+                        return 'Chưa thanh toán';
+                    default:
+                        return 'Chưa xác định';
+                endswitch;
+            })
+            ->addColumn('order_status',  function ($model) {
+                switch ($model->order_status) :
+                    case '0':
+                        return 'Đang chờ xác nhận';
+                    case '1':
+                        return 'Sẵn sàng giao hàng';
+                    case '2':
+                        return 'Đang giao hàng';
+                    case '3':
+                        return 'Đã giao hàng';
+                    case '4':
+                        return 'Hủy';
+                    default:
+                        return 'Chưa xác định';
+                endswitch;
+            })
+            ->addColumn('created_at_formatted', fn(Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     public function columns(): array
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Tổng tiền', 'total')
+                ->sortable(),
+            Column::make('Hình thức thanh toán', 'payment_status'),
+            Column::make('Trạng thái', 'order_status'),
+            Column::make('Ngày tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::action('Action')
+            Column::action('Thao tác')
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::datetimepicker('created_at'),
-        ];
-    }
+//    public function filters(): array
+//    {
+//        return [
+//            Filter::datetimepicker('created_at'),
+//        ];
+//    }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void
     {
-        $this->js('alert('.$rowId.')');
+        $this->js('alert(' . $rowId . ')');
     }
 
     public function actions(\App\Models\Order $row): array
