@@ -35,7 +35,6 @@ class GiaoHangNhanhService
         }
     }
     public function calculatePrice($url, $nameCache, $parameter = []){
-
         if (!Cache::has($nameCache)) {
             $response = Http::withHeader(
                 'token',

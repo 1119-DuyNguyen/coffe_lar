@@ -27,15 +27,9 @@ class PaymentController extends Controller
     public function payWithCod(PaymentRequest $request)
     {
         $this->orderService->checkOutFormSubmit($request);
-        dd(1);
-        $setting = SettingService::getGeneralSetting();
-
-        // amount calculation
-        $total = getFinalPayableAmount();
-        $payableAmount = round($total, 2);
 
 
-        return $this->orderService->storeOrder('COD', 0, $payableAmount, $setting->currency_name, $setting->currency_icon);
+        return response()->json();
 
 
 

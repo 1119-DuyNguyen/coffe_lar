@@ -60,7 +60,6 @@ class GiaoHangNhanhController extends Controller
 //            "coupon"=> null
             ];
         $feeship=$this->giaoHangNhanhService->calculatePrice('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee', 'ward-'.$idDistrict.'service-'.$idWard,$params);
-//        dd($feeShip);
         return  view('templates.clients.home.cart',compact(["feeship"]));
 
     }

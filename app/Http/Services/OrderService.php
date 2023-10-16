@@ -16,6 +16,11 @@ use Illuminate\Validation\ValidationException;
 
 class OrderService
 {
+    private $giaoHangNhanhService;
+    public function __construct(GiaoHangNhanhService $giaoHangNhanhService)
+    {
+        $this->giaoHangNhanhService=$giaoHangNhanhService;
+    }
     private function isInsideArrayKey($valueCheck, $keyCheck, $array)
     {
         foreach ($array as $key => $value) {
@@ -58,9 +63,28 @@ class OrderService
         $nameDistrict=$this->getValueInsideArrayKey($idDistrict, 'DistrictID','DistrictName', $dataDistrict);
         $nameWard=$this->getValueInsideArrayKey($idWard, 'WardCode','WardName', $dataWard);
         $nameAddresss=$request->input('address','');
+        $realAddress = $nameProvince.', ' . $nameDistrict.', '.$nameWard.($nameAddresss ? ', '.$nameAddresss: $nameAddresss);
+        //getPriceOrder
+        $listCart=CartService::getListCart();
+        $params=[
 
+            'shop_id'=>4579088,
+            "service_type_id"=>2,
+            "to_district_id"=>$idDistrict,
+            "to_ward_code"=>$idWard,
+
+            "weight"=>$listCart['weight'],
+
+        ];
+        $feeShip=$this->giaoHangNhanhService->calculatePrice('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee', 'ward-'.$idDistrict.'service-'.$idWard,$params);
+        $subtotal=$listCart['subtotal'] ;
+        if(empty($subtotal))
+        {
+            abort(500);
+        }
         DB::beginTransaction();
         try {
+
             $order = new Order();
 
             if (Auth::check()) {
@@ -72,62 +96,58 @@ class OrderService
             $order['phone_receiver'] = $request->input("phone");
             $order['email_receiver'] = $request->input("email");
             $order['note'] = $request->input("note");
-            $realAddress = $nameProvince.', ' . $nameDistrict.', '.$nameWard.($nameAddresss ? ', '.$nameAddresss: $nameAddresss);
             $order['address_receiver'] = $realAddress;
+            $order['sub_total'] = $subtotal;
+            $order['fee_ship'] = $feeShip;
+            $order['total'] = $subtotal + $feeShip;
+
             $order->save();
-            dd($realAddress);
             // store order products
             $productQuantity = [];
 
-            foreach (\Cart::getContent() as $item) {
-                $productQuantity[$item->attributes->product_id]['qty'] = $item->quantity;
-
-                $productQuantity[$item->attributes->product_id]['variants'] = $item->attributes->variants;
-                $productQuantity[$item->attributes->product_id]['variant_total'] = $item->attributes->variants_total;
-                $productQuantity[$item->attributes->product_id]['unit_price'] = $item->price;
-            }
-
-            $productList = Product::whereIn('id', array_keys($productQuantity))->get();
-            foreach ($productList as $product) {
-                if ($product->qty > $productQuantity[$product->id]['qty']) {
+            $cartItems=$listCart['cartList'];
+            foreach ($cartItems as $cart) {
+                $product=$cart['product-data'] ?? [];
+                if(empty($product))
+                {
+                    continue;
+                }
+                $qty=$cart['quantity'];
+                if (false&&$product->qty > $qty) {
                     $orderProduct = new OrderProduct();
                     $orderProduct->order_id = $order->id;
                     $orderProduct->product_id = $product->id;
                     $orderProduct->product_name = $product->name;
-                    $orderProduct->variants = json_encode($productQuantity[$product->id]['variants']);
-                    $orderProduct->variant_total = json_encode($productQuantity[$product->id]['variant_total']);
-                    $orderProduct->unit_price = $productQuantity[$product->id]['unit_price'];
+                    $orderProduct->product_price = $product->price;
+                    $orderProduct->qty = $qty;
+                    //                    $orderProduct->variants = json_encode($productQuantity[$product->id]['variants']);
+//                    $orderProduct->variant_total = json_encode($productQuantity[$product->id]['variant_total']);
+//                    $orderProduct->unit_price = $productQuantity[$product->id]['unit_price'];
 
-                    $orderProduct->qty = $productQuantity[$product->id]['qty'];
                     $orderProduct->save();
                     // update product quantity
-                    $product->decrement('qty', $productQuantity[$product->id]['qty']);
+                    $product->decrement('qty', $qty);
+                }
+                else{
+                    throw ValidationException::withMessages(['Có sản phẩm đã hết hàng. Giao dịch thất bại ']);
                 }
             }
+            CartService::clear();
 
-            if (isset($coupon)) {
-                Coupon::findOrFail($coupon['id'])->decrement('quantity');
-            }
             DB::commit();
 
-            $this->clearSession();
             alert('Order created!', 'We will contact you shortly to confirm your order details.');
 
             return Redirect::to('/');
         } catch (\Exception $ex) {
             DB::rollback();
-            toast()->error($ex->getMessage());
-            return Redirect::to(route('cart.index'));
+            if($ex instanceof ValidationException)
+            {
+                throw ValidationException::withMessages([$ex->getMessage()]);
+            }
+            abort(500);
+//            return Redirect::to(route('cart.index'));
         }
-        dd($dataDistrict, $dataWard);
-    }
-
-    public function clearSession()
-    {
-        \Cart::clear();
-        Session::forget('address');
-        Session::forget('shipping_method');
-        Session::forget('coupon');
     }
 
     public function storeOrder($paymentMethod, $paymentStatus, $paidAmount, $paidCurrencyName, $paidCurrencyIcon)
