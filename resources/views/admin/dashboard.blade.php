@@ -58,19 +58,27 @@
             </div>
         </div>
         <div class="row">
-            <h1 class="col-12">Báo cáo doanh thu</h1>
+            <h1 class="col-12">Thống kê doanh thu các tháng trong năm(đồng)</h1>
             <div class="col-12">
-                <label for="yearSelect">Chọn năm:</label>
-                <select wire:model.lazy="selectedYear" name="selectedYear" id="yearSelect">
-                    {{--            lấy 30 năm từ bây giờ--}}
-                    @for($i=0;$i<10;++$i)
-                        @php
-                            $year=(int)date('Y') - $i;
-//                        @endphp
-                        <option value="{{ $year  }}">{{ $year }}</option>
-                    @endfor
+                <form action="{{route('admin.dashboard.index')}}" method="get">
+                    <label for="yearSelect">Chọn năm:</label>
+                    <select class="form-control" name="year" id="yearSelect" onchange="this.closest('form').submit();">
+                        {{--            lấy 30 năm từ bây giờ--}}
+                        @for($i=0;$i<10;++$i)
+                            @php
+                                $year=(int)date('Y') - $i;
+                            @endphp
+                            <option value="{{ $year  }}"
+                                    @if(!empty($selectedYear)&& $selectedYear == $year)
+                                        selected
+                                @endif
+                            >{{ $year }}</option>
+                        @endfor
 
-                </select>
+                    </select>
+
+                </form>
+
             </div>
             <div class="col-12">
                 <canvas id="revenueChart" width="400" height="200"></canvas>
@@ -78,26 +86,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <h1 class="col-12">Báo cáo doanh thu</h1>
-            <div class="col-12">
-                <label for="yearSelect">Chọn năm:</label>
-                <select wire:model.lazy="selectedYear" name="selectedYear" wire:change="change" id="yearSelect">
-                    {{--            lấy 30 năm từ bây giờ--}}
-                    @for($i=0;$i<10;++$i)
-                        @php
-                            $year=(int)date('Y') - $i;
-                        @endphp
-                        <option value="{{ $year  }}">{{ $year }}</option>
-                    @endfor
-
-                </select>
-            </div>
-            <div class="col-12">
-                <canvas id="revenueChart" width="400" height="200"></canvas>
-
-            </div>
-        </div>
 
         @push('scripts')
             @once
@@ -105,7 +93,8 @@
 
                 <script>
                     var ctx = document.getElementById('revenueChart').getContext('2d');
-                    function getMonthly(data){
+
+                    function getMonthly(data) {
                         var monthly = [];
 
                         for (let i = 1; i <= 12; ++i) {
@@ -113,18 +102,18 @@
                             let value = data.find(function (item) {
                                 return item.month == i; // Format as "YYYY-MM"
                             });
-                            monthly[i] = value ? (value.revenue ?? 0) : 0;
+                            monthly[month+ "/{{$selectedYear}}"] = value ? (value.revenue ?? 0) : 0;
                         }
                         return monthly;
                     }
-                    let monthly=getMonthly(@json($revenueData));
-                    console.log(monthly);
+
+                    let monthly = getMonthly(@json($revenueData));
                     var chart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: Object.keys(monthly),
                             datasets: [{
-                                label: 'Revenue',
+                                label: 'Doanh thu',
                                 data: Object.values(monthly),
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -137,51 +126,29 @@
                                     beginAtZero: true,
                                 },
                             },
+                            plugins: {
+                                legend: {
+                                    onClick: function (e) {
+                                        e.stopPropagation();
+                                    }
+                                }
+                            }
                         },
                     })
-                    Livewire.on('updateChart',(data)=>{
-                        console.log(data);
-                    })
-                    // Use Livewire to refresh the chart when the selectedYear changes
-                    // Livewire.on('updateChart', data => {
-                    //     let monthly=getMonthly(data);
-                    //     chart.data = {
-                    //         labels: Object.keys(monthly),
-                    //         datasets: [{
-                    //             label: 'Revenue',
-                    //             data: Object.values(monthly),
-                    //             backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    //             borderColor: 'rgba(75, 192, 192, 1)',
-                    //             borderWidth: 1,
-                    //         }],
-                    //     };
-                    //     chart.update();
-                    // });
-                    // document.getElementById('yearSelect').addEventListener('change', () => {
-                    //     chart.update({
-                    //         data: {
-                    //             labels: Object.keys(monthly),
-                    //             datasets: [{
-                    //                 label: 'Revenue',
-                    //                 data: Object.values(monthly),
-                    //                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    //                 borderColor: 'rgba(75, 192, 192, 1)',
-                    //                 borderWidth: 1,
-                    //             }],
-                    //         }});
-                    // })
+
+
 
                     // ... Chart.js code as previously shown ...
                 </script>
             @endonce
         @endpush
 
-{{--        <div class="row">--}}
-{{--            <div class="col-12" style="height: 50vh;">--}}
-{{--                <canvas id="topProduct"></canvas>--}}
+        {{--        <div class="row">--}}
+        {{--            <div class="col-12" style="height: 50vh;">--}}
+        {{--                <canvas id="topProduct"></canvas>--}}
 
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
     </section>
 
 @endsection

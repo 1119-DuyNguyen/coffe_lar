@@ -8,21 +8,37 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-
-    public function dashboard()
+    private function getRevenueData($selectedYear)
     {
+        if (empty($selectedYear)) {
+            $selectedYear = date('Y');
+        }
+        $revenueData = Order::selectRaw(
+            'MONTH(created_at) as month,SUM(total) as revenue'
+        )
+            ->whereYear('created_at', $selectedYear)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy('month')
+            ->get();
+        return $revenueData;
+    }
 
+    public function dashboard(Request $request)
+    {
         $countProduct = Product::where('status', 1)->count();
         $countOrder = Order::whereDate('created_at', Carbon::today())->count();
-
+        $selectedYear=$request->input('year', date('Y'));
+        $revenueData=$this->getRevenueData($selectedYear);
 //        $countOrder = Order::whereDate('ngaytao', Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d'))->count();
         return view(
             'admin.dashboard',
-            compact( 'countProduct', 'countOrder'),
+            compact('countProduct', 'countOrder','revenueData','selectedYear')
 //            compact('name_login'), ['topproduct' => json_encode($data), 'statisByYear' => json_encode($statisByYear), 'statisByDay' => json_encode($statisByDay), 'countProduct' => $countProduct, 'countOrder' => $countOrder]
         );
     }
