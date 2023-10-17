@@ -85,6 +85,7 @@ ul {
 -------------------------------------------------------------*/
 :root {
     --font-main: SF-Pro-Text-Light;
+    --hoverColor:#EA8025;
     --radial-gradient-orange-1: radial-gradient(100% 501.4% at 0% 100%, #ffb141 0%, #fb8d17 100%);
     --radial-gradient-orange-2: radial-gradient(100% 501.4% at 100% 100%, #ffb141 0%, #fb8d17 100%);
     --radial-gradient-orange-3: radial-gradient(100% 100% at 0% 0%, #f5222d 0%, #fb8d17 100%);
@@ -2255,12 +2256,7 @@ a.btn-trans-video i {
     color: #ffffff !important;
 }
 
-.btn-primary.active, .btn-primary:active, .btn-primary:focus,
-.btn-primary.disabled.active,
-.btn-primary.disabled:active,
-.btn-primary.disabled:focus {
-    background: #345bcb;
-}
+
 
 .btn-themecolor,
 .btn-themecolor.disabled {
@@ -3934,7 +3930,8 @@ nav a:hover {
 .nav-menu > .active > a,
 .nav-menu > .focus > a,
 .nav-menu > li:hover > a {
-    color: black !important;
+    color: var(--hoverColor);
+    opacity: 0.8;
 }
 
 .nav-menu > li > a > [class*=ion-], .nav-menu > li > a > i {
@@ -11803,9 +11800,10 @@ li:hover .user-dropdown {
 
 
 .user-dropdown ul li:hover {
-    background-color: #ffb675;
-    color: #fff;
-    border-color: #ffb675;
+    background-color: #fff;
+    opacity: 0.8;
+    color: var(--hoverColor);
+    /*border-color: #ffb675;*/
 }
 
 .social {

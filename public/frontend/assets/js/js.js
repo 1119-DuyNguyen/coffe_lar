@@ -42,16 +42,22 @@ $(document).ready(function () {
         };
     });
 
-    const dropUser = document.querySelector(".dropdow-user");
-    const drop = document.querySelector(".user-dropdown");
-    const dropexit = document.querySelector(".dropexit");
-    dropUser.onclick = function (e) {
-        e.preventDefault();
-        drop.classList.toggle("active");
-    };
-    dropexit.onclick = () => {
-        drop.classList.remove("active");
-    };
+    const dropUser = document.querySelectorAll(".dropdown-user");
+    dropUser.forEach(drop=>{
+        let parent=drop.parentElement;
+        const dropModal = parent.querySelector(".user-dropdown");
+
+        drop.onclick = function (e) {
+            e.preventDefault();
+            dropModal.classList.toggle("active");
+        };
+        const dropexit = parent.querySelector(".dropexit");
+
+        dropexit.onclick = () => {
+            dropModal.classList.remove("active");
+        };
+    })
+
 
 
 

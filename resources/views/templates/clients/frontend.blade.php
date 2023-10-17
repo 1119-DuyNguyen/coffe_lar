@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/semantic.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/bootstrap.css') }}" /> -->
-    @livewireStyles
     {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>--}}
 </head>
 
@@ -75,7 +74,6 @@
         document.getElementById("rightMenu").style.display = "none";
     }
 </script>
-@livewireScripts
 @include('templates.clients.js.js')
 @include('templates.clients.js.notification')
 @stack('scripts')

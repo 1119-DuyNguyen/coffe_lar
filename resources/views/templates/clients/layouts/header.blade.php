@@ -1,5 +1,8 @@
+@php
+    use App\Http\Services\CartService;use App\Models\Category;
+$categories=Category::all();
 
-@php use App\Http\Services\CartService; @endphp
+@endphp
 <div id="preloader">
     <div class="preloader"><span></span><span></span></div>
 </div>
@@ -14,20 +17,19 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-9 col-md-6 col-sm-6 col-4">
+                <div class="col-lg-9 col-md-6 col-6">
                         <span class="t-14 ">
-                            {{$settings->name}} - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - ĐIỆN THOẠI:
-                                                        {{$settings->contact_phone ?? ""}}
+{{--                            {{$settings->name}}--}}
+                            {{--                            - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - --}}
+                            Liên hệ: {{$settings->contact_phone ?? ""}}
                         </span>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-8">
+                <div class="col-lg-3 col-md-6 col-6">
                     <div class="topbar_menu">
                         <ul>
-                            <li><a href="#"><i class="fab fa-youtube"></i>Youtube</a></li>
-                            @if(get_user('customer'))
-                                <li class="hide-m"><a href="{{ route('get.infouser', 'wishlist')}}"><i
-                                            class="fas fa-heart"></i>Yêu thích</a></li>
-                            @endif
+                            <li><a href="#" class="d-flex justify-content-end align-items-center"><i
+                                        class="fab fa-youtube"></i>Youtube</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -49,44 +51,64 @@
                     </a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-4 col-3">
-                    {{--                        <nav id="navigation" class="navigation navigation-landscape">--}}
-                    {{--                            <div class="nav-header">--}}
-                    {{--                                <div class="nav-toggle"></div>--}}
-                    {{--                            </div>--}}
-                    {{--                            <div class="nav-menus-wrapper" style="transition-property: none;">--}}
-                    {{--                                <ul class="nav-menu">--}}
+
+                    <nav id="navigation" class="navigation navigation-landscape">
+                        <div class="nav-header">
+                            <div class="nav-toggle"></div>
+                        </div>
+                        <div class="nav-menus-wrapper" style="transition-property: none;">
+                            <ul class="nav-menu">
 
 
+                            </ul>
 
-                    {{--                                    --}}{{--                                    <li><a href="{{ route('about')}}">Cửa hàng<span--}}
-                    {{--                                    --}}{{--                                                class="submenu-indicator"></span></a>--}}
-
-                    {{--                                    --}}{{--                                    </li>--}}
-
-
-                    {{--                                    --}}{{--                                    <li><a href="{{ route('get.all.promotion')}}">Khuyến mãi<span--}}
-                    {{--                                    --}}{{--                                                class="submenu-indicator"></span></a>--}}
-                    {{--                                    --}}{{--                                        <!-- <ul class="nav-dropdown nav-submenu">--}}
-                    {{--                                    --}}{{--                                            <li><a href="blog.html">...</a></li>--}}
-
-                    {{--                                    --}}{{--                                        </ul> -->--}}
-                    {{--                                    --}}{{--                                    </li>--}}
-
-                    {{--                                </ul>--}}
-
-                    {{--                            </div>--}}
-                    {{--                        </nav>--}}
+                        </div>
+                    </nav>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-5 col-5">
                     <div class="general_head_right">
                         <ul>
+                            <!-- category-->
+                            <li>
+                                <a class="border-icon dropdown-user" href="javascript:void(0);">
+                                    <i class="fas fa-list"></i>
+                                </a>
+                                <div class="user-dropdown">
+                                    <i class="fas fa-times dropexit d-lg-none"></i>
+                                    <h4 class=" text-center text-bold">
+                                        Danh mục
+                                    </h4>
+                                    <ul>
+                                        @foreach ($categories as $category)
+                                            <li  class="dropdown-item">
+                                                <i
+                                                    class="{{$category->icon}}"></i>
+                                                <a
+                                                    href="{{route('product.index', ['category' => $category->slug])}}"> {{$category->name}} </a>
+                                            </li>
+                                        @endforeach
+
+{{--                                        @can('admin.dashboard.index')--}}
+
+{{--                                            <li class="dropdown-item">--}}
+{{--                                                <i class="fas fa-chart-bar"></i>--}}
+{{--                                                <a href="{{route('admin.dashboard.index')}}">--}}
+{{--                                                    Thông tin người quản trị</a>--}}
+{{--                                            </li>--}}
+{{--                                        @endcan--}}
+
+
+                                    </ul>
+                                </div>
+
+                            </li>
                             @if(Auth::check())
-                                <li><a href="" class="dropdow-user border-icon ">
+                                <li><a href="" class="dropdown-user border-icon ">
                                         <i class="fas fa-user-circle"></i>
 
                                     </a>
-                                    <div class="user-dropdown" >
+                                    <div class="user-dropdown">
                                         <i class="fas fa-times dropexit d-lg-none"></i>
                                         <h4 class=" text-center text-bold">
                                             {{ Auth::user()->name?? 'Khách hàng' }}
@@ -99,8 +121,8 @@
 
                                             @can('user.dashboard.index')
                                                 <li class="dropdown-item">
-{{--                                                    <i--}}
-{{--                                                        class="fas fa-chart-bar"></i>--}}
+                                                    {{--                                                    <i--}}
+                                                    {{--                                                        class="fas fa-chart-bar"></i>--}}
                                                     <i class="fas fa-info-circle"></i>
                                                     <a href="{{route('user.profile')}}">
                                                         Thông tin
@@ -123,12 +145,12 @@
                                                         {{__("Order")}}</a></li>
                                             @endcan
 
-{{--                                            <li class="dropdown-item">--}}
-{{--                                                <i class="fas fa-sync"></i>--}}
-{{--                                                <a class="" href="{{ route('user.profile')}}">--}}
-{{--                                                    Đổi mật--}}
-{{--                                                    khẩu</a>--}}
-{{--                                            </li>--}}
+                                            {{--                                            <li class="dropdown-item">--}}
+                                            {{--                                                <i class="fas fa-sync"></i>--}}
+                                            {{--                                                <a class="" href="{{ route('user.profile')}}">--}}
+                                            {{--                                                    Đổi mật--}}
+                                            {{--                                                    khẩu</a>--}}
+                                            {{--                                            </li>--}}
                                             <form action="{{route('logout')}}" method="POST">
                                                 @csrf
 
@@ -145,9 +167,10 @@
                                     </div>
                                 </li>
                             @else
-                                <li><a href="" class="dropdow-user border-icon ">
+                                <li><a href="" class="dropdown-user border-icon ">
                                         <i class="fas fa-user-circle"></i>
                                     </a>
+
                                     <div class="user-dropdown">
                                         <i class="fas fa-times dropexit d-lg-none"></i>
                                         <ul>
@@ -362,12 +385,12 @@
                                             <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
-{{--                                    <div class="col-lg-12 col-md-12">--}}
-{{--                                        <div class="form-group">--}}
-{{--                                            <label>Địa Chỉ</label>--}}
-{{--                                            <input type="text" name="address" class="form-control">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                    {{--                                    <div class="col-lg-12 col-md-12">--}}
+                                    {{--                                        <div class="form-group">--}}
+                                    {{--                                            <label>Địa Chỉ</label>--}}
+                                    {{--                                            <input type="text" name="address" class="form-control">--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
 
 
                                     <div class="col-lg-12 col-md-12">
@@ -453,7 +476,7 @@
                             'Đăng nhập thành công',
                             '',
                             'success'
-                        ).then((result)=>{
+                        ).then((result) => {
                             window.location.reload();
 
                         })

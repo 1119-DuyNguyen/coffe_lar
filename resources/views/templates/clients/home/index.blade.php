@@ -28,14 +28,14 @@
                              alt="Third slide">
                     </a>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+{{--                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">--}}
+{{--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
+{{--                    <span class="sr-only">Previous</span>--}}
+{{--                </a>--}}
+{{--                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">--}}
+{{--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
+{{--                    <span class="sr-only">Next</span>--}}
+{{--                </a>--}}
             </div>
 
         </div>
@@ -66,53 +66,6 @@
                     @foreach($productNew as $value)
                         <div class="col-12 col-md-6 col-lg-3 ">
                             <x-product :product="$value"></x-product>
-                            <!-- Single Item -->
-                            {{--                                <div class="item">--}}
-                            {{--                                    <div class="woo_product_grid">--}}
-                            {{--                                        <span class="woo_pr_tag hot">Mới</span>--}}
-                            {{--                                        --}}{{--                            @if(count($value->Coupon) > 0)--}}
-                            {{--                                        --}}{{--                            <span class="woo_offer_sell">--}}
-                            {{--                                        --}}{{--                                ---}}
-                            {{--                                        --}}{{--                                {{currency_format($value->Coupon[0]->giamgia, ($value->Coupon[0]->loaigiam === 2) ? 'đ' : '%')}}</span>--}}
-                            {{--                                        --}}{{--                            @endif--}}
-                            {{--                                        <div class="woo_product_thumb">--}}
-                            {{--                                            <img src="{{ asset('uploads/product/'.$value->thumb_image)}}"--}}
-                            {{--                                                 class="img-fluid" alt=""/>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <div class="woo_product_caption center">--}}
-                            {{--                                            <div class="woo_title">--}}
-                            {{--                                                <h4 class="woo_pro_title"><a--}}
-                            {{--                                                        href="{{route('product.show', $value->slug)}}">{{$value->tensp}}</a>--}}
-                            {{--                                                </h4>--}}
-                            {{--                                            </div>--}}
-                            {{--                                            <div class="woo_price ">--}}
-                            {{--                                                <h6>--}}
-                            {{--                                                    @if(false&&count($value->Coupon) > 0)--}}
-                            {{--                                                            <?php--}}
-                            {{--                                                            $price = 0;--}}
-                            {{--                                                            if ($value->Coupon[0]->loaigiam === 2) {--}}
-                            {{--                                                                $price = $value->giaban - $value->Coupon[0]->giamgia;--}}
-                            {{--                                                            } else {--}}
-                            {{--                                                                $price = $value->giaban - ($value->giaban * $value->Coupon[0]->giamgia / 100);--}}
-                            {{--                                                            }--}}
-                            {{--                                                            ?>--}}
-                            {{--                                                        {{currency_format($price)}}--}}
-                            {{--                                                        <span class="less_price">--}}
-                            {{--                                            {{currency_format($value->giaban)}}--}}
-                            {{--                                        </span>--}}
-                            {{--                                                    @else--}}
-                            {{--                                                        {{currency_format($value->giaban)}}--}}
-                            {{--                                                    @endif--}}
-                            {{--                                                </h6>--}}
-                            {{--                                                <a href="javascript:" class="btn-plus quickView"--}}
-                            {{--                                                   data-id="{{$value->id}}"><i--}}
-                            {{--                                                        class="fa fa-plus-circle" aria-hidden="true"></i></a>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </div>--}}
-
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-
 
                         </div>
                     @endforeach

@@ -20,7 +20,22 @@
                 <input type="text" class="form-control" id="searchTerm" name="searchTerm"
                        placeholder="Tìm tên sản phẩm mà bạn quan tâm" wire:model.lazy="searchTerm">
             </div>
+            <div class="form-group input-search">
 
+                <select class="form-control" name="categorySlug" wire:model.live="categorySlug">
+                    <option>Tất cả</option>
+
+                    @foreach ($categories as $category)
+                        <option class="dropdown-item" value="{{$category->slug}}" {{$curCategorySlug == $category->slug ? "selected" : $categorySlug}} >
+                            <i
+                                class="{{$category->icon}}"></i>
+                            {{$category->name}}
+                        </option>
+
+                    @endforeach
+                </select>
+
+            </div>
         </div>
     </div>
     <div class="row align-items-center">
@@ -44,13 +59,16 @@
 
     </div>
     @if($products->count()>0)
-    <div class="row">
-        <div class="col-12">
+        <div class="row">
+            <div class="col-12">
 
-        {{ $products->links() }}
+                {{ $products->links() }}
+            </div>
+
         </div>
-
-    </div>
     @endif
-
+    <span>
+                    {{$curCategorySlug}}
+                    test
+                </span>
 </div>

@@ -11,42 +11,46 @@ use Livewire\WithPagination;
 class ProductSearch extends Component
 {
     use WithPagination;
+    #[Url(as: 'search' ,keep: true)]
+    public string $searchTerm='';
+    #[Url(as:'category',keep: true)]
+    public string $categorySlug='';
 
-    public $searchTerm;
     protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
         $products = Product::where(['status' => true]);
         $categories = Category::where(['status' => true])->get();
-        $request = request();
-
-        $this->categories = $categories;
-        if ($request->filled('category')) {
-            $category = $categories->firstWhere('slug', $request->input('category'));
-            $category = Category::where('slug', $request->input('category', ''))->firstOrFail();
-            $products = $products->where([
-                'category_id' => $category->id,
-            ]);
-        }
-        if(!empty($this->searchTerm)){
-            $products = $products
-                ->where('name', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('description', 'like', '%' . $this->searchTerm . '%')
-                    ;
+        if (!empty($this->categorySlug)) {
+            $category = $categories->firstWhere('slug', $this->categorySlug);
+            if(!empty($category))
+            {
+                $products = $products->where([
+                    'category_id' => $category->id,
+                ]);
             }
 
-
-        if ($request->filled('range-min') && $request->filled('range-max')) {
-            $from = $request->input('range-min');
-            $to = $request->input('range-max');
-            $products = $products->where('price', '>=', $from)->where('price', '<=', $to);
         }
+
+        if (!empty($this->searchTerm)) {
+            $products = $products
+                ->where('name', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('description', 'like', '%' . $this->searchTerm . '%');
+        }
+
+
+//        if ($request->filled('range-min') && $request->filled('range-max')) {
+//            $from = $request->input('range-min');
+//            $to = $request->input('range-max');
+//            $products = $products->where('price', '>=', $from)->where('price', '<=', $to);
+//        }
         $products = $products->orderBy('id', 'DESC')->paginate(8);
 
-        return view('livewire.product-search',[
+        return view('livewire.product-search', [
             'products' => $products,
             'categories' => $categories,
+            'curCategorySlug'=>$this->categorySlug
         ]);
     }
 }
