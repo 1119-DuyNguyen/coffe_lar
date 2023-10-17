@@ -5267,7 +5267,7 @@ div#myCategories {
     transition: all ease 0.4s;
 } */
 .theme-cl {
-    color: #5dbf13;
+    color: var(--hoverColor);
 }
 
 .banner_caption_form .input-group {

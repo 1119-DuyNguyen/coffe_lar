@@ -20,13 +20,18 @@
                 <input type="text" class="form-control" id="searchTerm" name="searchTerm"
                        placeholder="Tìm tên sản phẩm mà bạn quan tâm" wire:model.lazy="searchTerm">
             </div>
+
             <div class="form-group input-search">
 
                 <select class="form-control" name="categorySlug" wire:model.live="categorySlug">
-                    <option>Tất cả</option>
+                    <option value="" disabled>Danh mục</option>
+
+                    <option value="">Tất cả</option>
 
                     @foreach ($categories as $category)
-                        <option class="dropdown-item" value="{{$category->slug}}" {{$curCategorySlug == $category->slug ? "selected" : $categorySlug}} >
+                        <option class="dropdown-item" value="{{$category->slug}}" {{$curCategorySlug == $category->slug ? "selected" : $categorySlug}}
+                        wire:key="{{ $category->slug }}"
+                        >
                             <i
                                 class="{{$category->icon}}"></i>
                             {{$category->name}}
@@ -67,8 +72,5 @@
 
         </div>
     @endif
-    <span>
-                    {{$curCategorySlug}}
-                    test
-                </span>
+
 </div>

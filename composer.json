@@ -15,7 +15,8 @@
         "livewire/livewire": "^3.0",
         "realrashid/sweet-alert": "^7.0",
         "srmklive/paypal": "~3.0",
-        "yajra/laravel-datatables": "10.0"
+        "yajra/laravel-datatables": "10.0",
+        "power-components/livewire-powergrid": "^5.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

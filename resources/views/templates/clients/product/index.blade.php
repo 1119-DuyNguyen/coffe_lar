@@ -2,11 +2,9 @@
 @section('content')
 
 
-<section >
-    <div class="container">
+<section style="min-height: 100vh;" >
 
         <livewire:product-search/>
-    </div>
 
 </section>
 

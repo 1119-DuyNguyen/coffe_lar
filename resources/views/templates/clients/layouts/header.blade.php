@@ -1,5 +1,5 @@
 @php
-    use App\Http\Services\CartService;use App\Models\Category;
+    use App\Http\Services\CartService;use App\Models\Category;use Illuminate\Support\Facades\Route;
 $categories=Category::all();
 
 @endphp
@@ -70,39 +70,6 @@ $categories=Category::all();
                     <div class="general_head_right">
                         <ul>
                             <!-- category-->
-                            <li>
-                                <a class="border-icon dropdown-user" href="javascript:void(0);">
-                                    <i class="fas fa-list"></i>
-                                </a>
-                                <div class="user-dropdown">
-                                    <i class="fas fa-times dropexit d-lg-none"></i>
-                                    <h4 class=" text-center text-bold">
-                                        Danh mục
-                                    </h4>
-                                    <ul>
-                                        @foreach ($categories as $category)
-                                            <li  class="dropdown-item">
-                                                <i
-                                                    class="{{$category->icon}}"></i>
-                                                <a
-                                                    href="{{route('product.index', ['category' => $category->slug])}}"> {{$category->name}} </a>
-                                            </li>
-                                        @endforeach
-
-{{--                                        @can('admin.dashboard.index')--}}
-
-{{--                                            <li class="dropdown-item">--}}
-{{--                                                <i class="fas fa-chart-bar"></i>--}}
-{{--                                                <a href="{{route('admin.dashboard.index')}}">--}}
-{{--                                                    Thông tin người quản trị</a>--}}
-{{--                                            </li>--}}
-{{--                                        @endcan--}}
-
-
-                                    </ul>
-                                </div>
-
-                            </li>
                             @if(Auth::check())
                                 <li><a href="" class="dropdown-user border-icon ">
                                         <i class="fas fa-user-circle"></i>
@@ -199,23 +166,55 @@ $categories=Category::all();
                                     </div>
                                 </li>
                             @endif
-                            <li>
-                                <a class="border-icon" href="javascript:void(0);" data-toggle="modal"
-                                   data-target="#form-search" id="header-search">
-                                    <i class="fas fa-search"></i>
-                                </a>
+                            @if(!Route::is('product.index'))
+                                <li>
+                                    <a class="border-icon dropdown-user" href="javascript:void(0);">
+                                        <i class="fas fa-list"></i>
+                                    </a>
+                                    <div class="user-dropdown">
+                                        <i class="fas fa-times dropexit d-lg-none"></i>
+                                        <h4 class=" text-center text-bold">
+                                            Danh mục
+                                        </h4>
+                                        <ul>
+                                            @foreach ($categories as $category)
+                                                <li class="dropdown-item">
+                                                    <i
+                                                        class="{{$category->icon}}"></i>
+                                                    <a
+                                                        href="{{route('product.index', ['category' => $category->slug])}}"> {{$category->name}} </a>
+                                                </li>
+                                            @endforeach
 
+                                        </ul>
+                                    </div>
 
-                            </li>
+                                </li>
+
+                                <li>
+                                    {{--                                <a class="border-icon" href="javascript:void(0);" data-toggle="modal"--}}
+                                    {{--                                   data-target="#form-search" id="header-search">--}}
+                                    {{--                                    <i class="fas fa-search"></i>--}}
+                                    {{--                                </a>--}}
+                                    <a class="border-icon" href="{{route('product.index')}}">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+
+                                </li>
+                            @endif
+
                             <li>
-                                @if(Route::currentRouteName() !== "get.cart")
-                                    <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i
-                                            class="fas fa-cart-plus"></i><span class="cart_counter"
-                                                                               id="header-cart-quantity">
+                                <a class="border-icon" href="{{route('cart.index')}}" ><i
+                                        class="fas fa-cart-plus"></i><span class="cart_counter"
+                                                                           id="header-cart-quantity">
                                             {{CartService::countCart()}}
                                         </span></a>
+{{--                                    <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i--}}
+{{--                                            class="fas fa-cart-plus"></i><span class="cart_counter"--}}
+{{--                                                                               id="header-cart-quantity">--}}
+{{--                                            {{CartService::countCart()}}--}}
+{{--                                        </span></a>--}}
 
-                                @endif
                             </li>
                         </ul>
                     </div>
@@ -242,21 +241,21 @@ $categories=Category::all();
 <!-- ============================================================== -->
 <!-- Top header  -->
 <!-- ============================================================== -->
-<div class="modal fade" id="form-search" tabindex="-1" role="dialog" aria-labelledby="add-payment"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered align-items-center d-flex justify-content-center h-100"
-         role="document">
-        <div class="modal-content h-75" id="view-product">
-            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>
-            <span class="header-search">Tìm kiếm</span>
-            <div class="modal-body">
-                {{--                @livewire('product-search')--}}
-                <livewire:product-search/>
+{{--<div class="modal fade" id="form-search" tabindex="-1" role="dialog" aria-labelledby="add-payment"--}}
+{{--     aria-hidden="true">--}}
+{{--    <div class="modal-dialog modal-dialog-centered align-items-center d-flex justify-content-center h-100"--}}
+{{--         role="document">--}}
+{{--        <div class="modal-content h-75" id="view-product">--}}
+{{--            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>--}}
+{{--            <span class="header-search">Tìm kiếm</span>--}}
+{{--            <div class="modal-body">--}}
+{{--                --}}{{--                @livewire('product-search')--}}
+{{--                <livewire:product-search/>--}}
 
-            </div>
-        </div>
-    </div>
-</div>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" id="view-product">

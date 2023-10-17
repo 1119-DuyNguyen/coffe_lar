@@ -11,13 +11,23 @@ use Livewire\WithPagination;
 class ProductSearch extends Component
 {
     use WithPagination;
-    #[Url(as: 'search' ,keep: true)]
     public string $searchTerm='';
-    #[Url(as:'category',keep: true)]
+
+
     public string $categorySlug='';
 
     protected $paginationTheme = 'bootstrap';
-
+    protected function queryString()
+    {
+        return [
+            'searchTerm' => [
+                'as' => 'search',
+            ],
+            'categorySlug'=>[
+                'as' => 'category',
+            ]
+        ];
+    }
     public function render()
     {
         $products = Product::where(['status' => true]);

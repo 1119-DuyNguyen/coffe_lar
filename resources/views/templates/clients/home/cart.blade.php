@@ -6,29 +6,30 @@
 
 @if(!empty($carts) && count($carts)>0)
     <div class="cart_subtotal priceTotal">
-        <h6>Tổng đơn hàng<span class="theme-cl carsub">{{ currency_format($subtotal, 'đ') }}</span>
+        <h6>Tổng đơn hàng<span class="carsub">{{ currency_format($subtotal, 'đ') }}</span>
         </h6>
         <div class="not-cart">
 
 
             @isset($feeship)
-                <h6>Phí vận chuyển<span class="theme-cl">
+                <h6>Phí vận chuyển<span>
                             {{ currency_format($feeship)}}
                         </span></h6>
-
+                @if($feeship<0)
+                    <h6>Phí vận chuyển<span>
+                            Không hỗ trợ vận chuyển
+                        </span></h6>
+                @endif
             @else
 
                 <h6>Phí vận chuyển<span>
-                            Không hỗ trợ vận chuyển
+                            -
                         </span></h6>
             @endif
-                <?php
-                $feeship = $feeship ?? 0;
 
-                ?>
         </div>
         <h6>Tổng tiền<span class="theme-cl">
-                    {{currency_format(($subtotal + $feeship), 'đ')}}
+                    {{currency_format(($subtotal + ($feeship??0)), 'đ')}}
             </span></h6>
 
         {{--        <input id="checkFeeship" hidden type="number" value="{{$feeship}}">--}}

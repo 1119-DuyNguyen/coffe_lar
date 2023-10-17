@@ -7,7 +7,7 @@
   width: 100%;
   background:radial-gradient(100% 501.4% at 100% 100%,#ffb141 0%,#fb8d17 100%);
   ">
-        <div class="container-fluid container-lg position-relative">
+        <div class="container container-lg position-relative">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -74,12 +74,5 @@
         </div>
     </section>
     <div class="clearfix"></div>
-    <section class="pt-0 ">
 
-
-
-            <livewire:product-search/>
-
-    </section>
-    <div class="clearfix"></div>
 @stop
