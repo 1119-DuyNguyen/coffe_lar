@@ -68,7 +68,7 @@
     <!-- /END GA -->
 {{--    vendor--}}
    {{--    @include('sweetalert::alert')--}}
-
+    @livewireStyles
 </head>
 
 <body>
@@ -120,7 +120,7 @@
 
 {{--vendor--}}
 
-
+@livewireScripts
 
     <!-- Dynamic Delete alart -->
 

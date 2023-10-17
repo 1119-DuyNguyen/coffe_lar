@@ -58,170 +58,132 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12" style="height: 50vh;">
-                <canvas id="topProduct"></canvas>
+            <h1 class="col-12">Báo cáo doanh thu</h1>
+            <div class="col-12">
+                <label for="yearSelect">Chọn năm:</label>
+                <select wire:model.lazy="selectedYear" name="selectedYear" id="yearSelect">
+                    {{--            lấy 30 năm từ bây giờ--}}
+                    @for($i=0;$i<10;++$i)
+                        @php
+                            $year=(int)date('Y') - $i;
+//                        @endphp
+                        <option value="{{ $year  }}">{{ $year }}</option>
+                    @endfor
+
+                </select>
+            </div>
+            <div class="col-12">
+                <canvas id="revenueChart" width="400" height="200"></canvas>
 
             </div>
         </div>
-    </section>
 
+        <div class="row">
+            <h1 class="col-12">Báo cáo doanh thu</h1>
+            <div class="col-12">
+                <label for="yearSelect">Chọn năm:</label>
+                <select wire:model.lazy="selectedYear" name="selectedYear" wire:change="change" id="yearSelect">
+                    {{--            lấy 30 năm từ bây giờ--}}
+                    @for($i=0;$i<10;++$i)
+                        @php
+                            $year=(int)date('Y') - $i;
+                        @endphp
+                        <option value="{{ $year  }}">{{ $year }}</option>
+                    @endfor
 
+                </select>
+            </div>
+            <div class="col-12">
+                <canvas id="revenueChart" width="400" height="200"></canvas>
+
+            </div>
+        </div>
 
         @push('scripts')
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                const ctx = document.getElementById('topProduct');
+            @once
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                const data = {
-                    labels: [
-                        'Red',
-                        'Blue',
-                        'Yellow'
-                    ],
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                    }]
-                };
+                <script>
+                    var ctx = document.getElementById('revenueChart').getContext('2d');
+                    function getMonthly(data){
+                        var monthly = [];
 
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: data
+                        for (let i = 1; i <= 12; ++i) {
+                            let month = ('0' + i).slice(-2);
+                            let value = data.find(function (item) {
+                                return item.month == i; // Format as "YYYY-MM"
+                            });
+                            monthly[i] = value ? (value.revenue ?? 0) : 0;
+                        }
+                        return monthly;
+                    }
+                    let monthly=getMonthly(@json($revenueData));
+                    console.log(monthly);
+                    var chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Object.keys(monthly),
+                            datasets: [{
+                                label: 'Revenue',
+                                data: Object.values(monthly),
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                },
+                            },
+                        },
+                    })
+                    Livewire.on('updateChart',(data)=>{
+                        console.log(data);
+                    })
+                    // Use Livewire to refresh the chart when the selectedYear changes
+                    // Livewire.on('updateChart', data => {
+                    //     let monthly=getMonthly(data);
+                    //     chart.data = {
+                    //         labels: Object.keys(monthly),
+                    //         datasets: [{
+                    //             label: 'Revenue',
+                    //             data: Object.values(monthly),
+                    //             backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    //             borderColor: 'rgba(75, 192, 192, 1)',
+                    //             borderWidth: 1,
+                    //         }],
+                    //     };
+                    //     chart.update();
+                    // });
+                    // document.getElementById('yearSelect').addEventListener('change', () => {
+                    //     chart.update({
+                    //         data: {
+                    //             labels: Object.keys(monthly),
+                    //             datasets: [{
+                    //                 label: 'Revenue',
+                    //                 data: Object.values(monthly),
+                    //                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    //                 borderColor: 'rgba(75, 192, 192, 1)',
+                    //                 borderWidth: 1,
+                    //             }],
+                    //         }});
+                    // })
 
-                });
-
-
-            </script>
-{{--            <script src="https://code.highcharts.com/highcharts.js">--}}
-{{--            </script>--}}
-{{--            <script src="https://code.highcharts.com/modules/exporting.js"></script>--}}
-{{--            <script src="https://code.highcharts.com/modules/export-data.js"></script>--}}
-{{--            <script src="https://code.highcharts.com/modules/accessibility.js"></script>--}}
-{{--            <script src="https://code.highcharts.com/modules/drilldown.js"></script>--}}
-{{--            <script type="text/javascript">--}}
-{{--                let value = document.querySelector('#container-topproduct').getAttribute('data-topproduct');--}}
-{{--                value = JSON.parse(value);--}}
-{{--                Highcharts.chart('container-topproduct', {--}}
-{{--                    chart: {--}}
-{{--                        type: 'pie',--}}
-{{--                    },--}}
-{{--                    title: {--}}
-{{--                        text: 'TOP 5 SẢN PHẨM ĐƯỢC MUA NHỀU NHẤT',--}}
-{{--                        style: {--}}
-{{--                            fontSize: '20px'--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    tooltip: {--}}
-{{--                        pointFormat: '{series.name}: <b>{point.y}</b>',--}}
-{{--                    },--}}
-{{--                    accessibility: {--}}
-{{--                        point: {--}}
-{{--                            valueSuffix: '%'--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    plotOptions: {--}}
-{{--                        pie: {--}}
-{{--                            allowPointSelect: true,--}}
-{{--                            cursor: 'pointer',--}}
-{{--                            dataLabels: {--}}
-{{--                                enabled: true,--}}
-{{--                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',--}}
-{{--                                style: {--}}
-{{--                                    fontSize: '14px',--}}
-{{--                                }--}}
-{{--                            },--}}
-{{--                            showInLegend: true--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    series: [{--}}
-{{--                        name: 'Số lượng',--}}
-{{--                        colorByPoint: true,--}}
-{{--                        data: value--}}
-{{--                    }]--}}
-{{--                });--}}
-
-{{--                const formatCurrency = (x) => {--}}
-{{--                    x = x.toLocaleString('it-IT', {--}}
-{{--                        style: 'currency',--}}
-{{--                        currency: 'VND'--}}
-{{--                    });--}}
-{{--                    return x;--}}
-{{--                }--}}
-{{--                // thong ke theo nam--}}
-{{--                // var nowYear = new Date();--}}
-{{--                // var getNowYear = nowYear.getFullYear();--}}
-{{--                // let statisByYear = document.querySelector('#container-staticbyyear').getAttribute('data-staticbyyear');--}}
-{{--                // statisByYear = JSON.parse(statisByYear);--}}
-{{--                // let statisByDay = document.querySelector('#container-staticbyyear').getAttribute('data-staticbyday');--}}
-{{--                // statisByDay = JSON.parse(statisByDay);--}}
-{{--                // Highcharts.chart('container-staticbyyear', {--}}
-{{--                //     chart: {--}}
-{{--                //         type: 'column'--}}
-{{--                //     },--}}
-{{--                //     lang: {--}}
-{{--                //         drillUpText: '◁ {series.name}\' e Geri Dön',--}}
-{{--                //         decimalPoint: ',', // <== Most locales that use `.` for thousands use `,` for decimal, but adjust if that's not true in your locale--}}
-{{--                //         thousandsSep: '.' // <== Uses `.` for thousands--}}
-{{--                //     },--}}
-{{--                //     title: {--}}
-{{--                //         align: 'center',--}}
-{{--                //         text: `DOANH THU NĂM ${getNowYear}`--}}
-{{--                //     },--}}
-{{--                //     accessibility: {--}}
-{{--                //         announceNewData: {--}}
-{{--                //             enabled: true--}}
-{{--                //         }--}}
-{{--                //     },--}}
-{{--                //     xAxis: {--}}
-{{--                //         type: 'category'--}}
-{{--                //     },--}}
-{{--                //     yAxis: {--}}
-{{--                //         title: {--}}
-{{--                //             text: ''--}}
-{{--                //         }--}}
-{{--                //--}}
-{{--                //     },--}}
-{{--                //     legend: {--}}
-{{--                //         enabled: false,--}}
-{{--                //     },--}}
-{{--                //     plotOptions: {--}}
-{{--                //         series: {--}}
-{{--                //             borderWidth: 0,--}}
-{{--                //             dataLabels: {--}}
-{{--                //                 enabled: true,--}}
-{{--                //                 format: `{point.y}`--}}
-{{--                //             }--}}
-{{--                //         }--}}
-{{--                //     },--}}
-{{--                //--}}
-{{--                //     tooltip: {--}}
-{{--                //         headerFormat: '<span style="font-size:11px">{series.name}</span><br>',--}}
-{{--                //         pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>',--}}
-{{--                //         valueSuffix: "đ",--}}
-{{--                //     },--}}
-{{--                //--}}
-{{--                //     series: [{--}}
-{{--                //         name: `Doanh thu năm ${getNowYear}`,--}}
-{{--                //         colorByPoint: true,--}}
-{{--                //         data: statisByYear,--}}
-{{--                //     }],--}}
-{{--                //     drilldown: {--}}
-{{--                //         breadcrumbs: {--}}
-{{--                //             position: {--}}
-{{--                //                 align: 'right'--}}
-{{--                //             }--}}
-{{--                //         },--}}
-{{--                //         series: statisByDay--}}
-{{--                //     }--}}
-{{--                // });--}}
-{{--            </script>--}}
+                    // ... Chart.js code as previously shown ...
+                </script>
+            @endonce
         @endpush
+
+{{--        <div class="row">--}}
+{{--            <div class="col-12" style="height: 50vh;">--}}
+{{--                <canvas id="topProduct"></canvas>--}}
+
+{{--            </div>--}}
+{{--        </div>--}}
+    </section>
+
 @endsection
 
 

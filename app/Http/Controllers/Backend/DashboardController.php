@@ -12,81 +12,10 @@ use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
-    private function statisByMonthy1($month)
-    {
-        $nowYear = Carbon::now('Asia/Ho_Chi_Minh')->year;
-        $moneySale = 0;
-        $moneyBuyMaterial = 0;
-        //        $todaysPendingOrder = Order::whereDate('created_at', Carbon::today())
-//            ->where('order_status', 'pending')->count();
-        $getSaleByMonth = Sale_statisticals::whereYear('ngay_ban', $nowYear)->whereMonth('ngay_ban', $month)->get();
-        $getUseMaterialByMonth = ManagerMaterialUse::whereYear('ngay_tong_ket', $nowYear)->whereMonth('ngay_tong_ket', $month)->get();
-        if ($getSaleByMonth->count() > 0) {
-            foreach ($getSaleByMonth as $val) {
-                $moneySale += $val->tien_don_hang;
-            }
-            if ($getUseMaterialByMonth->count() > 0) {
-                foreach ($getUseMaterialByMonth as $val) {
-                    $moneyBuyMaterial += $val->so_luong * $val->don_gia;
-                }
-            } else {
-                $moneyBuyMaterial += 0;
-            }
-            $turnoverMonth = $moneySale - $moneyBuyMaterial;
-            return $turnoverMonth;
-        }
-        return 0;
-    }
+
     public function dashboard()
     {
-        $
-//        $nowMonth = Carbon::now('Asia/Ho_Chi_Minh')->month;
-//        $nowYear = Carbon::now('Asia/Ho_Chi_Minh')->year;
-//        $nowday = Carbon::now('Asia/Ho_Chi_Minh')->day;
-//        $statisByYear = array();
-//        $statisByDay = array();
-//        $datadays = null;
-//        for ($i = 1; $i < 13; $i++) {
-//            $month = 'Tháng ' . $i;
-//            $data['name'] = $month;
-//            $data['y'] = null;
-//            $data['drilldown'] = $i;
-//            if ($nowMonth >= $i) {
-//                $d = $this->statisByMonthy1($i);
-//                $data['y'] = $d;
-//                $datadays['data'] = array();
-//                // lay thong ke theo tung ngay
-//                $days = Carbon::createFromDate($nowYear, $i)->daysInMonth;
-//                for ($j = 1; $j <= $days; $j++) {
-//                    $day = 'Ngày ' . $j . '/' . $i . '/' . $nowYear;
-//                    if ($i <= $nowMonth) {
-//                        if ($i === $nowMonth && $j > $nowday) {
-//                            array_push($datadays['data'], [$day, null]);
-//                        } else {
-//                            array_push($datadays['data'], [$day, $this->statisByDay($i, $j)]);
-//                        }
-//                    } else {
-//                        array_push($datadays['data'], [$day, null]);
-//                    }
-//                }
-//            }
-//            $datadays['name'] = $data['name'] = $month;
-//            $datadays['id'] = $i;
-//            array_push($statisByYear, $data);
-//            array_push($statisByDay, $datadays);
-//            $datadays = array();
-//        }
-//        $nameOrder = DB::select(
-//            "SELECT id_san_pham_order,so_luot_dat FROM order_statisticals ORDER BY so_luot_dat DESC LIMIT 5"
-//        );
-//        $data = [];
-//        for ($i = 0; $i < count($nameOrder); $i++) {
-//            $nameP = DB::select("SELECT tensp FROM products WHERE id=" . $nameOrder[$i]->id_san_pham_order);
-//
-//            $value['name'] = $nameP[0]->tensp;
-//            $value['y'] = $nameOrder[$i]->so_luot_dat;
-//            array_push($data, $value);
-//        }
+
         $countProduct = Product::where('status', 1)->count();
         $countOrder = Order::whereDate('created_at', Carbon::today())->count();
 
