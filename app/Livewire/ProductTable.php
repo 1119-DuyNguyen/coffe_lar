@@ -29,7 +29,9 @@ final class ProductTable extends PowerGridComponent
 //            Exportable::make('export')
 //                ->striped()
 //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showSearchInput(),
+            Header::make()
+                ->showSearchInput()
+                ->withoutLoading(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -105,7 +107,7 @@ final class ProductTable extends PowerGridComponent
 //                ->sortable()
 //                ->searchable(),
 
-            Column::make('Loại Sản Phẩm', 'category_id'),
+            Column::make('Danh mục', 'category_id'),
             Column::make('Mô Tả', 'description')
                 ->sortable()
                 ->searchable(),

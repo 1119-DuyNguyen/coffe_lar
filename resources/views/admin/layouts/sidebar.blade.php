@@ -1,16 +1,22 @@
 @php use App\Http\Services\GateService;use Illuminate\Support\Facades\Gate; @endphp
 <div class="main-sidebar sidebar-style-2">
-    <div class="sidebar-brand">
-        <a href="index.html">Admin Panel</a>
+    <div class="sidebar-brand mt-3">
+        <a href="{{route('admin.dashboard.index')}}">
+            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">
+        </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="#">AD</a>
+        <a href="{{route('admin.dashboard.index')}}">
+            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">
+        </a>
+
+
     </div>
     <ul class="sidebar-menu">
         {{--        [ name=>str, title=>str,child=>[]]--}}
 
         @foreach([
-    ['name'=>'Dashboard','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index' ,'title'=>'Dashboard','child'=>[]],
+        ['name'=>'Statistic','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index' ,'title'=>'Dashboard','child'=>[]],
     ['name'=>'User','icon'=>'<i class="fas fa-user"></i>','child'=>
     [
         ['name'=>'User List','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.user.index'],
@@ -21,7 +27,7 @@
         ['name'=>'Role List','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.role.index'],
         ['name'=>'Create Role','icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.role.create' ],
     ]],
-    ['title'=>'Ecommerce'],
+    ['title'=>'Thương mại'],
       ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.category.index'  ],
 //    ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','child'=>
 //    [
@@ -56,7 +62,7 @@
             {{--                   href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user"></i>--}}
             {{--                    <span>Subscribers</span></a></li>--}}
             @if(isset($nav['title']))
-                <li class="menu-header">{{$nav['title']}}</li>
+                <li class="menu-header">{{__($nav['title'])}}</li>
             @endif
             @if(isset($nav['name']))
                 @if(empty($nav['child']))
