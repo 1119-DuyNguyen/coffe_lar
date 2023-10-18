@@ -68,6 +68,10 @@ class AppServiceProvider extends ServiceProvider
 
                     $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
                 });
+                View::composer('frontend.dashboard.order.print', function ($view) use ($generalSetting,$logoSetting){
+
+                    $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
+                });
                 View::composer('templates.clients.frontend', function ($view) use ($generalSetting,$logoSetting){
 
                     $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);

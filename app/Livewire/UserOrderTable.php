@@ -18,7 +18,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class OrderTable extends PowerGridComponent
+final class UserOrderTable extends PowerGridComponent
 {
     use WithExport;
 
@@ -56,35 +56,19 @@ final class OrderTable extends PowerGridComponent
             ->addColumn('phone_receiver')
             ->addColumn('total')
             ->addColumn('payment_status', function ($model) {
-                return '<label class="custom-switch mt-2">
-                        <input type="checkbox" '. ($model->payment_status ? "checked": '' ) .' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-payment-status" >
-                        <span class="custom-switch-indicator"></span>
-                    </label>';
+                return ($model->payment_status ? "Đã thanh toán": 'Chưa thanh toán' ) ;
             })
             ->addColumn('order_status',  function ($model) {
-                $html = '
-                    <select name="order_status" data-id="' . $model->id . '" class="form-select  form-control change-status w-auto">';
 
-                $statusArray = OrderStatus::getKeys();
-                foreach ($statusArray as  $key) {
-                    if ($model->order_status == OrderStatus::getValue($key)) {
-                        $html .= '<option value=' . OrderStatus::getValue($key) . ' selected>' . OrderStatus::getMessage($key)['status'] . '</option>';
-                    } else {
-                        $html .= '<option value=' . OrderStatus::getValue($key) . '>' . OrderStatus::getMessage($key)['status'] . '</option>';
-                    }
-                }
-
-                $html .= '</select>';
-
-                return $html;
+                return OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'];
             })
             ->addColumn('created_at_formatted', fn(Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function($query){
 //                $showBtn = "<a href='".route('admin.order.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
-                $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+//                $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
                 $printBtn="<a href='".route('user.order.show', $query->id)."' class='btn btn-warning'><i class='fas fa-print'></i></a>";
 
-                return $printBtn.$deleteBtn;
+                return $printBtn;
             })
             ;
     }
