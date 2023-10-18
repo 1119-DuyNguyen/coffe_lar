@@ -16,7 +16,8 @@
                     <h4>Danh sách tài khoản</h4>
                   </div>
                   <div class="card-body">
-                    {{ $dataTable->table() }}
+{{--                    {{ $dataTable->table() }}--}}
+                      @livewire('user-table')
                   </div>
 
                 </div>

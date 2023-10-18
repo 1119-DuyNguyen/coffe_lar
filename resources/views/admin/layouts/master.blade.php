@@ -192,6 +192,12 @@
 @stack('scripts')
 
 @include('sweetalert::alert')
+<style>
+    .visually-hidden {
+        visibility: hidden;
+    }
+</style>
+
 
 </body>
 </html>

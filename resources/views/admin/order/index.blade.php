@@ -37,7 +37,8 @@
                             <h4>All Order</h4>
                         </div>
                         <div class="card-body">
-                            {{ $dataTable->table() }}
+{{--                            {{ $dataTable->table() }}--}}
+                            @livewire('order-table')
                         </div>
 
                     </div>

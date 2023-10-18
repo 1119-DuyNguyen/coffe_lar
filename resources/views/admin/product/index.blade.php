@@ -19,7 +19,8 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    {{ $dataTable->table() }}
+{{--                    {{ $dataTable->table() }}--}}
+                      @livewire('product-table')
                   </div>
 
                 </div>
