@@ -13,11 +13,14 @@
                     id: id
                 },
                 success: function(data){
-                    Swal.fire(
-                        'Updated!',
-                        data.message,
-                        'success'
-                    )
+                    successToast(data.message);
+                    // Swal.fire(
+                    //     {  title: data.message,
+                    //         icon: 'success',
+                    //         confirmButtonText:"Xác nhận"
+                    //     }
+                    //
+                    // )
                 },
                 error: function(xhr, status, error){
                     console.log(error);

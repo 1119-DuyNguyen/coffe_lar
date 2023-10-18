@@ -24,48 +24,70 @@ final class OrderStatus extends Enum
     {
         switch ($orderStatus) {
             case 'pending':
-                $status = __('order_status.pending');
-                $details = __('order_status.pending_details');
+                $status = __('pending');
+                $details = __('pending_details');
                 break;
 
             case 'processed_and_ready_to_ship':
-                $status = __('order_status.processed_and_ready_to_ship');
-                $details = __('order_status.processed_and_ready_to_ship_details');
+                $status = __('processed_and_ready_to_ship');
+                $details = __('processed_and_ready_to_ship_details');
                 break;
 
             case 'dropped_off':
-                $status = __('order_status.dropped_off');
-                $details = __('order_status.dropped_off_details');
+                $status = __('dropped_off');
+                $details = __('dropped_off_details');
                 break;
 
             case 'shipped':
-                $status = __('order_status.shipped');
-                $details = __('order_status.shipped_details');
+                $status = __('shipped');
+                $details = __('shipped_details');
                 break;
 
             case 'out_for_delivery':
-                $status = __('order_status.out_for_delivery');
-                $details = __('order_status.out_for_delivery_details');
+                $status = __('out_for_delivery');
+                $details = __('out_for_delivery_details');
                 break;
 
             case 'delivered':
-                $status = __('order_status.delivered');
-                $details = __('order_status.delivered_details');
+                $status = __('delivered');
+                $details = __('delivered_details');
                 break;
 
             case 'canceled':
-                $status = __('order_status.canceled');
-                $details = __('order_status.canceled_details');
+                $status = __('canceled');
+                $details = __('canceled_details');
                 break;
 
             default:
-                $status = __('order_status.unknown');
-                $details = __('order_status.unknown_details');
+                $status = __('unknown');
+                $details = __('unknown_details');
                 break;
         }
         return [
             'status' => $status,
             'details' => $details,
         ];
+    }
+    public static function values(): array{
+        $keyList=OrderStatus::getKeys();
+        $array=[];
+        foreach ($keyList as $key)
+        {
+            $array[$key]=OrderStatus::getValue($key);
+        }
+        return $array;
+    }
+    public static function collectionValues(){
+        $keyList=OrderStatus::getKeys();
+        $array=[];
+        foreach ($keyList as $key)
+        {
+            $initArray=[];
+            $initArray['label']=OrderStatus::getMessage($key)['status'];
+
+            $initArray['value']=OrderStatus::getValue($key);
+            $array[]=$initArray;
+        }
+        return collect($array);
     }
 }

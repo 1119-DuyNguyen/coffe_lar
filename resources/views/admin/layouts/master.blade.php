@@ -119,6 +119,7 @@
 <script src="{{asset("backend/assets/js/custom.js")}}"></script>
 
 {{--vendor--}}
+@include('setup-js')
 
 @livewireScripts
 
@@ -141,13 +142,15 @@
                     let deleteUrl = $(this).attr('href');
 
                     Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
+                        title: 'Bạn chắc chắn muốn xoá chứ ?',
+                        text: "Bạn sẽ không thể hoàn lại tác vụ này",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
+                        confirmButtonText: 'Xoá',
+                        cancelButtonText: 'Huỷ bỏ'
+
                     }).then((result) => {
                         if (result.isConfirmed) {
 

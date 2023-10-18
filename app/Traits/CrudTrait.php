@@ -98,7 +98,7 @@ trait CrudTrait
         $resource->status = $request->status == 'true' ? 1 : 0;
         $resource->save();
 
-        return response(['message' => 'Status has been updated!']);
+        return response(['message' => __('Status has been updated!')]);
     }
 
 
