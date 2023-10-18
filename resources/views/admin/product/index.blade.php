@@ -14,9 +14,9 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>Danh sách sản phẩm</h4>
-                    <div class="card-header-action">
-                        <a href="{{route('admin.product.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>
-                    </div>
+{{--                    <div class="card-header-action">--}}
+{{--                        <a href="{{route('admin.product.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>--}}
+{{--                    </div>--}}
                   </div>
                   <div class="card-body">
 {{--                    {{ $dataTable->table() }}--}}

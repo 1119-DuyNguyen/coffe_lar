@@ -14,9 +14,9 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>Danh sách chuyên mục</h4>
-                    <div class="card-header-action">
-                        <a href="{{route('admin.category.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Tạo mới</a>
-                    </div>
+{{--                    <div class="card-header-action">--}}
+{{--                        <a href="{{route('admin.category.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Tạo mới</a>--}}
+{{--                    </div>--}}
                   </div>
                   <div class="card-body">
                       @livewire('category-table')

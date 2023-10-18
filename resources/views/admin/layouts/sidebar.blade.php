@@ -14,28 +14,42 @@
     </div>
     <ul class="sidebar-menu">
         {{--        [ name=>str, title=>str,child=>[]]--}}
+    @php
+        $listLanguage="Danh sách";
 
+        $addLanguage="Khởi tạo";
+    @endphp
         @foreach([
         ['name'=>'Statistic','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index' ,'title'=>'Dashboard','child'=>[]],
     ['name'=>'User','icon'=>'<i class="fas fa-user"></i>','child'=>
     [
-        ['name'=>'User List','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.user.index'],
-        ['name'=>'Create User','icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.user.create' ],
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.user.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.user.create' ],
     ]],
         ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','child'=>
     [
-        ['name'=>'Role List','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.role.index'],
-        ['name'=>'Create Role','icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.role.create' ],
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.role.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.role.create' ],
     ]],
     ['title'=>'Thương mại'],
-      ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.category.index'  ],
+      ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.category.index'  ,'child'=>
+    [
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.category.create' ],
+    ]],
 //    ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','child'=>
 //    [
 //        ['name'=>'Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
 //        ['name'=>'Sub Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.sub-category.index' ],
 //        ['name'=>'Child Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.child-category.index']
 //    ]],
-       ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'  ],
+       ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index' ,
+        'child'=>
+    [
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.product.create' ],
+    ]
+        ],
 
 //    ['name'=>'Manage Products','icon'=>'<i class="fas fa-box"></i>','child'=>[
 //        ['name'=>'Brands','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.brand.index' ],
@@ -109,7 +123,7 @@
             @endif
         @endforeach
         <li><a class="nav-link "
-               href="{{route('home')}}" >
+               href="{{route('home')}}">
                 <i class="fas fa-arrow-left"></i>
                 <span>Quay lại</span></a></li>
 

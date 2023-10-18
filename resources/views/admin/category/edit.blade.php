@@ -21,10 +21,10 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label>Icon</label>
+                            <label>Biểu tượng</label>
                              <div>
                                 <button class="btn btn-primary" data-icon="{{$category->icon}}" data-selected-class="btn-danger"
-                                data-unselected-class="btn-info" role="iconpicker" name="icon" ></button>
+                                data-unselected-class="btn-info" role="iconpicker" name="icon" data-search="true"></button>
                              </div>
 
                         </div>

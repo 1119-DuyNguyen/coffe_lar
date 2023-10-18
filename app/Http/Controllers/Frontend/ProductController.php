@@ -60,12 +60,6 @@ class ProductController extends Controller
                 return view('templates.clients.home.quick-view', ['product' => $product]);
 
         }
-        $product = Product::with(['category', 'variants'])->where('slug', $slug)->where('status', 1)->first();
-//        $reviews = ProductReview::where('product_id', $product->id)->where('status', 1)->paginate(10);
-        if (isset($product)) {
-            return view('frontend.pages.product-detail', compact('product'));
-
-        } else abort(404);
     }
 
 }

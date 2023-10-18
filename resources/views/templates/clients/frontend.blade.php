@@ -75,7 +75,6 @@
     }
 </script>
 @include('templates.clients.js.js')
-@include('templates.clients.js.notification')
 @stack('scripts')
 
 @include('sweetalert::alert')

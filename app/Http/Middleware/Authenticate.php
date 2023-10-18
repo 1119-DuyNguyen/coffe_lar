@@ -12,6 +12,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        toast()->error('Phiên đăng nhập của bạn đã hết. Hãy đăng nhập lại');
+        return $request->expectsJson() ? null : route('home');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Fronend;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class PaymentRequest extends FormRequest

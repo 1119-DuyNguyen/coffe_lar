@@ -58,6 +58,29 @@
                 errorToast('Không có kết nối mạng. Vui lòng thử lại sau');
 
             },
+            401: function (responseObject, textStatus, errorThrown) {
+                errorToast('Bạn chưa đăng nhập');
+                Swal.fire({
+                    title: 'Bạn chưa đăng nhập',
+                    text: "Hãy đăng nhập để thực hiện thao tác",
+                    icon: 'error',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Đăng nhập',
+                    denyButtonText: `Bạn chưa có tài khoản ?`,
+                    cancleButtonText: `Quay lại`,
+                    denyButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        $('#login').modal('show');
+                    } else if (result.isDenied) {
+                        $('#registerForm').modal('show');
+                    }
+                })
+
+            },
             404: function (responseObject, textStatus, errorThrown) {
                 errorToast('Yêu cầu gửi tới trang không tồn tại');
             },

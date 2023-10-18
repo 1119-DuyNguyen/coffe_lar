@@ -47,13 +47,11 @@ Route::get('product', [ProductController::class, 'index'])->name('product.index'
 Route::get('product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
 /** Cart routes */
+Route::middleware( 'auth')->group(function (){
 
 Route::resource('cart',CartController::class);
+});
 
-
-Route::get('contact', [PageController::class, 'contact'])->name('contact');
-Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
-Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::get('ghn/province',[GiaoHangNhanhController::class,'getProvince'])->name('ghn.province');
 Route::get('ghn/district/{idProvince}',[GiaoHangNhanhController::class,'getDistrict'])->name('ghn.district');
 Route::get('ghn/ward/{idDistrict}',[GiaoHangNhanhController::class,'getWard'])->name('ghn.ward');

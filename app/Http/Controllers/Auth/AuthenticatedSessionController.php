@@ -30,6 +30,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
 //        Session::put('success','Đăng nhập thành công');
         return redirect()->intended(RouteServiceProvider::HOME);
     }

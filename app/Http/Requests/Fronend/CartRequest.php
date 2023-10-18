@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Fronend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CartRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class CartRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**

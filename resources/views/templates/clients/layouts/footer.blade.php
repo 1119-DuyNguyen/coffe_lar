@@ -44,31 +44,30 @@
 						</ul>
 					</div>
 				</div> -->
-
-                <div class="col-lg-3 col-md-2">
-                    <div class="footer_widget">
-                        <h4 class="widget_title">Điều khoản</h4>
-                        <ul class="footer-menu">
-                            @if(isset($policy) && count($policy) > 0)
-                            @foreach($policy as $value)
-                            <li><a href="{{ route('show.policy', $value->slug)}}">{{$value->tieude}}</a></li>
-                            @endforeach
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-
                 <div class="col-lg-2 col-md-2">
                     <div class="footer_widget">
                         <h4 class="widget_title">Giới thiệu</h4>
                         <ul class="footer-menu">
-{{--                            <li><a href="{{ route('about')}}">Về Chúng Tôi</a></li>--}}
-{{--                            <li><a href="{{ route('product')}}">Sản phẩm</a></li>--}}
-{{--                            <li><a href="{{ route('get.all.promotion')}}">Khuyến mãi</a></li>--}}
-{{--                            <li><a href="{{ route('get.posts')}}">Tin tức</a></li>--}}
+                            {{--                            <li><a href="{{ route('about')}}">Về Chúng Tôi</a></li>--}}
+                            <li><a href="{{ route('product.index')}}">Sản phẩm</a></li>
+
                         </ul>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-2">
+{{--                    <div class="footer_widget">--}}
+{{--                        <h4 class="widget_title">Điều khoản</h4>--}}
+{{--                        <ul class="footer-menu">--}}
+{{--                            @if(isset($policy) && count($policy) > 0)--}}
+{{--                            @foreach($policy as $value)--}}
+{{--                            <li><a href="{{ route('show.policy', $value->slug)}}">{{$value->tieude}}</a></li>--}}
+{{--                            @endforeach--}}
+{{--                            @endif--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+                </div>
+
+
 
                 <div class="col-lg-3 col-md-2">
                     <iframe

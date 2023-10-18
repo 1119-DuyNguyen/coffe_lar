@@ -133,6 +133,19 @@ $categories=Category::all();
                                         </ul>
                                     </div>
                                 </li>
+                                <li>
+                                    <a class="border-icon" href="{{route('cart.index')}}" ><i
+                                            class="fas fa-cart-plus"></i><span class="cart_counter"
+                                                                               id="header-cart-quantity">
+                                            {{CartService::countCart()}}
+                                        </span></a>
+                                    {{--                                    <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i--}}
+                                    {{--                                            class="fas fa-cart-plus"></i><span class="cart_counter"--}}
+                                    {{--                                                                               id="header-cart-quantity">--}}
+                                    {{--                                            {{CartService::countCart()}}--}}
+                                    {{--                                        </span></a>--}}
+
+                                </li>
                             @else
                                 <li><a href="" class="dropdown-user border-icon ">
                                         <i class="fas fa-user-circle"></i>
@@ -151,11 +164,11 @@ $categories=Category::all();
                                                 <i class=" fas fa-user"></i>
                                                 <a class=" ">Đăng nhập</a>
                                             </li>
-                                            <li class="dropdown-item" data-toggle="modal"
-                                                data-target="#forgetPasswordForm">
-                                                <i class=" fas fa-key"></i>
-                                                <a href="#" class="">Quên mật khẩu ? </a>
-                                            </li>
+{{--                                            <li class="dropdown-item" data-toggle="modal"--}}
+{{--                                                data-target="#forgetPasswordForm">--}}
+{{--                                                <i class=" fas fa-key"></i>--}}
+{{--                                                <a href="#" class="">Quên mật khẩu ? </a>--}}
+{{--                                            </li>--}}
 
                                             <li class="dropdown-item" data-toggle="modal" data-target="#registerForm">
                                                 <i class=" fas fa-file-alt"></i>
@@ -203,19 +216,7 @@ $categories=Category::all();
                                 </li>
                             @endif
 
-                            <li>
-                                <a class="border-icon" href="{{route('cart.index')}}" ><i
-                                        class="fas fa-cart-plus"></i><span class="cart_counter"
-                                                                           id="header-cart-quantity">
-                                            {{CartService::countCart()}}
-                                        </span></a>
-{{--                                    <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i--}}
-{{--                                            class="fas fa-cart-plus"></i><span class="cart_counter"--}}
-{{--                                                                               id="header-cart-quantity">--}}
-{{--                                            {{CartService::countCart()}}--}}
-{{--                                        </span></a>--}}
 
-                            </li>
                         </ul>
                     </div>
                     <div class="collapse" id="mySearch">
