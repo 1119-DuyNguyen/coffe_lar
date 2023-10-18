@@ -122,7 +122,7 @@ final class OrderTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Số điện thoại', 'phone_receiver'),
+            Column::make('Số điện thoại', 'phone_receiver')->searchable(),
             Column::make('Tổng tiền', 'total')
                 ->sortable(),
             Column::make('Hình thức thanh toán', 'payment_status'),
