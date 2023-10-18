@@ -5,23 +5,23 @@
             <h1>Bảng điều khiển</h1>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <a href="{{ route('admin.order.index') }}">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
-                            <i class="fas fa-cart-plus"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Doanh thu hôm nay</h4>
-                            </div>
-                            <div class="card-body">
-                                {{ 0 }}
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+{{--            <div class="col-lg-4 col-md-6 col-sm-6 col-12">--}}
+{{--                <a href="{{ route('admin.order.index') }}">--}}
+{{--                    <div class="card card-statistic-1">--}}
+{{--                        <div class="card-icon bg-primary">--}}
+{{--                            <i class="fas fa-cart-plus"></i>--}}
+{{--                        </div>--}}
+{{--                        <div class="card-wrap">--}}
+{{--                            <div class="card-header">--}}
+{{--                                <h4>Doanh thu hôm nay</h4>--}}
+{{--                            </div>--}}
+{{--                            <div class="card-body">--}}
+{{--                                {{ 0 }}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <a href="{{ route('admin.order.index') }}">
                     <div class="card card-statistic-1">
