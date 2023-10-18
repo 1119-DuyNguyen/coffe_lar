@@ -2,7 +2,7 @@
 @extends('templates.clients.frontend')
 
 @section('content')
-<section class="section container">
+<section class="section container" style="min-height: 100vh;">
 
     <div class="section-body">
 
@@ -10,21 +10,13 @@
 
         <div class="col-12 col-md-12 col-lg-6">
           <div class="card">
-            <form method="post" class="needs-validation" novalidate="" action="{{route('admin.profile.update')}}" enctype="multipart/form-data">
+            <form method="post" class="form-info"  action="{{route('admin.profile.update')}}" >
                 @csrf
               <div class="card-header">
                 <h4>Cập nhập thông tin tài khoản</h4>
               </div>
               <div class="card-body">
                   <div class="row">
-{{--                    <div class="form-group col-12">--}}
-{{--                        <div class="mb-3">--}}
-{{--                            <img width="100px" style="border-radius: 4px;" src="{{asset($user->image)}}" alt="" id="image-preview">--}}
-{{--                        </div>--}}
-{{--                        <label>Image</label>--}}
-{{--                        <input type="file" name="image" class="form-control" id="image-upload">--}}
-
-{{--                      </div>--}}
 
                     <div class="form-group col-12">
                       <label>Tên người dùng</label>
@@ -38,7 +30,7 @@
                     </div>
                       <div class="form-group col-12">
                           <label>Số điện thoại</label>
-                          <input type="text" name="email" class="form-control" value="{{$user->phone}}" >
+                          <input type="text" name="phone" class="form-control" value="{{$user->phone}}" >
                       </div>
                   </div>
 
@@ -55,7 +47,7 @@
         <div class="col-12 col-md-12 col-lg-6">
             <div class="card">
 
-              <form method="post" class="needs-validation" novalidate="" action="{{route('admin.password.update')}}" enctype="multipart/form-data">
+              <form method="post"  class="form-info"  novalidate="" action="{{route('admin.password.update')}}" class="form-info">
                   @csrf
                 <div class="card-header">
                   <h4>Cập nhập mật khẩu</h4>
@@ -92,32 +84,18 @@
   </section>
 
 @endsection
-{{--@push('scripts')--}}
-{{--    <script>--}}
+@push('scripts')
+    <script>
+        formAjax('.form-info',(data)=>{
+            Swal.fire(
+                'Cập nhập thành công',
+                '',
+                'success'
+            ).then((result)=>{
+                window.location.reload();
 
-{{--        // on change image--}}
-{{--        $(function(){--}}
-{{--            $('#image-upload').change(function(){--}}
-{{--                var input = this;--}}
-{{--                var url = $(this).val();--}}
-{{--                var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();--}}
-{{--                if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg"))--}}
-{{--                {--}}
-{{--                    var reader = new FileReader();--}}
-
-{{--                    reader.onload = function (e) {--}}
-{{--                        $('#image-preview').attr('src', e.target.result);--}}
-{{--                    }--}}
-{{--                    reader.readAsDataURL(input.files[0]);--}}
-{{--                }--}}
-{{--                else--}}
-{{--                {--}}
-{{--                    $('#image-preview').attr('src', '{{asset('default/no_image.jpg')}}');--}}
-{{--                }--}}
-{{--            });--}}
-
-{{--        });--}}
-
-{{--    </script>--}}
-
-{{--@endpush--}}
+            })
+        });
+        console.log(document.querySelectorAll('.form-info'))
+    </script>
+@endpush

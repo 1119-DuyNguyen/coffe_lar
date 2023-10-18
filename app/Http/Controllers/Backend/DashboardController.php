@@ -23,6 +23,7 @@ class DashboardController extends Controller
             'MONTH(created_at) as month,SUM(total) as revenue'
         )
             ->whereYear('created_at', $selectedYear)
+            ->where('payment_status',true)
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy('month')
             ->get();

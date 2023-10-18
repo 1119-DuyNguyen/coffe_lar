@@ -112,4 +112,83 @@
         },
 
     });
+    const formAjax= function (selector,callbackSuccess){
+        var forms = document.querySelectorAll(selector);
+        // console.log(forms,"hi")
+
+        //init span error message
+        forms.forEach(form => {
+            let inputs = form.querySelectorAll('input');
+            inputs.forEach(input => {
+                let parent = input.parentElement;
+                let span = document.createElement('div');
+                span.innerHTML = `
+                    <span class="text-danger error-text ${input.name}_error"
+                    style="color: red"></span>`;
+
+                parent.insertAdjacentHTML('afterend', span.outerHTML);
+            })
+            let selects = form.querySelectorAll('select');
+            selects.forEach(select => {
+                let parent = select.parentElement;
+                let span = document.createElement('div');
+                span.innerHTML = `
+                    <span class="text-danger error-text ${select.name}_error"
+                    style="color: red"></span>`;
+
+                parent.insertAdjacentHTML('afterend', span.outerHTML);
+            })
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var all = $(this).serialize();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    data: all,
+                    beforeSend: function () {
+
+                        $(document).find('span.error-text').text('');
+                    },
+                    statusCode: {
+                        422: function (responseObject, textStatus, jqXHR) {
+                            // validation error fails
+                            if (responseObject.responseJSON) {
+                                let errors = responseObject.responseJSON.errors;
+                                // console.log(errors)
+                                if (errors) {
+                                    for (const [prefix, value] of Object.entries(errors)) {
+                                        let span = form.querySelector('span.' + prefix + '_error');
+                                        span.innerText = value
+
+                                        let input = form.querySelector('input[name=' + prefix + ']');
+                                        input.focus();
+                                    }
+
+                                }
+                            }
+
+                        },
+                    },
+                    success: callbackSuccess
+                    //     function (data) {
+                    //     $('#login').modal('hide');
+                    //     $('#registerForm').modal('hide');
+                    //
+                    //     Swal.fire(
+                    //         'Đăng nhập thành công',
+                    //         '',
+                    //         'success'
+                    //     ).then((result)=>{
+                    //         window.location.reload();
+                    //
+                    //     })
+                    // }
+                })
+
+            });
+
+        })
+    }
+
 </script>

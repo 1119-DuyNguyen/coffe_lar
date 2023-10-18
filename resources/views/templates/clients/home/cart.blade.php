@@ -46,7 +46,7 @@
             @endphp
             <div class="cart_selected_single">
                 <div class="cart_selected_single_thumb">
-                    <a href="#"><img src="{{ asset('uploads/product').'/'.$product->thumb_image }}"
+                    <a href="#"><img src="{{ asset($product->thumb_image)}}"
                                      class="img-fluid"
                                      alt=""/></a>
                 </div>

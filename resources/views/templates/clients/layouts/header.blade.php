@@ -1,6 +1,6 @@
 @php
     use App\Http\Services\CartService;use App\Models\Category;use Illuminate\Support\Facades\Route;
-$categories=Category::all();
+$categories=Category::where('status',true)->get();
 
 @endphp
 <div id="preloader">

@@ -113,7 +113,7 @@ class OrderService
                     continue;
                 }
                 $qty=$cart['quantity'];
-                if (false&&$product->qty > $qty) {
+//                if (false&&$product->qty > $qty) {
                     $orderProduct = new OrderProduct();
                     $orderProduct->order_id = $order->id;
                     $orderProduct->product_id = $product->id;
@@ -126,17 +126,17 @@ class OrderService
 
                     $orderProduct->save();
                     // update product quantity
-                    $product->decrement('qty', $qty);
-                }
-                else{
-                    throw ValidationException::withMessages(['Có sản phẩm đã hết hàng. Giao dịch thất bại ']);
-                }
+//                    $product->decrement('qty', $qty);
+//                }
+//                else{
+//                    throw ValidationException::withMessages(['Có sản phẩm đã hết hàng. Giao dịch thất bại ']);
+//                }
             }
             CartService::clear();
 
             DB::commit();
 
-            alert('Order created!', 'We will contact you shortly to confirm your order details.');
+//            alert('Order created!', 'We will contact you shortly to confirm your order details.');
 
             return Redirect::to('/');
         } catch (\Exception $ex) {

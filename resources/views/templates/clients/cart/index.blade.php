@@ -388,7 +388,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                         '',
                         'success'
                     ).then((result)=>{
-                        // window.location.reload();
+                        window.location.href= window.location.origin;
 
                     })
             });

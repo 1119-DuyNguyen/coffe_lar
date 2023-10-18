@@ -30,6 +30,7 @@ trait ProfileHandlerTrait {
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->phone=$request->phone;
         $user->save();
 //        toast(__('admin.Updated Successfully'),'success')->width('400');
 

@@ -22,8 +22,7 @@ class ProfileUpdateRequest extends FormRequest
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->route()->user ??"")],
             'phone' => ['required', 'numeric','regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
             'address' => ['required','string', 'max:255'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'role_id'=> ['required','exists:roles,id']
+            'password' => ['sometimes', 'confirmed', Password::defaults()],
         ];
 
     }
