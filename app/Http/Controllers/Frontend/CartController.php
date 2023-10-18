@@ -24,7 +24,11 @@ class CartController extends Controller
     /** Show cart page  */
     public function index(Request $request)
     {
-
+        if(CartService::countCart()<1)
+        {
+            alert()->warning('Bạn chưa có sản phẩm trong giỏ hàng','Hãy thêm ít nhất 1 sản phẩm vào giỏ hàng');
+            return  redirect()->back();
+        }
         return view('templates.clients.cart.index');
     }
 
