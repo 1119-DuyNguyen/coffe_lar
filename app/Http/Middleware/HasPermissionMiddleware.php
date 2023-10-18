@@ -23,7 +23,6 @@ class HasPermissionMiddleware
             Auth::logout();
             abort(401, 'Tài khoản đã bị khoá');
         }
-        return $next($request);
 
         $routeName= GateService::getGateDefineFromRouteName($request->route()->getName());
 

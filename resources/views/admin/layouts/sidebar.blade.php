@@ -80,12 +80,14 @@
             @endif
             @if(isset($nav['name']))
                 @if(empty($nav['child']))
+
                     @can(GateService::getGateDefineFromRouteName($nav['routeName']))
                         <li><a class="nav-link "
                                href="{{route($nav['routeName'])}}">
                                 {!!  $nav['icon']!!}
                                 <span>{{__($nav['name'])}}</span></a></li>
                     @endcan
+
                 @else
                     <li
                         class="dropdown">
@@ -97,6 +99,7 @@
                                 {
                             $nameRoute=GateService::getGateDefineFromRouteName($child['routeName']);
                             $nameRouteList[]=$nameRoute;
+
                             if(Gate::allows($nameRoute))
                                 {
                             $html.='                                 <li><a class="nav-link "
@@ -106,6 +109,7 @@
 
                                 }
                                 }
+
                         @endphp
                         @canany($nameRouteList)
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">

@@ -12,13 +12,13 @@ Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
-Route::middleware('hasPermission')->group(function () {
+//Route::middleware('hasPermission')->group(function () {
 
-    Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
-    /** Order Routes */
-    Route::get('orders', [UserOrderController::class, 'index'])->name('order.index');
-    Route::get('orders/{id}', [UserOrderController::class, 'show'])->name('order.show');
+Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
+/** Order Routes */
+Route::get('orders', [UserOrderController::class, 'index'])->name('order.index');
+Route::get('orders/{id}', [UserOrderController::class, 'show'])->name('order.show');
 
-    /** COD routes */
-    Route::post('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');
-});
+/** COD routes */
+Route::post('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');
+//});

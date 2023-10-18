@@ -35,7 +35,7 @@
                             <div class="row">
                                 @foreach($permissionList as $permission)
                                     <div  class="col-12 col-sm-6 col-lg-4 ">
-                                <input type="checkbox" name="permissions[]" value="{{$permission->id}}"> {{$permission->name}}
+                                <input type="checkbox" name="permissions[]" value="{{$permission->id}}"> {{$permission->description}}
                                 </div>
                                 @endforeach
 

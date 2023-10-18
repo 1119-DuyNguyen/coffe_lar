@@ -86,31 +86,27 @@ $categories=Category::all();
                                             {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
                                             {{--                                            </li>--}}
 
-                                            @can('user.dashboard.index')
-                                                <li class="dropdown-item">
-                                                    {{--                                                    <i--}}
-                                                    {{--                                                        class="fas fa-chart-bar"></i>--}}
-                                                    <i class="fas fa-info-circle"></i>
-                                                    <a href="{{route('user.profile')}}">
-                                                        Thông tin
-                                                        người dùng</a>
+                                            <li class="dropdown-item">
+                                                {{--                                                    <i--}}
+                                                {{--                                                        class="fas fa-chart-bar"></i>--}}
+                                                <i class="fas fa-info-circle"></i>
+                                                <a href="{{route('user.profile')}}">
+                                                    Thông tin
+                                                    người dùng</a>
 
-                                                </li>
-                                            @endcan
-                                            @can('admin.dashboard.index')
+                                            </li>
+                                            @can('admin.dashboard')
 
                                                 <li class="dropdown-item">
                                                     <i class="fas fa-chart-bar"></i>
                                                     <a href="{{route('admin.dashboard.index')}}">
-                                                        Thông tin người quản trị</a>
+                                                        Trang người quản trị</a>
                                                 </li>
                                             @endcan
-                                            @can('user.order.index')
-                                                <li class="dropdown-item">
-                                                    <i class="fas fa-file-invoice"></i>
-                                                    <a class="" href="{{route('user.order.index')}}">
-                                                        {{__("Order")}}</a></li>
-                                            @endcan
+                                            <li class="dropdown-item">
+                                                <i class="fas fa-file-invoice"></i>
+                                                <a class="" href="{{route('user.order.index')}}">
+                                                    {{__("Order")}}</a></li>
 
                                             {{--                                            <li class="dropdown-item">--}}
                                             {{--                                                <i class="fas fa-sync"></i>--}}
@@ -134,7 +130,7 @@ $categories=Category::all();
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="border-icon" href="{{route('cart.index')}}" ><i
+                                    <a class="border-icon" href="{{route('cart.index')}}"><i
                                             class="fas fa-cart-plus"></i><span class="cart_counter"
                                                                                id="header-cart-quantity">
                                             {{CartService::countCart()}}
@@ -164,11 +160,11 @@ $categories=Category::all();
                                                 <i class=" fas fa-user"></i>
                                                 <a class=" ">Đăng nhập</a>
                                             </li>
-{{--                                            <li class="dropdown-item" data-toggle="modal"--}}
-{{--                                                data-target="#forgetPasswordForm">--}}
-{{--                                                <i class=" fas fa-key"></i>--}}
-{{--                                                <a href="#" class="">Quên mật khẩu ? </a>--}}
-{{--                                            </li>--}}
+                                            {{--                                            <li class="dropdown-item" data-toggle="modal"--}}
+                                            {{--                                                data-target="#forgetPasswordForm">--}}
+                                            {{--                                                <i class=" fas fa-key"></i>--}}
+                                            {{--                                                <a href="#" class="">Quên mật khẩu ? </a>--}}
+                                            {{--                                            </li>--}}
 
                                             <li class="dropdown-item" data-toggle="modal" data-target="#registerForm">
                                                 <i class=" fas fa-file-alt"></i>

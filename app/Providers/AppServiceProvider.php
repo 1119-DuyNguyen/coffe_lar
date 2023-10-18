@@ -32,12 +32,12 @@ class AppServiceProvider extends ServiceProvider
         $permissionsArray = [];
         foreach ($roles as $role) {
             foreach ($role->permissions as $permissions) {
-                $permissionsArray[$permissions->name][$role->id]=9  ;
+                $permissionsArray[$permissions->name][$role->id]= true;
             }
         }
         // Every permission may have multiple roles assigned
         foreach ($permissionsArray as $name => $roles) {
-            Gate::define($name, function ($user) use (&$name,&$permissionsArray){
+            Gate::define($name, function ($user) use ($name,$permissionsArray){
                 // We check if we have the needed roles among current user's roles
                 return isset($permissionsArray[$name][$user->role->id]);
 //                    // We check if we have the needed roles among current user's roles
@@ -58,7 +58,6 @@ class AppServiceProvider extends ServiceProvider
 //            Config::set('app.timezone', $generalSetting->time_zone);
             //role & permissions
             $this->setupRBAC();
-
             SettingService::initSetting();
             $generalSetting = SettingService::getGeneralSetting();
             $logoSetting = SettingService::getLogoSetting();
