@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Session; @endphp
 <script>
     const Toast = Swal.mixin({
         toast: true,

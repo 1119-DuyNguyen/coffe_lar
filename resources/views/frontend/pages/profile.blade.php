@@ -36,6 +36,10 @@
                       <input type="text" name="email" class="form-control" value="{{$user->email}}" >
 
                     </div>
+                      <div class="form-group col-12">
+                          <label>Số điện thoại</label>
+                          <input type="text" name="email" class="form-control" value="{{$user->phone}}" >
+                      </div>
                   </div>
 
 
