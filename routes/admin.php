@@ -52,6 +52,8 @@ Route::middleware('hasPermission')->group(function () {
 
 
     /** Order routes */
+    Route::put('order/change-payment-status', [OrderController::class, 'changePaymentStatus'])->name('order.change-payment-status');
+
     Route::put('order/change-status', [OrderController::class, 'changeOrderStatus'])->name('order.change-status');
 
     Route::resource('order', OrderController::class);

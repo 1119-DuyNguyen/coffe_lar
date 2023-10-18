@@ -30,5 +30,8 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    <x-change-status :url="route('admin.order.change-payment-status')" selector-btn=".change-payment-status" />
+
+    <x-change-status :url="route('admin.order.change-status')" type="select"/>
 
 @endpush

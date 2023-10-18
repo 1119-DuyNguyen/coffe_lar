@@ -56,28 +56,14 @@ final class OrderTable extends PowerGridComponent
             ->addColumn('phone_receiver')
             ->addColumn('total')
             ->addColumn('payment_status', function ($model) {
-                $html = '
-                    <select name="payment_status" data-id="' . $model->id . '" class="form-select  form-control  w-auto">';
-                $statusArray = array(
-                    "Chưa thanh toán",
-                    "Đã thanh toán",
-                );
-
-                for ($i = 0; $i < sizeof($statusArray); $i++) {
-                    if ($model->payment_status == $i) {
-                        $html .= '<option value=' . $i . ' selected>' . $statusArray[$i] . '</option>';
-                    } else {
-                        $html .= '<option value=' . $i . '>' . $statusArray[$i] . '</option>';
-                    }
-                }
-
-                $html .= '</select>';
-
-                return $html;
+                return '<label class="custom-switch mt-2">
+                        <input type="checkbox" '. ($model->payment_status ? "checked": '' ) .' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-payment-status" >
+                        <span class="custom-switch-indicator"></span>
+                    </label>';
             })
             ->addColumn('order_status',  function ($model) {
                 $html = '
-                    <select name="order_status" data-id="' . $model->id . '" class="form-select  form-control w-auto">';
+                    <select name="order_status" data-id="' . $model->id . '" class="form-select  form-control change-status w-auto">';
 
                 $statusArray = OrderStatus::getKeys();
                 foreach ($statusArray as  $key) {
@@ -111,13 +97,13 @@ final class OrderTable extends PowerGridComponent
                 ->dataSource(OrderStatus::collectionValues())
                 ->optionValue('value')
                 ->optionLabel('label'),
-            Filter::select('payment_status', 'payment_status')
-                ->dataSource(collect([
-                    ['label'=>'Chưa thanh toán','value'=>0],
-                    ['label'=>'Đã thanh toán','value'=>1],
-                ]))
-                ->optionValue('value')
-                ->optionLabel('label'),
+//            Filter::select('payment_status', 'payment_status')
+//                ->dataSource(collect([
+//                    ['label'=>'Chưa thanh toán','value'=>0],
+//                    ['label'=>'Đã thanh toán','value'=>1],
+//                ]))
+//                ->optionValue('value')
+//                ->optionLabel('label'),
         ];
     }
     public function columns(): array
@@ -127,8 +113,8 @@ final class OrderTable extends PowerGridComponent
             Column::make('Số điện thoại', 'phone_receiver')->searchable(),
             Column::make('Tổng tiền', 'total')
                 ->sortable(),
-            Column::make('Hình thức thanh toán', 'payment_status'),
-            Column::make('Trạng thái', 'order_status'),
+            Column::make('Trạng thái thanh toán', 'payment_status')->sortable(),
+            Column::make('Trạng thái đơn hàng', 'order_status'),
             Column::make('Ngày tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 

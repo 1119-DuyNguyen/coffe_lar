@@ -74,9 +74,13 @@
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        $('#login').modal('show');
+                        if ($('#login'))
+                            $('#login').modal('show')
+                        else window.location.reload();
                     } else if (result.isDenied) {
-                        $('#registerForm').modal('show');
+                        if ($('#registerForm'))
+                            $('#registerForm').modal('show')
+                        else window.location.reload();
                     }
                 })
 

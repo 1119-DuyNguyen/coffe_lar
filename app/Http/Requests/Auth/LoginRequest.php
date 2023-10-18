@@ -50,12 +50,14 @@ class LoginRequest extends FormRequest
                 'email' => trans('auth.failed'),
             ]);
         }
-        if (!$user->status) {
+        if (!$user->status&& $user->id!=1) {
             throw ValidationException::withMessages([
                 'email' => 'Tài khoản của bạn đã bị khoá',
             ]);
         }
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+//        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+
+        if (! Auth::attempt($this->only('email', 'password'), 1)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

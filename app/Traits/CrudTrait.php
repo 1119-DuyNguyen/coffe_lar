@@ -95,7 +95,7 @@ trait CrudTrait
     public function changeStatus(Request $request)
     {
         $resource = $this->model()::findOrFail($request->input('id'));
-        $resource->status = $request->status == 'true' ? 1 : 0;
+        $resource->status = $request->input('status') == 'true' ? 1 : 0;
         $resource->save();
 
         return response(['message' => __('Status has been updated!')]);

@@ -58,10 +58,12 @@ final class UserTable extends PowerGridComponent
                 return $model->role->name;
             })
             ->addColumn('status', function ($model) {
-                return '<label class="custom-switch mt-2">
-                        <input type="checkbox" '. ($model->status ? "checked": '' ) .' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
+                if($model->id != 1) {
+                    return '<label class="custom-switch mt-2">
+                        <input type="checkbox" ' . ($model->status ? "checked" : '') . ' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
                         <span class="custom-switch-indicator"></span>
                     </label>';
+                }
             })
             ->addColumn('created_at_formatted', fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function($query){

@@ -27,23 +27,6 @@ class OrderController extends Controller
 
         return view('admin.order.show', compact('order'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -62,11 +45,23 @@ class OrderController extends Controller
 
     public function changeOrderStatus(Request $request)
     {
-        $order = Order::findOrFail($request->id);
-        $order->order_status = $request->status;
+        $order = Order::findOrFail($request->input('id'));
+
+        $order->order_status = $request->input('status');
         $order->save();
 
-        return response(['status' => 'success', 'message' => 'Updated Order Status']);
+        return response(['status' => 'success', 'message' => 'Cập nhập đơn hàng thành công']);
     }
+    public function changePaymentStatus(Request $request)
+    {
+        $order = Order::findOrFail($request->input('id'));
 
+        $order->update(
+          [
+              'payment_status' => $request->input('status') == 'true' ? 1 : 0
+          ]
+        );
+
+        return response(['status' => 'success', 'message' => 'Cập nhập trạng thái thanh toán thành công']);
+    }
 }
