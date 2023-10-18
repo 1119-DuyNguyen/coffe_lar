@@ -4,10 +4,6 @@ use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Product\ProductController;
-use App\Http\Controllers\Backend\Product\ProductVariantController;
-use App\Http\Controllers\Backend\Product\ProductVariantItemController;
-use App\Http\Controllers\Backend\Product\VariantController;
-use App\Http\Controllers\Backend\Product\VariantItemController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\User\ManageRoleController;
@@ -20,10 +16,10 @@ Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
-Route::middleware('can:admin.product.index')->group(function () {
-    Route::resource('product.product-variant', ProductVariantController::class)->only(['index', 'create', 'edit']);
-    Route::resource('product.product-variant.product-variant-item', ProductVariantItemController::class)->only(['index', 'create', 'edit']);
-});
+//Route::middleware('can:admin.product.index')->group(function () {
+//    Route::resource('product.product-variant', ProductVariantController::class)->only(['index', 'create', 'edit']);
+//    Route::resource('product.product-variant.product-variant-item', ProductVariantItemController::class)->only(['index', 'create', 'edit']);
+//});
 Route::middleware('can:admin.product.update')->group(function () {
     /** Products routes */
     Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');

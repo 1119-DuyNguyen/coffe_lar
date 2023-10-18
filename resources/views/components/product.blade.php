@@ -15,7 +15,7 @@
                                         >
                                         <span  class="woo_product_thumb mb-3">
 
-                                        <img src="{{ asset('uploads/product/'.$product->thumb_image)}}" class="img-fluid" alt="" />
+                                        <img src="{{ asset($product->thumb_image)}}" class="img-fluid" alt="" />
                                         </span>
 
                                         {{$product->name}}</a></h4>

@@ -42,7 +42,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="inputCategory">Chuyên mục</label>
+                                    <label for="inputCategory">Danh mục</label>
 
                                     <select id="inputCategory" class="form-control" name="category_id">
                                     @foreach($categories as $category)
@@ -54,18 +54,21 @@
 
                                 <div class="form-group">
                                     <label>Giá</label>
-                                    <input type="text" class="form-control" name="price" value="{{$product->price}}">
+                                    <input type="number" class="form-control" name="price" value="{{$product->price}}">
                                 </div>
-                                
                                 <div class="form-group">
-                                    <label>Mô tả ngắn</label>
+                                    <label>Khối lượng</label>
+                                    <input type="number" class="form-control" name="weight" value="{{$product->weight}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả</label>
                                     <textarea name="description"
                                               class="form-control">{!! $product->description !!}</textarea>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label>Mô tả chi tiết</label>
+                                    <label>Nội dung</label>
                                     <textarea name="content"
                                               class="form-control summernote">{!! $product->content !!}</textarea>
                                 </div>

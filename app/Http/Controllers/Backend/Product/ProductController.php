@@ -38,6 +38,11 @@ class ProductController extends Controller
     {
         return 'thumb_image';
     }
+    protected function getImagePath(): string|null
+    {
+        return 'products';
+    }
+
     protected function getInputSlug(): string
     {
         return 'name';

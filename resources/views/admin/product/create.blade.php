@@ -14,7 +14,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tạo sản phẩm</h4>
+                    <h4>Khởi tạo sản phẩm</h4>
                   </div>
                   <div class="card-body">
                     <form action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
@@ -47,16 +47,24 @@
                             <label>Giá</label>
                             <input type="text" class="form-control" name="price" value="{{old('price')}}">
                         </div>
-
                         <div class="form-group">
-                            <label>Mô tả ngắn</label>
-                            <textarea name="description" class="form-control" value="{{old('description')}}"></textarea>
+                            <label>Khối lượng</label>
+                            <input type="number" class="form-control" name="weight" value="{{old('weight')}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả </label>
+                            <textarea name="description" class="form-control" >
+                                {!! old('description')!!}
+                            </textarea>
                         </div>
 
 
                         <div class="form-group">
-                            <label>Mô tả chi tiết</label>
-                            <textarea name="content" class="form-control summernote" value="{{old('content')}}"> </textarea>
+                            <label>Nội dung</label>
+                            <textarea name="content" class="form-control summernote" >
+                                {!! old('content')!!}
+
+                            </textarea>
                         </div>
 
 
