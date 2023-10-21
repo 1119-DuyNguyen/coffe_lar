@@ -7,7 +7,9 @@ use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
@@ -38,34 +40,47 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate(): bool
     {
-        $this->ensureIsNotRateLimited();
-        $credentials = $this->only('email', 'password');
-        $user = User::where('email', $credentials['email'])->first();
-        if (!$user) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
-        }
-        if (!$user->status&& $user->id!=1) {
-            throw ValidationException::withMessages([
-                'email' => 'Tài khoản của bạn đã bị khoá',
-            ]);
-        }
+//        $this->ensureIsNotRateLimited();
+//        $credentials = $this->only('email', 'password');
+//        $user = User::where('email', $credentials['email'])->first();
+//        if (!$user) {
+//            RateLimiter::hit($this->throttleKey());
+//
+//            throw ValidationException::withMessages([
+//                'email' => trans('auth.failed'),
+//            ]);
+//        }
+//        if (!$user->status&& $user->id!=1) {
+//            throw ValidationException::withMessages([
+//                'email' => 'Tài khoản của bạn đã bị khoá',
+//            ]);
+//        }
 //        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
 
         if (! Auth::attempt($this->only('email', 'password'), 1)) {
-            RateLimiter::hit($this->throttleKey());
+//            RateLimiter::hit($this->throttleKey());
+
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
+        else{
+            $user=Auth::user();
 
-        RateLimiter::clear($this->throttleKey());
+            if (!($user->status || $user->id==1)) {
+                Auth::logout();
+                Session::flush();
+                throw ValidationException::withMessages([
+                    'email' => 'Tài khoản của bạn đã bị khoá',
+                ]);
+            }
+
+        }
+        return true;
+//        RateLimiter::clear($this->throttleKey());
     }
 
     /**

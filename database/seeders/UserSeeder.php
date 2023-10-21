@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
@@ -35,13 +36,14 @@ class UserSeeder extends Seeder
                 'role_id' =>2,
                 'password' => bcrypt('123')
             ],
-            [
-                'name' => 'girl',
-                'username' => 'girl',
-                'email' => 'girl@gmail.com',
-                'role_id' =>2,
-                'password' => bcrypt('123')
-            ]
+        ]);
+        User::create(          [
+            'name' => 'ban account',
+            'username' => 'ban',
+            'email' => 'ban@gmail.com',
+            'role_id' =>2,
+            'password' => bcrypt('123'),
+            'status'=>0
         ]);
     }
 }

@@ -42,4 +42,47 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
     }
+
+    public function testLoginRequestValidationPasses()
+    {
+        $request = new LoginRequest();
+        $this->assertTrue($request->authorize()); // Authorization rules are met
+    }
+
+    public function testLoginRequestValidationFails()
+    {
+        $request = new LoginRequest();
+        // Customize the input data to make the validation fail
+        $request->merge([
+            'email' => 'invalid-email',
+            'password' => 'short',
+        ]);
+        $this->assertFalse($request->authorize()); // Authorization rules are not met
+    }
+
+    // Test the login function inside the form request
+
+    public function testLoginFunctionSucceeds()
+    {
+        $request = new LoginRequest();
+        $request->merge([
+            'email' => 'valid@example.com',
+            'password' => 'validPassword',
+        ]);
+
+        $this->assertTrue($request->login()); // Ensure login function succeeds
+    }
+
+    public function testLoginFunctionFails()
+    {
+        $request = new LoginRequest();
+        $request->merge([
+            'email' => 'invalid@example.com',
+            'password' => 'invalidPassword',
+        ]);
+
+        $this->assertFalse($request->login()); // Ensure login function fails
+
+    }
+
 }
