@@ -16,43 +16,37 @@ use function PHPUnit\Framework\assertTrue;
 
 class LoginTest extends TestCase
 {
-    /**
-     * Set up operations
-     *
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     function testLoginRequestPasswordValidationFails()
     {
-        $request = new LoginRequest();
-        $validator = Validator::make([
-            'email' => 'thanhduy191103@gmail.com',
-            'password' => ''
-        ], $request->rules());
+        $this->expectException(ValidationException::class);
+        try {
+            $request = new LoginRequest([
+                'email' => 'thanhduy191103@gmail.com',
+                'password' => ''
+            ]);
 
-        //Kiểm tra xem thông tin có hợp lệ
-        $this->assertFalse($validator->passes());
-        //Kiểm tra xem lỗi có khởi tạo
-        $this->assertContains('password', $validator->errors()->keys());
+            $request->authenticate();
+        } catch (ValidationException $exception) {
+            $this->assertContains('password', array_keys($exception->errors()));
+            throw $exception;
+        }
+
     }
 
     function testLoginRequestEmailValidationFails()
     {
-        $request = new LoginRequest();
-        $validator = Validator::make([
-            'email' => 'not valid email',
-            'password' => '123'
-        ], $request->rules());
+        $this->expectException(ValidationException::class);
+        try {
+            $request = new LoginRequest([
+                'email' => 'not valid email',
+                'password' => '123'
+            ]);
 
-        //Kiểm tra xem thông tin có hợp lệ
-        $this->assertFalse($validator->passes());
-
-        //Kiểm tra xem lỗi có khởi tạo
-        $this->assertContains('email', $validator->errors()->keys());
+            $request->authenticate();
+        } catch (ValidationException $exception) {
+            $this->assertContains('email', array_keys($exception->errors()));
+            throw $exception;
+        }
     }
 
     function testLoginRequestEmailAndPasswordNotFound()
@@ -68,8 +62,7 @@ class LoginTest extends TestCase
             $request->authenticate();
         } catch (ValidationException $exception) {
             $this->assertContains('email', array_keys($exception->errors()));
-            //Kiểm tra xem có trả về đúng tin nhắn
-            $this->assertContains(trans('auth.failed'),array_values($exception->errors()['email']));
+            $this->assertContains('Thông tin tài khoản không tìm thấy trong hệ thống.',array_values($exception->errors()['email']));
 
             throw $exception;
         }
@@ -88,7 +81,6 @@ class LoginTest extends TestCase
             $request->authenticate();
         } catch (ValidationException $exception) {
             $this->assertContains('email', array_keys($exception->errors()));
-            //Kiểm tra xem có trả về đúng tin nhắn
             $this->assertContains('Tài khoản của bạn đã bị khoá', array_values($exception->errors()['email']) );
             throw $exception;
         }
