@@ -12,7 +12,7 @@ use Tests\TestCase;
 class DataProviderLoginTest extends TestCase
 {
     #[DataProvider('providerTestValidate')]
-    function testLoginRequestPasswordValidationFails($data,$typeValidate)
+    function testLoginRequestValidationFails($data, $typeValidate)
     {
         $this->expectException(ValidationException::class);
         try {
@@ -31,15 +31,13 @@ class DataProviderLoginTest extends TestCase
                 [
                     'email' => 'thanhduy191103@gmail.com',
                     'password' => ''
-                ]
-                ,'password'
+                ], 'password'
             ],
             [
                 [
                     'email' => 'not valid email',
                     'password' => '123'
-                ]
-                ,'email'
+                ], 'email'
 
             ],
         ];
