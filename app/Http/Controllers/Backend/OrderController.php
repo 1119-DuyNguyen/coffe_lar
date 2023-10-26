@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\DataTables\OrderDataTable;
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -45,6 +46,10 @@ class OrderController extends Controller
 
     public function changeOrderStatus(Request $request)
     {
+        if($request->input('status')==OrderStatus::canceled || $request->input('status')==OrderStatus::delivered)
+        {
+        return response(['status' => 'error', 'message' => 'Không được phép thay đổi trạng thái đơn hàng']);
+        }
         $order = Order::findOrFail($request->input('id'));
 
         $order->order_status = $request->input('status');

@@ -14,14 +14,17 @@
                     id: id
                 },
                 success: function(data){
-                    successToast(data.message);
-                    // Swal.fire(
-                    //     {  title: data.message,
-                    //         icon: 'success',
-                    //         confirmButtonText:"Xác nhận"
-                    //     }
-                    //
-                    // )
+                    // successToast(data.message);
+                    Swal.fire(
+                        {  title: data.message,
+                            icon: 'success',
+                            confirmButtonText:"Xác nhận"
+                        }
+
+                    ).then((result) => {
+                        window.location.reload();
+                    })
+
                 },
                 error: function(xhr, status, error){
                     console.log(error);
@@ -43,9 +46,18 @@
                     id: id
                 },
                 success: function(data){
-                    Toast.fire({
-                        icon: data.status,
-                        title: data.message
+                    // Toast.fire({
+                    //     icon: data.status,
+                    //     title: data.message
+                    // })
+                    Swal.fire(
+                        {  title: data.message,
+                            icon: data.status,
+                            confirmButtonText:"Xác nhận"
+                        }
+
+                    ).then((result) => {
+                        window.location.reload();
                     })
                     // Swal.fire(
                     //     {  title: data.message,

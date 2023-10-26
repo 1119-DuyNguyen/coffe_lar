@@ -62,6 +62,10 @@ final class OrderTable extends PowerGridComponent
                     </label>';
             })
             ->addColumn('order_status',  function ($model) {
+                if($model->order_status==OrderStatus::canceled || $model->order_status==OrderStatus::delivered)
+                {
+                    return "<span class='badge ". ($model->order_status==OrderStatus::canceled ?"bg-danger":"bg-success" )." text-white'>". OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'] ."</span>";
+                }
                 $html = '
                     <select name="order_status" data-id="' . $model->id . '" class="form-select  form-control change-status w-auto">';
 
@@ -81,7 +85,9 @@ final class OrderTable extends PowerGridComponent
             ->addColumn('created_at_formatted', fn(Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function($query){
 //                $showBtn = "<a href='".route('admin.order.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
-                $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+//                $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $deleteBtn = "";
+
                 $printBtn="<a href='".route('user.order.show', $query->id)."' class='btn btn-warning'><i class='fas fa-print'></i></a>";
 
                 return $printBtn.$deleteBtn;

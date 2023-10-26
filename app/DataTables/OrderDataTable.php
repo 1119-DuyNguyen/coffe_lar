@@ -27,8 +27,8 @@ class OrderDataTable extends DataTable
             })
             ->addColumn('action', function($query){
                 $showBtn = "<a href='".route('admin.order.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
-                $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-
+//                $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $deleteBtn='';
                 return $showBtn.$deleteBtn;
             })
             ->addColumn('customer', function($query){

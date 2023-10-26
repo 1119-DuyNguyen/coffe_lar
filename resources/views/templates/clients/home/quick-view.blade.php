@@ -3,7 +3,7 @@
 @if($product)
     <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="">
-            <img src="{{ asset('uploads/product/'.$product->thumb_image)}}" class="img-fluid w-100 img-thumbnail" alt="ảnh">
+            <img src="{{ asset($product->thumb_image)}}" class="img-fluid w-100 img-thumbnail" alt="ảnh">
         </div>
     </div>
 
