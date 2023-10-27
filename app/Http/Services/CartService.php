@@ -57,7 +57,7 @@ class CartService
             if (empty($product)) {
                 continue;
             }
-//            $product->quantity=$cart['quantity'];
+            $product->quantity=$cart['quantity'];
             $subtotal += ($product->price) * $cart['quantity'];
             $cart['product-data'] = $product;
 //            dd($product);

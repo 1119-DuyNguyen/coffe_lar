@@ -59,8 +59,14 @@ final class UserOrderTable extends PowerGridComponent
                 return ($model->payment_status ? "Đã thanh toán": 'Chưa thanh toán' ) ;
             })
             ->addColumn('order_status',  function ($model) {
+                $string= match ($model->order_status) {
+                    OrderStatus::canceled => 'bg-danger',
+                    OrderStatus::delivered => 'bg-success',
+                    default => 'bg-info',
+                };;
+                return "<span class='badge ". $string." text-white'>". OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'] ."</span>";
 
-                return OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'];
+//                return OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'];
             })
             ->addColumn('created_at_formatted', fn(Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function($query){

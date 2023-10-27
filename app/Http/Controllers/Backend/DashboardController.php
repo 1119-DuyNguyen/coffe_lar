@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
@@ -24,6 +25,7 @@ class DashboardController extends Controller
         )
             ->whereYear('created_at', $selectedYear)
             ->where('payment_status',true)
+            ->where('order_status',OrderStatus::delivered)
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy('month')
             ->get();
