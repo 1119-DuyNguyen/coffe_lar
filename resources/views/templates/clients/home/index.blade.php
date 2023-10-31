@@ -16,15 +16,15 @@
                 </ol>
                 <div class="carousel-inner pb-5" style="height: auto">
                     <a href="#" class="carousel-item active">
-                        <img class="d-block w-100" src="http://coffe-drink.test/uploads/slide/1683694.jpeg"
+                        <img class="d-block w-100" src="{{asset("uploads/slide/1683694.jpeg")}}"
                              alt="First slide">
                     </a>
                     <a href="#" class="carousel-item">
-                        <img class="d-block w-100" src="http://coffe-drink.test/uploads/slide/1683694.jpeg"
+                        <img class="d-block w-100" src="{{asset("uploads/slide/1683694.jpeg")}}"
                              alt="Second slide">
                     </a>
                     <a href="#" class="carousel-item">
-                        <img class="d-block w-100" src="http://coffe-drink.test/uploads/slide/1683694.jpeg"
+                        <img class="d-block w-100" src="{{asset("uploads/slide/1683694.jpeg")}}"
                              alt="Third slide">
                     </a>
                 </div>
