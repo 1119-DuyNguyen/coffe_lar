@@ -10,8 +10,6 @@ use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\OrderProduct;
 use App\Models\Product;
-use App\Models\ProductImageGallery;
-use App\Models\ProductVariant;
 use App\Models\SubCategory;
 use App\Traits\CrudTrait;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,10 +22,6 @@ class ProductController extends Controller
     protected function model(): string
     {
         return Product::class;
-    }
-    protected function addAutoInput(Request $request): array
-    {
-        return ['vendor_id'=>Auth::user()->id];
     }
 
     protected function getFormRequest():  string|null
@@ -74,7 +68,7 @@ class ProductController extends Controller
     {
 
         $product = Product::findOrFail($id);
-     $categories = Category::all();
+        $categories = Category::all();
         return view('admin.product.edit', compact('product', 'categories'));
     }
 
@@ -92,19 +86,19 @@ class ProductController extends Controller
         $this->deleteImage($product->thumb_image);
 
         /** Delete product gallery images */
-        $galleryImages = ProductImageGallery::where('product_id', $product->id)->get();
-        foreach($galleryImages as $image){
-            $this->deleteImage($image->image);
-            $image->delete();
-        }
-
-        /** Delete product variants if exist */
-        $variants = ProductVariant::where('product_id', $product->id)->get();
-
-        foreach($variants as $variant){
-            $variant->productVariantItems()->delete();
-            $variant->delete();
-        }
+//        $galleryImages = ProductImageGallery::where('product_id', $product->id)->get();
+//        foreach($galleryImages as $image){
+//            $this->deleteImage($image->image);
+//            $image->delete();
+//        }
+//
+//        /** Delete product variants if exist */
+//        $variants = ProductVariant::where('product_id', $product->id)->get();
+//
+//        foreach($variants as $variant){
+//            $variant->productVariantItems()->delete();
+//            $variant->delete();
+//        }
 
         $product->delete();
 
