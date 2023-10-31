@@ -23,7 +23,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/themify-icons/themify-icons.css')}}"/>
-
+    <style>
+        .form-select{
+            display: block;
+            width: 100%;
+            height: calc(2.25rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-top-color: rgb(206, 212, 218);
+            border-right-color: rgb(206, 212, 218);
+            border-bottom-color: rgb(206, 212, 218);
+            border-left-color: rgb(206, 212, 218);
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+    </style>
     <!-- <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/alertify.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/semantic.min.css') }}" />
