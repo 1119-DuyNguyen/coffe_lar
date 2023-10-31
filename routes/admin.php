@@ -5,7 +5,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Backend\SliderController;
+
 use App\Http\Controllers\Backend\User\ManageRoleController;
 use App\Http\Controllers\Backend\User\ManageUserController;
 use App\Http\Controllers\ProfileController;
@@ -24,11 +24,11 @@ Route::middleware('can:admin.product.update')->group(function () {
     /** Products routes */
     Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
 
-    /** Products variant route */
-    Route::put('product-variant/change-status', [VariantController::class, 'changeStatus'])->name('product-variant.change-status');
-    Route::resource('product-variant', VariantController::class)->only(['store', 'update', 'destroy']);
-    Route::put('product-variant-item/change-status', [VariantItemController::class, 'changeStatus'])->name('product-variant-item.change-status');
-    Route::resource('product-variant-item', VariantItemController::class)->only(['store', 'update', 'destroy']);
+//    /** Products variant route */
+//    Route::put('product-variant/change-status', [VariantController::class, 'changeStatus'])->name('product-variant.change-status');
+//    Route::resource('product-variant', VariantController::class)->only(['store', 'update', 'destroy']);
+//    Route::put('product-variant-item/change-status', [VariantItemController::class, 'changeStatus'])->name('product-variant-item.change-status');
+//    Route::resource('product-variant-item', VariantItemController::class)->only(['store', 'update', 'destroy']);
 });
 
 
@@ -37,7 +37,7 @@ Route::middleware('can:admin.product.update')->group(function () {
 Route::middleware('hasPermission')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
     /** Slider Route */
-    Route::resource('slider', SliderController::class);
+//    Route::resource('slider', SliderController::class);
 
     /** Category Route */
     Route::put('category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');

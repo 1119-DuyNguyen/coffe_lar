@@ -30,7 +30,7 @@
 @endsection
 
 @push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+{{--    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}--}}
     <x-change-status :url="route('admin.user.change-status')">
 
     </x-change-status>

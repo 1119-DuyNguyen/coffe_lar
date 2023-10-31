@@ -33,7 +33,7 @@
 @endsection
 
 @push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+{{--    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}--}}
     <x-change-status :url="route('admin.category.change-status')"></x-change-status>
 
 {{--    <script>--}}

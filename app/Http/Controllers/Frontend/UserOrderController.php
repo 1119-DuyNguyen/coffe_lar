@@ -13,10 +13,10 @@ class UserOrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(UserOrderDataTable $dataTable)
+    public function index()
     {
-        $statusOrder=config('order_status.order_status_admin');
-        return $dataTable->render('frontend.dashboard.order.index',compact('statusOrder'));
+
+        return view('frontend.dashboard.order.index');
     }
 
     public function show(string $id)

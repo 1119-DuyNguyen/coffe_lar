@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\DataTables\OrderDataTable;
 use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -13,10 +12,10 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(OrderDataTable $dataTable)
+    public function index()
     {
-        $statusOrder = config('order_status.order_status_admin');
-        return $dataTable->render('admin.order.index', compact('statusOrder'));
+
+        return view('admin.order.index');
     }
 
     /**
@@ -46,11 +45,11 @@ class OrderController extends Controller
 
     public function changeOrderStatus(Request $request)
     {
-        if($request->input('status')==OrderStatus::canceled || $request->input('status')==OrderStatus::delivered)
+        $order = Order::findOrFail($request->input('id'));
+        if($order->order_status==OrderStatus::canceled || $order->order_status==OrderStatus::delivered)
         {
         return response(['status' => 'error', 'message' => 'Không được phép thay đổi trạng thái đơn hàng']);
         }
-        $order = Order::findOrFail($request->input('id'));
 
         $order->order_status = $request->input('status');
         $order->save();

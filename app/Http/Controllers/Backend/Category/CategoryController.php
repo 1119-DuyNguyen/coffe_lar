@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
-use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CategoryRequest;
 use App\Models\Category;
 use App\Traits\CrudTrait;
-use Illuminate\Foundation\Http\FormRequest;
+
 
 class CategoryController extends Controller
 {
@@ -26,9 +25,9 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(CategoryDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('admin.category.index');
+        return view('admin.category.index');
     }
     /**
      * Show the form for editing the specified resource.

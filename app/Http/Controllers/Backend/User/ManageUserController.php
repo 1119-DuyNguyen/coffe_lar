@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend\User;
 
-use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRegisterRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Traits\CrudTrait;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class ManageUserController extends Controller
@@ -32,9 +30,9 @@ class ManageUserController extends Controller
     {
         return ProfileRegisterRequest::class;
     }
-    public function index(UserListDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('admin.user.index');
+        return view('admin.user.index');
     }
 
     public function create()

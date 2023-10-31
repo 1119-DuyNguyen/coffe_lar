@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
-use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ProductRequest;
-use App\Models\Brand;
 use App\Models\Category;
-use App\Models\ChildCategory;
 use App\Models\OrderProduct;
 use App\Models\Product;
-use App\Models\SubCategory;
 use App\Traits\CrudTrait;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -45,9 +39,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ProductDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('admin.product.index');
+        return view('admin.product.index');
     }
 
     /**

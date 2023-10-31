@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend\User;
 
-use App\DataTables\RoleDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\RoleRequest;
 use App\Models\Permission;
@@ -25,9 +24,9 @@ class ManageRoleController extends Controller
         return RoleRequest::class;
     }
 
-    public function index(RoleDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('admin.role.index');
+        return view('admin.role.index');
     }
 
     public function create()
