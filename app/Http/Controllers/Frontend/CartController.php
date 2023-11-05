@@ -27,7 +27,7 @@ class CartController extends Controller
         if(CartService::countCart()<1)
         {
             alert()->warning('Bạn chưa có sản phẩm trong giỏ hàng','Hãy thêm ít nhất 1 sản phẩm vào giỏ hàng');
-            return  redirect()->back();
+            return  redirect()->route('home');
         }
         return view('templates.clients.cart.index');
     }
