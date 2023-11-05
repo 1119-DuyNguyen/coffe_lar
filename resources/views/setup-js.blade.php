@@ -60,7 +60,9 @@
 
             },
             401: function (responseObject, textStatus, errorThrown) {
+                $('.modal').modal('hide');
                 errorToast('Bạn chưa đăng nhập');
+
                 Swal.fire({
                     title: 'Bạn chưa đăng nhập',
                     text: "Hãy đăng nhập để thực hiện thao tác",
