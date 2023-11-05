@@ -49,9 +49,15 @@
             type: 'DELETE',
 
             success(data) {
-                loadCart(data);
-                // loadCartItem(data);
-                errorToast('Đã xoá món');
+                if(data)
+                {
+                    loadCart(data);
+                    // loadCartItem(data);
+                    errorToast('Đã xoá món');
+                }
+                else {
+                    window.location.reload();
+                }
 
             }
         })
