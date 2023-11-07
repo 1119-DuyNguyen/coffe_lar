@@ -109,17 +109,22 @@
 {{--    <div class="company">C.Ty TNHH Ngôi Nhà Cà Phê</div>--}}
 
 {{--</div>--}}
-<table class="w-full">
-    <tr>
-        <td class="w-half">
-            <img src="{{ asset('img/logo.png') }}" alt="laravel daily" width="200"/>
-        </td>
-        <td class="w-half">
-            <div class="company">C.Ty TNHH Ngôi Nhà Cà Phê</div>
-        </td>
-    </tr>
-</table>
+{{--<table class="w-full">--}}
+{{--    <tr>--}}
+{{--        <td class="w-half">--}}
+{{--            <img src="{{ asset('img/logo-pdf.png') }}"  width="200"/>--}}
+{{--        </td>--}}
+{{--        <td class="w-half">--}}
+{{--            <div class="company">C.Ty TNHH Ngôi Nhà Cà Phê</div>--}}
+{{--        </td>--}}
+{{--    </tr>--}}
+{{--</table>--}}
+
 <div class="title">
+    Công Ty TNHH Ngôi Nhà Cà Phê
+    <br/>
+    <br/>
+    <br/>
     HÓA ĐƠN THANH TOÁN
     <br/>
     -------oOo-------
