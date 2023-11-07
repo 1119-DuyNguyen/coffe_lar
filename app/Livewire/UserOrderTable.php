@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,7 +42,7 @@ final class UserOrderTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Order::query();
+        return Order::query()->where('user_id',Auth::user()->id);
     }
 
     public function relationSearch(): array
