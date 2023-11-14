@@ -47,10 +47,10 @@ trait ProfileHandlerTrait {
         ]);
 
         $request->user()->update([
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->input('password'))
         ]);
 
-        toast()->success('Profile Password Updated Successfully!');
+        toast()->success('Mật khẩu đã được cập nhập thành công ');
 
         return redirect()->back();
     }

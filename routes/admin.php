@@ -20,7 +20,7 @@ Route::post('profile/update/password', [ProfileController::class, 'updatePasswor
 //    Route::resource('product.product-variant', ProductVariantController::class)->only(['index', 'create', 'edit']);
 //    Route::resource('product.product-variant.product-variant-item', ProductVariantItemController::class)->only(['index', 'create', 'edit']);
 //});
-Route::middleware('can:admin.product.update')->group(function () {
+Route::middleware('can:admin.product')->group(function () {
     /** Products routes */
     Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
 
