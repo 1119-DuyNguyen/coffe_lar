@@ -58,9 +58,10 @@ trait ImageUploadTrait
             if(isset($oldPath)&&$request->{$inputName}==$oldPath){
                 return null;
             }
-            if (File::exists(public_path($oldPath))) {
-                File::delete(public_path($oldPath));
-            }
+            // Không xoá file cũ nữa
+            // if (File::exists(public_path($oldPath))) {
+            //     File::delete(public_path($oldPath));
+            // }
 
             $image = $request->{$inputName};
 

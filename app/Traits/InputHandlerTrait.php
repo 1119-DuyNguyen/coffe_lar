@@ -61,7 +61,7 @@ trait InputHandlerTrait
         $rawData = array_merge($request->all(), $this->addAutoInput($request));
         // transform slug
         if (!empty($this->getInputSlug())) {
-            $rawData['slug'] = Str::slug($this->getInputSlug());
+            $rawData['slug'] = Str::slug($request->input($this->getInputSlug()));
         }
 
         $this->validateRequest($rawData,$request);

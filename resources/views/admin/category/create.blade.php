@@ -23,7 +23,7 @@
                             <label>Biểu tượng</label>
                              <div>
                                 <button class="btn btn-primary" data-icon="" data-selected-class="btn-danger"
-                                data-unselected-class="btn-info" role="iconpicker" name="icon" data-search="false"></button>
+                                data-unselected-class="btn-info" role="iconpicker" name="icon" data-search="false"  data-footer="false"></button>
                              </div>
 
                         </div>
