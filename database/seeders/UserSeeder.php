@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Admin user',
-                'username' => 'admin',
+                // 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'role_id' => 1,
                 'password' => bcrypt('123')
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
 //            ],
             [
                 'name' => 'user',
-                'username' => 'user',
+                // 'username' => 'user',
                 'email' => 'user@gmail.com',
                 'role_id' =>2,
                 'password' => bcrypt('123')
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
         ]);
         User::create(          [
             'name' => 'ban account',
-            'username' => 'ban',
+            // 'username' => 'ban',
             'email' => 'ban@gmail.com',
             'role_id' =>2,
             'password' => bcrypt('123'),

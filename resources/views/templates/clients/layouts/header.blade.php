@@ -266,12 +266,12 @@ $categories=Category::where('status',true)->get();
                         <h3 class="login_sec_title">Đăng nhập</h3>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" name="email" required class="form-control emailAcc">
+                            <input type="text" name="email"  class="form-control emailAcc">
                         </div>
 
                         <div class="form-group">
                             <label>Mật khẩu</label>
-                            <input type="password" required class="form-control passwordAcc" name="password">
+                            <input type="password"  class="form-control passwordAcc" name="password">
                         </div>
 
                         <div class="login_flex">
