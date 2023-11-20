@@ -48,5 +48,8 @@
 
         </form>
     </div>
-
+    <div class="col-12">
+        <hr>
+        <p>{!! $product->content !!}</p>
+    </div>
 @endif
