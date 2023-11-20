@@ -25,25 +25,6 @@ class Role  extends Model
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
-    /**
      * The users that belong to the role.
      */
     public function users(): BelongsToMany
@@ -53,5 +34,29 @@ class Role  extends Model
     public function permissions():BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
+    }
+
+    // Accessor for 'name'
+    public function getNameAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'name'
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+    }
+
+    // Accessor for 'description'
+    public function getDescriptionAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'description'
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = $value;
     }
 }

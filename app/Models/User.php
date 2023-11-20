@@ -22,9 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-//        'address',
         'phone',
         'role_id',
+        'status'
     ];
 
     /**
@@ -56,6 +56,64 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class);
     }
+    // Accessor for 'name'
+    public function getNameAttribute($value)
+    {
+        return $value;
+    }
 
+    // Mutator for 'name'
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+    }
+
+    // Accessor for 'email'
+    public function getEmailAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'email'
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = $value;
+    }
+
+    // Accessor for 'phone'
+    public function getPhoneAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'phone'
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone'] = $value;
+    }
+
+    // Accessor for 'role_id'
+    public function getRoleIdAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'role_id'
+    public function setRoleIdAttribute($value)
+    {
+        $this->attributes['role_id'] = $value;
+    }
+
+    // Accessor for 'status'
+    public function getStatusAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'status'
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value;
+    }
 
 }

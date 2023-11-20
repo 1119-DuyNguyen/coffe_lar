@@ -32,5 +32,27 @@ class Permission  extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+    // Accessor for 'name'
+    public function getNameAttribute($value)
+    {
+        return $value;
+    }
 
+    // Mutator for 'name'
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+    }
+
+    // Accessor for 'description'
+    public function getDescriptionAttribute($value)
+    {
+        return $value;
+    }
+
+    // Mutator for 'description'
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = $value;
+    }
 }
