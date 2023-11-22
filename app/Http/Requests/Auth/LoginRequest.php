@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -44,25 +45,29 @@ class LoginRequest extends FormRequest
     public function authenticate(): bool
     {
 
-        $validator =Validator::make($this->all(), [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
-        ]);
-        if(!$validator->passes())   throw new ValidationException($validator);
-        if (! Auth::attempt($this->only('email', 'password'), 1)) {
+        $user = User::where('email',$this->input('email'))->first();
+        if (!$user || !Hash::check( $this->input('password'),$user->password) ) {
             throw ValidationException::withMessages([
                 'email' => 'Thông tin tài khoản không tìm thấy trong hệ thống.',
             ]);
         }
         else{
-            $user=Auth::user();
+
 
             if (!($user->status || $user->id==1)) {
-                Auth::logout();
-                Session::flush();
+                if(Auth::check())
+                {
+                    Auth::logout();
+                    Session::flush();
+                }
+
                 throw ValidationException::withMessages([
                     'email' => 'Tài khoản của bạn đã bị khoá',
                 ]);
+            }
+            else{
+                Auth::login($user,1);
+
             }
 
         }
