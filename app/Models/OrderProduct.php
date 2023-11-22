@@ -16,12 +16,7 @@ class OrderProduct extends Model
         'qty'
     ];
 
-    public function vendor()
-    {
-        return $this->belongsTo(User::class,'vendor_id','id');
-    }
-
-    public function product()
+    public function products()
     {
         return $this->belongsTo(Product::class);
     }
