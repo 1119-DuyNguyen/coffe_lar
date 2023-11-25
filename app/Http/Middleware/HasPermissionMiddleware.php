@@ -6,6 +6,7 @@ use App\Http\Services\GateService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class HasPermissionMiddleware
@@ -24,19 +25,26 @@ class HasPermissionMiddleware
             abort(401, 'Tài khoản đã bị khoá');
         }
 
-        $routeName= GateService::getGateDefineFromRouteName($request->route()->getName());
+        $routeName = GateService::getGateDefineFromRouteName($request->route()->getName());
 
-        if($request->user()->can($routeName)) {
+        if ($request->user()->can($routeName)) {
             return $next($request);
+        } else if (Gate::allows('admin')) {
+            $gate = Gate::abilities();
+            foreach ($gate as $key => $value) {
+                if ($key != 'admin') {
+                    return redirect(route($key . '.index'));
+                }
+            }
+            // return redirect()->;
         }
-
         abort(403);
-//        if(in_array($last_word,['index','show','store','update','destroy']))
-//        {
-//
-//        }
-//        else {
-//            return $next($request);
-//        }
+        //        if(in_array($last_word,['index','show','store','update','destroy']))
+        //        {
+        //
+        //        }
+        //        else {
+        //            return $next($request);
+        //        }
     }
 }
