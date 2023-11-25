@@ -52,15 +52,17 @@ class AppServiceProvider extends ServiceProvider
                 //                    return count(array_intersect($user->roles->pluck('id')->toArray(), $roles)) > 0;
             });
         }
-        Gate::define('admin', function ($user) {
-            $gate = Gate::abilities();
-            //check if admin site
-            foreach ($gate as $key => $value) {
+        $gate = array_filter(Gate::abilities(), function ($var, $key) {
+            return  str_contains($key, 'admin');
+        }, ARRAY_FILTER_USE_BOTH);
+        Gate::define('admin', function ($user) use ($gate) {
 
-                if (str_contains($key, 'admin')) {
+            //check if admin site
+            foreach ($gate as  $key => $value) {
+
+                if (Gate::any($key)) {
                     return true;
                 }
-                # code...
             }
             return false;
         });
@@ -68,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
 
         //     return false;
         // });
+        // dd(Gate::abilities());
     }
     /**
      * Bootstrap any application services.

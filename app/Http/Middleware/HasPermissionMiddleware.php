@@ -30,12 +30,19 @@ class HasPermissionMiddleware
         if ($request->user()->can($routeName)) {
             return $next($request);
         } else if (Gate::allows('admin')) {
-            $gate = Gate::abilities();
+            $gate = array_filter(Gate::abilities(), function ($var, $key) {
+                return  str_contains($key, 'admin');
+            }, ARRAY_FILTER_USE_BOTH);
+
+            //check if admin site
             foreach ($gate as $key => $value) {
-                if ($key != 'admin') {
+
+                if (Gate::any($key)) {
                     return redirect(route($key . '.index'));
                 }
             }
+            return false;
+
             // return redirect()->;
         }
         abort(403);
