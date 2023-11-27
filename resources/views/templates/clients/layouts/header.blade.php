@@ -1,5 +1,5 @@
 @php
-    use App\Http\Services\CartService;use App\Models\Category;use Illuminate\Support\Facades\Route;
+use App\Http\Services\CartService;use App\Models\Category;use Illuminate\Support\Facades\Route;
 $categories=Category::where('status',true)->get();
 
 @endphp
@@ -18,11 +18,11 @@ $categories=Category::where('status',true)->get();
             <div class="row">
 
                 <div class="col-lg-9 col-md-6 col-6">
-                        <span class="t-14 ">
-{{--                            {{$settings->name}}--}}
-                            {{--                            - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - --}}
-                            Liên hệ: {{$settings->contact_phone ?? ""}}
-                        </span>
+                    <span class="t-14 ">
+                        {{-- {{$settings->name}}--}}
+                        {{-- - ĐỊA CHỈ: {{ $settings->contact_address ?? ""}} - --}}
+                        Liên hệ: {{$settings->contact_phone ?? ""}}
+                    </span>
                 </div>
                 <div class="col-lg-3 col-md-6 col-6">
                     <div class="topbar_menu">
@@ -47,7 +47,7 @@ $categories=Category::where('status',true)->get();
             <div class="row align-items-center">
                 <div class="col-lg-2 col-md-2 col-sm-3 col-4">
                     <a class="nav-brand" href="{{ route('home')}}">
-                        <img src="{{ asset('img/logo.png')}}" class="logo" alt=""/>
+                        <img src="{{ asset('img/logo.png')}}" class="logo" alt="" />
                     </a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-4 col-3">
@@ -71,145 +71,147 @@ $categories=Category::where('status',true)->get();
                         <ul>
                             <!-- category-->
                             @if(Auth::check())
-                                <li><a href="" class="dropdown-user border-icon ">
-                                        <i class="fas fa-user-circle"></i>
+                            <li><a href="" class="dropdown-user border-icon ">
+                                    <i class="fas fa-user-circle"></i>
 
-                                    </a>
-                                    <div class="user-dropdown">
-                                        <i class="fas fa-times dropexit d-lg-none"></i>
-                                        <h4 class=" text-center text-bold">
-                                            {{ Auth::user()->name?? 'Khách hàng' }}
-                                        </h4>
-                                        <ul>
-                                            {{--                                            <li>--}}
-                                            {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
-                                            {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
-                                            {{--                                            </li>--}}
+                                </a>
+                                <div class="user-dropdown">
+                                    <i class="fas fa-times dropexit d-lg-none"></i>
+                                    <h4 class=" text-center text-bold">
+                                        {{ Auth::user()->name?? 'Khách hàng' }}
+                                    </h4>
+                                    <ul>
+                                        {{-- <li>--}}
+                                            {{-- <i class="fa fa-clock" aria-hidden="true"></i>--}}
+                                            {{-- <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn
+                                                hàng</a>--}}
+                                            {{-- </li>--}}
 
-                                            <li class="dropdown-item">
-                                                {{--                                                    <i--}}
-                                                {{--                                                        class="fas fa-chart-bar"></i>--}}
+                                        <li class="dropdown-item">
+                                            {{-- <i--}} {{-- class="fas fa-chart-bar"></i>--}}
                                                 <i class="fas fa-info-circle"></i>
                                                 <a href="{{route('user.profile')}}">
                                                     Thông tin
                                                     người dùng</a>
 
-                                            </li>
-                                            @can('admin.dashboard')
+                                        </li>
+                                        @can('admin')
 
-                                                <li class="dropdown-item">
-                                                    <i class="fas fa-chart-bar"></i>
-                                                    <a href="{{route('admin.dashboard.index')}}">
-                                                        Trang người quản trị</a>
-                                                </li>
-                                            @endcan
+                                        <li class="dropdown-item">
+                                            <i class="fas fa-chart-bar"></i>
+                                            <a href="{{route('admin.dashboard.index')}}">
+                                                Trang nhân viên</a>
+                                        </li>
+                                        @endcan
+                                        <li class="dropdown-item">
+                                            <i class="fas fa-file-invoice"></i>
+                                            <a class="" href="{{route('user.order.index')}}">
+                                                {{__("Order")}}</a>
+                                        </li>
+
+                                        {{-- <li class="dropdown-item">--}}
+                                            {{-- <i class="fas fa-sync"></i>--}}
+                                            {{-- <a class="" href="{{ route('user.profile')}}">--}}
+                                                {{-- Đổi mật--}}
+                                                {{-- khẩu</a>--}}
+                                            {{-- </li>--}}
+                                        <form action="{{route('logout')}}" method="POST">
+                                            @csrf
+
                                             <li class="dropdown-item">
-                                                <i class="fas fa-file-invoice"></i>
-                                                <a class="" href="{{route('user.order.index')}}">
-                                                    {{__("Order")}}</a></li>
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                <a href="#" onclick="this.closest('form').submit();return false;"
+                                                    class=""> Đăng xuất</a>
 
-                                            {{--                                            <li class="dropdown-item">--}}
-                                            {{--                                                <i class="fas fa-sync"></i>--}}
-                                            {{--                                                <a class="" href="{{ route('user.profile')}}">--}}
-                                            {{--                                                    Đổi mật--}}
-                                            {{--                                                    khẩu</a>--}}
-                                            {{--                                            </li>--}}
-                                            <form action="{{route('logout')}}" method="POST">
-                                                @csrf
-
-                                                <li class="dropdown-item">
-                                                    <i class="fas fa-sign-out-alt"></i>
-                                                    <a href="#" onclick="this.closest('form').submit();return false;"
-                                                       class=""> Đăng xuất</a>
-
-                                                </li>
-                                            </form>
+                                            </li>
+                                        </form>
 
 
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="border-icon" href="{{route('cart.index')}}"><i
-                                            class="fas fa-cart-plus"></i><span class="cart_counter"
-                                                                               id="header-cart-quantity">
-                                            {{CartService::countCart()}}
-                                        </span></a>
-                                    {{--                                    <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()"><i--}}
-                                    {{--                                            class="fas fa-cart-plus"></i><span class="cart_counter"--}}
-                                    {{--                                                                               id="header-cart-quantity">--}}
-                                    {{--                                            {{CartService::countCart()}}--}}
-                                    {{--                                        </span></a>--}}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="border-icon" href="{{route('cart.index')}}"><i
+                                        class="fas fa-cart-plus"></i><span class="cart_counter"
+                                        id="header-cart-quantity">
+                                        {{CartService::countCart()}}
+                                    </span></a>
+                                {{-- <a class="border-icon" href="javascript:void(0);" onclick="openRightMenu()">
+                                    <i--}} {{-- class="fas fa-cart-plus"></i><span class="cart_counter" --}} {{--
+                                            id="header-cart-quantity">--}}
+                                            {{-- {{CartService::countCart()}}--}}
+                                            {{-- </span>
+                                </a>--}}
 
-                                </li>
+                            </li>
                             @else
-                                <li><a href="" class="dropdown-user border-icon ">
-                                        <i class="fas fa-user-circle"></i>
-                                    </a>
+                            <li><a href="" class="dropdown-user border-icon ">
+                                    <i class="fas fa-user-circle"></i>
+                                </a>
 
-                                    <div class="user-dropdown">
-                                        <i class="fas fa-times dropexit d-lg-none"></i>
-                                        <ul>
-                                            {{--                                            <li>--}}
-                                            {{--                                                <i class="fa fa-clock" aria-hidden="true"></i>--}}
-                                            {{--                                                <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn hàng</a>--}}
-                                            {{--                                            </li>--}}
+                                <div class="user-dropdown">
+                                    <i class="fas fa-times dropexit d-lg-none"></i>
+                                    <ul>
+                                        {{-- <li>--}}
+                                            {{-- <i class="fa fa-clock" aria-hidden="true"></i>--}}
+                                            {{-- <a href="{{ route('search.order')}}" class="ml-2">Tra cứu đơn
+                                                hàng</a>--}}
+                                            {{-- </li>--}}
 
 
-                                            <li class="dropdown-item" data-toggle="modal" data-target="#login">
-                                                <i class=" fas fa-user"></i>
-                                                <a class=" ">Đăng nhập</a>
-                                            </li>
-                                            {{--                                            <li class="dropdown-item" data-toggle="modal"--}}
-                                            {{--                                                data-target="#forgetPasswordForm">--}}
-                                            {{--                                                <i class=" fas fa-key"></i>--}}
-                                            {{--                                                <a href="#" class="">Quên mật khẩu ? </a>--}}
-                                            {{--                                            </li>--}}
+                                        <li class="dropdown-item" data-toggle="modal" data-target="#login">
+                                            <i class=" fas fa-user"></i>
+                                            <a class=" ">Đăng nhập</a>
+                                        </li>
+                                        {{-- <li class="dropdown-item" data-toggle="modal" --}} {{--
+                                            data-target="#forgetPasswordForm">--}}
+                                            {{-- <i class=" fas fa-key"></i>--}}
+                                            {{-- <a href="#" class="">Quên mật khẩu ? </a>--}}
+                                            {{-- </li>--}}
 
-                                            <li class="dropdown-item" data-toggle="modal" data-target="#registerForm">
-                                                <i class=" fas fa-file-alt"></i>
-                                                <a href="#" class="">Đăng kí</a>
-                                            </li>
+                                        <li class="dropdown-item" data-toggle="modal" data-target="#registerForm">
+                                            <i class=" fas fa-file-alt"></i>
+                                            <a href="#" class="">Đăng kí</a>
+                                        </li>
 
-                                        </ul>
-                                    </div>
-                                </li>
+                                    </ul>
+                                </div>
+                            </li>
                             @endif
                             @if(!Route::is('product.index'))
-                                <li>
-                                    <a class="border-icon dropdown-user" href="javascript:void(0);">
-                                        <i class="fas fa-list"></i>
-                                    </a>
-                                    <div class="user-dropdown">
-                                        <i class="fas fa-times dropexit d-lg-none"></i>
-                                        <h4 class=" text-center text-bold">
-                                            Danh mục
-                                        </h4>
-                                        <ul>
-                                            @foreach ($categories as $category)
-                                                <li class="dropdown-item">
-                                                    <i
-                                                        class="{{$category->icon}}"></i>
-                                                    <a
-                                                        href="{{route('product.index', ['category' => $category->slug])}}"> {{$category->name}} </a>
-                                                </li>
-                                            @endforeach
+                            <li>
+                                <a class="border-icon dropdown-user" href="javascript:void(0);">
+                                    <i class="fas fa-list"></i>
+                                </a>
+                                <div class="user-dropdown">
+                                    <i class="fas fa-times dropexit d-lg-none"></i>
+                                    <h4 class=" text-center text-bold">
+                                        Danh mục
+                                    </h4>
+                                    <ul>
+                                        @foreach ($categories as $category)
+                                        <li class="dropdown-item">
+                                            <i class="{{$category->icon}}"></i>
+                                            <a href="{{route('product.index', ['category' => $category->slug])}}">
+                                                {{$category->name}} </a>
+                                        </li>
+                                        @endforeach
 
-                                        </ul>
-                                    </div>
+                                    </ul>
+                                </div>
 
-                                </li>
+                            </li>
 
-                                <li>
-                                    {{--                                <a class="border-icon" href="javascript:void(0);" data-toggle="modal"--}}
-                                    {{--                                   data-target="#form-search" id="header-search">--}}
-                                    {{--                                    <i class="fas fa-search"></i>--}}
-                                    {{--                                </a>--}}
-                                    <a class="border-icon" href="{{route('product.index')}}">
-                                        <i class="fas fa-search"></i>
-                                    </a>
+                            <li>
+                                {{-- <a class="border-icon" href="javascript:void(0);" data-toggle="modal" --}} {{--
+                                    data-target="#form-search" id="header-search">--}}
+                                    {{-- <i class="fas fa-search"></i>--}}
+                                    {{-- </a>--}}
+                                <a class="border-icon" href="{{route('product.index')}}">
+                                    <i class="fas fa-search"></i>
+                                </a>
 
-                                </li>
+                            </li>
                             @endif
 
 
@@ -220,8 +222,7 @@ $categories=Category::where('status',true)->get();
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Tìm sản phẩm ?">
                                 <div class="input-group-append">
-                                    <button class="btn search_btn" type="button"><i
-                                            class="fas fa-search"></i></button>
+                                    <button class="btn search_btn" type="button"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -238,21 +239,23 @@ $categories=Category::where('status',true)->get();
 <!-- ============================================================== -->
 <!-- Top header  -->
 <!-- ============================================================== -->
-{{--<div class="modal fade" id="form-search" tabindex="-1" role="dialog" aria-labelledby="add-payment"--}}
-{{--     aria-hidden="true">--}}
-{{--    <div class="modal-dialog modal-dialog-centered align-items-center d-flex justify-content-center h-100"--}}
-{{--         role="document">--}}
-{{--        <div class="modal-content h-75" id="view-product">--}}
-{{--            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>--}}
-{{--            <span class="header-search">Tìm kiếm</span>--}}
-{{--            <div class="modal-body">--}}
-{{--                --}}{{--                @livewire('product-search')--}}
-{{--                <livewire:product-search/>--}}
+{{--<div class="modal fade" id="form-search" tabindex="-1" role="dialog" aria-labelledby="add-payment" --}} {{--
+    aria-hidden="true">--}}
+    {{-- <div class="modal-dialog modal-dialog-centered align-items-center d-flex justify-content-center h-100" --}}
+        {{-- role="document">--}}
+        {{-- <div class="modal-content h-75" id="view-product">--}}
+            {{-- <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times"></i></span>--}}
+            {{-- <span class="header-search">Tìm kiếm</span>--}}
+            {{-- <div class="modal-body">--}}
+                {{-- --}}{{-- @livewire('product-search')--}}
+                {{--
+                <livewire:product-search />--}}
 
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+                {{--
+            </div>--}}
+            {{-- </div>--}}
+        {{-- </div>--}}
+    {{--</div>--}}
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" id="view-product">
@@ -261,17 +264,17 @@ $categories=Category::where('status',true)->get();
                 <div class="row align-items-center">
 
                     <form method="POST" action=" {{ route('login')}}"
-                          class="login_signup ol-lg-12 col-md-12 col-sm-12 form-account" method="post">
+                        class="login_signup ol-lg-12 col-md-12 col-sm-12 form-account" method="post">
                         @csrf
                         <h3 class="login_sec_title">Đăng nhập</h3>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email"  class="form-control emailAcc">
+                            <input type="text" name="email" class="form-control emailAcc">
                         </div>
 
                         <div class="form-group">
                             <label>Mật khẩu</label>
-                            <input type="password"  class="form-control passwordAcc" name="password">
+                            <input type="password" class="form-control passwordAcc" name="password">
                         </div>
 
                         <div class="login_flex">
@@ -283,20 +286,22 @@ $categories=Category::where('status',true)->get();
                             </div>
                         </div>
 
-                        {{--                            <div class="login_flex_2 mrg-20">--}}
-                        {{--                                <div class="form-group mb-0 social facebook">--}}
-                        {{--                                    <a href="{{ route('login.facebook','facebook')}}" type="submit" class="btn btn-md ">--}}
-                        {{--                                        <i class="fab fa-facebook-square"></i>--}}
-                        {{--                                        Facebook--}}
-                        {{--                                    </a>--}}
-                        {{--                                </div>--}}
-                        {{--                                <div class="form-group mb-0 social google">--}}
-                        {{--                                    <a href="{{ route('login.facebook','google')}}" type="submit" class="btn btn-md ">--}}
-                        {{--                                        <i class="fab fa-google-plus-square"></i>--}}
-                        {{--                                        Google--}}
-                        {{--                                    </a>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
+                        {{-- <div class="login_flex_2 mrg-20">--}}
+                            {{-- <div class="form-group mb-0 social facebook">--}}
+                                {{-- <a href="{{ route('login.facebook','facebook')}}" type="submit"
+                                    class="btn btn-md ">--}}
+                                    {{-- <i class="fab fa-facebook-square"></i>--}}
+                                    {{-- Facebook--}}
+                                    {{-- </a>--}}
+                                {{-- </div>--}}
+                            {{-- <div class="form-group mb-0 social google">--}}
+                                {{-- <a href="{{ route('login.facebook','google')}}" type="submit"
+                                    class="btn btn-md ">--}}
+                                    {{-- <i class="fab fa-google-plus-square"></i>--}}
+                                    {{-- Google--}}
+                                    {{-- </a>--}}
+                                {{-- </div>--}}
+                            {{-- </div>--}}
                     </form>
                 </div>
             </div>
@@ -381,12 +386,12 @@ $categories=Category::where('status',true)->get();
                                             <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
-                                    {{--                                    <div class="col-lg-12 col-md-12">--}}
-                                    {{--                                        <div class="form-group">--}}
-                                    {{--                                            <label>Địa Chỉ</label>--}}
-                                    {{--                                            <input type="text" name="address" class="form-control">--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    {{-- <div class="col-lg-12 col-md-12">--}}
+                                        {{-- <div class="form-group">--}}
+                                            {{-- <label>Địa Chỉ</label>--}}
+                                            {{-- <input type="text" name="address" class="form-control">--}}
+                                            {{-- </div>--}}
+                                        {{-- </div>--}}
 
 
                                     <div class="col-lg-12 col-md-12">
@@ -413,8 +418,8 @@ $categories=Category::where('status',true)->get();
 </div>
 
 @push('scripts')
-    <script>
-        var forms = document.querySelectorAll(".form-account");
+<script>
+    var forms = document.querySelectorAll(".form-account");
 
         //init span error message
         forms.forEach(form => {
@@ -486,6 +491,6 @@ $categories=Category::where('status',true)->get();
         })
 
 
-    </script>
+</script>
 
 @endpush

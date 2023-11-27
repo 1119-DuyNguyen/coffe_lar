@@ -16,34 +16,34 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Admin user',
+                'name' => 'Người dùng tối cao',
                 // 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'role_id' => 1,
                 'password' => bcrypt('123')
             ],
-//            [
-//                'name' => 'Vendor user',
-//                'username' => 'vendor',
-//                'email' => 'vendor@gmail.com',
-//                'role_id' => 2,
-//                'password' => bcrypt('123')
-//            ],
+            //            [
+            //                'name' => 'Vendor user',
+            //                'username' => 'vendor',
+            //                'email' => 'vendor@gmail.com',
+            //                'role_id' => 2,
+            //                'password' => bcrypt('123')
+            //            ],
             [
-                'name' => 'user',
+                'name' => 'Người dùng',
                 // 'username' => 'user',
                 'email' => 'user@gmail.com',
-                'role_id' =>2,
+                'role_id' => 2,
                 'password' => bcrypt('123')
             ],
         ]);
-        User::create(          [
-            'name' => 'ban account',
+        User::create([
+            'name' => 'Tài khoản bị khoá',
             // 'username' => 'ban',
             'email' => 'ban@gmail.com',
-            'role_id' =>2,
+            'role_id' => 2,
             'password' => bcrypt('123'),
-            'status'=>0
+            'status' => 0
         ]);
     }
 }
