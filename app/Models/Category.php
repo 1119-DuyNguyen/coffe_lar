@@ -16,7 +16,10 @@ class Category extends Model
         'status',
         'slug'
     ];
-
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 
     // Accessor for 'name'
     public function getNameAttribute($value)

@@ -16,10 +16,10 @@ class OrderProduct extends Model
         'qty'
     ];
 
-    public function products()
-    {
-        return $this->belongsTo(Product::class);
-    }
+//    public function products()
+//    {
+//        return $this->belongsTo(Product::class);
+//    }
     // Accessor for 'order_id'
     public function getOrderIdAttribute($value)
     {
