@@ -35,10 +35,14 @@ class CartService
     {
         $idProduct = [];
         // Check if the user is logged in
-//        if (Auth::check()) {
+        if (Auth::check()) {
         $user = User::find(Auth::user()->id);;
 //            $cartItems = $cart ? json_decode($cart->cart_items, true) : [];
-//        } else {
+        }
+        else {
+            return [];
+        }
+// else {
 //            $cartItems = Session::get('cart', []);
 //        }
         $cartItems = $user?->cart?->getCartItems() ?? [];
