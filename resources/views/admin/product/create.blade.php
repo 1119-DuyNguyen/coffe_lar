@@ -48,7 +48,7 @@
                             <input type="text" class="form-control" name="price" value="{{old('price')}}">
                         </div>
                         <div class="form-group">
-                            <label>Khối lượng</label>
+                            <label>Khối lượng (g)</label>
                             <input type="number" class="form-control" name="weight" value="{{old('weight')}}">
                         </div>
                         <div class="form-group">

@@ -81,14 +81,14 @@ trait CrudTrait
         } catch (\Illuminate\Database\QueryException $e) {
             $errorCode = $e->errorInfo[1];
             if ($errorCode == '1451') {
-                return response(['status' => 'error', 'message' => 'This item contain relation can\'t delete it.']);
+                return response(['status' => 'error', 'message' => 'Không thể xóa do sản phẩm có ràng buộc']);
             }
 
         } catch (Exception $e) {
-            return response(['status' => 'error', 'message' => "Can't do this action. Please try again later !"]);
+            return response(['status' => 'error', 'message' => "lỗi máy chủ, không thể thực hiện"]);
         }
 
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+        return response(['status' => 'success', 'message' => 'Xóa thành công!']);
 
     }
 

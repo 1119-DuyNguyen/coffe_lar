@@ -184,6 +184,7 @@
 <div class="total">
     Tổng cộng : {{$order->total}}
 </div>
+<div>  <h4>Ngày tạo: {{$order->created_at}}</h4></div>
 
 
 </body>

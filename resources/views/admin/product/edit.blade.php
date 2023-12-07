@@ -57,7 +57,7 @@
                                     <input type="number" class="form-control" name="price" value="{{$product->price}}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Khối lượng</label>
+                                    <label>Khối lượng (g)</label>
                                     <input type="number" class="form-control" name="weight" value="{{$product->weight}}">
                                 </div>
                                 <div class="form-group">

@@ -94,9 +94,9 @@ final class ProductTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
+            Column::make('Id', 'id')
+                ->sortable(),
             Column::make('Ảnh Nền', 'thumb_image')
-                ->sortable()
                 ->searchable(),
 
             Column::make('Tên Sản Phẩm', 'name')

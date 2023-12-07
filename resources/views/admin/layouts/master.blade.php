@@ -183,16 +183,18 @@
 
                                     if(data.status == 'success'){
                                         Swal.fire(
-                                            'Deleted!',
-                                            data.message,
+                                            'Xóa thành công!',
+                                            "",
+                                            // data.message,
                                             'success'
                                         ).then(()=>{
                                             window.location.reload();
                                         })
                                     }else if (data.status == 'error'){
                                         Swal.fire(
-                                            'Cant Delete',
-                                            data.message,
+                                            'Không thể xóa',
+                                            // data.message,
+                                            '',
                                             'error'
                                         )
                                     }
