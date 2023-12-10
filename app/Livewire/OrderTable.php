@@ -56,10 +56,10 @@ final class OrderTable extends PowerGridComponent
             ->addColumn('phone_receiver')
             ->addColumn('total')
             ->addColumn('payment_status', function ($model) {
-                return '<label class="custom-switch mt-2">
-                        <input type="checkbox" '. ($model->payment_status ? "checked": '' ) .' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-payment-status" >
+                return (! $model->payment_status ) ? ('<label class="custom-switch mt-2">
+                        <input type="checkbox" name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-payment-status" >
                         <span class="custom-switch-indicator"></span>
-                    </label>';
+                    </label>') : ("<span class='badge bg-success text-white'> Đã thanh toán</span>");
             })
             ->addColumn('order_status',  function ($model) {
                 if($model->order_status==OrderStatus::canceled || $model->order_status==OrderStatus::delivered)

@@ -57,7 +57,9 @@ final class UserOrderTable extends PowerGridComponent
             ->addColumn('phone_receiver')
             ->addColumn('total')
             ->addColumn('payment_status', function ($model) {
-                return ($model->payment_status ? "Đã thanh toán": 'Chưa thanh toán' ) ;
+                return ($model->payment_status
+                    ?  ("<span class='badge bg-success text-white'> Đã thanh toán</span>")
+                    :  ("<span class='badge bg-danger text-white'> Chưa thanh toán</span>")) ;
             })
             ->addColumn('order_status',  function ($model) {
                 $string= match ($model->order_status) {
