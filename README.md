@@ -36,6 +36,30 @@
 ![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/48bf02f6-d08b-4ad9-9dd1-262cc96bebf5)
 
 ### Giao diện
-![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/c4f7f388-8d16-4c59-854a-55b289a9f21c)
 
+![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/8183e1dd-38e8-4703-b84d-4656144312ae)
 
+**Bảng mô tả thành phần:**
+
+|STT|Tên|Kiểu|Ý Nghĩa|Miền giá trị|Giá trị mặc định|Ghi chú|
+|---|---|---|---|---|---|---|
+|1|NameUserInputForm|InputTextForm|Cho phép người dùng nhập tên người dùng|Text|||
+|2|UserNumberInputForm|InputTextForm|Cho phép người dùng nhập số điện thoại|Text|||
+|3|UserEmailInputForm|InputTextForm|Cho phép người dùng nhập email|Text|||
+|4|UserNoteInputForm|InputTextForm|Cho phép người dùng nhập ghi chú|Text|||
+|5|SelectProvince|Select|Cho phép người dùng chọn Tỉnh/Thành nhận hàng||||
+|6|SelectCounty|Select|Cho phép người dùng chọn Quận/Huyện nhận hàng||Bỏ trống nếu chưa chọn tỉnh/thành||
+|7|SelectWards|Select|Cho phép người dùng chọn Phường/Xã nhận hàng||Bỏ trống nếu chưa chọn Quận/Huyện||
+|8|UserDetailInputForm|InputTextForm|Cho phép người dùng nhập địa chỉ chi tiết để nhận hàng|Text|||
+|9|UserPaymentButton|InputRadioboxtForm|Cho phép người dùng chọn phương thức thanh toán||||
+|10|TotalProduct|Text|Cho phép người dùng theo dõi tổng số tiền cần thanh toán cho đơn hàng||||
+|11|AbateButton|Button|Cho phép người sử dụng đặt hàng||||
+
+**Danh sách các biến cố**
+
+|STT|Điều kiện kích hoạt|Xử lý liên quan|Ghi chú|
+|---|---|---|---|
+|1|Người dùng nhập thông tin cần thiết và ấn nút “thanh toán”|Hệ thống kiểm tra thông tin người dùng và hiện thị ra lỗi nếu có, sau đó thực hiện khởi tạo đơn hàng||
+|2|Người dùng chọn giá trị ở trong thanh “tỉnh/thành phố”|Hệ thống kiểm tra và hiển thị và load dữ liệu “quận"||
+|3|Người dùng chọn giá trị ở trong thanh “quận”|Hệ thống kiểm tra và hiển thị và load dữ liệu “phường/ xã"||
+|4|Người dùng chọn giá trị ở trong  thanh “phường/xã”|Hệ thống kiểm tra và cập nhập giá tiền ship cho đơn hàng||
