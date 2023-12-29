@@ -21,9 +21,10 @@ Nhân viên :
 •	Xử lí đơn hàng
 •	Thống kê
 
-# Usecase tổng quát
+# Sơ đồ Usecase tổng quan của hệ thống cửa hàng cà phê
+![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/90be87ae-40cc-4ceb-9a0f-1d26f67a69b8)
 
-![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/62b15271-8052-407b-8c84-a3a7b52d9ac8)
+
 
 | # | Actor | Định nghĩa |
 | ---- | ---- | ---- |
@@ -32,7 +33,8 @@ Nhân viên :
 | 3 | NhanVien | Là người xử lý đơn hàng và tuỳ vào cấp bậc có thể làm các chức năng như thống kê, quản lý tài nguyên của hệ thống, xử lý đơn hàng, tạo các tài khoản với vai trò mang các quyền nhất định |
 
 # Database
-![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/61577f6b-b5ce-44cb-82da-d55462d0d132)
+![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/6a27e1b9-1d9b-4714-bde2-84a211c7d300)
+
 
 # Demo chức năng đặt mua hàng : 
 
@@ -40,7 +42,8 @@ Nhân viên :
 ### Activity
 ![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/a1ebd202-ce01-4f1c-8573-19ecbc023f10)
 ### Sequence
-![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/48bf02f6-d08b-4ad9-9dd1-262cc96bebf5)
+
+![DatHang](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/57c7b762-7bde-4974-8d0a-5028d3d57761)
 
 ### Giao diện
 
@@ -60,7 +63,7 @@ Nhân viên :
 |8|UserDetailInputForm|InputTextForm|Cho phép người dùng nhập địa chỉ chi tiết để nhận hàng|Text|||
 |9|UserPaymentButton|InputRadioboxtForm|Cho phép người dùng chọn phương thức thanh toán||||
 |10|TotalProduct|Text|Cho phép người dùng theo dõi tổng số tiền cần thanh toán cho đơn hàng||||
-|11|AbateButton|Button|Cho phép người sử dụng đặt hàng||||
+|11|SubmitButton|Button|Cho phép người sử dụng đặt hàng||||
 
 **Danh sách các biến cố**
 
