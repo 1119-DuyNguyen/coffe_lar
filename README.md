@@ -1,28 +1,35 @@
-# Bảng câu hỏi khảo sát 
+# Bảng phân rã chức năng
 
-> Khách hàng : Người truy cập website để xem sản phẩm và mua sắm trực tuyến, có thể thực hiện các chức năng sau : 
-●	Đăng ký: đăng ký bằng tài khoản mail.
-●	Đăng nhập: có lưu session cho người dùng.
-●	Tìm kiếm sản phẩm: tìm kiếm các sản phẩm theo tên, có kết hợp lọc sản phẩm theo danh mục, phân trang kết quả danh sách sản phẩm.
-●	Xem chi tiết sản phẩm: Hệ thống cung cấp các thông tin của sản phẩm như tên sản phẩm, hình ảnh đại diện, đơn giá, mô tả cho sản phẩm, giới thiệu sản phẩm,…
-●	Thêm vào giỏ hàng: Thêm nhanh sản phẩm vào giỏ hàng, thêm sản phẩm vào giỏ hàng chi tiết (số lượng thêm vào giỏ) 
-●	Quản lý giỏ hàng: Hệ thống cung cấp các chức năng cho phép người dùng xem danh sách sản phẩm hiện tại trong giỏ hàng, cập nhật lại số lượng của sản phẩm trong giỏ hàng, xóa sản phẩm khỏi giỏ hàng.
-●	Đặt mua hàng: Cung cấp tên, địa chỉ, số điện thoại người mua hàng, thanh toán cho đơn hàng.
-●	Xem lịch sử đặt hàng: Mã đơn hàng, thông tin chi tiết các sản phẩm trong đơn hàng, ngày giờ đặt mua, tìm kiếm các đơn hàng theo sđt,… 
-●	Chỉnh sửa thông tin tài khoản: chỉnh sửa họ tên, đổi mật khẩu,…
+![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/a0197740-1278-49e8-8006-dc032f2e7897)
 
-> Quản lý và Nhân viên có các chức năng sau:
-●	Quản lý sản phẩm: Xem danh sách các sản phẩm trong hệ thống, tìm kiếm theo tên sản phẩm, tạo sản phẩm mới, chỉnh sửa thông tin sản phẩm, thay đổi trạng thái kinh doanh của sản phẩm, xóa sản phẩm.
-●	Quản lý danh mục sản phẩm: Xem danh sách các danh mục sản phẩm trong hệ thống, tìm kiếm theo tên danh mục, tạo danh mục mới, chỉnh sửa danh mục, thay đổi trạng thái kinh doanh của danh mục, xóa danh mục.
-●	Quản lý tài khoản người dùng: Xem danh sách các tài khoản, tìm kiếm theo tên tài khoản, khóa/mở khóa tài khoản, chỉnh sửa thông tin người dùng, xóa tài khoản.
-●	Quản lý vai trò ( phân quyền ): Xem danh sách các vai trò, thêm vai trò mới, chỉnh sửa vai trò, xóa vai trò.
-●	Xử lý đơn hàng/hóa đơn: Duyệt danh sách các hóa đơn từ khách hàng, cập nhật trạng thái các đơn hàng, xóa đơn hàng.
-●	Thống kê doanh thu: Thống kê tổng sản phẩm trong kho, thống kê tổng đơn hàng trong hệ thống, thống kê tổng doanh thu bán hàng theo từng tháng của năm.
 
+# Yêu cầu hệ thống
+
+Người dùng khách:
+•	Tìm kiếm sản phẩm
+•	Đăng nhập/ Đăng kí
+Người dùng: 
+•	Quản lý giỏ hàng
+•	Quản lý thông tin tài khoản
+•	Xem lịch sử mua hàng
+•	Đặt hàng
+Nhân viên : 
+•	Quản lý tài khoản
+•	Quản lý vai trò
+•	Quản lý danh mục
+•	Quản lý sản phẩm
+•	Xử lí đơn hàng
+•	Thống kê
 
 # Usecase tổng quát
 
 ![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/62b15271-8052-407b-8c84-a3a7b52d9ac8)
+
+| # | Actor | Định nghĩa |
+| ---- | ---- | ---- |
+| 1 | NguoiDungKhach | Là người hứng thú và tìm kiếm các mặt hàng phù hợp với nhu cầu |
+| 2 | NguoiDung | Người dùng là người dùng khách khi đã tìm thấy mặt hàng phù hợp sẽ đăng nhập để có thể thanh toán |
+| 3 | NhanVien | Là người xử lý đơn hàng và tuỳ vào cấp bậc có thể làm các chức năng như thống kê, quản lý tài nguyên của hệ thống, xử lý đơn hàng, tạo các tài khoản với vai trò mang các quyền nhất định |
 
 # Database
 ![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/61577f6b-b5ce-44cb-82da-d55462d0d132)
