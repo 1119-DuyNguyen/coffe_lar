@@ -1,3 +1,14 @@
+# Mô tả chung hoạt động của ứng dụng:
+- Khách hàng chọn lựa sản phẩm và thêm vào giỏ hàng theo ý muốn
+- Khách hàng vào trang mua hàng để xem giá cả sản phẩm và tiền ship
+- Khi khách hàng bấm nút thanh toán(đặt hàng) trên ứng dụng web, nhân viên sẽ sử dụng phần mềm để xem xét việc bán sản phẩm cho khách hàng,
+- Nếu không được chấp thuận sẽ thông báo với khách hàng.
+- Nếu chấp thuận nhân viên sẽ vào web giaohangnhanh để lên đơn hàng cho quý khách
+- Khi bán sản phẩm cho khách hàng, phần mềm sẽ ghi lại hóa đơn tổng hợp các thông tin như: tên khách hàng, số điện thoại, ngày mua hàng, sản phẩm khách hàng đã mua, giá ship, ...
+- Về doanh thu bán hàng, ứng dụng sẽ thống kê doanh số sản phẩm đã bán được theo thời gian.
+
+Hiện ứng dụng chỉ để bán hàng và không hỗ trợ quản lý nhập hàng
+
 # Bảng phân rã chức năng
 
 ![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/a0197740-1278-49e8-8006-dc032f2e7897)
