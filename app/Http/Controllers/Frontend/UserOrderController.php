@@ -14,8 +14,6 @@ class UserOrderController extends Controller
     public function index()
     {
 
-        return view('frontend.dashboard.order.index');
+        return view('templates.clients.order.index');
     }
-
-
 }

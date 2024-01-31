@@ -1,16 +1,15 @@
 <?php
 
-use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Frontend\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /** Profile Routes */
-Route::get('profile', [ProfileController::class, 'index'])->name('profile');
-Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
-Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
+Route::post('profile/update', [UserProfileController::class, 'updateProfile'])->name('profile.update');
+Route::post('profile/update/password', [UserProfileController::class, 'updatePassword'])->name('password.update');
 
 //Route::middleware('hasPermission')->group(function () {
 

@@ -31,7 +31,12 @@ class AppServiceProvider extends ServiceProvider
 
     private function setupRBAC()
     {
-        $roles = Role::with('permissions')->get();
+        try {
+            $roles = Role::with('permissions')->get();
+        } catch (\Throwable $th) {
+            $roles = [];
+            //throw $th;
+        }
         $permissionsArray = [];
         foreach ($roles as $role) {
             foreach ($role->permissions as $permissions) {
