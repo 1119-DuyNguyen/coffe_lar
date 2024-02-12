@@ -9,8 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
+enum RoleID:int
+{
+case Admin=1;
+case User=2;
+case staff=3;
+}
 class Role  extends Model
 {
     use HasFactory;
@@ -23,6 +27,7 @@ class Role  extends Model
     protected $fillable = [
         'name',
         'description',
+        'is_employee'
     ];
 
     /**
@@ -37,27 +42,4 @@ class Role  extends Model
         return $this->belongsToMany(Permission::class);
     }
 
-    // Accessor for 'name'
-    public function getNameAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'name'
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-    }
-
-    // Accessor for 'description'
-    public function getDescriptionAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'description'
-    public function setDescriptionAttribute($value)
-    {
-        $this->attributes['description'] = $value;
-    }
 }

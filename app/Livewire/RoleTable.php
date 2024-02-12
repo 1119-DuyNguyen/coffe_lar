@@ -22,12 +22,12 @@ final class RoleTable extends PowerGridComponent
 
     public function setUp(): array
     {
-//        $this->showCheckBox();
+        //        $this->showCheckBox();
 
         return [
-//            Exportable::make('export')
-//                ->striped()
-//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            //            Exportable::make('export')
+            //                ->striped()
+            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()
                 ->showSearchInput()
                 ->withoutLoading(),
@@ -53,13 +53,13 @@ final class RoleTable extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('name')
             ->addColumn('description')
-            ->addColumn('action', function($query){
+            ->addColumn('action', function ($query) {
 
-                if($query->id != 1){
-                    $editBtn = "<a href='".route('admin.role.edit', $query->id)."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                    $deleteBtn = "<a href='".route('admin.role.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                if ($query->id != 1) {
+                    $editBtn = "<a href='" . route('admin.roles.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                    $deleteBtn = "<a href='" . route('admin.roles.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
-                    return $editBtn.$deleteBtn;
+                    return $editBtn . $deleteBtn;
                 }
             })
             ->addColumn('created_at_formatted', fn (Role $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
@@ -69,7 +69,7 @@ final class RoleTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Tên Vai Trò', 'name')
+            Column::make('Tên chức vụ', 'name')
                 ->sortable()
                 ->searchable(),
 
@@ -80,16 +80,16 @@ final class RoleTable extends PowerGridComponent
             Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::make('Thao Tác','action')
+            Column::make('Thao Tác', 'action')
         ];
     }
 
-//    public function filters(): array
-//    {
-//        return [
-//            Filter::datetimepicker('created_at'),
-//        ];
-//    }
+    //    public function filters(): array
+    //    {
+    //        return [
+    //            Filter::datetimepicker('created_at'),
+    //        ];
+    //    }
 
 
     /*

@@ -29,7 +29,7 @@ trait CrudTrait
         $data = $this->handleDataInput($request);
 
         $this->model()::create($data);
-//        toast()->success('Created Successfully!');
+        //        toast()->success('Created Successfully!');
         toast()->success('Khởi tạo dữ liệu thành công');
 
         return redirect()->back();
@@ -47,11 +47,10 @@ trait CrudTrait
             $request,
             !empty($this->getImageInput())
                 ? $resource->{$this->getImageInput()}
-                : null);
-        foreach ($this->unsetUpdateEmptyField() as $field)
-        {
-            if(empty($data[$field]))
-            {
+                : null
+        );
+        foreach ($this->unsetUpdateEmptyField() as $field) {
+            if (empty($data[$field])) {
                 unset($data[$field]);
             }
         }
@@ -67,10 +66,8 @@ trait CrudTrait
         $resource = $this->model()::findOrFail($resource_id);
 
         try {
-            if ($this->getImageInput() && $resource->{$this->getImageInput()}) {
-                {
+            if ($this->getImageInput() && $resource->{$this->getImageInput()}) { {
                     $imagePath = $this->getImageInput();
-
                 }
             }
             $resource->delete();
@@ -83,13 +80,11 @@ trait CrudTrait
             if ($errorCode == '1451') {
                 return response(['status' => 'error', 'message' => 'Không thể xóa do sản phẩm có ràng buộc']);
             }
-
         } catch (Exception $e) {
             return response(['status' => 'error', 'message' => "lỗi máy chủ, không thể thực hiện"]);
         }
 
         return response(['status' => 'success', 'message' => 'Xóa thành công!']);
-
     }
 
     public function changeStatus(Request $request)
@@ -100,7 +95,4 @@ trait CrudTrait
 
         return response(['message' => __('Status has been updated!')]);
     }
-
-
 }
-

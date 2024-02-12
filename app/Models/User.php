@@ -14,6 +14,7 @@ class User extends Authenticatable
 {
     use  HasFactory, Notifiable;
 
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -52,70 +53,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);
     }
 
-
-    // Accessor for 'name'
-    public function getNameAttribute($value)
+    // user with role = employee
+    public static function employee(): User|\Illuminate\Database\Eloquent\Builder
     {
-        return $value;
-    }
-
-    // Mutator for 'name'
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-    }
-
-    // Accessor for 'email'
-    public function getEmailAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'email'
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = $value;
-    }
-
-    // Accessor for 'phone'
-    public function getPhoneAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'phone'
-    public function setPhoneAttribute($value)
-    {
-        $this->attributes['phone'] = $value;
-    }
-
-    // Accessor for 'role_id'
-    public function getRoleIdAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'role_id'
-    public function setRoleIdAttribute($value)
-    {
-        $this->attributes['role_id'] = $value;
-    }
-
-    // Accessor for 'status'
-    public function getStatusAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'status'
-    public function setStatusAttribute($value)
-    {
-        $this->attributes['status'] = $value;
+        return User::whereHas(
+            'role', function ($query) {
+            $query->where('is_employee', true);
+        }
+        );
     }
 
 }

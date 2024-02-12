@@ -23,27 +23,26 @@ class ManageUserController extends Controller
     }
     protected function addAutoInput(Request $request): array
     {
-        $role_id=$request->input('role',[]) ;
-        return ['role_id'=>$role_id];
+        $role_id = $request->input('role', []);
+        return ['role_id' => $role_id];
     }
-    protected function getFormRequest(): string|null
+    protected function getFormRequest(): string
     {
         return ProfileRegisterRequest::class;
     }
     public function index()
     {
-        return view('admin.user.index');
+        return view('admin.users.index');
     }
 
     public function create()
     {
-        $roleList=Role::all()->whereNotIn('id',['1']);
-        return view('admin.user.create',compact( 'roleList'));
+        $roleList = Role::all()->whereNotIn('id', ['1']);
+        return view('admin.users.create', compact('roleList'));
     }
     public function edit(User $user)
     {
-        $roleList=Role::all()->whereNotIn('id',['1']);
-        return view('admin.user.edit',compact( ['user','roleList']));
+        $roleList = Role::all()->whereNotIn('id', ['1']);
+        return view('admin.users.edit', compact(['user', 'roleList']));
     }
-
 }

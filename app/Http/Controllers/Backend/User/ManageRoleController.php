@@ -19,42 +19,41 @@ class ManageRoleController extends Controller
         return Role::class;
     }
 
-    protected function getFormRequest():  string|null
+    protected function getFormRequest(): string
     {
         return RoleRequest::class;
     }
 
     public function index()
     {
-        return view('admin.role.index');
+        return view('admin.roles.index');
     }
 
     public function create()
     {
-        $permissionList=Permission::all();
-        return view('admin.role.create',compact('permissionList'));
+        $permissionList = Permission::all();
+        return view('admin.roles.create', compact('permissionList'));
     }
     public function edit(Role $role)
     {
-        $permissionList=Permission::all();
-        $roleHasPermission= DB::table('permission_role')->where('role_id',$role->id)->pluck('permission_id')->toArray();
-        return view('admin.role.edit',compact('role','permissionList','roleHasPermission'));
+        $permissionList = Permission::all();
+        $roleHasPermission = DB::table('permission_role')->where('role_id', $role->id)->pluck('permission_id')->toArray();
+        return view('admin.roles.edit', compact('role', 'permissionList', 'roleHasPermission'));
     }
     public function store(RoleRequest $request)
     {
 
-        $role=Role::create($request->all());
+        $role = Role::create($request->all());
         $role->permissions()->attach($request->input('permissions'));
         toast()->success('Khởi tạo dữ liệu thành công');
 
         return redirect()->back();
-
     }
-    public function update(RoleRequest $request,$resource_id)
+    public function update(RoleRequest $request, $resource_id)
     {
-        if($resource_id==0) return redirect()->back();
-        $role=Role::findOrFail($resource_id);
-        $permissionList=$request->input('permissions');
+        if ($resource_id == 0) return redirect()->back();
+        $role = Role::findOrFail($resource_id);
+        $permissionList = $request->input('permissions');
         $role->fill($request->all())->save();
         $role->permissions()->sync($permissionList);
         toast()->success('Cập nhập dữ liệu thành công!');
@@ -63,15 +62,13 @@ class ManageRoleController extends Controller
     }
     public function destroy($resource_id)
     {
-        if($resource_id==0) return redirect()->back();
+        if ($resource_id == 0) return redirect()->back();
 
         $resource = $this->model()::findOrFail($resource_id);
 
         try {
-            if ($this->getImageInput() && $resource->{$this->getImageInput()}) {
-                {
+            if ($this->getImageInput() && $resource->{$this->getImageInput()}) { {
                     $imagePath = $this->getImageInput();
-
                 }
             }
             $resource->delete();
@@ -84,12 +81,10 @@ class ManageRoleController extends Controller
             if ($errorCode == '1451') {
                 return response(['status' => 'error', 'message' => 'This item contain relation can\'t delete it.']);
             }
-
         } catch (Exception $e) {
             return response(['status' => 'error', 'message' => "Can't do this action. Please try again later !"]);
         }
 
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-
     }
 }
