@@ -4,11 +4,10 @@ use App\Http\Controllers\Backend\User\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('employees', EmployeeController::class);
+Route::resource('type-opinions', EmployeeController::class);
 
 
 // Route::get('/', 'NhanVienController@getview');
-
-
 
 
 // Route::get('danhsachnvpb', 'DanhmucController@getDanhSachNVPB')->middleware('check:qlnhanvienpb');;
@@ -167,12 +166,8 @@ Route::resource('employees', EmployeeController::class);
 // Route::get('quanly/xoathongtin/{id}', 'QLNhansuController@getXoaNhanvien')->middleware('check:thongtinnhanvien');
 
 
-
-
 // Route::get('thongtincanhan', 'NhanVienController@getHoSoNhanVien');
 // Route::post('thongtintaikhoan', 'NhanVienController@postThongtinTaikhoan');
-
-
 
 
 // Route::get('{id}/hopdong', 'NhanVienController@getHopDongNhanVien')->middleware('check:hopdongcanhan');
@@ -213,14 +208,9 @@ Route::resource('employees', EmployeeController::class);
 // Route::get('huyquyetdinh/{id}', 'QLNhansuController@huyquyetdinh')->middleware('check:lapquyetdinh');
 
 
-
-
-
-
 // //----------------------Form thêm nhân viên -------------------------
 // Route::group(['prefix' => 'ajax'], function () {
 //     Route::get('chucvu/{id_phongban}', 'AjaxController@getChucvu');
-
 
 
 //     Route::get('chucvu_moi/{id_phongban_moi}', 'AjaxController@getChucvumoi');

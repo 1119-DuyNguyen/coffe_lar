@@ -1,33 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Backend\User;
+namespace App\Http\Controllers\Backend\Opinion;
 
-use App\Http\Controllers\App\Models;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CRUDController;
-use App\Http\Requests\Backend\EmployeeRequest;
-use App\Models\Role;
+use App\Http\Requests\Backend\OpinionRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class EmployeeController extends CRUDController
+class TypeOpinionController extends CRUDController
 {
+
     protected function CRUDViewPath(): string
     {
-        return "admin.employees";
+        return "admin.type-opinions";
     }
 
     protected function model(): string
     {
-        return User::class;
+        return User::class;;
     }
 
+    // validate
     protected function getFormRequest(): string
     {
-        return EmployeeRequest::class;
+        return OpinionRequest::class;
     }
 
     protected function getNameRouteCRU(): string
     {
-        return 'admin.employees';
+        return 'admin.type-opinions';
     }
 
     protected function getFormElements(): array
@@ -71,6 +73,4 @@ class EmployeeController extends CRUDController
 
         ];
     }
-
-
 }

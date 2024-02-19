@@ -18,7 +18,7 @@ abstract class CRUDController extends Controller
     use InputHandlerTrait;
 
     /**
-     *
+     * cru= create, update, read
      * @return string Đường dẫn tới view của cru resource
      *
      * @example folder views/a/b/cru.blade.php => return a.b
