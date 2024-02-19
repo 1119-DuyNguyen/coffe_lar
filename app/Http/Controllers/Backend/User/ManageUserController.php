@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 class ManageUserController extends Controller
 {
     use CrudTrait;
+
     protected function unsetUpdateEmptyField(): array
     {
         return ['password'];
@@ -21,15 +22,18 @@ class ManageUserController extends Controller
     {
         return User::class;
     }
+
     protected function addAutoInput(Request $request): array
     {
         $role_id = $request->input('role', []);
         return ['role_id' => $role_id];
     }
+
     protected function getFormRequest(): string
     {
         return ProfileRegisterRequest::class;
     }
+
     public function index()
     {
         return view('admin.users.index');
@@ -40,6 +44,7 @@ class ManageUserController extends Controller
         $roleList = Role::all()->whereNotIn('id', ['1']);
         return view('admin.users.create', compact('roleList'));
     }
+
     public function edit(User $user)
     {
         $roleList = Role::all()->whereNotIn('id', ['1']);

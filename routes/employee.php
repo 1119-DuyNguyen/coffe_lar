@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Backend\Staff\EmployeeController;
+use App\Http\Controllers\Backend\User\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('employees', EmployeeController::class);

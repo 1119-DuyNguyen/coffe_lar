@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\EmployeeStatus;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,9 +26,9 @@ final class EmployeeTable extends PowerGridComponent
         //        $this->showCheckBox();
 
         return [
-            //            Exportable::make('export')
-            //                ->striped()
-            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+//            Exportable::make('export')
+//                ->striped()
+//                ->type(Exportable::TYPE_XLS),
             Header::make()
                 ->showSearchInput()
                 ->withoutLoading(),
@@ -52,21 +53,28 @@ final class EmployeeTable extends PowerGridComponent
         return PowerGrid::columns()
             ->addColumn('employee_code')
             ->addColumn('name')
-
-            ->addColumn('position')
-            ->addColumn('department')
-            ->addColumn('role', fn ($model) => $model->role->name)
-
-
+            ->addColumn('role', fn($model) => $model->role->name)
             ->addColumn('status', function ($model) {
                 if ($model->id != 1) {
-                    return '<label class="custom-switch mt-2">
-                        <input type="checkbox" ' . ($model->status ? "checked" : '') . ' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
-                        <span class="custom-switch-indicator"></span>
-                    </label>';
+
+                    $html = '
+                    <select name="status" data-id="' . $model->id . '" class="form-select  form-control change-status w-auto">';
+                    $statusArray = EmployeeStatus::getKeys();
+                    foreach ($statusArray as $key) {
+                        if ($model->status == EmployeeStatus::getValue($key)) {
+                            $html .= '<option value=' . EmployeeStatus::getValue($key) . ' selected>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
+                        } else {
+                            $html .= '<option value=' . EmployeeStatus::getValue($key) . '>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
+                        }
+                    }
+
+                    $html .= '</select>';
+
+                    return $html;
                 }
+
             })
-            ->addColumn('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y'))
+            ->addColumn('created_at_formatted', fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y'))
             ->addColumn('action', function ($query) {
                 if ($query->id != 1) {
                     $editBtn = "<a href='" . route('admin.employees.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";

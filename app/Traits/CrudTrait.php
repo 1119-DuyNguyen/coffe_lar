@@ -92,7 +92,7 @@ trait CrudTrait
         $resource = $this->model()::findOrFail($request->input('id'));
         $resource->status = $request->input('status') == 'true' ? 1 : 0;
         $resource->save();
+        return response(['status' => 'success', 'message' => __('Status has been updated!')]);
 
-        return response(['message' => __('Status has been updated!')]);
     }
 }

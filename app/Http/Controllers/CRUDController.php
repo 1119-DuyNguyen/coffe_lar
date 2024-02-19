@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\App\Models;
 use App\Traits\InputHandlerTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -15,36 +16,113 @@ abstract class CRUDController extends Controller
     //
 
     use InputHandlerTrait;
+
+    /**
+     *
+     * @return string Đường dẫn tới view của cru resource
+     *
+     * @example folder views/a/b/cru.blade.php => return a.b
+     */
     abstract protected function CRUDViewPath(): string;
+
+    /** Trả về class của model
+     * @return string
+     */
     abstract protected function model(): string;
+
+    /**
+     * Lấy tên route cho store và update resource
+     * @return string
+     */
+    abstract protected function getNameRouteCRU(): string;
+
+    /**
+     * Function lấy data dành cho resource route (edit)
+     * @param $resource
+     * @return mixed
+     */
+    protected function getEditResourceDataRoute($resource): array
+    {
+        return [$resource->id];
+    }
+
+    /**
+     * Function lấy data dành cho resource route (create,edit)
+     *
+     * @return array
+     */
+    protected function getExtraDataRoute(): array
+    {
+        return [];
+    }
+
+
+    /**
+     * @return array [
+     * @type string typeInput loại input ví dụ text, select, checkbox, ... etc
+     * @type string name tên input
+     * @type string fieldResource trường để lấy data của tài nguyên @default $name
+     * @type string class css của input
+     * @type string label label của input
+     *
+     * ]
+     *
+     */
+    abstract protected function getFormElements(): array;
+
+    protected function addCustomRouteData()
+    {
+        return [];
+    }
+
+
+    protected function getFormElemntsWithAutoParameters($resource = null): array
+    {
+        $formElements = $this->getFormElements() ?? [];
+        foreach ($formElements as &$formElement) {
+            $formElement['fieldResource'] = $formElement['fieldResource'] ?? $formElement['name'];
+            $formElement['value'] = $resource->{$formElement['fieldResource']} ?? "";
+        }
+        return $formElements;
+    }
+
     protected function unsetUpdateEmptyField(): array
     {
         return [];
     }
 
-    /**
-     * Display a listing of the resource.
+    /**    Display a listing of the resource.
      */
     public function index()
     {
         return view($this->CRUDViewPath() . '.index');
     }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
         $resource = $this->show($id);
-        $method= 'PUT';
-        return view($this->CRUDViewPath() . '.cru', compact('resource', $method));
+        $method = 'PUT';
+        $formElements = $this->getFormElemntsWithAutoParameters($resource) ?? [];
+        $routeCRU = route(
+            $this->getNameRouteCRU() . '.edit',
+            [...$this->getEditResourceDataRoute($resource), ...$this->getExtraDataRoute()]
+        );
+        return view($this->CRUDViewPath() . '.cru', compact('resource', 'method', 'formElements', 'routeCRU'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $method= "POST";
-        return view($this->CRUDViewPath() . '.cru', compact($method));
+        $method = "POST";
+        $routeCRU = route($this->getNameRouteCRU() . '.create', $this->getExtraDataRoute());
+
+        $formElements = $this->getFormElemntsWithAutoParameters() ?? [];
+        return view($this->CRUDViewPath() . '.cru', compact('method', 'formElements', 'routeCRU'));
     }
 
     /**
@@ -60,6 +138,7 @@ abstract class CRUDController extends Controller
 
         return redirect()->back();
     }
+
     /**
      * Display the specified resource.
      */
@@ -67,6 +146,7 @@ abstract class CRUDController extends Controller
     {
         return $this->model()::findOrFail($resource_id);
     }
+
     /**
      * Update the specified resource in storage.
      */
@@ -90,6 +170,7 @@ abstract class CRUDController extends Controller
 
         return redirect()->back();
     }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -98,7 +179,8 @@ abstract class CRUDController extends Controller
         $resource = $this->model()::findOrFail($resource_id);
 
         try {
-            if ($this->getImageInput() && $resource->{$this->getImageInput()}) { {
+            if ($this->getImageInput() && $resource->{$this->getImageInput()}) {
+                {
                     $imagePath = $this->getImageInput();
                 }
             }

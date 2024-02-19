@@ -1,18 +1,16 @@
-{{--cru =  create read update --}}
 @props([
     'title'=>"",
      "route"=> "",
      "method"=> "PUT",
-     'textSubmitData'=> ($method == "PUT"|| $method == "PATCH") ? "Cập nhập" : "Khởi tạo",
-      'formElements'=>[],
+     'formElements'=>[],
+     'resource'=> [],
 ])
-{{--dataExample formDATA--}}
-{{--[ typeInput =>  [--}}
-{{--'name'=>"",--}}
-{{--'value' => string || array,--}}
-{{--'class' => "",--}}
-{{--'title => ""--}}
-{{--]]--}}
+@php
+    $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
+    $textSubmitData = $isUpdateMethod ? "Cập nhập" : "Khởi tạo";
+@endphp
+{{--cru =  create read update --}}
+
 <!-- Main Content -->
 <section class="section">
     <div class="section-header">
@@ -28,15 +26,22 @@
                         <h4>{{  $textSubmitData }}</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{$route}}" method="POST">
-                            @csrf
-                            @method($method)
-                            @foreach($formElements as $type => $formElement)
-                                <x-render-form :formElement = "$formElement" :type="$type"></x-render-form>
+                        @if(!empty($formElements))
+                            <form
+                                action="{{$route}}"
+                                method="POST">
+                                @csrf
+                                @method($method)
+                                @foreach($formElements as $type => $formElement)
 
-                            @endforeach
-                            <button type="submmit" class="btn btn-primary">{{$textSubmitData}}</button>
-                        </form>
+                                    <x-render-form :formElement="$formElement"></x-render-form>
+
+                                @endforeach
+                                <button type="submmit" class="btn btn-primary">{{$textSubmitData}}</button>
+                            </form>
+                        @else
+                            Biểu mẫu chưa khởi tạo. Hãy nhấn F5
+                        @endif
                     </div>
 
                 </div>
