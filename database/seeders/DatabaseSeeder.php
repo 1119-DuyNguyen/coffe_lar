@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeOpinionSeeder::class);
         //        $this->call(AdminProfileSeeder::class);
         //        $this->call(VendorShopProfileSeeder::class);
+
+        $this->call(ProviderSeeder::class);
         //data product
         \DB::unprepared(
             file_get_contents(__DIR__ . '/seeder-product.sql')

@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\Backend\User\EmployeeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\Provider\ProviderController;
 
 Route::resource('employees', EmployeeController::class);
 Route::resource('type-opinions', EmployeeController::class);
-
+Route::resource('providers',ProviderController::class);
 
 // Route::get('/', 'NhanVienController@getview');
 

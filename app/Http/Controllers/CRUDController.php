@@ -107,7 +107,7 @@ abstract class CRUDController extends Controller
         $method = 'PUT';
         $formElements = $this->getFormElemntsWithAutoParameters($resource) ?? [];
         $routeCRU = route(
-            $this->getNameRouteCRU() . '.edit',
+            $this->getNameRouteCRU() . '.update',
             [...$this->getEditResourceDataRoute($resource), ...$this->getExtraDataRoute()]
         );
         return view($this->CRUDViewPath() . '.cru', compact('resource', 'method', 'formElements', 'routeCRU'));
@@ -119,7 +119,7 @@ abstract class CRUDController extends Controller
     public function create()
     {
         $method = "POST";
-        $routeCRU = route($this->getNameRouteCRU() . '.create', $this->getExtraDataRoute());
+        $routeCRU = route($this->getNameRouteCRU() . '.store', $this->getExtraDataRoute());
 
         $formElements = $this->getFormElemntsWithAutoParameters() ?? [];
         return view($this->CRUDViewPath() . '.cru', compact('method', 'formElements', 'routeCRU'));
