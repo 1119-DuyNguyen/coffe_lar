@@ -60,7 +60,9 @@ class EmployeeController extends CRUDController
             [
                 'type' => 'select',
                 'name' => "role",
-                'fieldResource' => 'role_id',
+                'value' => function ($resource) {
+                    return $resource->role_id;
+                },
                 'class' => "",
                 'label' => "Chức vụ",
                 'optionValues' => Role::employee()->get()->toArray(),

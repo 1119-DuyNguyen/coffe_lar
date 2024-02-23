@@ -45,8 +45,6 @@ class AppServiceProvider extends ServiceProvider
         }
         // Every permission may have multiple roles assigned
         foreach ($permissionsArray as $name => $roles) {
-
-
             Gate::define($name, function ($user) use ($name, $permissionsArray) {
                 // We check if we have the needed roles among current user's roles
                 $isRole = isset($permissionsArray[$name][$user->role->id]);
@@ -58,13 +56,11 @@ class AppServiceProvider extends ServiceProvider
             });
         }
         $gate = array_filter(Gate::abilities(), function ($var, $key) {
-            return  str_contains($key, 'admin');
+            return str_contains($key, 'admin');
         }, ARRAY_FILTER_USE_BOTH);
         Gate::define('admin', function ($user) use ($gate) {
-
             //check if admin site
-            foreach ($gate as  $key => $value) {
-
+            foreach ($gate as $key => $value) {
                 if (Gate::any($key)) {
                     return true;
                 }
@@ -77,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
         // });
         // dd(Gate::abilities());
     }
+
     /**
      * Bootstrap any application services.
      */
@@ -96,15 +93,12 @@ class AppServiceProvider extends ServiceProvider
             /** Share variable at all view */
             if (isset($generalSetting, $logoSetting)) {
                 View::composer('admin.*', function ($view) use ($generalSetting, $logoSetting) {
-
                     $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
                 });
                 View::composer('frontend.dashboard.order.print', function ($view) use ($generalSetting, $logoSetting) {
-
                     $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
                 });
-                View::composer('templates.clients.frontend', function ($view) use ($generalSetting, $logoSetting) {
-
+                View::composer('templates.clients.master', function ($view) use ($generalSetting, $logoSetting) {
                     $view->with(['settings' => $generalSetting, 'logoSetting' => $logoSetting]);
                 });
             }

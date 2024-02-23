@@ -13,6 +13,7 @@ use App\Traits\CrudTrait;
 class ProductController extends Controller
 {
     use CrudTrait;
+
     protected function model(): string
     {
         return Product::class;
@@ -22,10 +23,12 @@ class ProductController extends Controller
     {
         return ProductRequest::class;
     }
+
     protected function getImageInput(): string|null
     {
         return 'thumb_image';
     }
+
     protected function getImagePath(): string|null
     {
         return 'products';
@@ -54,13 +57,11 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-
         $product = Product::findOrFail($id);
         $categories = Category::all();
         return view('admin.products.edit', compact('product', 'categories'));
@@ -78,21 +79,6 @@ class ProductController extends Controller
 
         /** Delte the main product image */
         $this->deleteImage($product->thumb_image);
-
-        /** Delete product gallery images */
-        //        $galleryImages = ProductImageGallery::where('product_id', $product->id)->get();
-        //        foreach($galleryImages as $image){
-        //            $this->deleteImage($image->image);
-        //            $image->delete();
-        //        }
-        //
-        //        /** Delete product variants if exist */
-        //        $variants = ProductVariant::where('product_id', $product->id)->get();
-        //
-        //        foreach($variants as $variant){
-        //            $variant->productVariantItems()->delete();
-        //            $variant->delete();
-        //        }
 
         $product->delete();
 

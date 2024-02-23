@@ -3,18 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Observers\RoleObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 
-enum RoleID: int
-{
-    case Admin = 1;
-    case User = 2;
-    case staff = 3;
-}
 
 class Role extends Model
 {
@@ -30,6 +25,17 @@ class Role extends Model
         'description',
         'is_employee'
     ];
+
+    protected static function boot()
+    {
+        // you MUST call the parent boot method
+        // in this case the \Illuminate\Database\Eloquent\Model
+        parent::boot();
+
+        // note I am using static::observe(...) instead of Config::observe(...)
+        // this way the child classes auto-register the observer to their own class
+        static::observe(RoleObserver::class);
+    }
 
     /**
      * Scope a query to except admin, buyer(user) role.
