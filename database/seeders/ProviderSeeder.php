@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
+
 class ProviderSeeder extends Seeder
 {
     /**
@@ -28,8 +29,8 @@ class ProviderSeeder extends Seeder
         // create employee
         for ($i = 1; $i <= 50; ++$i) {
             $data = [
-                'name' => 'Nhân viên ' . $i,
-                'description' => 'provider' . $i,
+                'name' => 'Nhà cung cấp ' . $i,
+                'description' => 'nhà cung cấp chăm chỉ ' . $i,
             ];
             Provider::create($data);
         }

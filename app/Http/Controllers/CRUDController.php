@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\App\Models;
 use App\Traits\InputHandlerTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -70,18 +69,14 @@ abstract class CRUDController extends Controller
      */
     abstract protected function getFormElements(): array;
 
-    protected function addCustomRouteData()
-    {
-        return [];
-    }
-
-
     protected function getFormElemntsWithAutoParameters($resource = null): array
     {
         $formElements = $this->getFormElements() ?? [];
-        foreach ($formElements as &$formElement) {
-            $formElement['fieldResource'] = $formElement['fieldResource'] ?? $formElement['name'];
-            $formElement['value'] = $resource->{$formElement['fieldResource']} ?? "";
+        foreach ($formElements as $key => $formElement) {
+            if (!isset($formElement)) {
+                $formElements[$key]['fieldResource'] = $formElement['name'];
+            }
+            $formElements[$key]['value'] = $resource->{$formElement['fieldResource']} ?? "";
         }
         return $formElements;
     }
@@ -204,7 +199,7 @@ abstract class CRUDController extends Controller
     public function changeStatus(Request $request)
     {
         $resource = $this->model()::findOrFail($request->input('id'));
-        $resource->status = $request->input('status') == 'true' ? 1 : 0;
+        $resource->status = $request->input('status') === 'true' ? 1 : 0;
         $resource->save();
 
         return response(['message' => __('Status has been updated!')]);
