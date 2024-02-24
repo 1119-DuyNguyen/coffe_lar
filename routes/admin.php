@@ -6,8 +6,8 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\SettingController;
 
-use App\Http\Controllers\Backend\User\ManageRoleController;
-use App\Http\Controllers\Backend\User\ManageUserController;
+use App\Http\Controllers\Backend\User\RoleController;
+use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +32,6 @@ Route::middleware('can:admin.product')->group(function () {
 });
 
 
-
 /** Admin Routes */
 Route::middleware('hasPermission')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
@@ -44,15 +43,15 @@ Route::middleware('hasPermission')->group(function () {
     Route::resource('categories', CategoryController::class);
 
 
-
     /** product */
 
     Route::resource('products', ProductController::class);
 
 
-
     /** Order routes */
-    Route::put('orders/change-payment-status', [OrderController::class, 'changePaymentStatus'])->name('orders.change-payment-status');
+    Route::put('orders/change-payment-status', [OrderController::class, 'changePaymentStatus'])->name(
+        'orders.change-payment-status'
+    );
 
     Route::put('orders/change-status', [OrderController::class, 'changeOrderStatus'])->name('orders.change-status');
 
@@ -66,8 +65,8 @@ Route::middleware('hasPermission')->group(function () {
     Route::put('logo-setting', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting.update');
 
     /** manage user routes */
-    Route::put('users/change-status', [ManageUserController::class, 'changeStatus'])->name('users.change-status');
-    Route::resource('users', ManageUserController::class);
+    Route::put('users/change-status', [UserController::class, 'changeStatus'])->name('users.change-status');
+    Route::resource('users', UserController::class);
     //manage role
-    Route::resource('roles', ManageRoleController::class);
+    Route::resource('roles', RoleController::class);
 });

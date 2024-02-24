@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Traits\CrudTrait;
 use Illuminate\Http\Request;
 
-class ManageUserController extends Controller
+class UserController extends Controller
 {
     use CrudTrait;
 
