@@ -4,10 +4,13 @@ use App\Http\Controllers\Backend\User\EmployeeController;
 use App\Http\Controllers\Backend\Opinion\TypeOpinionController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\Provider\ProviderController;
 
 Route::resource('employees', EmployeeController::class);
+
 Route::resource('type-opinions', TypeOpinionController::class);
 
+Route::resource('providers',ProviderController::class);
 
 
 // Route::get('/', 'NhanVienController@getview');

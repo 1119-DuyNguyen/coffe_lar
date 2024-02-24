@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\App\Models;
 use App\Traits\InputHandlerTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +9,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+
 
 abstract class CRUDController extends Controller
 {
@@ -59,30 +60,44 @@ abstract class CRUDController extends Controller
 
     /**
      * @return array [
-     * @type string typeInput loại input ví dụ text, select, checkbox, ... etc
+     * @type array formElements Trả về các mảng input elements
+     * [
+     * @type string type loại input
+     * @example  text(one-line input) , textfield (multi line input), select, checkbox, ... etc
      * @type string name tên input
-     * @type string fieldResource trường để lấy data của tài nguyên @default $name
-     * @type string class css của input
-     * @type string label label của input
+     * @type function value giá trị của input khi edit
+     * @example  function( $resource ) { return $resource->name ; }
      *
+     * @type string class css của input
+     * @type string label label của thẻ input
+     *
+     * @type array optionValues chứa giá trị của các option gồm key và label
+     * @type string optionKey
+     * @type string optionLabel
+     * @example <option value="optionValues[optionKey]"> optionValues[optionLabel] </option>
+     * ]
      * ]
      *
      */
     abstract protected function getFormElements(): array;
 
-    protected function addCustomRouteData()
-    {
-        return [];
-    }
-
-
     protected function getFormElemntsWithAutoParameters($resource = null): array
     {
         $formElements = $this->getFormElements() ?? [];
-        foreach ($formElements as &$formElement) {
-            $formElement['fieldResource'] = $formElement['fieldResource'] ?? $formElement['name'];
-            $formElement['value'] = $resource->{$formElement['fieldResource']} ?? "";
+        if (empty($resource)) {
+            foreach ($formElements as $key => $formElement) {
+                $formElements[$key]['value'] = "";
+            }
+        } else {
+            foreach ($formElements as $key => $formElement) {
+                if (isset($formElement['value']) && is_callable($formElement['value'])) {
+                    $formElements[$key]['value'] = $formElement['value']($resource) ?? "";
+                } else {
+                    $formElements[$key]['value'] = $resource->{$formElement['name']} ?? "";
+                }
+            }
         }
+
         return $formElements;
     }
 
@@ -107,7 +122,7 @@ abstract class CRUDController extends Controller
         $method = 'PUT';
         $formElements = $this->getFormElemntsWithAutoParameters($resource) ?? [];
         $routeCRU = route(
-            $this->getNameRouteCRU() . '.edit',
+            $this->getNameRouteCRU() . '.update',
             [...$this->getEditResourceDataRoute($resource), ...$this->getExtraDataRoute()]
         );
         return view($this->CRUDViewPath() . '.cru', compact('resource', 'method', 'formElements', 'routeCRU'));
@@ -119,7 +134,7 @@ abstract class CRUDController extends Controller
     public function create()
     {
         $method = "POST";
-        $routeCRU = route($this->getNameRouteCRU() . '.create', $this->getExtraDataRoute());
+        $routeCRU = route($this->getNameRouteCRU() . '.store', $this->getExtraDataRoute());
 
         $formElements = $this->getFormElemntsWithAutoParameters() ?? [];
         return view($this->CRUDViewPath() . '.cru', compact('method', 'formElements', 'routeCRU'));
@@ -152,20 +167,28 @@ abstract class CRUDController extends Controller
      */
     public function update(Request $request, $resource_id)
     {
-        $resource = $this->model()::findOrFail($resource_id);
-        $data = $this->handleDataInput(
-            $request,
-            !empty($this->getImageInput())
-                ? $resource->{$this->getImageInput()}
-                : null
-        );
-        foreach ($this->unsetUpdateEmptyField() as $field) {
-            if (empty($data[$field])) {
-                unset($data[$field]);
+        try {
+            $resource = $this->model()::findOrFail($resource_id);
+
+            $data = $this->handleDataInput(
+                $request,
+                !empty($this->getImageInput())
+                    ? $resource->{$this->getImageInput()}
+                    : null
+            );
+            foreach ($this->unsetUpdateEmptyField() as $field) {
+                if (empty($data[$field])) {
+                    unset($data[$field]);
+                }
             }
+            $resource->fill($data);
+            $resource->save();
+
+            toast()->success('Cập nhập dữ liệu thành công!');
+        } catch (ValidationException $e) {
+            return response(['status' => 'error', 'message' => $e->getMessage()]);
+        } catch (Exception $e) {
         }
-        $resource->update($data);
-        toast()->success('Cập nhập dữ liệu thành công!');
 
 
         return redirect()->back();
@@ -194,6 +217,8 @@ abstract class CRUDController extends Controller
             if ($errorCode == '1451') {
                 return response(['status' => 'error', 'message' => 'Không thể xóa do sản phẩm có ràng buộc']);
             }
+        } catch (ValidationException $e) {
+            return response(['status' => 'error', 'message' => $e->getMessage()]);
         } catch (Exception $e) {
             return response(['status' => 'error', 'message' => "lỗi máy chủ, không thể thực hiện"]);
         }
@@ -204,7 +229,7 @@ abstract class CRUDController extends Controller
     public function changeStatus(Request $request)
     {
         $resource = $this->model()::findOrFail($request->input('id'));
-        $resource->status = $request->input('status') == 'true' ? 1 : 0;
+        $resource->status = $request->input('status') === 'true' ? 1 : 0;
         $resource->save();
 
         return response(['message' => __('Status has been updated!')]);

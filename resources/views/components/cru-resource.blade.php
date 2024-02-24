@@ -7,14 +7,14 @@
 ])
 @php
     $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
-    $textSubmitData = $isUpdateMethod ? "Cập nhập" : "Khởi tạo";
+    $textSubmitData = $isUpdateMethod ? "Cập nhập " : "Khởi tạo ";
 @endphp
 {{--cru =  create read update --}}
 
 <!-- Main Content -->
 <section class="section">
     <div class="section-header">
-        <h1>{{$title}}</h1>
+        <h1 class="lowercase-and-capitalize-first-letter">{{$textSubmitData . $title}}</h1>
     </div>
 
     <div class="section-body">
@@ -23,7 +23,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{  $textSubmitData }}</h4>
+                        <h4 class="lowercase-and-capitalize-first-letter">{{  $textSubmitData }}</h4>
                     </div>
                     <div class="card-body">
                         @if(!empty($formElements))

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +23,7 @@
           rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/themify-icons/themify-icons.css')}}"/>
     <style>
-        .form-select{
+        .form-select {
             display: block;
             width: 100%;
             height: calc(2.25rem + 2px);
@@ -40,7 +39,7 @@
             border-bottom-color: rgb(206, 212, 218);
             border-left-color: rgb(206, 212, 218);
             border-radius: .25rem;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         }
     </style>
     <!-- <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/alertify.min.css')}}" />
@@ -48,6 +47,8 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/semantic.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/alert/css/themes/bootstrap.css') }}" /> -->
     {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>--}}
+    @include('layouts.header-import')
+
 </head>
 
 <body class="grocery-theme">
