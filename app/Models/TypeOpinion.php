@@ -12,4 +12,17 @@ class TypeOpinion extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function type_opinions()
+    {
+        return $this->hasMany(TypeOpinion::class);
+    }
+    public function getNameAttribute($value)
+    {
+        return $value;
+    }
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+    }
 }

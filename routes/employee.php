@@ -2,16 +2,23 @@
 
 use App\Http\Controllers\Backend\User\EmployeeController;
 use App\Http\Controllers\Backend\Opinion\TypeOpinionController;
+use App\Http\Controllers\Backend\Contract\ContractController;
+use App\Http\Controllers\Backend\Opinion\OpinionController;
+
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
+use App\Models\Opinion;
 
 Route::resource('employees', EmployeeController::class);
 
 Route::resource('type-opinions', TypeOpinionController::class);
 
-Route::resource('providers',ProviderController::class);
+Route::resource('providers', ProviderController::class);
 
+Route::resource('contracts', ContractController::class);
+
+Route::resource('opinions', OpinionController::class);
 
 // Route::get('/', 'NhanVienController@getview');
 

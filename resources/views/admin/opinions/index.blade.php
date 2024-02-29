@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             {{-- {{ $dataTable->table() }} --}}
-                            @livewire('typeopinion-table')
+                            @livewire('opinion-table')
                         </div>
 
                     </div>
