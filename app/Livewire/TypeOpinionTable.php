@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Illuminate\Database\Query\Builder;
+use App\Models\TypeOpinion;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
@@ -22,15 +22,11 @@ final class TypeOpinionTable extends PowerGridComponent
 
     public function setUp(): array
     {
-        //        $this->showCheckBox();
-
         return [
-            //            Exportable::make('export')
-            //                ->striped()
-            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()
-                ->showSearchInput()
-                ->withoutLoading(),
+            Exportable::make('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -39,7 +35,12 @@ final class TypeOpinionTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return DB::table('type_opinions');
+        return TypeOpinion::query();
+    }
+
+    public function relationSearch(): array
+    {
+        return [];
     }
 
     public function addColumns(): PowerGridColumns
@@ -49,18 +50,9 @@ final class TypeOpinionTable extends PowerGridComponent
             ->addColumn('name')
 
             /** Example of custom column using a closure **/
-            ->addColumn('name_lower', fn ($model) => strtolower(e($model->name)))
+            ->addColumn('name_lower', fn (TypeOpinion $model) => strtolower(e($model->name)))
 
-            ->addColumn('created_at_formatted', fn ($model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn ($model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'))
-
-            // ->addColumn('status', function ($model) {
-            //     return '<label class="custom-switch mt-2">
-            //             <input type="checkbox" ' . ($model->status ? "checked" : '') . ' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
-            //             <span class="custom-switch-indicator"></span>
-            //         </label>';
-            // })
-
+            ->addColumn('created_at_formatted', fn (TypeOpinion $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function ($query) {
                 $editBtn = "<a href='" . route('admin.type-opinions.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
                 $deleteBtn = "<a href='" . route('admin.type-opinions.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
@@ -72,21 +64,16 @@ final class TypeOpinionTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id'),
-            Column::make('Loại ý kiến', 'name')
+            Column::make('ID', 'id')
                 ->sortable()
                 ->searchable(),
+            Column::make('Loại ý kiến', 'name'),
+
 
             Column::make('Ngày tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
-            Column::make('Ngày cập nhật', 'updated_at_formatted', 'updated_at')
-                ->sortable(),
-
-            // Column::make('Trạng Thái', 'status'),
-
             Column::make('Thao Tác', 'action')
-
         ];
     }
 
@@ -95,21 +82,20 @@ final class TypeOpinionTable extends PowerGridComponent
     //     return [
     //         Filter::inputText('name')->operators(['contains']),
     //         Filter::datetimepicker('created_at'),
-    //         Filter::datetimepicker('updated_at'),
     //     ];
     // }
 
     // #[\Livewire\Attributes\On('edit')]
     // public function edit($rowId): void
     // {
-    //     $this->js('alert(' . $rowId . ')');
+    //     $this->js('alert('.$rowId.')');
     // }
 
-    // public function actions($row): array
+    // public function actions(\App\Models\TypeOpinion $row): array
     // {
     //     return [
     //         Button::add('edit')
-    //             ->slot('Edit: ' . $row->id)
+    //             ->slot('Edit: '.$row->id)
     //             ->id()
     //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
     //             ->dispatch('edit', ['rowId' => $row->id])

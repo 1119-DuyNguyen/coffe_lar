@@ -2,12 +2,9 @@
 
 namespace App\Livewire;
 
-
-use App\Models\User;
-use Illuminate\Database\Query\Builder;
+use App\Models\Contract;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use PHPUnit\Metadata\Uses;
+use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
@@ -25,12 +22,11 @@ final class ContractTable extends PowerGridComponent
 
     public function setUp(): array
     {
-        // $this->showCheckBox();
 
         return [
-            // Exportable::make('my-export-file')
-            //     ->striped('#A6ACCD')
-            //     ->type(Exportable::TYPE_XLS),
+            Exportable::make('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -40,7 +36,12 @@ final class ContractTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return DB::table('contracts');
+        return Contract::query();
+    }
+
+    public function relationSearch(): array
+    {
+        return [];
     }
 
     public function addColumns(): PowerGridColumns
@@ -50,22 +51,20 @@ final class ContractTable extends PowerGridComponent
             ->addColumn('id_contract')
 
             /** Example of custom column using a closure **/
-            ->addColumn('id_contract_lower', fn ($model) => strtolower(e($model->id_contract)))
+            ->addColumn('id_contract_lower', fn (Contract $model) => strtolower(e($model->id_contract)))
 
             ->addColumn('name')
-            ->addColumn('user_id')
+            ->addColumn('user_name', fn ($model) => $model->user->name)
             ->addColumn('salary')
             ->addColumn('allowance')
-            ->addColumn('end_date_formatted', fn ($model) => Carbon::parse($model->end_date)->format('d/m/Y '))
+            ->addColumn('end_date_formatted', fn (Contract $model) => Carbon::parse($model->end_date)->format('d/m/Y'))
             ->addColumn('status', function ($model) {
                 return '<label class="custom-switch mt-2">
                         <input type="checkbox" ' . ($model->status ? "checked" : '') . ' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
                         <span class="custom-switch-indicator"></span>
                     </label>';
             })
-            ->addColumn('created_at_formatted', fn ($model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn ($model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'))
-
+            ->addColumn('created_at_formatted', fn (Contract $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function ($query) {
                 $editBtn = "<a href='" . route('admin.contracts.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
                 $deleteBtn = "<a href='" . route('admin.contracts.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
@@ -77,31 +76,31 @@ final class ContractTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Mã hợp đồng', 'id_contract')
+            Column::make('Id', 'id')
                 ->sortable()
                 ->searchable(),
+            Column::make('Mã hợp đồng', 'id_contract'),
 
             Column::make('Loại hợp đồng', 'name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Mã nhân viên', 'user_id'),
+            Column::make('Tên nhân viên', 'user_name'),
             Column::make('Lương', 'salary')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Phụ cấp', 'allowance')
+            Column::make('Phụ Cấp', 'allowance')
                 ->sortable()
                 ->searchable(),
 
+            Column::make('Ngày hết hạn', 'end_date_formatted', 'end_date')
+                ->sortable(),
+
+            Column::make('Trạng thái', 'status'),
+
             Column::make('Ngày tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
-
-            Column::make('Ngày kết thúc hợp đồng', 'end_date_formatted', 'end_date')
-                ->sortable(),
-
-            Column::make('Trạng thái hợp đồng', 'status'),
-
 
             Column::make('Thao Tác', 'action')
         ];
@@ -115,7 +114,6 @@ final class ContractTable extends PowerGridComponent
     //         Filter::datepicker('end_date'),
     //         Filter::boolean('status'),
     //         Filter::datetimepicker('created_at'),
-    //         Filter::datetimepicker('updated_at'),
     //     ];
     // }
 
@@ -125,7 +123,7 @@ final class ContractTable extends PowerGridComponent
     //     $this->js('alert(' . $rowId . ')');
     // }
 
-    // public function actions($row): array
+    // public function actions(\App\Models\Contract $row): array
     // {
     //     return [
     //         Button::add('edit')

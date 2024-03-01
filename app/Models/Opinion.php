@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Opinion extends Model
 {
@@ -15,10 +16,11 @@ class Opinion extends Model
         'content',
     ];
 
-    public function type_opinions()
+    public function typeOpinion(): belongsTo
     {
-        return $this->hasMany(Opinion::class);
+        return $this->belongsTo(Opinion::class);
     }
+
     public function getTopicAttribute($value)
     {
         return $value;

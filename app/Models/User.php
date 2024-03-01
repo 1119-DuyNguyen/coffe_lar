@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,14 +60,19 @@ class User extends Authenticatable
         return $this->hasOne(Cart::class);
     }
 
+    public function contract()
+    {
+        return $this->hasMany(Contract::class);
+    }
+
     // user with role = employee
     public static function employee(): User|\Illuminate\Database\Eloquent\Builder
     {
         return User::whereHas(
-            'role', function ($query) {
-            $query->where('is_employee', true);
-        }
+            'role',
+            function ($query) {
+                $query->where('is_employee', true);
+            }
         );
     }
-
 }

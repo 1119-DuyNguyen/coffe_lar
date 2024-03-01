@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class TypeOpinion extends Model
 {
     use HasFactory;
@@ -13,9 +14,9 @@ class TypeOpinion extends Model
         'name'
     ];
 
-    public function type_opinions()
+    public function opinion()
     {
-        return $this->hasMany(TypeOpinion::class);
+        return $this->hasMany(Opinion::class);
     }
     public function getNameAttribute($value)
     {

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Contract extends Model
 {
@@ -19,9 +21,9 @@ class Contract extends Model
         'status',
     ];
 
-    public function contracts()
+    public function user(): belongsTo
     {
-        return $this->hasMany(Contract::class);
+        return $this->belongsTo(User::class);
     }
 
     public function getId_ContractAttribute($value)
@@ -32,16 +34,6 @@ class Contract extends Model
     {
         $this->attributes['id_contract'] = $value;
     }
-
-    public function getUser_idAttribute($value)
-    {
-        return $value;
-    }
-    public function setUser_idAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-    }
-
     public function getNameAttribute($value)
     {
         return $value;
@@ -67,15 +59,6 @@ class Contract extends Model
     public function setAllowanceAttribute($value)
     {
         $this->attributes['allowance'] = $value;
-    }
-
-    public function getEnd_dateAttribute($value)
-    {
-        return $value;
-    }
-    public function setEnd_dateAttribute($value)
-    {
-        $this->attributes['end_date'] = $value;
     }
 
     public function getStatusAttribute($value)
