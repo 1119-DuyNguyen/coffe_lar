@@ -10,7 +10,6 @@ use App\Traits\CrudTrait;
 
 class CategoryController extends Controller
 {
-    use CrudTrait;
     protected function model(): string
     {
         return Category::class;
