@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>Loại Ý Kiến</h1>
+            <h1>Hợp đồng</h1>
         </div>
 
         <div class="section-body">
@@ -13,11 +13,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Danh sách các loại ý kiến</h4>
+                            <h4>Danh sách hợp đồng</h4>
                         </div>
                         <div class="card-body">
                             {{-- {{ $dataTable->table() }} --}}
-                            @livewire('typeopinion-table')
+                            @livewire('contract-table')
                         </div>
 
                     </div>
@@ -28,8 +28,8 @@
     </section>
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
     <x-change-status :url="route('admin.users.change-status')" type="select">
 
-    </x-change-status>
-@endpush
+    </x-change-status> --}}
+{{-- @endpush --}}

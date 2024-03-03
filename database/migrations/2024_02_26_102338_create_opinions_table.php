@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_opinions', function (Blueprint $table) {
+        Schema::create('opinions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->unsignedBigInteger('type_opinion_id');
+            $table->foreign('type_opinion_id')->references('id')->on('type_opinions')->nullable();
+            $table->string('topic')->nullable();
+            $table->string('content')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_opinions');
+        Schema::dropIfExists('opinions');
     }
 };
