@@ -13,8 +13,9 @@
         "laravel/framework": "^10.10",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
-        "realrashid/sweet-alert": "^7.0",
-        "power-components/livewire-powergrid": "^5.1"
+        "openspout/openspout": "^4.23",
+        "power-components/livewire-powergrid": "^5.1",
+        "realrashid/sweet-alert": "^7.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

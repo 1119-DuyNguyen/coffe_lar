@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -23,119 +24,21 @@ class Product extends Model
     ];
 
 
-
-
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Accessor for 'thumb_image'
-    public function getThumbImageAttribute($value)
-    {
-        return $value;
-    }
 
-    // Mutator for 'thumb_image'
-    public function setThumbImageAttribute($value)
+    protected static function boot()
     {
-        $this->attributes['thumb_image'] = $value;
-    }
+        // you MUST call the parent boot method
+        // in this case the \Illuminate\Database\Eloquent\Model
+        parent::boot();
 
-    // Accessor for 'name'
-    public function getNameAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'name'
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-    }
-
-    // Accessor for 'slug'
-    public function getSlugAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'slug'
-    public function setSlugAttribute($value)
-    {
-        $this->attributes['slug'] =  Str::slug($value);
-    }
-
-    // Accessor for 'category_id'
-    public function getCategoryIdAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'category_id'
-    public function setCategoryIdAttribute($value)
-    {
-        $this->attributes['category_id'] = $value;
-    }
-
-    // Accessor for 'description'
-    public function getDescriptionAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'description'
-    public function setDescriptionAttribute($value)
-    {
-        $this->attributes['description'] = $value;
-    }
-
-    // Accessor for 'content'
-    public function getContentAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'content'
-    public function setContentAttribute($value)
-    {
-        $this->attributes['content'] = $value;
-    }
-
-    // Accessor for 'price'
-    public function getPriceAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'price'
-    public function setPriceAttribute($value)
-    {
-        $this->attributes['price'] = $value;
-    }
-
-    // Accessor for 'status'
-    public function getStatusAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'status'
-    public function setStatusAttribute($value)
-    {
-        $this->attributes['status'] = $value;
-    }
-
-    // Accessor for 'weight'
-    public function getWeightAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'weight'
-    public function setWeightAttribute($value)
-    {
-        $this->attributes['weight'] = $value;
+        // note I am using static::observe(...) instead of Config::observe(...)
+        // this way the child classes auto-register the observer to their own class
+        static::observe(ProductObserver::class);
     }
 
 

@@ -22,15 +22,16 @@ class PermissionRoleSeeder extends Seeder
     public function run(): void
     {
         //
-        $superAdminRole = Role::create(['name' => 'Super Admin']);
-        $userRole = Role::create(['name' => 'User']);
+        $superAdminRole = Role::create(['name' => 'Tài khoản quyền lực nhất','is_employee'=>true]);
+        $userRole = Role::create(['name' => 'Người dùng']);
+        $employeeRole = Role::create(['name' => 'Nhân viên','is_employee'=>true]);
 
         $arrayPermission = [
-            'admin.user'=>'Quản lý người dùng',
-            'admin.category'=>'Quản lý danh mục',
-            'admin.product'=>'Quản lý sản phẩm',
-            'admin.order'=>'Xử lý đơn hàng',
-            'admin.role'=>'Quản lý vai trò',
+            'admin.users'=>'Quản lý người dùng',
+            'admin.categories'=>'Quản lý danh mục',
+            'admin.products'=>'Quản lý sản phẩm',
+            'admin.orders'=>'Xử lý đơn hàng',
+            'admin.roles'=>'Quản lý vai trò',
             'admin.dashboard'=>'Xem thống kê',
 
         ];

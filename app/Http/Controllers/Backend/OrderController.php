@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        return view('admin.order.index');
+        return view('admin.orders.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         $order = Order::with('orderProducts')->findOrFail($id);
 
-        return view('admin.order.show', compact('order'));
+        return view('admin.orders.show', compact('order'));
     }
     /**
      * Remove the specified resource from storage.
@@ -46,9 +46,8 @@ class OrderController extends Controller
     public function changeOrderStatus(Request $request)
     {
         $order = Order::findOrFail($request->input('id'));
-        if($order->order_status==OrderStatus::canceled || $order->order_status==OrderStatus::delivered)
-        {
-        return response(['status' => 'error', 'message' => 'Không được phép thay đổi trạng thái đơn hàng']);
+        if ($order->order_status == OrderStatus::canceled || $order->order_status == OrderStatus::delivered) {
+            return response(['status' => 'error', 'message' => 'Không được phép thay đổi trạng thái đơn hàng']);
         }
 
         $order->order_status = $request->input('status');
@@ -61,9 +60,9 @@ class OrderController extends Controller
         $order = Order::findOrFail($request->input('id'));
 
         $order->update(
-          [
-              'payment_status' => $request->input('status') == 'true' ? 1 : 0
-          ]
+            [
+                'payment_status' => $request->input('status') == 'true' ? 1 : 0
+            ]
         );
 
         return response(['status' => 'success', 'message' => 'Cập nhập trạng thái thanh toán thành công']);

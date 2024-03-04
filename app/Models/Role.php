@@ -3,15 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Observers\RoleObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Builder;
 
-class Role  extends Model
+
+class Role extends Model
 {
     use HasFactory;
 
@@ -23,7 +23,29 @@ class Role  extends Model
     protected $fillable = [
         'name',
         'description',
+        'is_employee'
     ];
+
+    protected static function boot()
+    {
+        // you MUST call the parent boot method
+        // in this case the \Illuminate\Database\Eloquent\Model
+        parent::boot();
+
+        // note I am using static::observe(...) instead of Config::observe(...)
+        // this way the child classes auto-register the observer to their own class
+        static::observe(RoleObserver::class);
+    }
+
+    /**
+     * Scope a query to except admin, buyer(user) role.
+     *
+     *
+     */
+    public function scopeEmployee(Builder $query): void
+    {
+        $query->whereNotIn('id', [1, 2]);
+    }
 
     /**
      * The users that belong to the role.
@@ -32,32 +54,10 @@ class Role  extends Model
     {
         return $this->hasMany(User::class);
     }
-    public function permissions():BelongsToMany
+
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
     }
 
-    // Accessor for 'name'
-    public function getNameAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'name'
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-    }
-
-    // Accessor for 'description'
-    public function getDescriptionAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'description'
-    public function setDescriptionAttribute($value)
-    {
-        $this->attributes['description'] = $value;
-    }
 }
