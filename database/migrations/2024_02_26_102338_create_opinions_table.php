@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('opinions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('type_opinion_id');
-            $table->foreign('type_opinion_id')->references('id')->on('type_opinions')->nullable();
+            $table->foreignId('type_opinion_id')->constrained();
             $table->string('topic')->nullable();
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }

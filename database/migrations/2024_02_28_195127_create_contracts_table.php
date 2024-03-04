@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->string('id_contract');
+            $table->string('code')->unique();
             $table->string('name');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->double('salary');
             $table->double('allowance');
             $table->date('end_date');
-            $table->boolean('status')->default(true);;
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

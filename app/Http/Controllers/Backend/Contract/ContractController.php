@@ -37,7 +37,7 @@ class ContractController extends CRUDController
         return [
             [
                 'type' => 'text',
-                'name' => "id_contract",
+                'name' => "code",
                 'class' => "",
                 'label' => "Mã hợp đồng",
             ],

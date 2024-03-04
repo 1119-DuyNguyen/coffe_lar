@@ -24,7 +24,7 @@ class ContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_contract' => ['required'],
+            'code' => ['required'],
             'name' => ['required', 'max:250'],
             'salary' => ['required'],
             'allowance' => ['required'],
