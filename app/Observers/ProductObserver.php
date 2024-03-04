@@ -16,13 +16,20 @@ class ProductObserver
     private function generateSlug(Product &$product)
     {
         // generate slug từ  $product-> name/ title
-        $slug = "";
+
         // Check if unique  trong database Product
         //
         // gán trường slug attribute từ tên với hàm generate slug
         // check slug unique trong db Product::exists
-
-
+        $StringNameOfSlug = \Str::slug($product->name, '-');
+        $slugTonTai = Product::where('slug', $StringNameOfSlug)->exists();
+        //nếu slug đã tồn tại
+        if ($slugTonTai == true) {
+            throw ValidationException::withMessages([
+                'message' => 'đã tồn tại slug'
+            ]);
+        }
+        $product->slug = $StringNameOfSlug;
     }
 
     /**
@@ -35,8 +42,11 @@ class ProductObserver
 
     public function creating(Product $product)
     {
-        // unique
-        // check exists then generate slug
+//        dd($product->slug === $this->request->input('slug') && $product->slug != null);
+        if (!($product->slug === $this->request->input('slug') && $product->slug != null)) {
+//            dd(Product::where('slug', \Str::slug($product->name, '-'))->exists());
+            $this->generateSlug($product);
+        }
     }
 
     /**
@@ -51,13 +61,9 @@ class ProductObserver
     {
         if (!($product->slug === $this->request->input('slug'))) {
             // check exists
-            
             // then generate slug
-
             // đã exists thả lỗi
-            throw ValidationException::withMessages([
-                'message' => 'đã tồn tại slug'
-            ]);
+            $this->generateSlug($product);
         }
         //
     }

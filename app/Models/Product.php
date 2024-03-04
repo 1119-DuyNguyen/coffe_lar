@@ -29,6 +29,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+
     protected static function boot()
     {
         // you MUST call the parent boot method
@@ -39,5 +40,6 @@ class Product extends Model
         // this way the child classes auto-register the observer to their own class
         static::observe(ProductObserver::class);
     }
+
 
 }

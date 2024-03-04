@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         {{-- {{ $dataTable->table() }}--}}
-                        @livewire('employee-table')
+                        @livewire('provider-table')
                     </div>
 
                 </div>

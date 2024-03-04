@@ -16,6 +16,7 @@ class Category extends Model
         'status',
         'slug'
     ];
+
     public function products()
     {
         return $this->hasMany(Product::class);
@@ -68,6 +69,7 @@ class Category extends Model
     {
 //        $this->attributes['slug'] = $value;
         $this->attributes['slug'] = Str::slug($value);
-
     }
+
+
 }
