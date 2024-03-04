@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\ProductRequest;
 use App\Models\Category;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\Role;
 use App\Traits\CrudTrait;
 
 
-class ProductController extends Controller
+class ProductController extends CRUDController
 {
-    use CrudTrait;
 
     protected function model(): string
     {
@@ -39,49 +40,76 @@ class ProductController extends Controller
         return 'name';
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    protected function CRUDViewPath(): string
     {
-        return view('admin.products.index');
+        return "admin.products";
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    protected function getNameRouteCRU(): string
     {
-        $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        return "admin.products";
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    protected function getFormElements(): array
     {
-        $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
-    }
+        return [
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $product = Product::findOrFail($id);
-        if (OrderProduct::where('product_id', $product->id)->count() > 0) {
-            return response(['status' => 'error', 'message' => 'This product have orders can\'t delete it.']);
-        }
+            [
+                'type' => 'text',
+                'name' => "name",
+                'class' => "",
+                'label' => "Tên sản phẩm",
+            ],
+            [
+                'type' => 'file',
+                'name' => "thumb_image",
+                'class' => "",
+                'label' => "Chọn ảnh",
+            ],
+            [
+                'type' => 'select',
+                'name' => "category_id",
+                'value' => function ($resource) {
+                    return $resource->category;
+                },
+                'class' => "",
+                'label' => "Danh mục",
+                'optionValues' => Category::all()->toArray(),
+                'optionKey' => 'id',
+                'optionLabel' => 'name'
+            ],
+            [
+                'type' => 'text',
+                'name' => "description",
+                'class' => "",
+                'label' => "Mô tả sản phẩm",
+            ],
+            [
+                'type' => 'text',
+                'name' => "content",
+                'class' => "",
+                'label' => "Nội dung sản phẩm",
+            ],
+            [
+                'type' => 'number',
+                'name' => "price",
+                'class' => "",
+                'label' => "Giá sản phẩm",
+            ],
+            [
+                'type' => 'number',
+                'name' => "weight",
+                'class' => "",
+                'label' => "Khối lượng",
+            ],
+            [
+                'type' => 'status',
+                'name' => "price",
+                'class' => "",
+                'label' => "Trạng thái",
+            ],
 
-        /** Delte the main product image */
-        $this->deleteImage($product->thumb_image);
-
-        $product->delete();
-
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+        ];
     }
 }
