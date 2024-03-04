@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         //        $this->call(VendorShopProfileSeeder::class);
 
         $this->call(ProviderSeeder::class);
+
         //data product
         \DB::unprepared(
             file_get_contents(__DIR__ . '/seeder-product.sql')
@@ -79,6 +80,8 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        
+        $this->call(ProductSeeder::class);
 
         //         data all
         //        $this->call(ProductVariantSeeder::class);
