@@ -16,10 +16,10 @@ class OrderProduct extends Model
         'qty'
     ];
 
-//    public function products()
-//    {
-//        return $this->belongsTo(Product::class);
-//    }
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
     // Accessor for 'order_id'
     public function getOrderIdAttribute($value)
     {
@@ -36,47 +36,5 @@ class OrderProduct extends Model
     public function getProductIdAttribute($value)
     {
         return $value;
-    }
-
-    // Mutator for 'product_id'
-    public function setProductIdAttribute($value)
-    {
-        $this->attributes['product_id'] = $value;
-    }
-
-    // Accessor for 'product_name'
-    public function getProductNameAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'product_name'
-    public function setProductNameAttribute($value)
-    {
-        $this->attributes['product_name'] = $value;
-    }
-
-    // Accessor for 'product_price'
-    public function getProductPriceAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'product_price'
-    public function setProductPriceAttribute($value)
-    {
-        $this->attributes['product_price'] = $value;
-    }
-
-    // Accessor for 'qty'
-    public function getQtyAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'qty'
-    public function setQtyAttribute($value)
-    {
-        $this->attributes['qty'] = $value;
     }
 }

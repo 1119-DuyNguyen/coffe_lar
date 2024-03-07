@@ -1,3 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+@import "flatpickr/dist/flatpickr.min.css";
+
+.form-control[readonly] {
+    background-color: inherit;
+}
+
+.form-control {
+    border-color: #e4e6fc;
+}
+
+.power_grid.form-control[readonly] {
+    min-width: 250px;
+}

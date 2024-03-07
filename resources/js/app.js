@@ -1,7 +1,8 @@
 import './bootstrap';
-import 'laravel-datatables-vite';
-import Alpine from 'alpinejs';
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid';
+import flatpickr from "flatpickr";
+import {Vietnamese} from "flatpickr/dist/l10n/vn.js"
 
-window.Alpine = Alpine;
 
-Alpine.start();
+flatpickr.localize(Vietnamese);
+window.flatpickr = flatpickr;

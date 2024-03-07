@@ -88,7 +88,7 @@
             </style>
 
             @stack('head')
-
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
             <!-- /END GA -->
             {{--    vendor--}}
             {{--    @include('sweetalert::alert')--}}
