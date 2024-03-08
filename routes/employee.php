@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Receipt\ReceiptController;
 use App\Http\Controllers\Backend\User\EmployeeController;
 use App\Http\Controllers\Backend\Opinion\TypeOpinionController;
 use App\Http\Controllers\Backend\Contract\ContractController;
@@ -19,7 +20,8 @@ Route::resource('providers', ProviderController::class);
 Route::resource('contracts', ContractController::class);
 
 Route::resource('opinions', OpinionController::class);
-
+/** receipt */
+Route::resource('receipts', ReceiptController::class);
 // Route::get('/', 'NhanVienController@getview');
 
 

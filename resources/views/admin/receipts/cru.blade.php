@@ -2,7 +2,7 @@
 
 @section('content')
     <x-cru-resource
-        title="nhà cung cấp"
+        title="phiếu nhập hàng"
         :route="$routeCRU"
         :method="$method"
         :formElements="$formElements"
