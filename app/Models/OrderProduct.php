@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OrderProduct extends Model
 {
     use HasFactory;
-    protected $fillable=[
+
+    protected $table = "order_products";
+    protected $fillable = [
         'order_id',
         'product_id',
         'product_name',
@@ -20,6 +22,7 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
     // Accessor for 'order_id'
     public function getOrderIdAttribute($value)
     {

@@ -22,6 +22,7 @@ final class OrderTable extends PowerGridComponent
 {
     use WithExport;
 
+
     public function setUp(): array
     {
         //        $this->showCheckBox();
