@@ -83,8 +83,9 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        
+
         $this->call(ProductSeeder::class);
+        $this->call(OrderSeeder::class);
 
         //         data all
         //        $this->call(ProductVariantSeeder::class);
