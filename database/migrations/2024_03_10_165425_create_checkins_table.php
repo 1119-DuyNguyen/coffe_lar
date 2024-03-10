@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('date');
             $table->decimal('reality_times', 10, 2);
             $table->decimal('over_times', 10, 2);
+            $table->decimal('salary', 10, 2);
+            $table->decimal('total_salary', 10, 2);
             $table->timestamps();
         });
     }
