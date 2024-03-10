@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('opinions', function (Blueprint $table) {
+        Schema::create('checkins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('type_opinion_id')->constrained();
-            $table->string('topic')->nullable();
-            $table->text('content')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->date('date');
+            $table->decimal('reality_times', 10, 2);
+            $table->decimal('over_times', 10, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('opinions');
+        Schema::dropIfExists('checkins');
     }
 };
