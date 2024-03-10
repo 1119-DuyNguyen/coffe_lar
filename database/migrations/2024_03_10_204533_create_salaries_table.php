@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('checkin_id')->references('id')->on('checkins');
             $table->foreignId('contract_id')->references('id')->on('contracts');
-            $table->decimal('overtime_pay', 10, 2);   // Adjust decimal places as needed         // Adjust decimal places as needed
-            $table->decimal('deductions', 10, 2);    // Adjust decimal places as needed
-            $table->decimal('total_salary', 10, 2);  // Adjust decimal places as needed
+            $table->decimal('overtime_pay', 10, 2);
+            $table->decimal('deductions', 10, 2);
+            $table->decimal('total_salary', 10, 2);
             $table->timestamps();
         });
     }
