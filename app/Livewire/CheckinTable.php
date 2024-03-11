@@ -55,8 +55,8 @@ final class CheckinTable extends PowerGridComponent
             ->addColumn('date_formatted', fn (Checkin $model) => Carbon::parse($model->date)->format('d/m/Y'))
             ->addColumn('created_at_formatted', fn (Checkin $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.opinions.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='" . route('admin.opinions.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='" . route('admin.checkins.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='" . route('admin.checkins.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
             });
