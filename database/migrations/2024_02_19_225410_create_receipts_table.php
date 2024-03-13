@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('receipts', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->foreignId('provider_id');
+            $table->foreignId('provider_id')->constrained();
             $table->integer('total')->unsigned()->default(0);
             $table->timestamps();
         });

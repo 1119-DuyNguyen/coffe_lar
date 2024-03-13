@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->double('price')->unsigned();
 
             $table->boolean('status')->default(true);
-            $table->integer('quantity')->unsigned()->default(0);
+            $table->integer('stock')->unsigned()->default(0);
             $table->timestamps();
         });
     }

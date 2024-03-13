@@ -40,10 +40,16 @@ class ProductObserver
         //
     }
 
+    private function shouldUpdateSlug(Product $product, $commingSlug): bool
+    {
+        return $product->isDirty('slug') && !($product->slug === $commingSlug && $product->slug != null);
+    }
+
     public function creating(Product $product)
     {
+        $commingSlug = $this->request->input('slug');
 //        dd($product->slug === $this->request->input('slug') && $product->slug != null);
-        if (!($product->slug === $this->request->input('slug') && $product->slug != null)) {
+        if ($this->shouldUpdateSlug($product, $commingSlug)) {
 //            dd(Product::where('slug', \Str::slug($product->name, '-'))->exists());
             $this->generateSlug($product);
         }
@@ -59,7 +65,8 @@ class ProductObserver
 
     public function updating(Product $product)
     {
-        if (!($product->slug === $this->request->input('slug'))) {
+        $commingSlug = $this->request->input('slug');
+        if ($this->shouldUpdateSlug($product, $commingSlug)) {
             // check exists
             // then generate slug
             // đã exists thả lỗi

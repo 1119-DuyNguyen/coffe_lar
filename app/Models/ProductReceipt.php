@@ -2,46 +2,24 @@
 
 namespace App\Models;
 
-use App\Observers\ProductObserver;
+use App\Observers\ReceiptObserver;
+use App\Observers\RoleObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Str;
 
-class Product extends Model
+class ProductReceipt extends Model
 {
     use HasFactory;
 
+    public $table = "product_receipt";
     protected $fillable = [
-        "thumb_image",
-        "name",
-        "slug",
-        "category_id",
-        "description",
-        "content",
-        "price",
-        "status",
-        "weight",
-        "stock"
+        'receipt_id',
+        'product_id',
+        'quantity'
     ];
-
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function receipts(): BelongsToMany
-    {
-        return $this->belongsToMany(Receipt::class);
-    }
-
-    public function ReceiptProduct(): HasMany
-    {
-        return $this->hasMany(ReceiptProduct::class);
-    }
 
     protected static function boot()
     {
@@ -51,8 +29,21 @@ class Product extends Model
 
         // note I am using static::observe(...) instead of Config::observe(...)
         // this way the child classes auto-register the observer to their own class
-        static::observe(ProductObserver::class);
+//        static::observe(ReceiptObserver::class);
     }
 
+//    public function products(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Product::class);
+//    }
+    public function products(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function receipts(): BelongsTo
+    {
+        return $this->belongsTo(Receipt::class);
+    }
 
 }
