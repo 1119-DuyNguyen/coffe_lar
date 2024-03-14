@@ -112,4 +112,9 @@ class ProductController extends CRUDController
 
         ];
     }
+
+    public function getStatistic()
+    {
+        return view($this->getNameRouteCRU() . '.statistic');
+    }
 }
