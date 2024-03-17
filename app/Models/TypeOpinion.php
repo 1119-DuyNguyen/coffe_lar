@@ -14,7 +14,7 @@ class TypeOpinion extends Model
         'name'
     ];
 
-    public function opinion()
+    public function opinions()
     {
         return $this->hasMany(Opinion::class);
     }

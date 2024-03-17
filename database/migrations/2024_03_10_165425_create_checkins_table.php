@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('contract_id')->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->decimal('reality_times', 10);
-            $table->decimal('over_times', 10);
-            $table->decimal('salary', 20);
-            $table->decimal('total_salary', 20);
+            $table->integer('auth_day_off',)->default(0);
+            $table->integer('unauth_day_off')->default(0);
+            $table->integer('reality_times')->default(0);
+            $table->integer('over_times');
+            $table->integer('salary')->default(0);
+            $table->integer('total_salary')->default(0);
             $table->timestamps();
         });
     }

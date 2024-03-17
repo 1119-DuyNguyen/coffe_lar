@@ -15,6 +15,7 @@ use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use App\Models\User;
 
 final class CheckinTable extends PowerGridComponent
 {
@@ -35,7 +36,7 @@ final class CheckinTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Checkin::query();
+        return Checkin::query()->with('contract.user');
     }
 
     public function relationSearch(): array
@@ -47,10 +48,10 @@ final class CheckinTable extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('username', fn ($model) => $model->contract->name)
+            ->addColumn('username', fn ($model) => $model->contract->user->name)
             ->addColumn('reality_times')
             ->addColumn('over_times')
-            ->addColumn('salary')
+            ->addColumn('salary', fn ($model) => $model->contract->salary)
             ->addColumn('total_salary')
             ->addColumn('date_formatted', fn (Checkin $model) => Carbon::parse($model->date)->format('d/m/Y'))
             ->addColumn('created_at_formatted', fn (Checkin $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
@@ -92,13 +93,16 @@ final class CheckinTable extends PowerGridComponent
         ];
     }
 
-    // public function filters(): array
-    // {
-    //     return [
-    //         Filter::datepicker('date'),
-    //         Filter::datetimepicker('created_at'),
-    //     ];
-    // }
+    public function filters(): array
+    {
+        return [
+            Filter::datepicker('date'),
+            Filter::select('username', 'user_id')
+                ->dataSource(User::all())
+                ->optionValue('id')
+                ->optionLabel('name'),
+        ];
+    }
 
     // #[\Livewire\Attributes\On('edit')]
     // public function edit($rowId): void

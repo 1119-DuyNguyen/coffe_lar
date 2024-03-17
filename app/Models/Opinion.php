@@ -12,13 +12,14 @@ class Opinion extends Model
 
     protected $fillable = [
         'type_opinion_id',
+        'user_id',
         'topic',
         'content',
     ];
 
     public function typeOpinion(): belongsTo
     {
-        return $this->belongsTo(Opinion::class);
+        return $this->belongsTo(TypeOpinion::class);
     }
 
     public function getTopicAttribute($value)

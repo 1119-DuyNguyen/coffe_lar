@@ -17,13 +17,13 @@ class TypeOpinionSeeder extends Seeder
     {
         $seedData = [
             [
-                'name' => 'Đề xuất tăng ca',
+                'name' => 'Nghỉ việc',
             ],
             [
-                'name' => 'Xin phép nghỉ việc',
+                'name' => 'Xin nghỉ phép',
             ],
             [
-                'name' => 'Đề xuất kỉ luật',
+                'name' => 'Nghỉ ốm đau thai sản',
             ],
         ];
         foreach ($seedData as $data) {

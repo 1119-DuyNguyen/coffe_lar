@@ -7,7 +7,7 @@ use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\OpinionRequest;
 use App\Models\Opinion;
 use App\Models\TypeOpinion;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OpinionController extends CRUDController
@@ -46,6 +46,18 @@ class OpinionController extends CRUDController
                 'class' => "",
                 'label' => "Loại ý kiến",
                 'optionValues' => TypeOpinion::all()->toArray(),
+                'optionKey' => 'id',
+                'optionLabel' => 'name'
+            ],
+            [
+                'type' => 'select',
+                'name' => "user_id",
+                'value' => function ($resource) {
+                    return $resource->user_id;
+                },
+                'class' => "",
+                'label' => "Nhân viên",
+                'optionValues' => User::all()->toArray(),
                 'optionKey' => 'id',
                 'optionLabel' => 'name'
             ],

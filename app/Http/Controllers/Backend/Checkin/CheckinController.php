@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\CheckinRequest;
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\Checkin;
+use App\Models\User;
 
 class CheckinController extends CRUDController
 {
@@ -42,7 +43,7 @@ class CheckinController extends CRUDController
                     return $resource->contract_id;
                 },
                 'class' => "",
-                'label' => "Loại ý kiến",
+                'label' => "Nhân viên",
                 'optionValues' => Contract::all()->toArray(),
                 'optionKey' => 'id',
                 'optionLabel' => 'name'
@@ -54,28 +55,22 @@ class CheckinController extends CRUDController
                 'label' => "Ngày chấm công",
             ],
             [
-                'type' => 'date',
-                'name' => "reality_times",
+                'type' => 'number',
+                'name' => "auth_day_off",
                 'class' => "",
-                'label' => "Ngày công",
+                'label' => "Ngày nghỉ có phép",
             ],
             [
-                'type' => 'date',
+                'type' => 'number',
+                'name' => "unauth_day_off",
+                'class' => "",
+                'label' => "Ngày nghỉ không phép",
+            ],
+            [
+                'type' => 'number',
                 'name' => "over_times",
                 'class' => "",
                 'label' => "Ngày tăng ca",
-            ],
-            [
-                'type' => 'number',
-                'name' => "salary",
-                'class' => "",
-                'label' => "Mức lương cơ bản",
-            ],
-            [
-                'type' => 'number',
-                'name' => "total_salary",
-                'class' => "",
-                'label' => "Lượng thực lãnh",
             ],
         ];
     }
