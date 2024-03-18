@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('checkins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('contract_id')->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->decimal('reality_times', 10, 2);
-            $table->decimal('over_times', 10, 2);
-            $table->decimal('salary', 10, 2);
-            $table->decimal('total_salary', 10, 2);
+            $table->integer('auth_day_off',)->default(0);
+            $table->integer('unauth_day_off')->default(0);
+            $table->integer('reality_times')->default(0);
+            $table->integer('over_times');
+            $table->integer('salary')->default(0);
+            $table->integer('total_salary')->default(0);
             $table->timestamps();
         });
     }

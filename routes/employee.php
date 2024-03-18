@@ -5,11 +5,13 @@ use App\Http\Controllers\Backend\User\EmployeeController;
 use App\Http\Controllers\Backend\Opinion\TypeOpinionController;
 use App\Http\Controllers\Backend\Contract\ContractController;
 use App\Http\Controllers\Backend\Opinion\OpinionController;
+use App\Http\Controllers\Backend\Checkin\CheckinController;
 
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
-use App\Models\Opinion;
+
+
 
 Route::resource('employees', EmployeeController::class);
 
@@ -20,8 +22,13 @@ Route::resource('providers', ProviderController::class);
 Route::resource('contracts', ContractController::class);
 
 Route::resource('opinions', OpinionController::class);
+
 /** receipt */
 Route::resource('receipts', ReceiptController::class);
+
+
+Route::resource('checkins', CheckinController::class);
+
 // Route::get('/', 'NhanVienController@getview');
 
 

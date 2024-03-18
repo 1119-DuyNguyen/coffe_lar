@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeOpinionSeeder::class);
         $this->call(ContractSeeder::class);
         $this->call(OpinionSeeder::class);
-
+        $this->call(CheckinSeeder::class);
         //        $this->call(AdminProfileSeeder::class);
         //        $this->call(VendorShopProfileSeeder::class);
 
