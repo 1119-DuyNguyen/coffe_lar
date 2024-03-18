@@ -27,11 +27,7 @@ class ReceiptObserver
         $productList = $this->request->input('products');
         $total = $receipt->total;
         $receipt_id = $receipt->id;
-//        dd($total);
-//        $provider_id = $receipt_id->provider();
-//        dd($provider_id);
-//        $quantity = ProductReceipt::find($receipt_id);
-//        dd($quantity);
+
         $receiptProduct = ProductReceipt::create([
             'receipt_id' => $receipt_id,
             'product_id' => $productList,
@@ -44,55 +40,7 @@ class ReceiptObserver
 //        dd($product_stock);
 
         $product->save();
-
-        // Product ->find
-        // stock += quantiy
-        //product->save(); update khacs gi save
-        //
-        //
-//        dd($quantity);
-//        dd($productList);
-//        if (is_array($productList)) {
-//            foreach ($productList as $key) {
-//                $receipt->products()->attach($key);
-//            }
-//            $receipt->products()->sync($productList);
-        //->total+=quantity
-        // Product
-//        }
     }
 
 
-    public function deleting(Receipt $receipt)
-    {
-//        if ($role->id === 1 || $role->id === 2) {
-//            throw ValidationException::withMessages([
-//                'message' => 'Không đủ thẩm quyền để xoá'
-//            ]);
-//        }
-    }
-
-    /**
-     * Handle the Role "deleted" event.
-     */
-    public function deleted(Receipt $receipt): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Role "restored" event.
-     */
-    public function restored(Receipt $receipt): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Role "force deleted" event.
-     */
-    public function forceDeleted(Receipt $receipt): void
-    {
-        //
-    }
 }

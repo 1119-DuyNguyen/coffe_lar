@@ -48,14 +48,6 @@ class ReceiptProductSeeder extends Seeder
 //        }
         //den day
 
-//        $this->createRolePermission($superAdminRole, 'admin.setting.index');
-//        $this->createRolePermission($superAdminRole, 'admin.general-setting.update');
-//        $this->createRolePermission($superAdminRole, 'admin.logo-setting.update');
-//        $this->createRolePermission($superAdminRole, 'admin.dashboard.index');
-//        $arrayUserPermission=['dashboard.index','order.index','order.show','cod.payment'];
-//        foreach ($arrayUserPermission as $per){
-//            $perObject=$this->createRolePermission($superAdminRole,'user.'.$per );
-//            $userRole->permissions()->attach($perObject->id);
-//        }
+
     }
 }

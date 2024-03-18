@@ -43,7 +43,7 @@ class CheckinController extends CRUDController
                     return $resource->contract_id;
                 },
                 'class' => "",
-                'label' => "Nhân viên",
+                'label' => "Hợp đồng",
                 'optionValues' => Contract::all()->toArray(),
                 'optionKey' => 'id',
                 'optionLabel' => 'name'

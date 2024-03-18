@@ -6,6 +6,7 @@ use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\ReceiptRequest;
 use App\Models\Permission;
 use App\Models\Product;
+use App\Models\ProductReceipt;
 use App\Models\Provider;
 use App\Models\Receipt;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +16,11 @@ class ReceiptController extends CRUDController
     //
     protected function CRUDViewPath(): string
     {
-        // TODO: Implement CRUDViewPath() method.
         return "admin.receipts";
     }
 
     protected function model(): string
     {
-        // TODO: Implement model() method.
         return Receipt::class;
     }
 
@@ -32,7 +31,6 @@ class ReceiptController extends CRUDController
 
     protected function getFormElements(): array
     {
-        // TODO: Implement getFormElements() method.
         return [
             [
                 'type' => 'text',
@@ -44,7 +42,7 @@ class ReceiptController extends CRUDController
                 'type' => 'select',
                 'name' => "products",
                 'value' => function ($receipt) {
-                    return DB::table('product_receipt')->where('receipt_id', $receipt->id)->pluck(
+                    return ProductReceipt::where('receipt_id', $receipt->id)->pluck(
                         'product_id'
                     )->toArray();
                 },
@@ -65,9 +63,7 @@ class ReceiptController extends CRUDController
                 'type' => 'select',
                 'name' => "provider_id",
                 'value' => function ($receipt) {
-                    return DB::table('receipts')->pluck(
-                        'provider_id'
-                    )->toArray();
+                    return $receipt->provider_id;
                 },
                 'class' => "",
                 'label' => "Nhà cung cấp",

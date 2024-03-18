@@ -38,7 +38,7 @@ class Product extends Model
         return $this->belongsToMany(Receipt::class);
     }
 
-    public function ReceiptProduct(): HasMany
+    public function receiptProduct(): HasMany
     {
         return $this->hasMany(ReceiptProduct::class);
     }
