@@ -20,9 +20,10 @@ Route::post('profile/update/password', [ProfileController::class, 'updatePasswor
 //    Route::resource('product.product-variant', ProductVariantController::class)->only(['index', 'create', 'edit']);
 //    Route::resource('product.product-variant.product-variant-item', ProductVariantItemController::class)->only(['index', 'create', 'edit']);
 //});
-Route::middleware('can:admin.product')->group(function () {
+Route::middleware('can:admin.products')->group(function () {
     /** Products routes */
     Route::put('products/change-status', [ProductController::class, 'changeStatus'])->name('products.change-status');
+    Route::get('products/statistic', [ProductController::class, 'getStatistic'])->name('products.statistic');
 
     //    /** Products variant route */
     //    Route::put('product-variant/change-status', [VariantController::class, 'changeStatus'])->name('product-variant.change-status');

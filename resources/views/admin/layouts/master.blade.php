@@ -88,7 +88,8 @@
             </style>
 
             @stack('head')
-
+            @filamentStyles
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
             <!-- /END GA -->
             {{--    vendor--}}
             {{--    @include('sweetalert::alert')--}}
@@ -144,6 +145,7 @@
         <script src="{{asset("backend/assets/js/scripts.js")}}"></script>
         <script src="{{asset("backend/assets/js/custom.js")}}"></script>
 
+        @filamentScripts
         {{--vendor--}}
         @include('setup-js')
 
