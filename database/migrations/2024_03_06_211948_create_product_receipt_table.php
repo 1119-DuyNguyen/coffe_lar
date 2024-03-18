@@ -15,6 +15,9 @@ return new class extends Migration {
             $table->unique(['receipt_id', 'product_id']);
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('receipt_id')->constrained()->cascadeOnDelete();
+
+            $table->integer('quantity')->unsigned();
+
             $table->timestamps();
         });
     }
