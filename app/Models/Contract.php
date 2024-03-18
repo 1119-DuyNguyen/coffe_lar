@@ -25,7 +25,10 @@ class Contract extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function checkins()
+    {
+        return $this->hasMany(Checkin::class);
+    }
     public function getId_ContractAttribute($value)
     {
         return $value;
