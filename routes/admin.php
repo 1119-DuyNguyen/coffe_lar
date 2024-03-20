@@ -40,7 +40,9 @@ Route::middleware('hasPermission')->group(function () {
     //    Route::resource('slider', SliderController::class);
 
     /** Category Route */
-    Route::put('categories/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
+    Route::put('categories/change-status', [CategoryController::class, 'changeStatus'])->name(
+        'categories.change-status'
+    );
     Route::resource('categories', CategoryController::class);
 
 

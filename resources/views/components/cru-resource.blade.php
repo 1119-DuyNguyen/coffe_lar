@@ -37,7 +37,7 @@
                                     <x-render-form :formElement="$formElement"></x-render-form>
 
                                 @endforeach
-                                <button type="submmit" class="btn btn-primary">{{$textSubmitData}}</button>
+                                <button type="submit" class="btn btn-primary">{{$textSubmitData}}</button>
                             </form>
                         @else
                             Biểu mẫu chưa khởi tạo. Hãy nhấn F5

@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .form-control[readonly] {
     background-color: inherit;
 }
@@ -15,3 +16,9 @@
 .power_grid.form-control[readonly] {
     min-width: 250px;
 }
+
+.btn-primary, .btn-primary.disabled {
+
+    background-color: #6777ef;
+}
+

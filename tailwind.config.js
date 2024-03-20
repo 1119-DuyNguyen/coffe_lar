@@ -12,6 +12,7 @@ export default {
         './app/Filament/**/*.php',
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
+
     ],
 
     theme: {
@@ -23,4 +24,8 @@ export default {
     },
 
     plugins: [forms],
+    // prefix: 'tw-',
+    // corePlugins: {
+    //     preflight: false,
+    // }
 };
