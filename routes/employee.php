@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
 
 
-
 Route::resource('employees', EmployeeController::class);
 
 Route::resource('type-opinions', TypeOpinionController::class);
@@ -24,7 +23,7 @@ Route::resource('contracts', ContractController::class);
 Route::resource('opinions', OpinionController::class);
 
 /** receipt */
-Route::resource('receipts', ReceiptController::class);
+Route::resource('receipts', ReceiptController::class)->only(['index', 'create', 'store']);
 
 
 Route::resource('checkins', CheckinController::class);

@@ -11,43 +11,16 @@ use Illuminate\Database\Seeder;
 
 class ReceiptProductSeeder extends Seeder
 {
-    private function createReceiptProduct(Receipt $receipt, $per)
-    {
-        $receipt->products()->attach($per);
-    }
+
 
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-//        $seedData = [
-//            [
-//                'name' => 'hayem e332',
-//                'provider_name' => 'hay em oi',
-//
-//            ],
-//            [
-//                'name' => 'hayem4444',
-//                'provider_name' => 'hay em oi444444',
-//            ],
-//
-//        ];
-
-        //////tu day, đóng lại để fix bug
-//        $seedDataPhieuNhap = Receipt::create(['name' => 'PhieuNhap1', 'provider_id' => 'vĩnh hão']);
-//        $productIds = Product::pluck('id');
-//        foreach ($productIds as $per) {
-//            $this->createReceiptProduct($seedDataPhieuNhap, $per);
-//
-////            $perIndex = $this->createRolePermission($superAdminRole, $per . '.index');
-////            $perStore = $this->createRolePermission($superAdminRole, $per . '.store');
-////            $perShow = $this->createRolePermission($superAdminRole, $per . '.show');
-////            $perUpdate = $this->createRolePermission($superAdminRole, $per . '.update');
-////            $perDel = $this->createRolePermission($superAdminRole, $per . '.destroy');
-//        }
-        //den day
-
-
+        $seedDataPhieuNhap = Receipt::create([
+            'name' => 'Nhập sản phẩm 1',
+            'provider_id' => '1',
+        ]);
     }
 }

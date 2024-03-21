@@ -18,28 +18,51 @@ class ReceiptObserver
     ) {
     }
 
-    public function created(Receipt $receipt): void
+    private function getData()
     {
+        $isSeed = config('services.is_seed_data');
+        if ($isSeed) {
+            return [
+                ['product_id' => 1, 'quantity' => 4],
+                ['product_id' => 2, 'quantity' => 4]
+            ];
+        }
+        return $this->request->input('product_receipt');
+    }
+
+    public function saving(Receipt $receipt): void
+    {
+        $productReceiptInput = $this->getData();
+        if (is_array($productReceiptInput)) {
+            $total = 0;
+            foreach ($productReceiptInput as $input) {
+                $total += $input['quantity'];
+            }
+            if ($receipt->total != $total) {
+                ValidationException::withMessages(['total' => 'Số lượng sản phẩm nhập không tương ứng']);
+            }
+        }
+        ValidationException::withMessages(['products' => 'Bạn chưa nhập sản phẩm vào phiếu nhập']);
     }
 
     public function saved(Receipt $receipt): void
     {
-        $productList = $this->request->input('products');
-        $total = $receipt->total;
-        $receipt_id = $receipt->id;
+        $productReceiptInput = $this->getData();
+        if (is_array($productReceiptInput)) {
+            $productList = Product::whereIn('id', array_column($productReceiptInput, 'product_id'))->get();
 
-        $receiptProduct = ProductReceipt::create([
-            'receipt_id' => $receipt_id,
-            'product_id' => $productList,
-            'quantity' => $total,
-        ]);
-//        dd($receiptProduct);
-        $product_id = $receiptProduct->product_id;
-        $product = Product::find($product_id);
-        $product->stock += $total;
-//        dd($product_stock);
-
-        $product->save();
+            foreach ($productReceiptInput as $input) {
+                $receiptProduct = ProductReceipt::create([
+                    'receipt_id' => $receipt->id,
+                    'product_id' => $input['product_id'],
+                    'quantity' => $input['quantity'],
+                ]);
+                $product = $productList->where('id', $receiptProduct->product_id)->first();
+                $product->stock += $receiptProduct->quantity;
+                $product->save();
+            }
+        }
+        ValidationException::withMessages(['products' => 'Bạn chưa nhập sản phẩm vào phiếu nhập']);
     }
 
 

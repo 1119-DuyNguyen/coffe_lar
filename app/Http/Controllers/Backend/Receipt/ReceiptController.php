@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Receipt;
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\ReceiptRequest;
 use App\Models\Permission;
@@ -11,7 +12,7 @@ use App\Models\Provider;
 use App\Models\Receipt;
 use Illuminate\Support\Facades\DB;
 
-class ReceiptController extends CRUDController
+class ReceiptController extends Controller
 {
     //
     protected function CRUDViewPath(): string
@@ -27,6 +28,31 @@ class ReceiptController extends CRUDController
     protected function getNameRouteCRU(): string
     {
         return "admin.receipts";
+    }
+
+    /**    Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view($this->CRUDViewPath() . '.index');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $resource = $this->show($id);
+
+        return view($this->CRUDViewPath() . '.edit', compact('resource'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view($this->CRUDViewPath() . '.create');
     }
 
     protected function getFormElements(): array

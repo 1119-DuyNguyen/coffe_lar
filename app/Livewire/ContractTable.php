@@ -22,7 +22,6 @@ final class ContractTable extends PowerGridComponent
 
     public function setUp(): array
     {
-
         return [
             Exportable::make('export')
                 ->striped()
@@ -48,26 +47,33 @@ final class ContractTable extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('id_contract')
-
+            ->addColumn('code')
             /** Example of custom column using a closure **/
-            ->addColumn('id_contract_lower', fn (Contract $model) => strtolower(e($model->id_contract)))
-
+            ->addColumn('id_contract_lower', fn(Contract $model) => strtolower(e($model->id_contract)))
             ->addColumn('name')
-            ->addColumn('user_name', fn ($model) => $model->user->name)
+            ->addColumn('user_name', fn($model) => $model->user->name)
             ->addColumn('salary')
             ->addColumn('allowance')
-            ->addColumn('end_date_formatted', fn (Contract $model) => Carbon::parse($model->end_date)->format('d/m/Y'))
+            ->addColumn('end_date_formatted', fn(Contract $model) => Carbon::parse($model->end_date)->format('d/m/Y'))
             ->addColumn('status', function ($model) {
                 return '<label class="custom-switch mt-2">
                         <input type="checkbox" ' . ($model->status ? "checked" : '') . ' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
                         <span class="custom-switch-indicator"></span>
                     </label>';
             })
-            ->addColumn('created_at_formatted', fn (Contract $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn(
+                'created_at_formatted',
+                fn(Contract $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+            )
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.contracts.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='" . route('admin.contracts.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='" . route(
+                        'admin.contracts.edit',
+                        $query->id
+                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='" . route(
+                        'admin.contracts.destroy',
+                        $query->id
+                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
             });
@@ -79,7 +85,7 @@ final class ContractTable extends PowerGridComponent
             Column::make('Id', 'id')
                 ->sortable()
                 ->searchable(),
-            Column::make('Mã hợp đồng', 'id_contract'),
+            Column::make('Mã hợp đồng', 'code'),
 
             Column::make('Loại hợp đồng', 'name')
                 ->sortable()

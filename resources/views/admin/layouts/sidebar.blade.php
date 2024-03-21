@@ -23,8 +23,9 @@
             $addLanguage="Khởi tạo";
         @endphp
         @foreach([
-        ['name'=>'Statistic','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index'
+        ['name'=>'Trang chủ','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index'
         ,'title'=>'Dashboard','child'=>[]],
+
         ['title'=>'Nhân sự'],
         ['name'=>'Tài khoản','icon'=>'<i class="fas fa-user"></i>','child'=>
         [
@@ -51,10 +52,6 @@
 
 
         ['name'=>'Chấm công','routeName'=>'admin.checkins.index'],
-
-
-
-
         ]
         ],
         ['title'=>'Thương mại'],
@@ -80,15 +77,18 @@
         ['name'=>'Nhập hàng','routeName'=>'admin.receipts.index'],
         ['name'=>'Đơn đặt hàng','routeName'=>'admin.orders.index' ],
         ['name'=>'Nhà cung cấp','routeName'=>'admin.providers.index'],
-        ]
+        ['name'=>'Thống kê sản phẩm','routeName'=>'admin.receipts.index'],
 
         ]
-
-        ,
-
+        ]
 
 
-        ] as $nav
+
+
+
+
+        ]
+         as $nav
         )
 
             {{-- <li><a class="nav-link " --}} {{-- href="{{ route('admin.subscribers.index') }}"><i

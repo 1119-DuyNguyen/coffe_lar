@@ -22,7 +22,7 @@ abstract class CRUDController extends Controller
      * cru= create, update, read
      * @return string Đường dẫn tới view của cru resource
      *
-     * @example folder views/a/b/cru.blade.php => return a.b
+     * @example folder views/a/b/create.blade.php => return a.b
      */
     abstract protected function CRUDViewPath(): string;
 

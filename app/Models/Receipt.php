@@ -23,12 +23,7 @@ class Receipt extends Model
 
     protected static function boot()
     {
-        // you MUST call the parent boot method
-        // in this case the \Illuminate\Database\Eloquent\Model
         parent::boot();
-
-        // note I am using static::observe(...) instead of Config::observe(...)
-        // this way the child classes auto-register the observer to their own class
         static::observe(ReceiptObserver::class);
     }
 
