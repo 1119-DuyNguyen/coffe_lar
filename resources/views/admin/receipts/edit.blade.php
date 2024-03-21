@@ -1,15 +1,30 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    {{--    <x-cru-resource--}}
+    <section class="section">
+        <div class="section-header">
+            <h1>Phiếu nhập</h1>
+        </div>
 
-    {{--        title="phiếu nhập hàng"--}}
+        <div class="section-body">
 
-    {{--        :route="$routeCRU"--}}
-    {{--        :method="$method"--}}
-    {{--        :formElements="$formElements"--}}
-    {{--    ></x-cru-resource>--}}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Chỉnh sửa phiếu nhập</h4>
 
-    @livewire('import-receipt')
+                        </div>
+                        <div class="card-body">
+                            
+                            @livewire('import-receipt',['receipt' => $receipt])
 
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 @endsection

@@ -23,12 +23,8 @@ final class EmployeeTable extends PowerGridComponent
 
     public function setUp(): array
     {
-        //        $this->showCheckBox();
-
         return [
-//            Exportable::make('export')
-//                ->striped()
-//                ->type(Exportable::TYPE_XLS),
+
             Header::make()
                 ->showSearchInput()
                 ->withoutLoading(),
@@ -56,15 +52,18 @@ final class EmployeeTable extends PowerGridComponent
             ->addColumn('role', fn($model) => $model->role->name)
             ->addColumn('status', function ($model) {
                 if ($model->id != 1) {
-
                     $html = '
                     <select name="status" data-id="' . $model->id . '" class="form-select  form-control change-status w-auto">';
                     $statusArray = EmployeeStatus::getKeys();
                     foreach ($statusArray as $key) {
                         if ($model->status == EmployeeStatus::getValue($key)) {
-                            $html .= '<option value=' . EmployeeStatus::getValue($key) . ' selected>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
+                            $html .= '<option value=' . EmployeeStatus::getValue(
+                                    $key
+                                ) . ' selected>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
                         } else {
-                            $html .= '<option value=' . EmployeeStatus::getValue($key) . '>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
+                            $html .= '<option value=' . EmployeeStatus::getValue(
+                                    $key
+                                ) . '>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
                         }
                     }
 
@@ -72,13 +71,18 @@ final class EmployeeTable extends PowerGridComponent
 
                     return $html;
                 }
-
             })
             ->addColumn('created_at_formatted', fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y'))
             ->addColumn('action', function ($query) {
                 if ($query->id != 1) {
-                    $editBtn = "<a href='" . route('admin.employees.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                    $deleteBtn = "<a href='" . route('admin.employees.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                    $editBtn = "<a href='" . route(
+                            'admin.employees.edit',
+                            $query->id
+                        ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                    $deleteBtn = "<a href='" . route(
+                            'admin.employees.destroy',
+                            $query->id
+                        ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                     return $editBtn . $deleteBtn;
                 }

@@ -40,11 +40,9 @@ class ReceiptController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Receipt $receipt)
     {
-        $resource = $this->show($id);
-
-        return view($this->CRUDViewPath() . '.edit', compact('resource'));
+        return view($this->CRUDViewPath() . '.edit', compact('receipt'));
     }
 
     /**

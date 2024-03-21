@@ -18,9 +18,12 @@ class ReceiptProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $seedDataPhieuNhap = Receipt::create([
-            'name' => 'Nhập sản phẩm 1',
-            'provider_id' => '1',
-        ]);
+        for ($i = 0; $i < 10; ++$i) {
+            $seedDataPhieuNhap = Receipt::create([
+                'name' => 'Nhập sản phẩm ' . $i + 1,
+                'provider_id' => '1',
+                'total' => 8
+            ]);
+        }
     }
 }

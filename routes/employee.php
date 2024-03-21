@@ -23,7 +23,7 @@ Route::resource('contracts', ContractController::class);
 Route::resource('opinions', OpinionController::class);
 
 /** receipt */
-Route::resource('receipts', ReceiptController::class)->only(['index', 'create', 'store']);
+Route::resource('receipts', ReceiptController::class);
 
 
 Route::resource('checkins', CheckinController::class);

@@ -1,16 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    {{--    <x-cru-resource--}}
-
-    {{--        title="phiếu nhập hàng"--}}
-
-    {{--        :route="$routeCRU"--}}
-    {{--        :method="$method"--}}
-    {{--        :formElements="$formElements"--}}
-    {{--    ></x-cru-resource>--}}
-
-    <!-- Main Content -->
     <section class="section">
         <div class="section-header">
             <h1>Phiếu nhập</h1>
@@ -28,22 +18,6 @@
                         <div class="card-body">
                             @livewire('import-receipt')
 
-                            {{--                            <form action="{{route('admin.receipts.store')}}" method="POST">--}}
-                            {{--                                @csrf--}}
-
-                            {{--                                <div class="form-group">--}}
-                            {{--                                    <label>Tên</label>--}}
-                            {{--                                    <input type="text" class="form-control" name="name" value="">--}}
-                            {{--                                </div>--}}
-                            {{--                                <div class="form-group">--}}
-                            {{--                                    <label for="inputState">Trạng thái</label>--}}
-                            {{--                                    <select id="inputState" class="form-control" name="status">--}}
-                            {{--                                        <option value="1">Bật</option>--}}
-                            {{--                                        <option value="0">Tắt</option>--}}
-                            {{--                                    </select>--}}
-                            {{--                                </div>--}}
-                            {{--                                <button type="submit" class="btn btn-primary">Khởi tạo</button>--}}
-                            {{--                            </form>--}}
                         </div>
 
                     </div>

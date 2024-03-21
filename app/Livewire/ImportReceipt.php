@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use App\Models\ProductReceipt;
 use App\Models\Provider;
 use App\Models\Receipt;
 use Filament\Forms\Components\Section;
@@ -17,7 +18,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
-use Filament\Actions\Action;
+use Filament\Forms\Components\Actions\Action;
 
 class ImportReceipt extends Component implements HasForms
 {
@@ -26,17 +27,25 @@ class ImportReceipt extends Component implements HasForms
     public ?array $data = [];
     public Receipt $receipt;
 
-    public function mount(Receipt $receipt): void
+    public function mount(): void
     {
-        $this->receipt = $receipt;
-        $this->form->fill();
+        if (isset($this->receipt)) {
+            $data = array_merge($this->receipt->attributesToArray(), [
+                'product_receipt' =>
+                    $this->receipt->productReceipt->toArray()
+//                    [
+//                        ['product_id' => 1, 'quantity' => 4],
+//                        ['product_id' => 2, 'quantity' => 4]
+//                    ]
+            ]);
+            $this->form->fill($data);
+        } else {
+            $this->form->fill();
+        }
     }
 
     public function form(Form $form): Form
     {
-        $products = Product::get();
-        $receipt = $this->receipt;
-
         return $form
             ->schema([
                 Section::make()
@@ -61,16 +70,7 @@ class ImportReceipt extends Component implements HasForms
                                 // Two fields in each row: product and quantity
                                 Select::make('product_id')
                                     ->relationship('products', 'name')
-//                                    ->options(
-//                                        $products->mapWithKeys(function (Product $product) {
-//                                            return [
-//                                                $product->id => sprintf(
-//                                                    '%s',
-//                                                    $product->name,
-//                                                )
-//                                            ];
-//                                        })
-//                                    )
+
                                     // Disable options that are already selected in other rows
                                     //https://filamentphp.com/docs/3.x/forms/fields/repeater#using-get-to-access-parent-field-values
                                     ->disableOptionWhen(function ($value, $state, Get $get) {
@@ -93,23 +93,36 @@ class ImportReceipt extends Component implements HasForms
                             ->afterStateUpdated(function (Get $get, Set $set) {
                                 self::updateTotals($get, $set);
                             })
+
                             // After deleting a row, we need to update the totals
                             ->deleteAction(
-                                fn($action) => $action->after(fn(Get $get, Set $set) => self::updateTotals($get, $set)),
+                                fn(Action $action) => $action->after(
+                                    fn(Get $get, Set $set) => self::updateTotals($get, $set)
+                                ),
                             )
                             // Disable reordering
                             ->reorderable(false)
                             ->columns(2)
-                            ->model($receipt)
+                            ->model(Receipt::class)
+                            ->defaultItems(1)
                     ])
                 ,
 
 
             ])
             ->statePath('data')
-            ->model($this->receipt);
+            ->model(Receipt::class);
     }
 
+    public function edit(Request $request): void
+    {
+        $request->merge($this->form->getState());
+        $this->receipt->update($request->all());
+        Notification::make()
+            ->title('Cập nhập phiếu nhập thành công')
+            ->success()
+            ->send();
+    }
 
     public function create(Request $request): void
     {
@@ -118,10 +131,8 @@ class ImportReceipt extends Component implements HasForms
         Receipt::create($request->all());
         Notification::make()
             ->title('Lưu phiếu nhập thành công')
-            ->warning()
-            ->duration(1000)
+            ->success()
             ->send();
-
         $this->form->fill();
     }
 
@@ -134,21 +145,17 @@ class ImportReceipt extends Component implements HasForms
     public static function updateTotals(Get $get, Set $set): void
     {
         // Retrieve all selected products and remove empty rows
-//        dd($get('product_receipt'));
 
         $selectedProducts = collect($get('product_receipt'))->filter(
             fn($item) => !empty($item['product_id']) && !empty($item['quantity'])
         );
 
-        // Retrieve prices for all selected products
 
         // Calculate subtotal based on the selected products and quantities
         $subtotal = $selectedProducts->reduce(function ($subtotal, $product) {
             return $subtotal + $product['quantity'];
         }, 0);
 
-        // Update the state with the new values
-//        $set('subtotal', number_format($subtotal, 2, '.', ''));
         $set('total', $subtotal);
     }
 }

@@ -24,12 +24,7 @@ final class ReceiptTable extends PowerGridComponent
 
     public function setUp(): array
     {
-        //        $this->showCheckBox();
-
         return [
-            //            Exportable::make('export')
-            //                ->striped()
-            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()
                 ->showSearchInput()
                 ->withoutLoading(),
@@ -41,7 +36,7 @@ final class ReceiptTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Receipt::query();
+        return Receipt::query()->with('provider');
     }
 
     public function relationSearch(): array
@@ -54,9 +49,24 @@ final class ReceiptTable extends PowerGridComponent
         return PowerGrid::columns()
             ->addColumn('id')
             ->addColumn('name')
-//          ->addColumn('category_id', fn($model) => $model->category->name)
-            ->addColumn('provider_name')
-            ->addColumn('total');
+            ->addColumn('provider_name', function ($model) {
+                return $model->provider->name;
+            })
+            ->addColumn('total')
+            ->addColumn('action', function ($query) {
+                if ($query->id != 1) {
+                    $editBtn = "<a href='" . route(
+                            'admin.receipts.edit',
+                            $query->id
+                        ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                    $deleteBtn = "<a href='" . route(
+                            'admin.receipts.destroy',
+                            $query->id
+                        ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+
+                    return $editBtn . $deleteBtn;
+                }
+            });;
     }
 
     public function columns(): array
@@ -74,7 +84,8 @@ final class ReceiptTable extends PowerGridComponent
             //                ->searchable(),
 
             Column::make('Nhà cung cấp', 'provider_name'),
-            Column::make('Số lượng nhập', 'total')
+            Column::make('Số lượng nhập', 'total'),
+            Column::make('Thao Tác', 'action')
         ];
     }
 }

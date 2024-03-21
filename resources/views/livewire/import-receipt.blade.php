@@ -1,5 +1,6 @@
 <div>
-    <form wire:submit="create">
+
+    <form wire:submit="{{(isset($this->receipt))? "edit" : "create"}}">
         <div class="form-group">
 
             {{ $this->form }}
@@ -7,7 +8,7 @@
 
 
         <button type="submit" class="btn btn-primary">
-            Xác nhận
+            Thực hiện thao tác
         </button>
     </form>
 

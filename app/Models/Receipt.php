@@ -29,7 +29,7 @@ class Receipt extends Model
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withTimestamps();
     }
 
     public function provider(): BelongsTo
@@ -37,9 +37,9 @@ class Receipt extends Model
         return $this->belongsTo(Provider::class);
     }
 
-    public function receiptProduct(): HasMany
+    public function productReceipt(): HasMany
     {
-        return $this->hasMany(ReceiptProduct::class);
+        return $this->hasMany(ProductReceipt::class);
     }
 
 
