@@ -18,7 +18,8 @@ class Receipt extends Model
     protected $fillable = [
         'name',
         'provider_id',
-        'total'
+        'total_price',
+        'total_quantity',
     ];
 
     protected static function boot()

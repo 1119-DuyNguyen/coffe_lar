@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Product;
+use App\Models\ProductReport;
 use App\Models\Provider;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -46,6 +48,15 @@ class OrderSeeder extends Seeder
                 'product_price' => 20000,
                 'product_name' => ' Cà Phê Hòa Tan Đậm Vị Việt Túi 40x16G --seed-data-' . $i,
             ]);
+            ProductReport::create(
+                [
+                    'product_id' => 1,
+                    'total_receipt' => 0,
+                    'total_sale' => 1,
+                    'price_receipt' => 0,
+                    'price_sale' => 20000
+                ]
+            );
         }
     }
 }

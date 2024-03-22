@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\ProductReport;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -14,7 +15,9 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Summarizers\Count;
+use Filament\Tables\Columns\Summarizers\Range;
 use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Columns\Summarizers\Summarizer;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -56,15 +59,18 @@ class ProductQuantityStatisticsTable extends Component implements HasForms, HasT
     private function getStatisticQueryBuilder(Builder $builder): Builder
     {
         $builder->select(
-            'product_id',
+            "product_id",
         );
+
         switch ($this->typeStatistic) {
             case 2:
                 $builder->selectRaw("DATE_FORMAT(created_at,'%m-%Y') as time ");
                 $this->messageGroupBy = "Tháng";
                 break;
             case 3:
-                $builder->selectRaw("CONCAT( QUARTER(created_at),'-',YEAR(created_at)) as time ");
+                $builder->selectRaw(
+                    "CONCAT( QUARTER(created_at),'-',YEAR(created_at)) as time "
+                );
 
                 $this->messageGroupBy = "Quý";
 
@@ -78,7 +84,12 @@ class ProductQuantityStatisticsTable extends Component implements HasForms, HasT
             default:
                 return $builder;
         }
-        return $builder->selectRaw('count(*) as total')->groupBy('product_id', 'time');;
+        return $builder->selectRaw(
+            'sum(total_sale) as total_sale, sum(total_receipt) as total_receipt, sum(total_sale)- sum(total_receipt) as profit  '
+        )->groupBy(
+            'time',
+            'product_id',
+        );;
     }
 
     private function getStatisticGroupByBuilder(Table $tableBuilder): Table
@@ -86,12 +97,14 @@ class ProductQuantityStatisticsTable extends Component implements HasForms, HasT
         $tableBuilder->defaultGroup(
             Group::make('time')
                 ->getKeyFromRecordUsing(
-                    fn(OrderProduct $model): string => $model->time
+//                    fn(Product $model): string => dd($model->time)
+                    fn(ProductReport $model): string => $model->time
+
                 )
 
                 // Ex: "September 2023"
                 ->getTitleFromRecordUsing(
-                    fn(OrderProduct $model): string => $this->messageGroupBy . " " . $model->time
+                    fn(ProductReport $model): string => $this->messageGroupBy . " " . $model->time
                 )
                 ->titlePrefixedWithLabel(false)
                 ->collapsible()
@@ -109,7 +122,7 @@ class ProductQuantityStatisticsTable extends Component implements HasForms, HasT
 
     public function table(Table $table): Table
     {
-        $queryBuilder = $this->getStatisticQueryBuilder(OrderProduct::query()->with('product'));
+        $queryBuilder = $this->getStatisticQueryBuilder(ProductReport::query()->with('product'));
         $tableBuilder = $table
             ->paginated(false)
             ->query(
@@ -117,9 +130,14 @@ class ProductQuantityStatisticsTable extends Component implements HasForms, HasT
 
             )
             ->columns([
-
                 TextColumn::make('product.name')->label('Sản phẩm'),
-                TextColumn::make('total')->label('Số lượng bán ra')->summarize(Sum::make()),
+
+//                TextColumn::make('product.name')->label('Sản phẩm'),
+                TextColumn::make('total_sale')->label('Số lượng bán ra')->summarize(Sum::make()),
+                TextColumn::make('total_receipt')->label('Số lượng nhập')->summarize(Sum::make()),
+                TextColumn::make('profit')->label('Lợi nhuận')->summarize(Sum::make())
+
+
 //                TextColumn::make('product_id')->label('Lợi nhuận ( đợi nhập hàng)'),
             ])
             ->actions([])
@@ -129,27 +147,27 @@ class ProductQuantityStatisticsTable extends Component implements HasForms, HasT
 
         $formFilter = [
         ];
-        if ($this->typeStatistic >= 2) {
-            $formFilter[] = TextInput::make('created_from')
-                ->label('Năm')
-                ->numeric()
-                ->minValue(1945)
-                ->maxValue(
-                    Carbon::now()->year
-                );
-            $tableBuilder->filters([
-                Filter::make('created_at')
-                    ->form($formFilter)
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                            );
-                    })
-                // ...
-            ]);
-        }
+//        if ($this->typeStatistic >= 2) {
+//            $formFilter[] = TextInput::make('created_from')
+//                ->label('Năm')
+//                ->numeric()
+//                ->minValue(1945)
+//                ->maxValue(
+//                    Carbon::now()->year
+//                );
+//            $tableBuilder->filters([
+//                Filter::make('created_at')
+//                    ->form($formFilter)
+//                    ->query(function (Builder $query, array $data): Builder {
+//                        return $query
+//                            ->when(
+//                                $data['created_from'],
+//                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+//                            );
+//                    })
+//                // ...
+//            ]);
+//        }
         return $this->getStatisticGroupByBuilder($tableBuilder);
     }
 

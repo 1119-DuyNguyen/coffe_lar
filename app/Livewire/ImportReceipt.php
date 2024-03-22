@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductReceipt;
 use App\Models\Provider;
 use App\Models\Receipt;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -58,19 +59,12 @@ class ImportReceipt extends Component implements HasForms
                             ->label('Nhà cung cấp')
                             ->required()
                         ,
-
-                        TextInput::make('total')
-                            ->label('Tổng số lượng sản phẩm nhập')
-                            ->readOnly()
-                            ->placeholder('Tự động tính toán khi nhập sản phẩm')
-                        ,
                         Repeater::make('product_receipt')
                             ->label("Sản phẩm nhập")
                             ->schema([
                                 // Two fields in each row: product and quantity
                                 Select::make('product_id')
                                     ->relationship('products', 'name')
-
                                     // Disable options that are already selected in other rows
                                     //https://filamentphp.com/docs/3.x/forms/fields/repeater#using-get-to-access-parent-field-values
                                     ->disableOptionWhen(function ($value, $state, Get $get) {
@@ -80,10 +74,20 @@ class ImportReceipt extends Component implements HasForms
                                             ->contains($value);
                                     })
                                     ->required()
-                                    ->label('Sản phẩm'),
+                                    ->label('Sản phẩm')
+                                    ->columnSpan(2)
+
+                                ,
                                 TextInput::make('quantity')->label('Số lượng')
                                     ->integer()
                                     ->default(1)
+                                    ->minValue(0)
+                                    ->required(),
+                                TextInput::make('price')->label('Giá (đồng)')
+                                    ->integer()
+                                    ->minValue(0)
+                                    ->default(1000)
+                                    ->step(1000)
                                     ->required()
                             ])
                             // Repeatable field is live so that it will trigger the state update on each change
@@ -104,9 +108,23 @@ class ImportReceipt extends Component implements HasForms
                             ->reorderable(false)
                             ->columns(2)
                             ->model(Receipt::class)
-                            ->defaultItems(1)
-                    ])
-                ,
+                            ->defaultItems(1),
+                        Section::make()->schema(
+                            [
+                   
+                                TextInput::make('total_quantity')
+                                    ->label('Tổng số lượng sản phẩm nhập')
+                                    ->readOnly()
+                                    ->placeholder('Tự động tính toán khi nhập sản phẩm')
+                                ,
+                                TextInput::make('total_price')
+                                    ->label('Tổng số lượng sản phẩm nhập')
+                                    ->readOnly()
+                                    ->placeholder('Tự động tính toán khi nhập sản phẩm')
+                            ]
+                        )->columns(2)
+
+                    ]),
 
 
             ])
@@ -127,7 +145,6 @@ class ImportReceipt extends Component implements HasForms
     public function create(Request $request): void
     {
         $request->merge($this->form->getState());
-
         Receipt::create($request->all());
         Notification::make()
             ->title('Lưu phiếu nhập thành công')
@@ -145,7 +162,6 @@ class ImportReceipt extends Component implements HasForms
     public static function updateTotals(Get $get, Set $set): void
     {
         // Retrieve all selected products and remove empty rows
-
         $selectedProducts = collect($get('product_receipt'))->filter(
             fn($item) => !empty($item['product_id']) && !empty($item['quantity'])
         );
@@ -155,7 +171,10 @@ class ImportReceipt extends Component implements HasForms
         $subtotal = $selectedProducts->reduce(function ($subtotal, $product) {
             return $subtotal + $product['quantity'];
         }, 0);
-
-        $set('total', $subtotal);
+        $subPrice = $selectedProducts->reduce(function ($subPrice, $product) {
+            return $subPrice + $product['price'];
+        }, 0);
+        $set('total_quantity', $subtotal);
+        $set('total_price', $subPrice);
     }
 }

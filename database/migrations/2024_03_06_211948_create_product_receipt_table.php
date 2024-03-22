@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreignId('receipt_id')->constrained()->cascadeOnDelete();
 
             $table->integer('quantity')->unsigned();
+            $table->double('price')->unsigned();
 
             $table->timestamps();
         });

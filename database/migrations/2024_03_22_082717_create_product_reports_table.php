@@ -10,13 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('receipts', function (Blueprint $table) {
+        Schema::create('product_reports', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->foreignId('provider_id')->constrained();
-            $table->integer('total_quantity')->unsigned();
-            $table->integer('total_price')->unsigned();
-
+            $table->foreignId('product_id')->constrained();
+            $table->double('total_receipt')->default(0);
+            $table->double('total_sale')->default(0);
+            $table->double('price_receipt')->default(0);
+            $table->double('price_sale')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('receipts');
+        Schema::dropIfExists('product_reports');
     }
 };
