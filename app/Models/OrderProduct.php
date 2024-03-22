@@ -15,7 +15,9 @@ class OrderProduct extends Model
         'product_id',
         'product_name',
         'product_price',
-        'qty'
+        'qty',
+        'created_at',
+        'updated_at'
     ];
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo

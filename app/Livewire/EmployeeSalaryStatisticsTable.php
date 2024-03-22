@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Filament\Tables\Grouping\Group;
 
-class ProductQuantityStatisticsTable extends Component implements HasForms, HasTable
+class EmployeeSalaryStatisticsTable extends Component implements HasForms, HasTable
 {
 
     use InteractsWithTable;

@@ -14,7 +14,9 @@ class ProductReport extends Model
         'total_receipt',
         'total_sale',
         'price_receipt',
-        'price_sale'
+        'price_sale',
+        'created_at',
+        'updated_at'
     ];
 
     public function product()

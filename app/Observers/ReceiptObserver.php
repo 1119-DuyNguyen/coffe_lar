@@ -3,11 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Product;
-use App\Models\ProductReceipt;
 use App\Models\ProductReport;
 use App\Models\Receipt;
-use App\Models\Role;
-use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
