@@ -1,3 +1,40 @@
+@import "flatpickr/dist/flatpickr.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.form-control[readonly] {
+    background-color: inherit;
+}
+
+.form-control {
+    border-color: #e4e6fc;
+}
+
+.power_grid.form-control[readonly] {
+    min-width: 250px;
+}
+
+.btn-primary, .btn-primary.disabled {
+
+    background-color: #6777ef;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.form-control:not(.form-control-sm):not(.form-control-lg) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.5rem;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)
+
+}
+

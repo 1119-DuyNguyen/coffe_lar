@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,8 +21,8 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->double('sub_total');
             $table->double('fee_ship')->default(0);
-            $table->double('total');
-            // thanh toán hay chưa
+            $table->double('total_price')->unsigned();
+            $table->double('total_quantity')->unsigned();
             $table->boolean('payment_status')->default(false);
             $table->tinyInteger('order_status')->default(OrderStatus::pending);
             $table->timestamps();

@@ -26,11 +26,15 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thumb_image' => ['sometimes', 'image', 'max:3000'],
-            'name' => ['required', 'max:200', Rule::unique(Product::class,'slug')->ignore(Str::slug($this->input('name')),'slug')],
-            'category_id' => ['required','exists:categories,id'],
-            'price' => ['required','integer','min:1'],
-            'weight' => ['required','integer','min:1'],
+//            'thumb_image' => ['sometimes', 'image', 'max:3000'],
+            'name' => [
+                'required',
+                'max:200',
+                Rule::unique(Product::class, 'slug')->ignore(Str::slug($this->input('name')), 'slug')
+            ],
+            'category_id' => ['required', 'exists:categories,id'],
+            'price' => ['required', 'integer', 'min:1'],
+            'weight' => ['required', 'integer', 'min:1'],
 //            'qty' => ['required'],
             'description' => ['required', 'max: 600'],
             'content' => ['required'],

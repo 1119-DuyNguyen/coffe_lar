@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Observers\OrderObserver;
+use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
@@ -35,118 +38,16 @@ class Order extends Model
         return $this->hasMany(OrderProduct::class);
     }
 
-    // Mutator for 'name_receiver'
-    public function setNameReceiverAttribute($value)
+    public function products(): BelongsToMany
     {
-        $this->attributes['name_receiver'] = $value;
+        return $this->belongsToMany(Product::class)->withTimestamps();
     }
 
-    // Mutator for 'address_receiver'
-    public function setAddressReceiverAttribute($value)
+    protected static function boot()
     {
-        $this->attributes['address_receiver'] = $value;
-    }
+        // you MUST call the parent boot method
+        parent::boot();
 
-    // Mutator for 'phone_receiver'
-    public function setPhoneReceiverAttribute($value)
-    {
-        $this->attributes['phone_receiver'] = $value;
-    }
-
-    // Mutator for 'email_receiver'
-    public function setEmailReceiverAttribute($value)
-    {
-        $this->attributes['email_receiver'] = $value;
-    }
-
-    // Mutator for 'note'
-    public function setNoteAttribute($value)
-    {
-        $this->attributes['note'] = $value;
-    }
-
-    // Mutator for 'sub_total', 'fee_ship', 'total'
-    public function setSubTotalAttribute($value)
-    {
-        $this->attributes['sub_total'] = $value;
-    }
-
-    public function setFeeShipAttribute($value)
-    {
-        $this->attributes['fee_ship'] = $value;
-    }
-
-    public function setTotalAttribute($value)
-    {
-        $this->attributes['total'] = $value;
-    }
-
-    // Mutator for 'payment_status', 'order_status'
-    public function setPaymentStatusAttribute($value)
-    {
-        $this->attributes['payment_status'] = $value;
-    }
-
-    public function setOrderStatusAttribute($value)
-    {
-        $this->attributes['order_status'] = $value;
-    }
-
-
-    // Accessor for 'name_receiver'
-    public function getNameReceiverAttribute($value)
-    {
-        return $value;
-    }
-
-    // Accessor for 'address_receiver'
-    public function getAddressReceiverAttribute($value)
-    {
-        return $value;
-    }
-
-    // Accessor for 'phone_receiver'
-    public function getPhoneReceiverAttribute($value)
-    {
-        return $value;
-    }
-
-    // Accessor for 'email_receiver'
-    public function getEmailReceiverAttribute($value)
-    {
-        return $value;
-    }
-
-    // Accessor for 'note'
-    public function getNoteAttribute($value)
-    {
-        return $value;
-    }
-
-    // Accessor for 'sub_total', 'fee_ship', 'total'
-    public function getSubTotalAttribute($value)
-    {
-        return $value;
-    }
-
-    public function getFeeShipAttribute($value)
-    {
-        return $value;
-    }
-
-    public function getTotalAttribute($value)
-    {
-        return $value;
-    }
-
-    // Accessor for 'payment_status', 'order_status'
-    public function getPaymentStatusAttribute($value)
-    {
-        return $value;
-    }
-
-    public function getOrderStatusAttribute($value)
-    {
-        return $value;
+        static::observe(OrderObserver::class);
     }
 }

@@ -4,7 +4,7 @@
     <select id="inputState" class="form-control main-category" name="category_id">
         <option value="">Select</option>
         @foreach ($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+        <option value="{{$category->id}}">{{$category->name}}</option>
         @endforeach
     </select>
 </div>
@@ -15,13 +15,13 @@
     </select>
 </div>
 @push('scripts')
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
             $('body').on('change', '.main-category', function (e) {
                 let id = $(this).val();
                 $.ajax({
                     method: 'GET',
-                    url: "{{route('admin.category.index')}}/" + id + "/sub-category",
+                    url: "{{route('admin.categories.index')}}/" + id + "/sub-category",
                     data: {
                         id: id
                     },
@@ -39,5 +39,5 @@
             })
 
         })
-    </script>
+</script>
 @endpush

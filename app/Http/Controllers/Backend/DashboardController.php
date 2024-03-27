@@ -12,33 +12,33 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    private function getRevenueData($selectedYear)
-    {
-        if (empty($selectedYear)) {
-            $selectedYear = date('Y');
-        }
-        $revenueData = Order::selectRaw(
-            'MONTH(created_at) as month,SUM(total) as revenue'
-        )
-            ->whereYear('created_at', $selectedYear)
-            ->where('payment_status',true)
-            ->where('order_status',OrderStatus::delivered)
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->orderBy('month')
-            ->get();
-        return $revenueData;
-    }
+//    private function getRevenueData($selectedYear)
+//    {
+//        if (empty($selectedYear)) {
+//            $selectedYear = date('Y');
+//        }
+//        $revenueData = Order::selectRaw(
+//            'MONTH(created_at) as month,SUM(total) as revenue'
+//        )
+//            ->whereYear('created_at', $selectedYear)
+//            ->where('payment_status',true)
+//            ->where('order_status',OrderStatus::delivered)
+//            ->groupBy(DB::raw('MONTH(created_at)'))
+//            ->orderBy('month')
+//            ->get();
+//        return $revenueData;
+//    }
 
     public function dashboard(Request $request)
     {
         $countProduct = Product::where('status', 1)->count();
         $countOrder = Order::whereDate('created_at', Carbon::today())->count();
-        $selectedYear=$request->input('year', date('Y'));
-        $revenueData=$this->getRevenueData($selectedYear);
+        $selectedYear = $request->input('year', date('Y'));
+//        $revenueData = $this->getRevenueData($selectedYear);
 //        $countOrder = Order::whereDate('ngaytao', Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d'))->count();
         return view(
             'admin.dashboard',
-            compact('countProduct', 'countOrder','revenueData','selectedYear')
+            compact('countProduct', 'countOrder', 'selectedYear')
 //            compact('name_login'), ['topproduct' => json_encode($data), 'statisByYear' => json_encode($statisByYear), 'statisByDay' => json_encode($statisByDay), 'countProduct' => $countProduct, 'countOrder' => $countOrder]
         );
     }

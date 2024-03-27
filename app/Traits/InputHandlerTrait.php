@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 trait InputHandlerTrait
 {
     use ImageUploadTrait;
-
+    abstract protected function getFormRequest(): string;
     protected function addAutoInput(Request $request): array
     {
         return [];
@@ -30,10 +30,8 @@ trait InputHandlerTrait
         return '';
     }
 
-    protected function getFormRequest(): string|null
-    {
-        return null;
-    }
+
+
 
     protected function getImageInput(): string|null
     {
@@ -64,7 +62,7 @@ trait InputHandlerTrait
             $rawData['slug'] = Str::slug($request->input($this->getInputSlug()));
         }
 
-        $this->validateRequest($rawData,$request);
+        $this->validateRequest($rawData, $request);
         $storageImage = 'uploads/' . ($this->getImagePath() ?? "");
         // transform a image file
         $imagePath = $this->updateImage($request, $this->getImageInput(),
@@ -76,7 +74,7 @@ trait InputHandlerTrait
         return $rawData;
     }
 
-    protected function validateRequest($data,$request)
+    protected function validateRequest($data, $request)
     {
 
         $formRequest = $this->getFormRequest()::createFrom($request);

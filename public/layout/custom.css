@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+body {
+    font-family: "Open Sans", 'Segoe UI', arial;
+}
+
+.lowercase-and-capitalize-first-letter {
+    text-transform: lowercase !important;
+}
+
+.lowercase-and-capitalize-first-letter::first-letter {
+    text-transform: capitalize !important;
+
+}

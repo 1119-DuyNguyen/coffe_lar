@@ -30,5 +30,5 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    'is_seed_data' => env('IS_SEED_DATA', false)
 ];

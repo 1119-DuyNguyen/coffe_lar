@@ -15,11 +15,12 @@ class CategoryController extends Controller
     {
         return Category::class;
     }
-    protected function getFormRequest(): string|null
+    protected function getFormRequest(): string
     {
         return CategoryRequest::class;
     }
-    protected function getInputSlug():string{
+    protected function getInputSlug(): string
+    {
         return 'name';
     }
     /**
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        return view('admin.categories.index');
     }
     /**
      * Show the form for editing the specified resource.
@@ -35,25 +36,25 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.category.edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.categories.create');
     }
 
 
-//    public function changeStatus(Request $request)
-//    {
-//        $category = Category::findOrFail($request->id);
-//        $category->status = $request->status == 'true' ? 1 : 0;
-//        $category->save();
-//
-//        return response(['message' => 'Status has been updated!']);
-//    }
+    //    public function changeStatus(Request $request)
+    //    {
+    //        $category = Category::findOrFail($request->id);
+    //        $category->status = $request->status == 'true' ? 1 : 0;
+    //        $category->save();
+    //
+    //        return response(['message' => 'Status has been updated!']);
+    //    }
 
 
 }

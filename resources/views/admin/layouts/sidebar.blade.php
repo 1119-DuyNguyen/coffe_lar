@@ -13,123 +13,141 @@
 
     </div>
     <ul class="sidebar-menu">
-        {{--        [ name=>str, title=>str,child=>[]]--}}
-    @php
-        $listLanguage="Danh sách";
+        <li><a class="nav-link " href="{{route('home')}}">
+                <i class="fas fa-arrow-left"></i>
+                <span>Quay lại trang chủ</span></a></li>
+        {{-- [ name=>str, title=>str,child=>[]]--}}
+        @php
+            $listLanguage="Danh sách";
 
-        $addLanguage="Khởi tạo";
-    @endphp
+            $addLanguage="Khởi tạo";
+        @endphp
         @foreach([
-        ['name'=>'Statistic','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index' ,'title'=>'Dashboard','child'=>[]],
-    ['name'=>'User','icon'=>'<i class="fas fa-user"></i>','child'=>
-    [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.user.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.user.create' ],
-    ]],
+        ['name'=>'Trang chủ','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index'
+        ,'title'=>'Dashboard','child'=>[]],
+
+        ['title'=>'Nhân sự'],
+        ['name'=>'Tài khoản','icon'=>'<i class="fas fa-user"></i>','child'=>
+        [
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.users.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.users.create' ],
+        ]],
         ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','child'=>
-    [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.role.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.role.create' ],
-    ]],
-    ['title'=>'Thương mại'],
-      ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.category.index'  ,'child'=>
-    [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.category.create' ],
-    ]],
-//    ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','child'=>
-//    [
-//        ['name'=>'Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.category.index'],
-//        ['name'=>'Sub Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.sub-category.index' ],
-//        ['name'=>'Child Category','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.child-category.index']
-//    ]],
-       ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index' ,
+        [
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.roles.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.roles.create' ],
+        ]],
+
+               ['name'=>'Tính lương','icon'=>'<i class="fas fa-file-invoice-dollar"></i>','routeName'=>'admin.products.index' ,
         'child'=>
-    [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.product.create' ],
-    ]
+        [
+
+        ['name'=>'Loại ý kiến','icon'=>'<i class="fas fa-comment-dots"></i>','routeName'=>'admin.type-opinions.index'],
+
+
+        ['name'=>'Hợp đồng','icon'=>'<i class="fas fa-file-contract"></i>','routeName'=>'admin.contracts.index'],
+
+        ['name'=>'Ý kiến','icon'=>'<i class="fas fa-comments"></i>','routeName'=>'admin.opinions.index'],
+
+        /** receipt */
+
+
+        ['name'=>'Chấm công','icon'=>'<i class="fas fa-calculator"></i>','routeName'=>'admin.checkins.index'],
+        ]
         ],
+        ['title'=>'Thương mại'],
+        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ,'child'=>
+        [
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.categories.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.categories.create' ],
+        ]],
 
-//    ['name'=>'Manage Products','icon'=>'<i class="fas fa-box"></i>','child'=>[
-//        ['name'=>'Brands','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.brand.index' ],
-//        ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.product.index'  ],
-//        ['name'=>'Featured Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.featured-product.index'],
-//    ['name'=>'Coupons','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.coupon.index' ],
-//]],
+        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index' ,
+        'child'=>
+        [
+        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.products.index'],
+        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.products.create' ],
 
-    ['name'=>'Order','icon'=>'<i class="fas fa-cart-plus"></i>','routeName'=>'admin.order.index' ,'child'=>[]],
+        ]
 
-//    ['title'=>'Settings & More'],
-//
-//   ['name'=>'Settings','icon'=>'<i class="fas fa-wrench"></i>','routeName'=>'admin.setting.index'  ],
-//    ['name'=>'Manage Website','icon'=>'<i class="fas fa-pager"></i>','child'=>[
-//                ['name'=>'Slider','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.slider.index' ],
-//
-//
-//]],
+        ],
+        ['name'=>'Kho','icon'=>'<i class="fas fa-table"></i>',
+        'child'=>
+        [
 
-    ] as $nav
-    )
+        ['name'=>'Nhập hàng','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
 
-            {{--            <li><a class="nav-link "--}}
-            {{--                   href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user"></i>--}}
-            {{--                    <span>Subscribers</span></a></li>--}}
+        ['name'=>'Đơn đặt hàng','icon'=>'<i class="fas fa-file-alt"></i>','routeName'=>'admin.orders.index' ],
+
+        ['name'=>'Nhà cung cấp','icon'=>'<i class="fas fa-shuttle-van"></i>','routeName'=>'admin.providers.index'],
+
+        ['name'=>'Thống kê','icon'=>'<i class="fas fa-scroll"></i>','routeName'=>'admin.receipts.index'],
+
+        ]
+        ]
+
+
+
+
+
+
+        ]
+         as $nav
+        )
+
+            {{-- <li><a class="nav-link " --}} {{-- href="{{ route('admin.subscribers.index') }}"><i
+                    class="fas fa-user"></i>--}}
+            {{-- <span>Subscribers</span></a></li>--}}
             @if(isset($nav['title']))
                 <li class="menu-header">{{__($nav['title'])}}</li>
             @endif
             @if(isset($nav['name']))
                 @if(empty($nav['child']))
 
-                    @can(GateService::getGateDefineFromRouteName($nav['routeName']))
-                        <li><a class="nav-link "
-                               href="{{route($nav['routeName'])}}">
-                                {!!  $nav['icon']!!}
-                                <span>{{__($nav['name'])}}</span></a></li>
-                    @endcan
+                    {{--                    @can(GateService::getGateDefineFromRouteName($nav['routeName']))--}}
+                    <li><a class="nav-link " href="{{route($nav['routeName'])}}">
+                            {!! $nav['icon']!!}
+                            <span>{{__($nav['name'])}}</span></a></li>
+                    {{--                    @endcan--}}
 
                 @else
-                    <li
-                        class="dropdown">
+                    <li class="dropdown">
 
                         @php
                             $nameRouteList=[];
                             $html='';
                             foreach($nav['child'] as $child)
-                                {
+                            {
                             $nameRoute=GateService::getGateDefineFromRouteName($child['routeName']);
                             $nameRouteList[]=$nameRoute;
 
-                            if(Gate::allows($nameRoute))
-                                {
-                            $html.='                                 <li><a class="nav-link "
-                                           href="'.route($child['routeName']).'">
+                            if(true||Gate::allows($nameRoute))
+                            {
+                            $html.='
+                        <li><a class="nav-link " href="'.route($child['routeName']).'">
 
-                                            <span>'.$child['icon'].__($child['name']).'</span></a></li>';
+                                <span>'.($child['icon'] ?? "").__($child['name']).'</span></a></li>';
 
-                                }
-                                }
+                        }
+                        }
 
                         @endphp
-                        @canany($nameRouteList)
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                                {!!  $nav['icon']!!}
-                                <span>    {{__($nav['name'])}}</span></a>
-                            <ul class="dropdown-menu">
-                                {!! $html !!}
+                        {{--                        @canany($nameRouteList )--}}
+                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                            {!! $nav['icon']!!}
+                            <span> {{__($nav['name'])}}</span></a>
+                        <ul class="dropdown-menu">
+                            {!! $html !!}
 
-                            </ul>
-                        @endcan
+                        </ul>
+                        {{--                        @endcan--}}
 
                     </li>
 
                 @endif
             @endif
         @endforeach
-        <li><a class="nav-link "
-               href="{{route('home')}}">
-                <i class="fas fa-arrow-left"></i>
-                <span>Quay lại</span></a></li>
+
 
     </ul>
 
@@ -163,4 +181,3 @@
 
     </script>
 @endpush
-
