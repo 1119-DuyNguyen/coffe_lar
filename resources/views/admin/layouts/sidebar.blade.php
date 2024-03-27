@@ -38,20 +38,21 @@
         ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.roles.create' ],
         ]],
 
-               ['name'=>'Tính lương','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.products.index' ,
+               ['name'=>'Tính lương','icon'=>'<i class="fas fa-file-invoice-dollar"></i>','routeName'=>'admin.products.index' ,
         'child'=>
         [
-        ['name'=>'Loại ý kiến','routeName'=>'admin.type-opinions.index'],
+
+        ['name'=>'Loại ý kiến','icon'=>'<i class="fas fa-comment-dots"></i>','routeName'=>'admin.type-opinions.index'],
 
 
-        ['name'=>'Hợp đồng','routeName'=>'admin.contracts.index'],
+        ['name'=>'Hợp đồng','icon'=>'<i class="fas fa-file-contract"></i>','routeName'=>'admin.contracts.index'],
 
-        ['name'=>'Ý kiến','routeName'=>'admin.opinions.index'],
+        ['name'=>'Ý kiến','icon'=>'<i class="fas fa-comments"></i>','routeName'=>'admin.opinions.index'],
 
         /** receipt */
 
 
-        ['name'=>'Chấm công','routeName'=>'admin.checkins.index'],
+        ['name'=>'Chấm công','icon'=>'<i class="fas fa-calculator"></i>','routeName'=>'admin.checkins.index'],
         ]
         ],
         ['title'=>'Thương mại'],
@@ -61,7 +62,7 @@
         ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.categories.create' ],
         ]],
 
-        ['name'=>'Products','icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.products.index' ,
+        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index' ,
         'child'=>
         [
         ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.products.index'],
@@ -74,10 +75,13 @@
         'child'=>
         [
 
-        ['name'=>'Nhập hàng','routeName'=>'admin.receipts.index'],
-        ['name'=>'Đơn đặt hàng','routeName'=>'admin.orders.index' ],
-        ['name'=>'Nhà cung cấp','routeName'=>'admin.providers.index'],
-        ['name'=>'Thống kê sản phẩm','routeName'=>'admin.receipts.index'],
+        ['name'=>'Nhập hàng','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
+
+        ['name'=>'Đơn đặt hàng','icon'=>'<i class="fas fa-file-alt"></i>','routeName'=>'admin.orders.index' ],
+
+        ['name'=>'Nhà cung cấp','icon'=>'<i class="fas fa-shuttle-van"></i>','routeName'=>'admin.providers.index'],
+
+        ['name'=>'Thống kê','icon'=>'<i class="fas fa-scroll"></i>','routeName'=>'admin.receipts.index'],
 
         ]
         ]
