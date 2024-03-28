@@ -1,9 +1,9 @@
-@extends('templates.clients.frontend')
+@extends('templates.clients.layouts.master')
 @section('content')
-@php
-$user=\Illuminate\Support\Facades\Auth::user();
-@endphp
-    <!-- =========================== Billing Section =================================== -->
+    @php
+        $user=\Illuminate\Support\Facades\Auth::user();
+    @endphp
+        <!-- =========================== Billing Section =================================== -->
     <section>
         <div class="container">
             <form action="{{ route('user.cod.payment') }}" method="POST" class="submitOrder">
@@ -86,17 +86,17 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
 
                             </div>
-{{--                            <div class="col-12">--}}
+                            {{--                            <div class="col-12">--}}
 
-{{--                                <div class="location_group form-group service">--}}
-{{--                                    <label>Phương thức vận chuyển</label>--}}
-{{--                                    <select type="text" value="" name="service" required--}}
-{{--                                            class="input_search service">--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
+                            {{--                                <div class="location_group form-group service">--}}
+                            {{--                                    <label>Phương thức vận chuyển</label>--}}
+                            {{--                                    <select type="text" value="" name="service" required--}}
+                            {{--                                            class="input_search service">--}}
+                            {{--                                    </select>--}}
+                            {{--                                </div>--}}
 
 
-{{--                            </div>--}}
+                            {{--                            </div>--}}
                             <div class="col-12">
                                 <!-- Company Name -->
                                 <div class="form-group">
@@ -241,24 +241,23 @@ $user=\Illuminate\Support\Facades\Auth::user();
                                         '.district .input_search').value;
                                     let idWard = document.querySelector(
                                         '.ward .input_search').value;
-                                    console.log(idWard,document.querySelector(
+                                    console.log(idWard, document.querySelector(
                                         '.ward .input_search'));
-                                    if (idWard&&idDistrict) {
+                                    if (idWard && idDistrict) {
                                         let url = "{{ route('ghn.price') }}";
 
                                         $.ajax({
                                             type: 'get',
                                             url: url,
-                                            data:{
-                                                idDistrict:idDistrict,
-                                                idWard:idWard
+                                            data: {
+                                                idDistrict: idDistrict,
+                                                idWard: idWard
                                             },
                                             success: function (data) {
                                                 loadCart(data);
                                                 loadCartItem(data);
                                             }
                                         });
-
 
 
                                     }
@@ -327,7 +326,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                             console.error('location error')
                         }
                     },
-                    getService: function (district,ward) {
+                    getService: function (district, ward) {
                         let url = "{{ route('ghn.ward', ":idDistrict") }}";
                         url = url.replace(':idDistrict', district);
                         let _this = this;
@@ -356,7 +355,7 @@ $user=\Illuminate\Support\Facades\Auth::user();
                             html += data.map(province => {
                                 return (
                                     `
-                            <option class="search_item" value='${province[`${type}ID`]||province[`${type}Code`]}'>
+                            <option class="search_item" value='${province[`${type}ID`] || province[`${type}Code`]}'>
                                 ${province[`${type}Name`]}
                             </option>
                         `
@@ -382,20 +381,18 @@ $user=\Illuminate\Support\Facades\Auth::user();
 
             }
 
-            formAjax('.submitOrder',(data)=>{
-                    Swal.fire(
-                        'Thanh toán thành công',
-                        '',
-                        'success'
-                    ).then((result)=>{
-                        window.location.href= window.location.origin;
+            formAjax('.submitOrder', (data) => {
+                Swal.fire(
+                    'Thanh toán thành công',
+                    '',
+                    'success'
+                ).then((result) => {
+                    window.location.href = window.location.origin;
 
-                    })
+                })
             });
         </script>
 
-
     @endpush
-
 
 @stop

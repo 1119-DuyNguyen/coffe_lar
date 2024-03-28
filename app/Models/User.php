@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +15,7 @@ class User extends Authenticatable
 {
     use  HasFactory, Notifiable;
 
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -52,70 +54,25 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);
     }
 
-
-    // Accessor for 'name'
-    public function getNameAttribute($value)
+    public function contract()
     {
-        return $value;
+        return $this->hasMany(Contract::class);
     }
 
-    // Mutator for 'name'
-    public function setNameAttribute($value)
+    // user with role = employee
+    public static function employee(): User|\Illuminate\Database\Eloquent\Builder
     {
-        $this->attributes['name'] = $value;
+        return User::whereHas(
+            'role',
+            function ($query) {
+                $query->where('is_employee', true);
+            }
+        );
     }
-
-    // Accessor for 'email'
-    public function getEmailAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'email'
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = $value;
-    }
-
-    // Accessor for 'phone'
-    public function getPhoneAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'phone'
-    public function setPhoneAttribute($value)
-    {
-        $this->attributes['phone'] = $value;
-    }
-
-    // Accessor for 'role_id'
-    public function getRoleIdAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'role_id'
-    public function setRoleIdAttribute($value)
-    {
-        $this->attributes['role_id'] = $value;
-    }
-
-    // Accessor for 'status'
-    public function getStatusAttribute($value)
-    {
-        return $value;
-    }
-
-    // Mutator for 'status'
-    public function setStatusAttribute($value)
-    {
-        $this->attributes['status'] = $value;
-    }
-
 }
