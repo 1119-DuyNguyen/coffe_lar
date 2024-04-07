@@ -38,7 +38,10 @@ class OrderObserver
                 ]
             ];
         }
-        return $this->request->input('product_receipt');
+        //đổi lại input từ trang cart.index, created_at, update_at thì không cần thêm vô
+        // dd($this->request->all());
+        // $cartItems = $this->request->session()->get('cartItems');
+        return $this->request->input('product_order');
     }
 
     public function saving(Order $order)
@@ -90,6 +93,4 @@ class OrderObserver
             $product->save();
         }
     }
-
-
 }

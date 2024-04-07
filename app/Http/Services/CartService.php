@@ -19,16 +19,16 @@ class CartService
 
     public static function clear()
     {
-//        if (Auth::check()) {
+        //        if (Auth::check()) {
         $user = User::find(Auth::user()->id);
         $user?->cart?->clear();
-//        $cart = Cart::where('user_id', $user->id)->first();
-//        $cart?->clear();
-//            $cart->cart_items = json_encode([]);
-//            $cart->save();
-//        } else {
-//            $cartItems = Session::put('cart', []);
-//        }
+        //        $cart = Cart::where('user_id', $user->id)->first();
+        //        $cart?->clear();
+        //            $cart->cart_items = json_encode([]);
+        //            $cart->save();
+        //        } else {
+        //            $cartItems = Session::put('cart', []);
+        //        }
     }
 
     public static function getListCart(): array
@@ -36,15 +36,14 @@ class CartService
         $idProduct = [];
         // Check if the user is logged in
         if (Auth::check()) {
-        $user = User::find(Auth::user()->id);;
-//            $cartItems = $cart ? json_decode($cart->cart_items, true) : [];
-        }
-        else {
+            $user = User::find(Auth::user()->id);;
+            //            $cartItems = $cart ? json_decode($cart->cart_items, true) : [];
+        } else {
             return [];
         }
-// else {
-//            $cartItems = Session::get('cart', []);
-//        }
+        // else {
+        //            $cartItems = Session::get('cart', []);
+        //        }
         $cartItems = $user?->cart?->getCartItems() ?? [];
         foreach ($cartItems as $key => $cart) {
             $idProduct[] = $cart['id_product'];
@@ -57,6 +56,7 @@ class CartService
         $productList = Product::whereIn('id', $idProduct)->get();
         $subtotal = 0;
         $weight = 0;
+        $totalQuantity = 0;
         foreach ($cartItems as $key => &$cart) {
             // clone data without reference
             $product = $productList->firstWhere('id', $cart['id_product']);
@@ -64,13 +64,14 @@ class CartService
                 continue;
             }
             $product->quantity = $cart['quantity'];
+            $totalQuantity += $cart['quantity'];
             $subtotal += ($product->price) * $cart['quantity'];
             $cart['product-data'] = $product;
-//            dd($product);
+            //            dd($product);
             $weight += ($product->weight ?? 0);
         }
-        return ['cartList' => $cartItems, 'productList' => $productList, 'weight' => $weight, 'subtotal' => $subtotal];
-//        return $this->cart;
+        return ['cartList' => $cartItems, 'productList' => $productList, 'weight' => $weight, 'subtotal' => $subtotal, 'total_quantity_cart' => $totalQuantity];
+        //        return $this->cart;
     }
 
     private function findCart($idCart)
@@ -103,17 +104,17 @@ class CartService
     public function destroy($idCart)
     {
         // Check if the user is logged in
-//        if (Auth::check()) {
+        //        if (Auth::check()) {
         $user = Auth::user();
         $cart = Cart::firstWhere(['user_id' => $user->id]);
 
         $cart->deleteCartItem($idCart);
-//        } else {
-//            $cartItems = Session::get('cart', []);
-//            unset($cartItems[$idCart]);
-//
-//            Session::put('cart', $cartItems);
-//        }
+        //        } else {
+        //            $cartItems = Session::get('cart', []);
+        //            unset($cartItems[$idCart]);
+        //
+        //            Session::put('cart', $cartItems);
+        //        }
     }
 
 
@@ -124,7 +125,7 @@ class CartService
         }
 
 
-//        if (Auth::check()) {
+        //        if (Auth::check()) {
         $user = Auth::user();
         $cart = Cart::firstOrNew(['user_id' => $user->id]);
         $cartItems = $cart?->getCartItems();
@@ -133,19 +134,19 @@ class CartService
         }
         $cart->saveCart($idProduct, $qty);
 
-//        } else {
-//            $cartItems = Session::get('cart', []);
-//            if (isset($cartItems[$idCart])) {
-//                $productCart['quantity'] = $qty + $cartItems[$idCart]['quantity'];
-//            } else {
-//                $productCart['quantity'] = $qty;
-//            }
-//            $cartItems[$idCart] = $productCart ?? [];
-//            if ($idCart != $idOldCart) {
-//                unset($cartItems[$idOldCart]);
-//            }
-//            Session::put('cart', $cartItems);
-//        }
+        //        } else {
+        //            $cartItems = Session::get('cart', []);
+        //            if (isset($cartItems[$idCart])) {
+        //                $productCart['quantity'] = $qty + $cartItems[$idCart]['quantity'];
+        //            } else {
+        //                $productCart['quantity'] = $qty;
+        //            }
+        //            $cartItems[$idCart] = $productCart ?? [];
+        //            if ($idCart != $idOldCart) {
+        //                unset($cartItems[$idOldCart]);
+        //            }
+        //            Session::put('cart', $cartItems);
+        //        }
     }
 
     public static function countCart(): int
@@ -159,5 +160,4 @@ class CartService
         }
         return count($cartItems ?? 0);
     }
-
 }
