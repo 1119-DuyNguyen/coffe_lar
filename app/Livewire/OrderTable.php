@@ -4,60 +4,35 @@ namespace App\Livewire;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
-use PowerComponents\LivewirePowerGrid\Facades\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridColumns;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use Illuminate\Support\Carbon;
+use Filament\Tables\Columns\TextColumn;
 
-final class OrderTable extends PowerGridComponent
+class OrderTable extends IndexDataTable
 {
-    use WithExport;
 
 
-    public function setUp(): array
-    {
-        //        $this->showCheckBox();
-        $this->persist(['columns', 'filters', 'sort']);
-        return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()
-                ->showSearchInput()
-                ->withoutLoading(),
-            Footer::make()
-                ->showPerPage()
-                ->showRecordCount(),
-        ];
-    }
-
-    public function datasource(): Builder
+    protected function datasource(): Builder
     {
         return Order::query()->orderBy('created_at', 'desc');
     }
 
-    public function relationSearch(): array
+    protected function getColumns(): array
     {
-        return [];
+        return [
+            TextColumn::make('id')->label('Id'),
+            TextColumn::make('total_quantity')->label('Tổng tiền'),
+            TextColumn::make('payment_status')->label('Trạng thái thanh toán'),
+            TextColumn::make('order_status')->label('Trạng thái đơn hàng'),
+            TextColumn::make('created_at')->label('Ngày tạo (định dạng)'),
+        ];
     }
 
     public function addColumns(): PowerGridColumns
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('total')
-            ->addColumn('profit', function (Order $order) {
-                return $order->total;
-            })
+            ->addColumn('total_quantity')
             ->addColumn('payment_status', function ($model) {
                 return (!$model->payment_status) ? ('<label class="custom-switch mt-2">
                         <input type="checkbox" name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-payment-status" >
@@ -138,8 +113,7 @@ final class OrderTable extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Tổng tiền', 'total'),
-            Column::make('Lợi nhuận', 'profit', 'total')->withSum('Tổng', true, false),
+            Column::make('Tổng tiền', 'total_quantity'),
             Column::make('Trạng thái thanh toán', 'payment_status'),
             Column::make('Trạng thái đơn hàng', 'order_status'),
             Column::make('Ngày tạo', 'created_at_formatted', 'created_at'),
@@ -148,23 +122,5 @@ final class OrderTable extends PowerGridComponent
         ];
     }
 
-    //    public function filters(): array
-    //    {
-    //        return [
-    //            Filter::datetimepicker('created_at'),
-    //        ];
-    //    }
 
-
-    /*
-    public function actionRules($row): array
-    {
-       return [
-            // Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($row) => $row->id === 1)
-                ->hide(),
-        ];
-    }
-    */
 }

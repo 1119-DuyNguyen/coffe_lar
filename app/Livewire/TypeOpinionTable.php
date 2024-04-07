@@ -16,7 +16,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class TypeOpinionTable extends PowerGridComponent
+class TypeOpinionTable extends IndexDataTable
 {
     use WithExport;
 
@@ -48,14 +48,21 @@ final class TypeOpinionTable extends PowerGridComponent
         return PowerGrid::columns()
             ->addColumn('id')
             ->addColumn('name')
-
             /** Example of custom column using a closure **/
-            ->addColumn('name_lower', fn (TypeOpinion $model) => strtolower(e($model->name)))
-
-            ->addColumn('created_at_formatted', fn (TypeOpinion $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn('name_lower', fn(TypeOpinion $model) => strtolower(e($model->name)))
+            ->addColumn(
+                'created_at_formatted',
+                fn(TypeOpinion $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+            )
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.type-opinions.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='" . route('admin.type-opinions.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='" . route(
+                        'admin.type-opinions.edit',
+                        $query->id
+                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='" . route(
+                        'admin.type-opinions.destroy',
+                        $query->id
+                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
             });

@@ -16,7 +16,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class CategoryTable extends PowerGridComponent
+class CategoryTable extends IndexDataTable
 {
     use WithExport;
 
@@ -64,11 +64,17 @@ final class CategoryTable extends PowerGridComponent
             //            ->addColumn('slug')
             ->addColumn(
                 'created_at_formatted',
-                fn (Category $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+                fn(Category $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
             )
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.categories.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='" . route('admin.categories.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='" . route(
+                        'admin.categories.edit',
+                        $query->id
+                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='" . route(
+                        'admin.categories.destroy',
+                        $query->id
+                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
             });
@@ -94,11 +100,9 @@ final class CategoryTable extends PowerGridComponent
             //                ->searchable(),
 
 
-
             Column::make('Thao Tác', 'action')
         ];
     }
-
 
 
     /*

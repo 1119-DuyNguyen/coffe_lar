@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-
+use Filament\Tables\Table;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -82,6 +82,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         //
         App::setLocale('vi');
+        Table::configureUsing(function (Table $table) {
+            $table->paginated([10]);
+        });
         try {
             /** set time zone */
             //            Config::set('app.timezone', $generalSetting->time_zone);

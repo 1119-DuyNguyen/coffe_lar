@@ -16,7 +16,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class OpinionTable extends PowerGridComponent
+class OpinionTable extends IndexDataTable
 {
     use WithExport;
 
@@ -47,17 +47,24 @@ final class OpinionTable extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('type_opinion', fn ($model) => $model->typeOpinion->name)
+            ->addColumn('type_opinion', fn($model) => $model->typeOpinion->name)
             ->addColumn('topic')
-
             /** Example of custom column using a closure **/
-            ->addColumn('topic_lower', fn (Opinion $model) => strtolower(e($model->topic)))
-
+            ->addColumn('topic_lower', fn(Opinion $model) => strtolower(e($model->topic)))
             ->addColumn('content')
-            ->addColumn('created_at_formatted', fn (Opinion $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn(
+                'created_at_formatted',
+                fn(Opinion $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+            )
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.opinions.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='" . route('admin.opinions.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $editBtn = "<a href='" . route(
+                        'admin.opinions.edit',
+                        $query->id
+                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='" . route(
+                        'admin.opinions.destroy',
+                        $query->id
+                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
             });

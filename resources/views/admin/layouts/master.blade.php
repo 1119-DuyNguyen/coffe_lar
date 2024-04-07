@@ -13,20 +13,21 @@
             <meta charset="UTF-8">
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
             <!-- General CSS Files -->
+            @livewireStyles
+            @filamentStyles
+            @vite(['resources/css/app.css'])
             <link rel="stylesheet" href="{{asset("backend/assets/modules/bootstrap/css/bootstrap.css")}}">
-            {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/fontawesome/css/all.min.css")}}">--}}
+            <link rel="stylesheet" href="{{asset("backend/assets/modules/fontawesome/css/all.min.css")}}">
             <link rel="stylesheet" href="{{asset('lib/fontawesome/css/all.min.css')}}">
             <title>{{ $setting->name ?? "Drinks Order"}}</title>
             <link rel="icon" href="{{ asset('img/logo.png')}}" type="image/gif" sizes="16x16">
 
             <!-- CSS Libraries -->
-            {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/jqvmap/dist/jqvmap.min.css")}}">--}}
-            {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/weather-icon/css/weather-icons.min.css")}}">--}}
-            {{--    <link rel="stylesheet" href="{{asset("backend/assets/modules/weather-icon/css/weather-icons-wind.min.css")}}">--}}
+
             {{--            <link rel="stylesheet" href="{{asset("backend/assets/modules/summernote/summernote-bs4.css")}}">--}}
-            {{--            <link rel="stylesheet"--}}
-            {{--                  href="{{asset("backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css")}}">--}}
-            {{--            <link rel="stylesheet" href="{{asset("backend/assets/modules/datatables/datatables.min.css")}}">--}}
+            <link rel="stylesheet"
+                  href="{{asset("backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css")}}">
+            <link rel="stylesheet" href="{{asset("backend/assets/modules/datatables/datatables.min.css")}}">
 
             {{--            <link rel="stylesheet" href="{{asset('lib/sweetalert/sweetalert.all.min.css')}}">--}}
 
@@ -40,6 +41,8 @@
             <meta name="csrf-token" content="{{ csrf_token() }}">
 
             @include('layouts.header-import')
+
+            @stack('head')
 
             <style>
                 .dataTables_wrapper {
@@ -74,10 +77,7 @@
                 }
             </style>
 
-            @stack('head')
-            @livewireStyles
-            @filamentStyles
-            @vite(['resources/css/app.css'])
+
             <!-- /END GA -->
             {{--    vendor--}}
             {{--    @include('sweetalert::alert')--}}
@@ -108,10 +108,7 @@
 
         <!-- JS Libraies -->
         {{--<script src="{{asset("backend/assets/modules/simple-weather/jquery.simpleWeather.min.js")}}"></script>--}}
-        {{--<script src="{{asset("backend/assets/modules/chart.min.js")}}"></script>--}}
-        {{--<script src="{{asset("backend/assets/modules/jqvmap/dist/jquery.vmap.min.js")}}"></script>--}}
-        {{--<script src="{{asset("backend/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js")}}"></script>--}}
-        {{--<script src="{{asset("backend/assets/modules/chocolat/dist/js/jquery.chocolat.min.js")}}"></script>--}}
+
         <script src="{{asset("backend/assets/modules/summernote/summernote-bs4.js")}}"></script>
         {{--<script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>--}}
         <script src="{{asset('lib/sweetalert/sweetalert.all.min.js')}}"></script>
@@ -121,7 +118,6 @@
 
 
         <!-- Page Specific JS File -->
-        {{--<script src="{{asset("backend/assets/js/page/index-0.js")}}"></script>--}}
         <script src="{{asset('backend/assets/modules/datatables/datatables.min.js')}}"></script>
         <script
             src="{{asset('backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>

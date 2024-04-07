@@ -18,7 +18,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class ProviderTable extends PowerGridComponent
+classProviderTable extends IndexDataTable
 {
     use WithExport;
 
@@ -83,5 +83,5 @@ final class ProviderTable extends PowerGridComponent
         ];
     }
 
-  
+
 }

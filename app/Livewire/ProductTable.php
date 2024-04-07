@@ -17,7 +17,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class ProductTable extends PowerGridComponent
+class ProductTable extends IndexDataTable
 {
     use WithExport;
 
@@ -52,15 +52,18 @@ final class ProductTable extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('thumb_image', fn ($model) => "<img width='70px' src='" . asset($model->thumb_image) . "' alt='ảnh sản phẩm'/>")
+            ->addColumn(
+                'thumb_image',
+                fn($model) => "<img width='70px' src='" . asset($model->thumb_image) . "' alt='ảnh sản phẩm'/>"
+            )
             ->addColumn('name')
             /** Example of custom column using a closure **/
-            ->addColumn('name_lower', fn (Product $model) => strtolower(e($model->name)))
+            ->addColumn('name_lower', fn(Product $model) => strtolower(e($model->name)))
 
             //            ->addColumn('slug')
-            ->addColumn('category_id', fn ($model) => $model->category->name)
-            ->addColumn('description', fn ($model) => Str::words($model->description, '8', '...'))
-            ->addColumn('content', fn ($model) => Str::words($model->content, '8', '...'))
+            ->addColumn('category_id', fn($model) => $model->category->name)
+            ->addColumn('description', fn($model) => Str::words($model->description, '8', '...'))
+            ->addColumn('content', fn($model) => Str::words($model->content, '8', '...'))
             ->addColumn('price')
             ->addColumn('status', function ($model) {
                 return '<label class="custom-switch mt-2">
@@ -70,12 +73,18 @@ final class ProductTable extends PowerGridComponent
             })
             ->addColumn(
                 'created_at_formatted',
-                fn (Product $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+                fn(Product $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
             )
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.products.edit', $query->id) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $editBtn = "<a href='" . route(
+                        'admin.products.edit',
+                        $query->id
+                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
 
-                $deleteBtn = "<a href='" . route('admin.products.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $deleteBtn = "<a href='" . route(
+                        'admin.products.destroy',
+                        $query->id
+                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
                 //                $moreBtn = '<div class="dropdown dropleft d-inline">
                 //                <button class="btn btn-primary dropdown-toggle ml-1" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 //                <i class="fas fa-cog"></i>
@@ -135,8 +144,6 @@ final class ProductTable extends PowerGridComponent
     //            Filter::datetimepicker('created_at'),
     //        ];
     //    }
-
-
 
 
 }

@@ -17,7 +17,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use App\Models\User;
 
-final class CheckinTable extends PowerGridComponent
+class CheckinTable extends IndexDataTable
 {
     use WithExport;
 

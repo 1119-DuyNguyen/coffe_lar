@@ -17,7 +17,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class EmployeeTable extends PowerGridComponent
+class EmployeeTable extends IndexDataTable
 {
     use WithExport;
 

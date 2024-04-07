@@ -1,17 +1,17 @@
 @php use App\Http\Services\GateService;use Illuminate\Support\Facades\Gate; @endphp
 <div class="main-sidebar sidebar-style-2">
-    <div class="sidebar-brand mt-3">
-        <a href="{{route('admin.dashboard.index')}}">
-            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">
-        </a>
-    </div>
-    <div class="sidebar-brand sidebar-brand-sm">
-        <a href="{{route('admin.dashboard.index')}}">
-            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">
-        </a>
+    {{--    <div class="sidebar-brand mt-3 ">--}}
+    {{--        <a href="{{route('admin.dashboard.index')}}">--}}
+    {{--            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">--}}
+    {{--        </a>--}}
+    {{--    </div>--}}
+    {{--    <div class="sidebar-brand sidebar-brand-sm">--}}
+    {{--        <a href="{{route('admin.dashboard.index')}}">--}}
+    {{--            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">--}}
+    {{--        </a>--}}
 
 
-    </div>
+    {{--    </div>--}}
     <ul class="sidebar-menu">
         <li><a class="nav-link " href="{{route('home')}}">
                 <i class="fas fa-arrow-left"></i>
