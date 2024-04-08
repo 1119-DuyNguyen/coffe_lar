@@ -2,6 +2,7 @@
     'title'=>"Mặc định",
      "route"=> "",
      'table'=>"",
+     'useCreateBtn'=> true
 ])
 <div>
     <!-- Main Content -->
@@ -21,12 +22,13 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="w-100 text-right p-4">
-                                <a class="btn btn-primary " href="{{route($route)}}"><i
-                                        class="fas fa-plus"></i></a>
+                            @if($useCreateBtn==true)
+                                <div class="w-100 text-right p-4">
+                                    <a class="btn btn-primary " href="{{route($route)}}"><i
+                                            class="fas fa-plus"></i></a>
 
-                            </div>
-
+                                </div>
+                            @endif
 
                             @livewire($table)
                         </div>

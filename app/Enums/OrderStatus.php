@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Enums;
@@ -68,26 +69,30 @@ final class OrderStatus extends Enum
             'details' => $details,
         ];
     }
-    public static function values(): array{
-        $keyList=OrderStatus::getKeys();
-        $array=[];
-        foreach ($keyList as $key)
-        {
-            $array[$key]=OrderStatus::getValue($key);
+
+    public static function values(): array
+    {
+        $keyList = OrderStatus::getKeys();
+        $array = [];
+        foreach ($keyList as $key) {
+            $array[$key] = OrderStatus::getValue($key);
         }
         return $array;
     }
-    public static function collectionValues(){
-        $keyList=OrderStatus::getKeys();
-        $array=[];
-        foreach ($keyList as $key)
-        {
-            $initArray=[];
-            $initArray['label']=OrderStatus::getMessage($key)['status'];
 
-            $initArray['value']=OrderStatus::getValue($key);
-            $array[]=$initArray;
+
+    public static function collectionValues()
+    {
+        $keyList = OrderStatus::getKeys();
+        $array = [];
+        foreach ($keyList as $key) {
+            $array[OrderStatus::getValue($key)] = OrderStatus::getMessage($key)['status'];
+//            $initArray = [];
+//            $initArray['label'] = OrderStatus::getMessage($key)['status'];
+//
+//            $initArray['value'] = OrderStatus::getValue($key);
+//            $array[] = $initArray;
         }
-        return collect($array);
+        return $array;
     }
 }

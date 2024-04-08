@@ -41,7 +41,7 @@ class OrderObserver
         return $this->request->input('product_receipt');
     }
 
-    public function saving(Order $order)
+    public function creating(Order $order)
     {
         $productOrderInput = $this->getData();
         if (is_array($productOrderInput)) {
@@ -64,7 +64,7 @@ class OrderObserver
         }
     }
 
-    public function saved(Order $order): void
+    public function created(Order $order): void
     {
         $productOrderInput = $this->getData();
         $productList = Product::whereIn('id', array_column($productOrderInput, 'product_id'))->get();

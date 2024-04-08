@@ -6,11 +6,6 @@
         table="opinion-table"
         route="admin.opinions.create"
     ></x-index-datatable>
-    
+
 @endsection
 
-@push('scripts')
-    <x-change-status :url="route('admin.users.change-status')" type="select">
-
-    </x-change-status>
-@endpush

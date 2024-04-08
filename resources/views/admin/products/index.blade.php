@@ -9,8 +9,4 @@
 
 @endsection
 
-@push('scripts')
-    {{-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }}--}}
-    <x-change-status :url="route('admin.products.change-status')"/>
 
-@endpush
