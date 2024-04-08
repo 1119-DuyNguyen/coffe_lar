@@ -1,37 +1,17 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<!-- Main Content -->
-<section class="section">
-    <div class="section-header">
-        <h1>Nhà cung cấp</h1>
-    </div>
-
-    <div class="section-body">
-
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Danh sách nhà cung cấp</h4>
-                    </div>
-                    <div class="card-body">
-                        {{-- {{ $dataTable->table() }}--}}
-                        @livewire('provider-table')
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
+    <x-index-datatable
+        title="Nhà cung cấp"
+        table="provider-table"
+        route="admin.providers.create"
+    ></x-index-datatable>
 
 @endsection
 
 @push('scripts')
 
-<x-change-status :url="route('admin.users.change-status')" type="select">
+    <x-change-status :url="route('admin.users.change-status')" type="select">
 
-</x-change-status>
+    </x-change-status>
 @endpush

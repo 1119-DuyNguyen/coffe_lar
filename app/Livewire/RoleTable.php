@@ -24,7 +24,6 @@ class RoleTable extends IndexDataTable
             TextColumn::make('name')->label('Tên chức vụ'),
             TextColumn::make('description')->label('Mô Tả'),
             TextColumn::make('created_at')->label('Ngày Tạo'),
-            TextColumn::make('action')->label('Thao Tác'),
         ];
     }
 }

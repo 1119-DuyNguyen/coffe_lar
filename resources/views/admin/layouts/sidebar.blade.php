@@ -27,16 +27,9 @@
         ,'title'=>'Dashboard','child'=>[]],
 
         ['title'=>'Nhân sự'],
-        ['name'=>'Tài khoản','icon'=>'<i class="fas fa-user"></i>','child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.users.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.users.create' ],
-        ]],
-        ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.roles.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.roles.create' ],
-        ]],
+        ['name'=>'Người dùng','icon'=>'<i class="fas fa-user"></i>','routeName'=>'admin.users.index'],
+       ['name'=>'Nhân viên','icon'=>'<i class="fas fa-user"></i>','routeName'=>'admin.employees.index'],
+        ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','routeName'=>'admin.roles.index'],
 
                ['name'=>'Tính lương','icon'=>'<i class="fas fa-file-invoice-dollar"></i>','routeName'=>'admin.products.index' ,
         'child'=>
@@ -56,19 +49,9 @@
         ]
         ],
         ['title'=>'Thương mại'],
-        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ,'child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.categories.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.categories.create' ],
-        ]],
+        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ],
 
-        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index' ,
-        'child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.products.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.products.create' ],
-
-        ]
+        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index'
 
         ],
         ['name'=>'Kho','icon'=>'<i class="fas fa-table"></i>',

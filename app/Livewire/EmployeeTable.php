@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Enums\EmployeeStatus;
 use App\Models\User;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -19,91 +21,25 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 class EmployeeTable extends IndexDataTable
 {
-    use WithExport;
-
-    public function setUp(): array
-    {
-        return [
-
-            Header::make()
-                ->showSearchInput()
-                ->withoutLoading(),
-            Footer::make()
-                ->showPerPage()
-                ->showRecordCount(),
-        ];
-    }
 
     public function datasource(): Builder
     {
         return User::employee();
     }
 
-    public function relationSearch(): array
-    {
-        return [];
-    }
-
-    public function addColumns(): PowerGridColumns
-    {
-        return PowerGrid::columns()
-            ->addColumn('employee_code')
-            ->addColumn('name')
-            ->addColumn('role', fn($model) => $model->role->name)
-            ->addColumn('status', function ($model) {
-                if ($model->id != 1) {
-                    $html = '
-                    <select name="status" data-id="' . $model->id . '" class="form-select  form-control change-status w-auto">';
-                    $statusArray = EmployeeStatus::getKeys();
-                    foreach ($statusArray as $key) {
-                        if ($model->status == EmployeeStatus::getValue($key)) {
-                            $html .= '<option value=' . EmployeeStatus::getValue(
-                                    $key
-                                ) . ' selected>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
-                        } else {
-                            $html .= '<option value=' . EmployeeStatus::getValue(
-                                    $key
-                                ) . '>' . EmployeeStatus::getMessage($key)['status'] . '</option>';
-                        }
-                    }
-
-                    $html .= '</select>';
-
-                    return $html;
-                }
-            })
-            ->addColumn('created_at_formatted', fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y'))
-            ->addColumn('action', function ($query) {
-                if ($query->id != 1) {
-                    $editBtn = "<a href='" . route(
-                            'admin.employees.edit',
-                            $query->id
-                        ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                    $deleteBtn = "<a href='" . route(
-                            'admin.employees.destroy',
-                            $query->id
-                        ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-
-                    return $editBtn . $deleteBtn;
-                }
-            });
-    }
-
-    public function columns(): array
+    protected function getColumns(): array
     {
         return [
-            Column::make('Mã nhân viên', 'employee_code', 'employee_code')->sortable(),
-            Column::make('Tên', 'name')
-                ->sortable()
-                ->searchable(),
-            Column::make('Chức vụ', 'role'),
-            Column::make('Trạng Thái', 'status'),
-            Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
-                ->sortable(),
-
-            Column::make('Thao Tác', 'action')
+            TextColumn::make('employee_code')->label('Mã nhân viên'),
+            TextColumn::make('name')->label('Tên')->sortable(),  // Maintains sortable for 'name'
+            TextColumn::make('role.name')->label('Chức vụ'),
+            ToggleColumn::make('status')->label('Trạng Thái'),
+            TextColumn::make('created_at')->label('Ngày Tạo')->sortable(),  // Maintains sortable for 'created_at'
+            TextColumn::make('action')->label('Thao Tác'),
         ];
     }
+
+
 
     //    public function filters(): array
     //    {

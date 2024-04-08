@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Filament\Tables\Table;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -79,6 +81,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilamentColor::register([
+            'danger' => Color::Red,
+            'gray' => Color::Zinc,
+            'info' => Color::Blue,
+            'primary' => Color::hex('#6777ef'),
+            'success' => Color::Green,
+            'warning' => Color::Amber,
+        ]);
         Paginator::useBootstrap();
         //
         App::setLocale('vi');

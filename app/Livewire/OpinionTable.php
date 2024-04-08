@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Opinion;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -18,76 +19,23 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 class OpinionTable extends IndexDataTable
 {
-    use WithExport;
+    protected string $buttonEditRoute = "admin.opinions.edit";
+    protected string $buttonDeleteRoute = "admin.opinions.destroy";
 
-    public function setUp(): array
-    {
-        return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showSearchInput(),
-            Footer::make()
-                ->showPerPage()
-                ->showRecordCount(),
-        ];
-    }
 
     public function datasource(): Builder
     {
-        return Opinion::query();
+        return Opinion::query()->with('typeOpinion');
     }
 
-    public function relationSearch(): array
-    {
-        return [];
-    }
-
-    public function addColumns(): PowerGridColumns
-    {
-        return PowerGrid::columns()
-            ->addColumn('id')
-            ->addColumn('type_opinion', fn($model) => $model->typeOpinion->name)
-            ->addColumn('topic')
-            /** Example of custom column using a closure **/
-            ->addColumn('topic_lower', fn(Opinion $model) => strtolower(e($model->topic)))
-            ->addColumn('content')
-            ->addColumn(
-                'created_at_formatted',
-                fn(Opinion $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
-            )
-            ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route(
-                        'admin.opinions.edit',
-                        $query->id
-                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='" . route(
-                        'admin.opinions.destroy',
-                        $query->id
-                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-
-                return $editBtn . $deleteBtn;
-            });
-    }
-
-    public function columns(): array
+    protected function getColumns(): array
     {
         return [
-            Column::make('Id', 'id')
-                ->sortable()
-                ->searchable(),
-            Column::make('Loại ý kiến', 'type_opinion'),
-            Column::make('Chủ đề', 'topic')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Nội dung', 'content'),
-
-            Column::make('Ngày tạo', 'created_at_formatted', 'created_at')
-                ->sortable(),
-
-            Column::make('Thao Tác', 'action')
-
+            TextColumn::make('id')->label('Id'),
+            TextColumn::make('typeOpinion.name')->label('Loại ý kiến'),
+            TextColumn::make('topic')->label('Chủ đề')->sortable(),  // Maintains sortable for 'topic'
+            TextColumn::make('content')->label('Nội dung'),
+            TextColumn::make('created_at')->label('Ngày tạo')->sortable(),  // Maintains sortable for 'created_at'
         ];
     }
 

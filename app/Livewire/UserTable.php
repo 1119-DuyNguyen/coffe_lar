@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -18,92 +20,30 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 class UserTable extends IndexDataTable
 {
-    use WithExport;
 
-    public function setUp(): array
+
+    protected string $buttonEditRoute = "admin.users.edit";
+    protected string $buttonDeleteRoute = "admin.users.destroy";
+
+    protected function getColumns(): array
     {
-        //        $this->showCheckBox();
-
         return [
-            //            Exportable::make('export')
-            //                ->striped()
-            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()
-                ->showSearchInput()
-                ->withoutLoading(),
-            Footer::make()
-                ->showPerPage()
-                ->showRecordCount(),
+            TextColumn::make('id')->label('Id'),
+            TextColumn::make('name')->label('Tên'),
+            TextColumn::make('email')->label('Email'),
+            TextColumn::make('phone')->label('Điện Thoại'),
+            ToggleColumn::make('status')->label('Trạng Thái'),
+            TextColumn::make('created_at')->label('Ngày Tạo'),
         ];
     }
+
 
     public function datasource(): Builder
     {
         return User::query()->with('role');
     }
 
-    public function relationSearch(): array
-    {
-        return [];
-    }
 
-    public function addColumns(): PowerGridColumns
-    {
-        return PowerGrid::columns()
-            ->addColumn('id')
-            ->addColumn('name')
-            ->addColumn('email')
-            ->addColumn('phone')
-            ->addColumn('status', function ($model) {
-                if ($model->id != 1) {
-                    return '<label class="custom-switch mt-2">
-                        <input type="checkbox" ' . ($model->status ? "checked" : '') . ' name="custom-switch-checkbox" data-id="' . $model->id . '" class="custom-switch-input change-status" >
-                        <span class="custom-switch-indicator"></span>
-                    </label>';
-                }
-            })
-            ->addColumn(
-                'created_at_formatted',
-                fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
-            )
-            ->addColumn('action', function ($query) {
-                if ($query->id != 1) {
-                    $editBtn = "<a href='" . route(
-                            'admin.users.edit',
-                            $query->id
-                        ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
-                    $deleteBtn = "<a href='" . route(
-                            'admin.users.destroy',
-                            $query->id
-                        ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-
-                    return $editBtn . $deleteBtn;
-                }
-            });
-    }
-
-    public function columns(): array
-    {
-        return [
-            Column::make('Id', 'id')->sortable(),
-            Column::make('Tên', 'name')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Email', 'email')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Điện Thoại', 'phone')
-                ->sortable()
-                ->searchable(),
-            Column::make('Trạng Thái', 'status'),
-            Column::make('Ngày Tạo', 'created_at_formatted', 'created_at')
-                ->sortable(),
-
-            Column::make('Thao Tác', 'action')
-        ];
-    }
 
     //    public function filters(): array
     //    {
@@ -147,8 +87,4 @@ class UserTable extends IndexDataTable
         ];
     }
     */
-    protected function getColumns(): array
-    {
-        // TODO: Implement getColumns() method.
-    }
 }

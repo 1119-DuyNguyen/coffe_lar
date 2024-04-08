@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `slug`, `icon`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Cà Phê đóng gói', 'ca-phe-dong-goi', 'fas fa-coffee', 1, NULL, '2023-11-16 06:03:01'),
-(2, 'Quà tặng cao cấp', 'qua-tang-cao-cap', 'fas fa-gift', 1, NULL, '2023-11-16 06:02:16'),
-(3, 'Vật phẩm bán lẻ', 'vat-pham-ban-le', 'fas fa-prescription-bottle', 1, NULL, '2023-11-16 06:06:11');
+INSERT INTO `categories` (`id`, `name`, `slug`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Cà Phê đóng gói', 'ca-phe-dong-goi', 1, '2023-09-23 17:52:28', '2023-11-16 06:03:01'),
+(2, 'Quà tặng cao cấp', 'qua-tang-cao-cap', 1, '2023-09-23 17:52:28', '2023-11-16 06:02:16'),
+(3, 'Vật phẩm bán lẻ', 'vat-pham-ban-le', 1, '2023-09-23 17:52:28', '2023-11-16 06:06:11');
 COMMIT;
 
 
