@@ -6,6 +6,8 @@ use App\Http\Services\SettingService;
 use App\Models\GeneralSetting;
 use App\Models\LogoSetting;
 use App\Models\Role;
+use Filament\Notifications\Notification;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -89,6 +91,15 @@ class AppServiceProvider extends ServiceProvider
             'success' => Color::Green,
             'warning' => Color::Amber,
         ]);
+        ToggleColumn::configureUsing(function (ToggleColumn $column): void {
+            $column
+                ->afterStateUpdated(function ($record, $state) {
+                    Notification::make()
+                        ->title('Cập nhập thành công')
+                        ->success()
+                        ->send();
+                });
+        });
         Paginator::useBootstrap();
         //
         App::setLocale('vi');

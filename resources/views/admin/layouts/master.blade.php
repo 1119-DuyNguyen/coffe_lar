@@ -25,9 +25,9 @@
             <!-- CSS Libraries -->
 
             {{--            <link rel="stylesheet" href="{{asset("backend/assets/modules/summernote/summernote-bs4.css")}}">--}}
-            <link rel="stylesheet"
-                  href="{{asset("backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css")}}">
-            <link rel="stylesheet" href="{{asset("backend/assets/modules/datatables/datatables.min.css")}}">
+            {{--            <link rel="stylesheet"--}}
+            {{--                  href="{{asset("backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css")}}">--}}
+            {{--            <link rel="stylesheet" href="{{asset("backend/assets/modules/datatables/datatables.min.css")}}">--}}
 
             {{--            <link rel="stylesheet" href="{{asset('lib/sweetalert/sweetalert.all.min.css')}}">--}}
 

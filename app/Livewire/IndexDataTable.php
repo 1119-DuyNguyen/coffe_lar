@@ -3,16 +3,17 @@
 namespace App\Livewire;
 
 
-use App\Models\Receipt;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 abstract class IndexDataTable extends Component implements HasForms, HasTable
@@ -27,6 +28,7 @@ abstract class IndexDataTable extends Component implements HasForms, HasTable
 
     abstract protected function getColumns(): array;
 
+
     protected function getActionBtns()
     {
         $actionBtn = [];
@@ -37,20 +39,40 @@ abstract class IndexDataTable extends Component implements HasForms, HasTable
                 ->url(fn($record): string => route($this->buttonEditRoute, $record))
                 ->openUrlInNewTab()
                 ->color('info')
+                ->tooltip("Sửa")
                 ->icon('heroicon-o-pencil-square');
         }
         if (!empty($this->buttonDeleteRoute)) {
-            $actionBtn[] = Action::make('delete')
+            $actionBtn[] = DeleteAction::make('delete')
+                ->modalHeading(
+                    fn($record): string => __('filament-actions::delete.single.modal.heading', ['label' => "tài nguyên"]
+                    )
+                )
                 ->label("")
+                ->tooltip("Xóa")
                 ->button()
-                ->url(fn($record): string => route($this->buttonDeleteRoute, $record))
-                ->openUrlInNewTab()
+//                ->url(fn($record): string => route($this->buttonDeleteRoute, $record))
+//                ->openUrlInNewTab()
                 ->color('danger')
                 ->icon('heroicon-o-trash');
         }
         return $actionBtn;
     }
 
+    private function addDynamicEventColumns(array $columns)
+    {
+//        foreach ($columns as $a) {
+//            if ($a instanceof ToggleColumn) {
+//                $a->afterStateUpdated(function ($record, $state) {
+//                    Notification::make()
+//                        ->title('Cập nhập thành công')
+//                        ->success()
+//                        ->send();
+//                });
+//            }
+//        }
+        return $columns;
+    }
 
     public function table(Table $table): Table
     {
@@ -58,7 +80,7 @@ abstract class IndexDataTable extends Component implements HasForms, HasTable
             ->query(
                 $this->datasource()
             )
-            ->columns($this->getColumns())
+            ->columns($this->addDynamicEventColumns($this->getColumns()))
             ->actions($this->getActionBtns())
             ->bulkActions([
                 // ...

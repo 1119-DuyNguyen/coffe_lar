@@ -7,6 +7,7 @@
 ])
 @php
     $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
+    $indexRoute= ($method === "PUT"|| $method === "PATCH") ? substr($route, 0, strrpos($route, "/")) : $route;
     $textSubmitData = $isUpdateMethod ? "Cập nhập " : "Khởi tạo ";
 @endphp
 {{--cru =  create read update --}}
@@ -24,8 +25,15 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="lowercase-and-capitalize-first-letter">{{  $textSubmitData }}</h4>
+
                     </div>
                     <div class="card-body">
+
+                        <div class="w-100 text-right p-4">
+                            <a class="btn btn-primary "
+                               href="{{$indexRoute}}"><i class="fas fa-long-arrow-alt-left"></i> Quay lại danh sách</a>
+
+                        </div>
                         @if(!empty($formElements))
                             <form
                                 action="{{$route}}"
