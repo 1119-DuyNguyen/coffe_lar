@@ -10,6 +10,7 @@ use Filament\Forms\Get;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Filament\Tables\Columns\TextColumn;
@@ -19,6 +20,7 @@ class OrderTable extends IndexDataTable
 {
 
     protected string $buttonPrintRoute = "user.order.show";
+    protected $listeners = ['refreshTable' => '$refresh'];
 
     protected function datasource(): Builder
     {
@@ -36,13 +38,17 @@ class OrderTable extends IndexDataTable
                 fn($record): bool => $record->payment_status
             ),
             SelectColumn::make('order_status')->label('Trạng thái đơn hàng')
+                ->options(
+                    OrderStatus::collectionValues()
+                )
+                ->selectablePlaceholder(false)
                 ->disabled(function ($record
                 ): bool {
                     return $record->order_status == OrderStatus::canceled || $record->order_status == OrderStatus::delivered;
                 }
-                )->selectablePlaceholder(false)->options(
-                    OrderStatus::collectionValues()
-                ),
+                )->afterStateUpdated(function ($record, $state) {
+                    $this->dispatch('refreshTable');
+                }),
             TextColumn::make('created_at')->label('Ngày tạo (định dạng)'),
         ];
     }
