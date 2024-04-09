@@ -3,21 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Checkin;
-use Filament\Forms\Components\DatePicker;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
-use PowerComponents\LivewirePowerGrid\Facades\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridColumns;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use App\Models\User;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
+use PowerComponents\LivewirePowerGrid\Facades\Filter;
 
 class CheckinTable extends IndexDataTable
 {
@@ -54,6 +43,4 @@ class CheckinTable extends IndexDataTable
                 ->optionLabel('name'),
         ];
     }
-
-    
 }

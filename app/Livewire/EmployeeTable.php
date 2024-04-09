@@ -2,23 +2,11 @@
 
 namespace App\Livewire;
 
-use App\Enums\EmployeeStatus;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
-use PowerComponents\LivewirePowerGrid\Facades\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridColumns;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 class EmployeeTable extends IndexDataTable
 {
@@ -38,7 +26,6 @@ class EmployeeTable extends IndexDataTable
             TextColumn::make('role.name')->label('Chức vụ'),
             ToggleColumn::make('status')->label('Trạng Thái'),
             TextColumn::make('created_at')->label('Ngày Tạo')->sortable(),  // Maintains sortable for 'created_at'
-            TextColumn::make('action')->label('Thao Tác'),
         ];
     }
 
