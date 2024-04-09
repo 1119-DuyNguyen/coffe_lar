@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Category;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Support\Carbon;
@@ -38,15 +39,5 @@ class CategoryTable extends IndexDataTable
             ToggleColumn::make('status')->label('Trạng Thái'),
         ];
     }
-    /*
-    public function actionRules($row): array
-    {
-       return [
-            // Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($row) => $row->id === 1)
-                ->hide(),
-        ];
-    }
-    */
+    
 }

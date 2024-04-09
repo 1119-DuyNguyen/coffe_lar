@@ -20,7 +20,6 @@
                             <form action="{{route('admin.categories.update', $category->id)}}" method="POST">
                                 @csrf
                                 @method('PUT')
-
                                 <div class="form-group">
                                     <label>Tên</label>
                                     <input type="text" class="form-control" name="name" value="{{$category->name}}">

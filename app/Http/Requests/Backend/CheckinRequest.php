@@ -24,7 +24,7 @@ class CheckinRequest extends FormRequest
         return [
             'contract_id' => ['required'],
             'date' => ['required'],
-            'over_times' => ['required'],
+            'over_times' => ['required', 'numeric'],
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Support\Carbon;
@@ -37,12 +38,13 @@ class ProductTable extends IndexDataTable
             TextColumn::make('thumb_image')->label('Ảnh Nền'),
             TextColumn::make('name')->label('Tên Sản Phẩm'),
             TextColumn::make('category_id')->label('Danh mục'),
-            TextColumn::make('description')->label('Mô Tả'),
-            TextColumn::make('content')->label('Nội Dung'),
+            TextColumn::make('description')->label('Mô Tả')->limit(25),
+            TextColumn::make('content')->label('Nội Dung')->limit(25),
             TextColumn::make('price')->label('Đơn Giá( đ )'),
             TextColumn::make('created_at')->label('Ngày Tạo'),
             ToggleColumn::make('status')->label('Trạng Thái'),
 
         ];
     }
+
 }

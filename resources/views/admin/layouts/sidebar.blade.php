@@ -69,7 +69,7 @@
 
         ],
 
-                ['name'=>'Nhập hàng','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
+                ['name'=>'Phiếu nhập','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
 
         ['name'=>'Đơn đặt hàng','icon'=>'<i class="fas fa-file-alt"></i>','routeName'=>'admin.orders.index' ],
 

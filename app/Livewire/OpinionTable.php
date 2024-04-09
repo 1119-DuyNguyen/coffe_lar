@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Opinion;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -39,41 +40,27 @@ class OpinionTable extends IndexDataTable
         ];
     }
 
-    // public function filters(): array
-    // {
-    //     return [
-    //         Filter::inputText('topic')->operators(['contains']),
-    //         Filter::inputText('content')->operators(['contains']),
-    //         Filter::datetimepicker('created_at'),
-    //     ];
-    // }
-
-    // #[\Livewire\Attributes\On('edit')]
-    // public function edit($rowId): void
-    // {
-    //     $this->js('alert(' . $rowId . ')');
-    // }
-
-    // public function actions(\App\Models\Opinion $row): array
-    // {
-    //     return [
-    //         Button::add('edit')
-    //             ->slot('Edit: ' . $row->id)
-    //             ->id()
-    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-    //             ->dispatch('edit', ['rowId' => $row->id])
-    //     ];
-    // }
-
-    /*
-    public function actionRules($row): array
+    protected function getDataTableFilters(): array
     {
-       return [
-            // Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($row) => $row->id === 1)
-                ->hide(),
+        return [
+            \Filament\Tables\Filters\Filter::make('created_at')
+                ->form([
+                    DatePicker::make('created_from')->label("Từ ngày"),
+                    DatePicker::make('created_until')->label("Tới ngày"),
+                ])
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['created_from'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        );
+                })
         ];
     }
-    */
+
+  
 }

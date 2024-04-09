@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Backend\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\CRUDController;
 use App\Http\Requests\ProfileRegisterRequest;
 use App\Models\Role;
 use App\Models\User;
-use App\Traits\CrudTrait;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends CRUDController
 {
-    use CrudTrait;
 
     protected function unsetUpdateEmptyField(): array
     {
@@ -25,7 +23,7 @@ class UserController extends Controller
 
     protected function addAutoInput(Request $request): array
     {
-        $role_id = $request->input('role', []);
+        $role_id = $request->input('role_id', []);
         return ['role_id' => $role_id];
     }
 
@@ -34,20 +32,53 @@ class UserController extends Controller
         return ProfileRegisterRequest::class;
     }
 
-    public function index()
+    protected function CRUDViewPath(): string
     {
-        return view('admin.users.index');
+        return "admin.users";
+        // TODO: Implement CRUDViewPath() method.
     }
 
-    public function create()
+    protected function getNameRouteCRU(): string
     {
-        $roleList = Role::all()->whereNotIn('id', ['1']);
-        return view('admin.users.create', compact('roleList'));
+        return "admin.users";
+        // TODO: Implement getNameRouteCRU() method.
     }
 
-    public function edit(User $user)
+    protected function getFormElements(): array
     {
-        $roleList = Role::all()->whereNotIn('id', ['1']);
-        return view('admin.users.edit', compact(['user', 'roleList']));
+        return [
+            [
+                'type' => 'text',
+                'name' => "name",
+                'class' => "",
+                'label' => "Tên người dùng",
+            ],
+            [
+                'type' => 'text',
+                'name' => "email",
+                'class' => "",
+                'label' => "Email",
+            ],
+            [
+                'type' => 'text',
+                'name' => "phone",
+                'class' => "",
+                'label' => "Số điện thoại",
+            ],
+            [
+                'type' => 'select',
+                'name' => "role_id",
+                'value' => function ($resource) {
+                    return $resource->role_id;
+                },
+                'class' => "",
+                'label' => "Vai trò",
+                'optionValues' => Role::all()->toArray(),
+                'optionKey' => 'id',
+                'optionLabel' => 'name'
+            ],
+
+        ];
+        // TODO: Implement getFormElements() method.
     }
 }
