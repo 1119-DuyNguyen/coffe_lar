@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\OpinionStatus;
 use App\Models\Opinion;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -60,6 +61,32 @@ final class OpinionTable extends PowerGridComponent
                 $deleteBtn = "<a href='" . route('admin.opinions.destroy', $query->id) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
+            })
+            ->addColumn('opinion_status', function ($model) {
+                if ($model->opinion_status == OpinionStatus::rejected || $model->opinion_status == OpinionStatus::accepted) {
+                    return "<span class='badge " . ($model->opinion_status == OpinionStatus::rejected ? "bg-danger" : "bg-success") . " text-white'>" . OpinionStatus::getMessage(
+                        OpinionStatus::getKey($model->opinion_status)
+                    )['status'] . "</span>";
+                }
+                $html = '
+                    <select name="opinion_status" data-id="' . $model->id . '" class="form-select  form-control change-status w-100">';
+
+                $statusArray = OpinionStatus::getKeys();
+                foreach ($statusArray as $key) {
+                    if ($model->opinion_status == OpinionStatus::getValue($key)) {
+                        $html .= '<option value=' . OpinionStatus::getValue(
+                            $key
+                        ) . ' selected>' . OpinionStatus::getMessage($key)['status'] . '</option>';
+                    } else {
+                        $html .= '<option value=' . OpinionStatus::getValue($key) . '>' . OpinionStatus::getMessage(
+                            $key
+                        )['status'] . '</option>';
+                    }
+                }
+
+                $html .= '</select>';
+
+                return $html;
             });
     }
 
@@ -75,7 +102,7 @@ final class OpinionTable extends PowerGridComponent
                 ->searchable(),
 
             Column::make('Nội dung', 'content'),
-
+            Column::make('Trạng thái ý kiến', 'opinion_status'),
             Column::make('Ngày tạo', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
@@ -84,14 +111,15 @@ final class OpinionTable extends PowerGridComponent
         ];
     }
 
-    // public function filters(): array
-    // {
-    //     return [
-    //         Filter::inputText('topic')->operators(['contains']),
-    //         Filter::inputText('content')->operators(['contains']),
-    //         Filter::datetimepicker('created_at'),
-    //     ];
-    // }
+    public function filters(): array
+    {
+        return [
+            Filter::select('opinion_status', 'opinion_status')
+                ->dataSource(OpinionStatus::collectionValues())
+                ->optionValue('value')
+                ->optionLabel('label'),
+        ];
+    }
 
     // #[\Livewire\Attributes\On('edit')]
     // public function edit($rowId): void
@@ -105,7 +133,7 @@ final class OpinionTable extends PowerGridComponent
     //         Button::add('edit')
     //             ->slot('Edit: ' . $row->id)
     //             ->id()
-    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:bopinion-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
     //             ->dispatch('edit', ['rowId' => $row->id])
     //     ];
     // }

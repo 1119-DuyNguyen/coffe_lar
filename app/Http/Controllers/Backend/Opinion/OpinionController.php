@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\OpinionRequest;
 use App\Models\Opinion;
+use App\Enums\OpinionStatus;
 use App\Models\TypeOpinion;
 use App\Models\User;
 use Illuminate\Http\Request;
+
 
 class OpinionController extends CRUDController
 {
@@ -73,6 +75,24 @@ class OpinionController extends CRUDController
                 'class' => "",
                 'label' => "Nội dung",
             ],
+            [
+                'type' => 'text',
+                'name' => "content",
+                'class' => "",
+                'label' => "Nội dung",
+            ],
         ];
+    }
+    public function changeOpinionStatus(Request $request)
+    {
+        $opinion = Opinion::findOrFail($request->input('id'));
+        if ($opinion->opinion_status == OpinionStatus::rejected || $opinion->opinion_status == OpinionStatus::accepted) {
+            return response(['status' => 'error', 'message' => 'Không được phép thay đổi trạng thái đơn hàng']);
+        }
+
+        $opinion->opinion_status = $request->input('status');
+        $opinion->save();
+
+        return response(['status' => 'success', 'message' => 'Cập nhập trạng thái thành công']);
     }
 }

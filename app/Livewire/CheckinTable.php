@@ -24,9 +24,9 @@ final class CheckinTable extends PowerGridComponent
     public function setUp(): array
     {
         return [
-//            Exportable::make('export')
-//                ->striped()
-//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            //            Exportable::make('export')
+            //                ->striped()
+            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -48,25 +48,26 @@ final class CheckinTable extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('username', fn($model) => $model->contract->user->name)
+            ->addColumn('username', fn ($model) => $model->contract->user->name)
             ->addColumn('reality_times')
+            ->addColumn('auth_day_off')
             ->addColumn('over_times')
-            ->addColumn('salary', fn($model) => $model->contract->salary)
+            ->addColumn('salary', fn ($model) => $model->contract->salary)
             ->addColumn('total_salary')
-            ->addColumn('date_formatted', fn(Checkin $model) => Carbon::parse($model->date)->format('d/m/Y'))
+            ->addColumn('date_formatted', fn (Checkin $model) => Carbon::parse($model->date)->format('d/m/Y'))
             ->addColumn(
                 'created_at_formatted',
-                fn(Checkin $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+                fn (Checkin $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
             )
             ->addColumn('action', function ($query) {
                 $editBtn = "<a href='" . route(
-                        'admin.checkins.edit',
-                        $query->id
-                    ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                    'admin.checkins.edit',
+                    $query->id
+                ) . "' class='btn btn-primary'><i class='far fa-edit'></i></a>";
                 $deleteBtn = "<a href='" . route(
-                        'admin.checkins.destroy',
-                        $query->id
-                    ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                    'admin.checkins.destroy',
+                    $query->id
+                ) . "' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
 
                 return $editBtn . $deleteBtn;
             });
@@ -85,7 +86,9 @@ final class CheckinTable extends PowerGridComponent
             Column::make('Số ngày công', 'reality_times')
                 ->sortable()
                 ->searchable(),
-
+            Column::make('Số ngày nghỉ có phép', 'auth_day_off')
+                ->sortable()
+                ->searchable(),
             Column::make('Số ngày tăng ca', 'over_times')
                 ->sortable()
                 ->searchable(),

@@ -20,12 +20,35 @@ class OpinionSeeder extends Seeder
                 'type_opinion_id' => '1',
                 'topic' => 'Xin phép nghỉ việc',
                 'content' => 'Xin phép hội đồng cho phép tôi được tạm dừng làm việc tại cơ sở vì lí do gia dình',
+                'opinion_status' => 0,
             ],
             [
-                'user_id' => 7,
+                'user_id' => 4,
                 'type_opinion_id' => '2',
                 'topic' => 'Xin nghỉ phép',
                 'content' => 'Tôi xin phép được nghỉ một hôm vì có công việc cá nhân cần giải quyết',
+                'opinion_status' => 0,
+            ],
+            [
+                'user_id' => 5,
+                'type_opinion_id' => '2',
+                'topic' => 'Xin nghỉ phép',
+                'content' => 'Tôi xin phép được nghỉ một hôm vì có công việc cá nhân cần giải quyết',
+                'opinion_status' => 0,
+            ],
+            [
+                'user_id' => 4,
+                'type_opinion_id' => '1',
+                'topic' => 'Xin phép nghỉ việc',
+                'content' => 'Xin phép hội đồng cho phép tôi được tạm dừng làm việc tại cơ sở vì lí do gia dình',
+                'opinion_status' => 0,
+            ],
+            [
+                'user_id' => 6,
+                'type_opinion_id' => '2',
+                'topic' => 'Xin nghỉ phép',
+                'content' => 'Tôi xin phép được nghỉ một hôm vì có công việc cá nhân cần giải quyết',
+                'opinion_status' => 0,
             ],
         ];
         foreach ($seedData as $data) {

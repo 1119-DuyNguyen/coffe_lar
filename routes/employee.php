@@ -20,7 +20,9 @@ Route::resource('providers', ProviderController::class);
 
 Route::resource('contracts', ContractController::class);
 
+Route::put('opinions/change-status', [OpinionController::class, 'changeOpinionStatus'])->name('opinions.change-status');
 Route::resource('opinions', OpinionController::class);
+
 
 /** receipt */
 Route::resource('receipts', ReceiptController::class);

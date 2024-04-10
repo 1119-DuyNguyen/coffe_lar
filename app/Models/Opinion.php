@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Observers\OpinionObserver;
 
 class Opinion extends Model
 {
@@ -15,13 +16,17 @@ class Opinion extends Model
         'user_id',
         'topic',
         'content',
+        'opinion_status',
     ];
 
     public function typeOpinion(): belongsTo
     {
         return $this->belongsTo(TypeOpinion::class);
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function getTopicAttribute($value)
     {
         return $value;
@@ -45,5 +50,12 @@ class Opinion extends Model
     public function setContentAttribute($value)
     {
         $this->attributes['content'] = $value;
+    }
+    protected static function boot()
+    {
+        // you MUST call the parent boot method
+        parent::boot();
+
+        static::observe(OpinionObserver::class);
     }
 }
