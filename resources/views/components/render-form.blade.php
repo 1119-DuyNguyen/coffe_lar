@@ -3,7 +3,8 @@
 
 @if(!empty($formElement))
     <div class="form-group">
-        <label class="lowercase-and-capitalize-first-letter">{{$formElement['label'] ?? ""}}</label>
+        <label
+            class="lowercase-and-capitalize-first-letter">{{$formElement['label'] ?? ""}}{!!   empty($formElement['optional']) ? '<sup class="text-danger-600 dark:text-danger-400 font-medium">*</sup>' :""  !!}</label>
         @switch($formElement['type'])
             @case('select')
                 <select class="form-control" name="{{$formElement['name']}}">

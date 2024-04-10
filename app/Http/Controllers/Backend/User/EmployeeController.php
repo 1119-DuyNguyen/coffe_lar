@@ -47,6 +47,12 @@ class EmployeeController extends CRUDController
             ],
             [
                 'type' => 'text',
+                'name' => "employee_code",
+                'class' => "",
+                'label' => "Mã nhân viên",
+            ],
+            [
+                'type' => 'text',
                 'name' => "phone",
                 'class' => "",
                 'label' => "Số điện thoại",
@@ -59,7 +65,7 @@ class EmployeeController extends CRUDController
             ],
             [
                 'type' => 'select',
-                'name' => "role",
+                'name' => "role_id",
                 'value' => function ($resource) {
                     return $resource->role_id;
                 },
@@ -69,8 +75,36 @@ class EmployeeController extends CRUDController
                 'optionKey' => 'id',
                 'optionLabel' => 'name'
             ],
-
-
+            [
+                'type' => 'date',
+                'name' => "day_of_birth",
+                'class' => "",
+                'label' => "Ngày sinh",
+            ],
+            [
+                'type' => 'select',
+                'name' => "gender",
+                'value' => function ($resource) {
+                    return $resource->gender;
+                },
+                'optionValues' => [['label' => 'nam', "value" => 1], ['label' => 'nữ', "value" => 0]],
+                'optionKey' => 'value',
+                'optionLabel' => 'label',
+                'class' => "",
+                'label' => "Giới tính",
+            ],
+            [
+                'type' => '',
+                'name' => "tax_code",
+                'class' => "",
+                'label' => "Mã số thuế cá nhân",
+            ],
+            [
+                'type' => 'text',
+                'name' => "bank_number",
+                'class' => "",
+                'label' => "Số tài khoản ngân hàng",
+            ],
         ];
     }
 

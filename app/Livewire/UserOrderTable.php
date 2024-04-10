@@ -19,7 +19,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class UserOrderTable extends PowerGridComponent
+class UserOrderTable extends IndexDataTable
 {
     use WithExport;
 
@@ -58,28 +58,36 @@ final class UserOrderTable extends PowerGridComponent
             ->addColumn('total')
             ->addColumn('payment_status', function ($model) {
                 return ($model->payment_status
-                    ?  ("<span class='badge bg-success text-white'> Đã thanh toán</span>")
+                    ? ("<span class='badge bg-success text-white'> Đã thanh toán</span>")
                     : ("<span class='badge bg-danger text-white'> Chưa thanh toán</span>"));
             })
-            ->addColumn('order_status',  function ($model) {
+            ->addColumn('order_status', function ($model) {
                 $string = match ($model->order_status) {
                     OrderStatus::canceled => 'bg-danger',
                     OrderStatus::delivered => 'bg-success',
                     default => 'bg-info',
                 };;
-                return "<span class='badge " . $string . " text-white'>" . OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'] . "</span>";
-
+                return "<span class='badge " . $string . " text-white'>" . OrderStatus::getMessage(
+                        OrderStatus::getKey($model->order_status)
+                    )['status'] . "</span>";
                 //                return OrderStatus::getMessage(OrderStatus::getKey($model->order_status))['status'];
             })
-            ->addColumn('created_at_formatted', fn (Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn(
+                'created_at_formatted',
+                fn(Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+            )
             ->addColumn('action', function ($query) {
                 //                $showBtn = "<a href='".route('admin.orders.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
                 //                $deleteBtn = "<a href='".route('admin.orders.destroy', $query->id)."' class='btn btn-danger ml-2 mr-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-                $printBtn = "<a href='" . route('user.order.show', $query->id) . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
+                $printBtn = "<a href='" . route(
+                        'user.order.show',
+                        $query->id
+                    ) . "' class='btn btn-warning'><i class='fas fa-print'></i></a>";
 
                 return $printBtn;
             });
     }
+
     public function filters(): array
     {
         /*
@@ -99,6 +107,7 @@ final class UserOrderTable extends PowerGridComponent
             //                ->optionLabel('label'),
         ];
     }
+
     public function columns(): array
     {
         return [
@@ -121,7 +130,6 @@ final class UserOrderTable extends PowerGridComponent
     //            Filter::datetimepicker('created_at'),
     //        ];
     //    }
-
 
 
     /*

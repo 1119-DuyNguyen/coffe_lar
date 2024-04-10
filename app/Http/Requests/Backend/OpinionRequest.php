@@ -22,8 +22,10 @@ class OpinionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'topic' => ['required'],
-            'content' => ['required'],
+            'type_opinion_id' => ['required', 'numeric'],
+            'user_id' => ['required', 'numeric'],
+            'topic' => ['required', 'max:250'],
+            'content' => ['required', 'max:250'],
         ];
     }
 }
