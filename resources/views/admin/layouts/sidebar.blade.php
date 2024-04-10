@@ -1,21 +1,34 @@
 @php use App\Http\Services\GateService;use Illuminate\Support\Facades\Gate; @endphp
 <div class="main-sidebar sidebar-style-2">
-    <div class="sidebar-brand mt-3">
-        <a href="{{route('admin.dashboard.index')}}">
-            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">
-        </a>
-    </div>
-    <div class="sidebar-brand sidebar-brand-sm">
-        <a href="{{route('admin.dashboard.index')}}">
-            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">
-        </a>
+    {{--    <div class="sidebar-brand mt-3 ">--}}
+    {{--        <a href="{{route('admin.dashboard.index')}}">--}}
+    {{--            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">--}}
+    {{--        </a>--}}
+    {{--    </div>--}}
+    {{--    <div class="sidebar-brand sidebar-brand-sm">--}}
+    {{--        <a href="{{route('admin.dashboard.index')}}">--}}
+    {{--            <img src="{{ asset('img/logo.png')}}" class="img-fluid h-100 img-thumbnail">--}}
+    {{--        </a>--}}
 
 
-    </div>
+    {{--    </div>--}}
     <ul class="sidebar-menu">
-        <li><a class="nav-link " href="{{route('home')}}">
-                <i class="fas fa-arrow-left"></i>
-                <span>Quay lại trang chủ</span></a></li>
+        <li>
+            <form action="{{route('logout')}}" method="POST">
+                @csrf
+
+                <a class="nav-link " href="#" onclick="this.closest('form').submit();return false;"
+                >
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+
+
+            </form>
+        </li>
+        {{--        <li><a class="nav-link " href="{{route('home')}}">--}}
+        {{--                <i class="fas fa-arrow-left"></i>--}}
+        {{--                <span>Quay lại tra</span></a></li>--}}
         {{-- [ name=>str, title=>str,child=>[]]--}}
         @php
             $listLanguage="Danh sách";
@@ -27,21 +40,10 @@
         ,'title'=>'Dashboard','child'=>[]],
 
         ['title'=>'Nhân sự'],
-        ['name'=>'Tài khoản','icon'=>'<i class="fas fa-user"></i>','child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.users.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.users.create' ],
-        ]],
-        ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.roles.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.roles.create' ],
-        ]],
 
-               ['name'=>'Tính lương','icon'=>'<i class="fas fa-file-invoice-dollar"></i>','routeName'=>'admin.products.index' ,
-        'child'=>
-        [
-
+        ['name'=>'Người dùng','icon'=>'<i class="fas fa-user"></i>','routeName'=>'admin.users.index'],
+       ['name'=>'Nhân viên','icon'=>'<i class="fas fa-user-tie"></i>','routeName'=>'admin.employees.index'],
+        ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','routeName'=>'admin.roles.index'],
         ['name'=>'Loại ý kiến','icon'=>'<i class="fas fa-comment-dots"></i>','routeName'=>'admin.type-opinions.index'],
 
 
@@ -53,38 +55,35 @@
 
 
         ['name'=>'Chấm công','icon'=>'<i class="fas fa-calculator"></i>','routeName'=>'admin.checkins.index'],
-        ]
-        ],
+
+//               ['name'=>'Tính lương','icon'=>'<i class="fas fa-file-invoice-dollar"></i>','routeName'=>'admin.products.index' ,
+//        'child'=>
+//        [
+//
+//  ]
+//        ],
         ['title'=>'Thương mại'],
-        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ,'child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.categories.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.categories.create' ],
-        ]],
+        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ],
 
-        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index' ,
-        'child'=>
-        [
-        ['name'=>$listLanguage,'icon'=>'<i class="fas fa-table"></i>','routeName'=>'admin.products.index'],
-        ['name'=>$addLanguage,'icon'=>'<i class="fas fa-plus"></i>','routeName'=>'admin.products.create' ],
-
-        ]
+        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index'
 
         ],
-        ['name'=>'Kho','icon'=>'<i class="fas fa-table"></i>',
-        'child'=>
-        [
 
-        ['name'=>'Nhập hàng','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
+                ['name'=>'Phiếu nhập','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
 
         ['name'=>'Đơn đặt hàng','icon'=>'<i class="fas fa-file-alt"></i>','routeName'=>'admin.orders.index' ],
 
         ['name'=>'Nhà cung cấp','icon'=>'<i class="fas fa-shuttle-van"></i>','routeName'=>'admin.providers.index'],
 
-        ['name'=>'Thống kê','icon'=>'<i class="fas fa-scroll"></i>','routeName'=>'admin.receipts.index'],
+//        ['name'=>'Thống kê','icon'=>'<i class="fas fa-scroll"></i>','routeName'=>'admin.receipts.index'],
 
-        ]
-        ]
+//        ['name'=>'Kho','icon'=>'<i class="fas fa-table"></i>',
+//        'child'=>
+//        [
+//
+//
+//        ]
+//        ]
 
 
 
@@ -165,13 +164,19 @@
             var navActive = Array.from(document.querySelectorAll('ul.sidebar-menu a')).filter(function (a) {
                 return url.includes(a.href);
             });
+            console.log(navActive);
             navActive.forEach(nav => {
-                if (nav.href == url) {
-                    nav.parentElement.classList.add('active');
-                }
+
                 var parent = nav.closest('li.dropdown');
-                if (parent)
+                if (parent) {
+                    if (nav.href == url) {
+                        nav.parentElement.classList.add('active');
+                    }
                     parent.classList.add('active');
+                } else {
+                    nav.closest('li').classList.add('active');
+
+                }
             });
         }
         dynamicSidebar()

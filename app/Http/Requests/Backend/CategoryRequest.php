@@ -24,10 +24,14 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            'icon' => ['required', 'string'],
-            'name' => ['required', 'max:200','string', Rule::unique(Category::class,'slug')->ignore(Str::slug($this->input('name')),'slug')],
+//            'icon' => ['required', 'string'],
+            'name' => [
+                'required',
+                'max:200',
+                'string',
+                Rule::unique(Category::class, 'slug')->ignore(Str::slug($this->input('name')), 'slug')
+            ],
             'status' => ['required']
         ];
     }

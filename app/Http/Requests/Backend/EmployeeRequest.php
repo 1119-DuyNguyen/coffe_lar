@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
-use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -25,7 +22,16 @@ class EmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'name' => ['required', 'max:250'],
+            'employee_code' => ['required'],
+            'email' => ['required', 'max:250', 'email:rfc,dns'],
+            'phone' => ['required', 'phone', 'min:10'],
+            'address' => ['required', 'max:250'],
+            'role_id' => ['required'],
+            'day_of_birth' => ['required'],
+            'gender' => ['required'],
+            'tax_code' => ['required', 'max:250'],
+            'bank_number' => ['required', 'numeric'],
         ];
     }
 

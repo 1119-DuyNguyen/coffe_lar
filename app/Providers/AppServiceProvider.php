@@ -6,6 +6,8 @@ use App\Http\Services\SettingService;
 use App\Models\GeneralSetting;
 use App\Models\LogoSetting;
 use App\Models\Role;
+use Filament\Notifications\Notification;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -16,7 +18,9 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-
+use Filament\Tables\Table;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -79,9 +83,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilamentColor::register([
+            'danger' => Color::Red,
+            'gray' => Color::Zinc,
+            'info' => Color::Blue,
+            'primary' => Color::hex('#6777ef'),
+            'success' => Color::Green,
+            'warning' => Color::Amber,
+        ]);
+        ToggleColumn::configureUsing(function (ToggleColumn $column): void {
+            $column
+                ->afterStateUpdated(function ($record, $state) {
+                    Notification::make()
+                        ->title('Cập nhập thành công')
+                        ->success()
+                        ->send();
+                });
+        });
         Paginator::useBootstrap();
         //
         App::setLocale('vi');
+        Table::configureUsing(function (Table $table) {
+            $table->paginated([10]);
+        });
         try {
             /** set time zone */
             //            Config::set('app.timezone', $generalSetting->time_zone);

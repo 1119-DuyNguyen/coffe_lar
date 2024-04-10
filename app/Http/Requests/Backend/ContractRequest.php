@@ -24,11 +24,11 @@ class ContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['required'],
+            'code' => ['required', 'max:250'],
             'name' => ['required', 'max:250'],
-            'salary' => ['required'],
-            'allowance' => ['required'],
-            'end_date' => ['required'],
+            'salary' => ['required', 'numeric', 'min:0'],
+            'allowance' => ['required', 'numeric', 'min:0'],
+            'end_date' => ['required', 'date'],
         ];
     }
 }

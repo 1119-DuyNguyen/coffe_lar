@@ -163,11 +163,16 @@ return [
         'username' => 'tên đăng nhập',
         'year' => 'năm',
         'weight' => 'khối lượng',
-        'current_password' => "mật khẩu hiện tại"
-        ,
+        'current_password' => "mật khẩu hiện tại",
         'price' => "giá",
         'image' => 'ảnh',
-        'icon'=>'biểu tượng',
-        'permissions'=>'quyền'
+        'icon' => 'biểu tượng',
+        'permissions' => 'quyền',
+        "salary" => "lương",
+        "code" => "mã",
+        "allowance" => "phụ cấp",
+        "end_date" => "ngày kết thúc hợp đồng",
+        "topic" => "chủ đề",
+        "over_times" => "ngày tăng ca"
     ],
 ];

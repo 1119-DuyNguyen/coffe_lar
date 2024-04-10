@@ -35,10 +35,10 @@ class ProductController extends CRUDController
         return 'products';
     }
 
-    protected function getInputSlug(): string
-    {
-        return 'name';
-    }
+//    protected function getInputSlug(): string
+//    {
+//        return 'name';
+//    }
 
 
     protected function CRUDViewPath(): string
@@ -71,7 +71,7 @@ class ProductController extends CRUDController
                 'type' => 'select',
                 'name' => "category_id",
                 'value' => function ($resource) {
-                    return $resource->category;
+                    return $resource->category_id;
                 },
                 'class' => "",
                 'label' => "Danh mục",
@@ -103,12 +103,12 @@ class ProductController extends CRUDController
                 'class' => "",
                 'label' => "Khối lượng",
             ],
-            [
-                'type' => 'status',
-                'name' => "price",
-                'class' => "",
-                'label' => "Trạng thái",
-            ],
+//            [
+//                'type' => 'status',
+//                'name' => "price",
+//                'class' => "",
+//                'label' => "Trạng thái",
+//            ],
 
         ];
     }

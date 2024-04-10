@@ -57,20 +57,20 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Thống kê lương nhân sự </h4>
+        {{--        <div class="row">--}}
+        {{--            <div class="col-12">--}}
+        {{--                <div class="card">--}}
+        {{--                    <div class="card-header">--}}
+        {{--                        <h4>Thống kê lương nhân sự </h4>--}}
 
-                    </div>
-                    <div class="card-body">
-                        @livewire('employee-salary-statistics-table')
-                    </div>
+        {{--                    </div>--}}
+        {{--                    <div class="card-body">--}}
+        {{--                        @livewire('employee-salary-statistics-table')--}}
+        {{--                    </div>--}}
 
-                </div>
-            </div>
-        </div>
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -82,12 +82,29 @@
                         {{--                        </div>--}}
                     </div>
                     <div class="card-body">
-                        @livewire('product-quantity-statistics-table')
+                        @livewire(\App\Livewire\ProductRevenueStatisticsChart::class)
                     </div>
 
                 </div>
             </div>
         </div>
+        {{--        <div class="row">--}}
+        {{--            <div class="col-12">--}}
+        {{--                <div class="card">--}}
+        {{--                    <div class="card-header">--}}
+        {{--                        <h4>Thống kê doanh thu </h4>--}}
+        {{--                        --}}{{--                        <div class="card-header-action">--}}
+        {{--                        --}}{{--                            <a href="{{route('admin.products.create')}}" class="btn btn-primary"><i--}}
+        {{--                        --}}{{--                                    class="fas fa-plus"></i> Thêm mới</a>--}}
+        {{--                        --}}{{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                    <div class="card-body">--}}
+        {{--                        @livewire('product-quantity-statistics-table')--}}
+        {{--                    </div>--}}
+
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
     </section>
 
 @endsection

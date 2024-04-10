@@ -21,7 +21,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class ProductStatisticYearTable extends PowerGridComponent
+class ProductStatisticYearTable extends IndexDataTable
 {
     use WithExport;
 
