@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('type_opinion_id')->constrained();
-            $table->boolean('is_accepted')->default(false);
+            //0, chờ duyệt, 1 đã duyệt, 2 từ chối
+            $table->tinyInteger('status')->default(0);
 
 
             $table->string('topic')->nullable();

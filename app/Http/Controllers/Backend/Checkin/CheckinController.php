@@ -58,14 +58,14 @@ class CheckinController extends CRUDController
                 'type' => 'number',
                 'name' => "auth_day_off",
                 'class' => "",
-                'label' => "Ngày nghỉ có phép",
+                'label' => "Tổng số ngày nghỉ",
             ],
-            [
-                'type' => 'number',
-                'name' => "unauth_day_off",
-                'class' => "",
-                'label' => "Ngày nghỉ không phép",
-            ],
+//            [
+//                'type' => 'number',
+//                'name' => "unauth_day_off",
+//                'class' => "",
+//                'label' => "Ngày nghỉ không phép",
+//            ],
             [
                 'type' => 'number',
                 'name' => "over_times",

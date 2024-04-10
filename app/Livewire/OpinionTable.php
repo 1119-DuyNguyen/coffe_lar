@@ -5,8 +5,10 @@ namespace App\Livewire;
 use App\Enums\OrderStatus;
 use App\Models\Opinion;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -33,11 +35,23 @@ class OpinionTable extends IndexDataTable
                 ->tooltip(function ($record) {
                     return $record->content;
                 }),
-            ToggleColumn::make('is_accepted')->label('Đã duyệt')
+            SelectColumn::make('status')->label('Trạng thái ý kiến')
+                ->options(
+                    [
+                        0 => "Chờ duyệt",
+                        1 => "Duyệt",
+                        2 => "Từ chối"
+                    ]
+                )
+                ->selectablePlaceholder(false)
                 ->disabled(function ($record
                 ): bool {
-                    return $record->is_accepted;
+                    return $record->status != 0;
+                }
+                )->afterStateUpdated(function ($record, $state) {
+                    $this->dispatch('refreshTable');
                 }),
+
             TextColumn::make('created_at')->label('Ngày tạo'),  // Maintains sortable for 'created_at'
         ];
     }
@@ -62,11 +76,17 @@ class OpinionTable extends IndexDataTable
                             fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                         );
                 }),
-            TernaryFilter::make('is_accepted')
+            SelectFilter::make('status')
                 ->label("Trạng thái ý kiến")
-                ->default(false)
-                ->trueLabel('Đã duyệt')
-                ->falseLabel('Chưa duyệt'),
+                ->options([
+                    0 => "Chờ duyệt",
+                    1 => "Duyệt",
+                    2 => "Từ chối"
+                ])->default(0)
+
+//                ->default(false)
+//                ->trueLabel('Đã duyệt')
+//                ->falseLabel('Chưa duyệt'),
 
         ];
     }
