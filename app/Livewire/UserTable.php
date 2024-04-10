@@ -21,7 +21,6 @@ class UserTable extends IndexDataTable
             TextColumn::make('id')->label('Id'),
             TextColumn::make('name')->label('Tên'),
             TextColumn::make('email')->label('Email'),
-            TextColumn::make('phone')->label('Điện Thoại'),
             ToggleColumn::make('status')->label('Trạng Thái'),
             TextColumn::make('created_at')->label('Ngày Tạo'),
         ];

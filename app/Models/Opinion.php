@@ -22,28 +22,9 @@ class Opinion extends Model
         return $this->belongsTo(TypeOpinion::class);
     }
 
-    public function getTopicAttribute($value)
+    public function user(): belongsTo
     {
-        return $value;
+        return $this->belongsTo(User::class);
     }
-    public function setTopicAttribute($value)
-    {
-        $this->attributes['topic'] = $value;
-    }
-    public function getTypeOpinionIdAttribute($value)
-    {
-        return $value;
-    }
-    public function setTypeOpinionIdAttribute($value)
-    {
-        $this->attributes['type_opinion_id'] = $value;
-    }
-    public function getContentAttribute($value)
-    {
-        return $value;
-    }
-    public function setContentAttribute($value)
-    {
-        $this->attributes['content'] = $value;
-    }
+
 }

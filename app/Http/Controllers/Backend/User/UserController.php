@@ -21,11 +21,6 @@ class UserController extends CRUDController
         return User::class;
     }
 
-    protected function addAutoInput(Request $request): array
-    {
-        $role_id = $request->input('role_id', []);
-        return ['role_id' => $role_id];
-    }
 
     protected function getFormRequest(): string
     {
@@ -59,12 +54,12 @@ class UserController extends CRUDController
                 'class' => "",
                 'label' => "Email",
             ],
-            [
-                'type' => 'text',
-                'name' => "phone",
-                'class' => "",
-                'label' => "Số điện thoại",
-            ],
+//            [
+//                'type' => 'text',
+//                'name' => "phone",
+//                'class' => "",
+//                'label' => "Số điện thoại",
+//            ],
             [
                 'type' => 'select',
                 'name' => "role_id",
