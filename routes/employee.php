@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Opinion\MyOpinionController;
 use App\Http\Controllers\Backend\Receipt\ReceiptController;
 use App\Http\Controllers\Backend\User\EmployeeController;
 use App\Http\Controllers\Backend\Opinion\TypeOpinionController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Backend\Provider\ProviderController;
 
 
 Route::resource('employees', EmployeeController::class);
+Route::get('employees/{employees}/my-salary', [EmployeeController::class, 'getMySalary'])->name('employees.my-salary');
 
 Route::resource('type-opinions', TypeOpinionController::class);
 
@@ -21,6 +23,8 @@ Route::resource('providers', ProviderController::class);
 Route::resource('contracts', ContractController::class);
 
 Route::resource('opinions', OpinionController::class);
+Route::resource('my-opinions', MyOpinionController::class);
+
 
 /** receipt */
 Route::resource('receipts', ReceiptController::class);

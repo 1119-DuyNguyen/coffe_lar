@@ -19,9 +19,9 @@ class ProviderTable extends IndexDataTable
     protected function getColumns(): array
     {
         return [
-            TextColumn::make('id')->label('Id')->sortable(),
-            TextColumn::make('name')->label('Tên nhà cung cấp'),
-            TextColumn::make('description')->label('mô tả'),
+            TextColumn::make('id')->label('Id'),
+            TextColumn::make('name')->label('Tên nhà cung cấp')->searchable(),
+            TextColumn::make('description')->label('mô tả')->searchable(),
         ];
     }
 

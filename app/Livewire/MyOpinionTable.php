@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Enums\OrderStatus;
 use App\Models\Opinion;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\SelectColumn;
@@ -12,10 +11,10 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 
-class OpinionTable extends IndexDataTable
+class MyOpinionTable extends IndexDataTable
 {
-//    protected string $buttonEditRoute = "admin.opinions.edit";
-//    protected string $buttonDeleteRoute = "admin.opinions.destroy";
+    protected string $buttonEditRoute = "admin.opinions.edit";
+    protected string $buttonDeleteRoute = "admin.opinions.destroy";
 
 
     public function datasource(): Builder
@@ -28,29 +27,35 @@ class OpinionTable extends IndexDataTable
         return [
             TextColumn::make('id')->label('Id'),
             TextColumn::make('typeOpinion.name')->label('Loại ý kiến'),
-            TextColumn::make('user.name')->label('Người đăng'),
 
             TextColumn::make('topic')->label('Chủ đề'),  // Maintains sortable for 'topic'
             TextColumn::make('content')->label('Nội dung')->wrap()->limit(25)
                 ->tooltip(function ($record) {
                     return $record->content;
                 }),
-            SelectColumn::make('status')->label('Trạng thái ý kiến')
-                ->options(
-                    [
-                        0 => "Chờ duyệt",
-                        1 => "Duyệt",
-                        2 => "Từ chối"
-                    ]
+            TextColumn::make('status')
+                ->label('Trạng thái ý kiến')
+                ->badge()
+                ->color(
+                    function ($record) {
+                        return match ($record->status) {
+                            0 => "gray",
+                            1 => "success",
+                            2 => "danger",
+                            default => ""
+                        };
+                    }
+
+
                 )
-                ->selectablePlaceholder(false)
-                ->disabled(function ($record
-                ): bool {
-                    return $record->status != 0;
-                }
-                )->afterStateUpdated(function ($record, $state) {
-                    $this->dispatch('refreshTable');
-                }),
+                ->getStateUsing(fn($record) => match ($record->status) {
+                    0 => "Chờ duyệt",
+                    1 => "Duyệt",
+                    2 => "Từ chối",
+                    default => ""
+                })
+
+            ,
 
             TextColumn::make('created_at')->label('Ngày tạo'),  // Maintains sortable for 'created_at'
         ];
@@ -82,7 +87,7 @@ class OpinionTable extends IndexDataTable
                     0 => "Chờ duyệt",
                     1 => "Duyệt",
                     2 => "Từ chối"
-                ])->default(0)
+                ])
 
 //                ->default(false)
 //                ->trueLabel('Đã duyệt')

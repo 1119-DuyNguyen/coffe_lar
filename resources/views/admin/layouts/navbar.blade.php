@@ -3,8 +3,8 @@
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-{{--            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i--}}
-{{--                        class="fas fa-search"></i></a></li>--}}
+            {{--            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i--}}
+            {{--                        class="fas fa-search"></i></a></li>--}}
         </ul>
 
     </form>
@@ -83,8 +83,9 @@
         {{--                </div>--}}
         {{--            </div>--}}
         {{--        </li>--}}
-        {{--        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"--}}
-        {{--                                                     class="nav-link notification-toggle nav-link-lg beep"><i--}}
+        {{--        <li class="dropdown dropdown-list-toggle">--}}
+        {{--            <a href="#" data-toggle="dropdown"--}}
+        {{--               class="nav-link notification-toggle nav-link-lg beep"><i--}}
         {{--                    class="far fa-bell"></i></a>--}}
         {{--            <div class="dropdown-menu dropdown-list dropdown-menu-right">--}}
         {{--                <div class="dropdown-header">Notifications--}}
@@ -144,32 +145,51 @@
         {{--                </div>--}}
         {{--            </div>--}}
         {{--        </li>--}}
-        <li class=""><a href="#"
-                        class="nav-link nav-link-lg nav-link-user">
+        <li class="dropdown dropdown-list-toggle"><a href="#"
+                                                     data-toggle="dropdown"
+                                                     class="nav-link nav-link-lg nav-link-user">
                 {{--                <img alt="image" src="{{asset(auth()->user()->image)}}" class="rounded-circle mr-1">--}}
-                <div class="d-sm-none d-lg-inline-block">Chúc một ngày tốt lành , {{ auth()->user()->name }}</div>
+                <div class="d-sm-none d-lg-inline-block">
+                    {{ auth()->user()->email }}
+                    <i class="fas fa-caret-down"></i>
+                </div>
             </a>
-            {{--            <div class="dropdown-menu dropdown-menu-right">--}}
-            {{--                <a href="{{ route('admin.profile') }}" class="dropdown-item has-icon">--}}
-            {{--                    <i class="far fa-user"></i> Profile--}}
-            {{--                </a>--}}
+            <div class="dropdown-menu dropdown-menu-right">
 
-            {{--                <a href="features-settings.html" class="dropdown-item has-icon">--}}
-            {{--                    <i class="fas fa-cog"></i> Settings--}}
-            {{--                </a>--}}
-            {{--                <div class="dropdown-divider"></div>--}}
+                <a href="{{ route('admin.profile', [\Illuminate\Support\Facades\Auth::user()->id]) }}"
+                   class="dropdown-item has-icon">
+                    <i class="fas fa-address-card"></i> Thông tin cá nhân
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ route('admin.password.edit') }}"
+                   class="dropdown-item has-icon">
+                    <i class="fas fa-address-card"></i> Thay đổi mật khẩu
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ route('admin.my-opinions.index') }}"
 
-            {{--                <!-- Authentication -->--}}
-            {{--                <form method="POST" action="{{ route('logout') }}">--}}
-            {{--                    @csrf--}}
+                   class="dropdown-item has-icon">
+                    <i class="fas fa-comments"></i> Ý kiến của tôi
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ route('admin.employees.my-salary', [\Illuminate\Support\Facades\Auth::user()->id]) }}"
+                   class="dropdown-item has-icon">
 
-            {{--                    <a href="#" onclick=" this.closest('form').submit(); return false;"--}}
-            {{--                       class="dropdown-item has-icon text-danger">--}}
-            {{--                        <i class="fas fa-sign-out-alt"></i> Logout--}}
-            {{--                    </a>--}}
-            {{--                </form>--}}
-            {{--                </a>--}}
-            {{--            </div>--}}
+                    <i class="fas fa-comments"></i> Lương của tôi
+                </a>
+                <div class="dropdown-divider"></div>
+
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <a href="#" onclick=" this.closest('form').submit(); return false;"
+                       class="dropdown-item has-icon text-danger">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </a>
+                </form>
+                </a>
+            </div>
         </li>
     </ul>
 </nav>

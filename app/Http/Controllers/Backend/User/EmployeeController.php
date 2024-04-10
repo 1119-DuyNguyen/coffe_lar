@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend\User;
 use App\Http\Controllers\App\Models;
 use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\EmployeeRequest;
+use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EmployeeController extends CRUDController
 {
@@ -106,6 +108,15 @@ class EmployeeController extends CRUDController
                 'label' => "Số tài khoản ngân hàng",
             ],
         ];
+    }
+
+    public function getMySalary()
+    {
+//        $order = Order::with('orderProducts')->findOrFail($id);
+//        return view('frontend.dashboard.order.print', compact('order'));
+        $user = "";
+        $pdf = Pdf::loadView('admin.prints.my-salary', compact('user'));
+        return $pdf->stream('my-salary.pdf');
     }
 
 

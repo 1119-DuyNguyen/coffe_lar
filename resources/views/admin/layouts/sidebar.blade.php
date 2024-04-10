@@ -13,19 +13,7 @@
 
     {{--    </div>--}}
     <ul class="sidebar-menu">
-        <li>
-            <form action="{{route('logout')}}" method="POST">
-                @csrf
 
-                <a class="nav-link " href="#" onclick="this.closest('form').submit();return false;"
-                >
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Đăng xuất</span>
-                </a>
-
-
-            </form>
-        </li>
         {{--        <li><a class="nav-link " href="{{route('home')}}">--}}
         {{--                <i class="fas fa-arrow-left"></i>--}}
         {{--                <span>Quay lại tra</span></a></li>--}}
@@ -164,7 +152,7 @@
             var navActive = Array.from(document.querySelectorAll('ul.sidebar-menu a')).filter(function (a) {
                 return url.includes(a.href);
             });
-            console.log(navActive);
+            // console.log(navActive);
             navActive.forEach(nav => {
 
                 var parent = nav.closest('li.dropdown');

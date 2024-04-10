@@ -4,6 +4,7 @@
      "method"=> "PUT",
      'formElements'=>[],
      'resource'=> [],
+     'haveIndexPage'=>true,
 ])
 @php
     $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
@@ -30,8 +31,11 @@
                     <div class="card-body">
 
                         <div class="w-100 text-right p-4">
-                            <a class="btn btn-primary "
-                               href="{{$indexRoute}}"><i class="fas fa-long-arrow-alt-left"></i> Quay lại danh sách</a>
+                            @if($haveIndexPage)
+                                <a class="btn btn-primary "
+                                   href="{{$indexRoute}}"><i class="fas fa-long-arrow-alt-left"></i> Quay lại danh sách</a>
+
+                            @endif
 
                         </div>
                         @if(!empty($formElements))

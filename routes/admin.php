@@ -12,24 +12,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /** Profile Routes */
-Route::get('profile', [ProfileController::class, 'index'])->name('profile');
-Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
-Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+Route::get('profile/password', [ProfileController::class, 'editPassword'])->name('password.edit');
+Route::post('profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
-//Route::middleware('can:admin.product.index')->group(function () {
-//    Route::resource('product.product-variant', ProductVariantController::class)->only(['index', 'create', 'edit']);
-//    Route::resource('product.product-variant.product-variant-item', ProductVariantItemController::class)->only(['index', 'create', 'edit']);
-//});
+Route::get('profile/{id}', [ProfileController::class, 'edit'])->name('profile');
+
+
 Route::middleware('can:admin.products')->group(function () {
     /** Products routes */
     Route::put('products/change-status', [ProductController::class, 'changeStatus'])->name('products.change-status');
     Route::get('products/statistic', [ProductController::class, 'getStatistic'])->name('products.statistic');
-
-    //    /** Products variant route */
-    //    Route::put('product-variant/change-status', [VariantController::class, 'changeStatus'])->name('product-variant.change-status');
-    //    Route::resource('product-variant', VariantController::class)->only(['store', 'update', 'destroy']);
-    //    Route::put('product-variant-item/change-status', [VariantItemController::class, 'changeStatus'])->name('product-variant-item.change-status');
-    //    Route::resource('product-variant-item', VariantItemController::class)->only(['store', 'update', 'destroy']);
 });
 
 
@@ -62,10 +54,10 @@ Route::middleware('hasPermission')->group(function () {
 
 
     /** settings routes */
-    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
-    Route::put('general-setting', [SettingController::class, 'generalSettingUpdate'])->name('general-setting.update');
-    //    Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
-    Route::put('logo-setting', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting.update');
+//    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+//    Route::put('general-setting', [SettingController::class, 'generalSettingUpdate'])->name('general-setting.update');
+//    //    Route::put('email-setting', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting.update');
+//    Route::put('logo-setting', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting.update');
 
     /** manage user routes */
     Route::put('users/change-status', [UserController::class, 'changeStatus'])->name('users.change-status');

@@ -46,6 +46,7 @@ class OrderTable extends IndexDataTable
                 ): bool {
                     return $record->order_status == OrderStatus::canceled || $record->order_status == OrderStatus::delivered;
                 }
+
                 )->afterStateUpdated(function ($record, $state) {
                     $this->dispatch('refreshTable');
                 }),
