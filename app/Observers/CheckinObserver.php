@@ -40,7 +40,7 @@ class CheckinObserver
             $total_salary = null;
             $reality_times = 26;
             $checkin->unauth_day_off = $checkin->auth_day_off - min($count_opinions, 3);
-            $total_salary = ($contract->salary * $reality_times) + ($contract->salary * 2 * $checkin->over_times) - ($checkin->unauth_day_off * $contract->salary);
+            $total_salary = ($contract->salary * $reality_times) + ((($contract->salary) / 8) * 2 * $checkin->over_times) + ($contract->allowance) - ($checkin->unauth_day_off * $contract->salary);
             $reality_times = 26 - $checkin->unauth_day_off;
             $checkin->reality_times = $reality_times;
             $checkin->total_salary = $total_salary;
@@ -70,7 +70,7 @@ class CheckinObserver
             $total_salary = null;
             $reality_times = 26;
             $checkin->unauth_day_off = $checkin->auth_day_off - min($count_opinions, 3);
-            $total_salary = ($contract->salary * $reality_times) + ($contract->salary * 2 * $checkin->over_times) - ($checkin->unauth_day_off * $contract->salary);
+            $total_salary = ($contract->salary * $reality_times) + ((($contract->salary) / 8) * 2 * $checkin->over_times) + ($contract->allowance) - ($checkin->unauth_day_off * $contract->salary);
             $reality_times = 26 - $checkin->unauth_day_off;
             $checkin->reality_times = $reality_times;
             $checkin->total_salary = $total_salary;

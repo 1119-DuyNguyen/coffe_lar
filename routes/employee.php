@@ -12,7 +12,7 @@ use App\Http\Controllers\Backend\Checkin\CheckinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
 
-
+Route::get('employees/salary', [EmployeeController::class, 'getSalary'])->name('employees.salary');
 Route::resource('employees', EmployeeController::class);
 Route::get('employees/{employees}/my-salary', [EmployeeController::class, 'getMySalary'])->name('employees.my-salary');
 
