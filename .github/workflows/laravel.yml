@@ -28,9 +28,9 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+        server: ftp.tienminhvy.com
+        username: eenelpah@nguyenthanhduy.id.vn
+        password: $35L2YAHA~wn
         server-dir: /
         
 
