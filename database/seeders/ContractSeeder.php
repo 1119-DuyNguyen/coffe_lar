@@ -17,7 +17,7 @@ class ContractSeeder extends Seeder
         $seedData = [
             [
                 'code' => '10-HDLD-ABC',
-                'name' => 'Hợp đồng xác định thời hạn',
+                'name' => 'Hợp đồng kế toán của nhân viên B',
                 'user_id' => '4',
                 'salary' => '500000',
                 'allowance' => '250000',
@@ -26,7 +26,7 @@ class ContractSeeder extends Seeder
             ],
             [
                 'code' => '10-HDLD-BCD',
-                'name' => 'Hợp đồng xác định thời hạn',
+                'name' => 'Hợp đồng kế toán của nhân viên A ',
                 'user_id' => '5',
                 'salary' => '500000',
                 'allowance' => '250000',

@@ -10,6 +10,16 @@ use Illuminate\Support\Carbon;
 class CheckinObserver
 {
 
+    public function retrieved(Checkin $checkin)
+    {
+        $checkin->date = Carbon::parse($checkin->date)->format('Y-m');
+    }
+
+    public function saving(Checkin $checkin)
+    {
+        $checkin->date = Carbon::createFromFormat('Y-m', $checkin->date);
+    }
+
     /**
      * Handle the Checkin "created" event.
      */
@@ -32,8 +42,9 @@ class CheckinObserver
             // $opinions->where('contract_id', $checkin->contract_id);
             foreach ($opinions as $opinion) {
                 if ($opinion->type_opinion_id == 2 || $opinion->type_opinion_id == 3) {
-                    if ($opinion->status == 1 && (date('m', strtotime($opinion->updated_at)) == date('m')))
+                    if ($opinion->status == 1 && (date('m', strtotime($opinion->updated_at)) == date('m'))) {
                         $count_opinions++;
+                    }
                 }
             }
 
@@ -62,8 +73,9 @@ class CheckinObserver
             // $opinions->where('contract_id', $checkin->contract_id);
             foreach ($opinions as $opinion) {
                 if ($opinion->type_opinion_id == 2 || $opinion->type_opinion_id == 3) {
-                    if ($opinion->status == 1 && (date('m', strtotime($opinion->updated_at)) == date('m')))
+                    if ($opinion->status == 1 && (date('m', strtotime($opinion->updated_at)) == date('m'))) {
                         $count_opinions++;
+                    }
                 }
             }
 

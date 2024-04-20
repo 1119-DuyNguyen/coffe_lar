@@ -12,7 +12,6 @@
         </div>
 
         <div class="section-body">
-
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -22,6 +21,7 @@
                         </div>
 
                         <div class="card-body">
+
                             @if($useCreateBtn==true)
                                 <div class="w-100 text-right p-4">
                                     <a class="btn btn-primary " href="{{route($route)}}"><i
@@ -29,6 +29,7 @@
 
                                 </div>
                             @endif
+                            {{ $header ?? "" }}
 
                             @livewire($table)
                         </div>

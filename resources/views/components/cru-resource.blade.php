@@ -9,7 +9,7 @@
 @php
     $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
     $indexRoute= ($method === "PUT"|| $method === "PATCH") ? substr($route, 0, strrpos($route, "/")) : $route;
-    $textSubmitData = $isUpdateMethod ? "Cập nhập " : "Khởi tạo ";
+    $textSubmitData = $isUpdateMethod ? "Cập nhật " : "Khởi tạo ";
 @endphp
 {{--cru =  create read update --}}
 
@@ -66,7 +66,7 @@
                                                 <span class="text-danger error-text ${input.name.replace(/\[\]$/, "")}_error"
                                                 style="color: red"></span>`;
 
-                                            parent.insertAdjacentHTML('afterend', span.outerHTML);
+                                            parent.insertAdjacentHTML('beforeend', span.outerHTML);
                                         })
                                         let inputCheckboxes = form.querySelectorAll('input[type=checkbox][name]');
                                         let distinctInputCheckboxes = {};

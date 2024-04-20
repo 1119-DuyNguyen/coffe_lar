@@ -173,6 +173,7 @@ return [
         "allowance" => "phụ cấp",
         "end_date" => "ngày kết thúc hợp đồng",
         "topic" => "chủ đề",
-        "over_times" => "ngày tăng ca"
+        "over_times" => "ngày tăng ca",
+        "auth_day_off" => "ngày nghỉ"
     ],
 ];

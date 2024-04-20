@@ -45,7 +45,7 @@ class ContractController extends CRUDController
                 'type' => 'text',
                 'name' => "name",
                 'class' => "",
-                'label' => "Loại hợp đồng",
+                'label' => "Tên hợp đồng",
             ],
             [
                 'type' => 'select',

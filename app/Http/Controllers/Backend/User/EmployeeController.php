@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\EmployeeRequest;
+use App\Models\Checkin;
 use App\Models\Role;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends CRUDController
@@ -117,10 +120,24 @@ class EmployeeController extends CRUDController
         return $pdf->stream('my-salary.pdf', compact('month'));
     }
 
-    public function getSalary()
+    public function formSelectMySalary()
     {
-        $users = User::with('contract.checkins')->get();
-        $pdf = Pdf::loadView('admin.prints.salary', compact('users'));
-        return $pdf->stream('salary.pdf');
+        $user = User::with('contract.checkins')->findOrFail(Auth::user()->id);
+        $pdf = Pdf::loadView('admin.prints.my-salary', compact('user'));
+        $month = 1;
+        return $pdf->stream('my-salary.pdf', compact('month'));
     }
+
+    public function getSalary(Request $request)
+    {
+        $day = Carbon::createFromFormat('Y-m', $request->input('month'));
+        $checkins = Checkin::with('contract.user')->whereMonth('date', $day->month)->whereYear(
+            'date',
+            $day->year
+        )->get();
+        $month = $request->input('month');
+        $pdf = Pdf::loadView('admin.prints.salary', compact('checkins', 'day', 'month'));
+        return $pdf->stream('luong-' . $month . '.pdf');
+    }
+
 }

@@ -25,7 +25,7 @@ class CheckinTable extends IndexDataTable
         return [
             TextColumn::make('id')->label('Id'),
             TextColumn::make('contract.user.name')->label('Tên nhân viên'),
-            TextColumn::make('date')->label('Ngày chấm công')->sortable(),  // Maintains sortable for 'date'
+            TextColumn::make('date')->label('Tháng chấm công')->sortable(),  // Maintains sortable for 'date'
             TextColumn::make('reality_times')->label('Số ngày công'),
             TextColumn::make('over_times')->label('Số giờ tăng ca'),
             TextColumn::make('contract.salary')->label('Lương cơ bản'),

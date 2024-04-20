@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Checkin;
 use App\Http\Controllers\CRUDController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CheckinRequest;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\Checkin;
@@ -49,10 +50,10 @@ class CheckinController extends CRUDController
                 'optionLabel' => 'name'
             ],
             [
-                'type' => 'date',
+                'type' => 'month',
                 'name' => "date",
                 'class' => "",
-                'label' => "Ngày chấm công",
+                'label' => "Tháng chấm công",
             ],
             [
                 'type' => 'number',
@@ -72,6 +73,7 @@ class CheckinController extends CRUDController
                 'class' => "",
                 'label' => "Số giờ tăng ca",
             ],
+
         ];
     }
 }
