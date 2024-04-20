@@ -38,7 +38,7 @@ class OrderObserver
                 ]
             ];
         }
-        return $this->request->input('product_receipt');
+        return $this->request->input('product_order');
     }
 
     public function creating(Order $order)
@@ -60,7 +60,7 @@ class OrderObserver
                 throw ValidationException::withMessages(['data.total_price' => 'Giá sản phẩm nhập không tương ứng']);
             }
         } else {
-            throw ValidationException::withMessages(['data.products' => 'Bạn chưa nhập sản phẩm vào phiếu nhập']);
+            throw ValidationException::withMessages(['data.products' => 'Bạn chưa nhập sản phẩm vào đơn hàng']);
         }
     }
 
