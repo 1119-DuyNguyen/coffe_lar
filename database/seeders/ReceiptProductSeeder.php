@@ -20,12 +20,13 @@ class ReceiptProductSeeder extends Seeder
     public function run(): void
     {
         Config::set('services.is_seed_data', true);
-        for ($i = 0; $i < 20; ++$i) {
+        for ($i = 1; $i <= 20; ++$i) {
             $seedDataPhieuNhap = Receipt::create([
                 'name' => 'Nhập sản phẩm ' . $i + 1,
                 'provider_id' => '1',
-                'total_quantity' => 8,
-                'total_price' => 19000
+                // 4* 30 sản phẩm
+                'total_quantity' => 4 * 30,
+                'total_price' => 9000 * 30
             ]);
         }
     }

@@ -2,17 +2,12 @@
 
 namespace App\Http\Services;
 
-use App\Models\Coupon;
 use App\Models\Order;
-use App\Models\OrderProduct;
-use App\Models\Product;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class OrderService
@@ -91,28 +86,7 @@ class OrderService
         DB::beginTransaction();
         try {
             // store order products
-            $productQuantity = [];
 
-            $cartItems = $listCart['cartList'];
-            foreach ($cartItems as $key => $cartItem) {
-                $product = $cartItem['product-data'] ?? [];
-//                if ($product->stock < $cartItem['quantity']) {
-//                    throw new Exception("Sản phẩm đã hết hàng");
-//                }
-                // sản phẩm data lỗi hoặc hết hàng thì không ghi nhận
-                if (empty($product) || $product->stock < $cartItem['quantity']) {
-                    continue;
-                }
-                $cartItems[$key] = [
-//                    'order_id' => $order->id,
-                    'product_id' => $product->id,
-                    'quantity' => $cartItem['quantity'],
-                    'product_name' => $product->name,
-                    'product_price' => $product->price
-                ];
-            }
-            $request->merge(['product_order' => $cartItems]);
-            dd($request->all());
 
             $order = new Order();
 
@@ -141,6 +115,7 @@ class OrderService
             if ($ex instanceof ValidationException) {
                 throw ValidationException::withMessages([$ex->getMessage()]);
             }
+            dd($ex->getMessage());
             abort(500);
             // return Redirect::to(route('cart.index'));
         }
