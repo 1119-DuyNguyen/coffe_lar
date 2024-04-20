@@ -20,6 +20,6 @@ jobs:
         username: ${{ secrets.USERNAME_LARAVEL }}
         password: ${{ secrets.PASSWORD_LARAVEL }}
         port: ${{ secrets.PORT_SSH_LARAVEL }}
-        script: "cd /home/eenelpah/nguyenthanhduy.id.vn && sh ./.scripts/deploy.sh"
+        script: "cd /home/eenelpah/nguyenthanhduy.id.vn && sh ./scripts/deploy.sh"
         
 
