@@ -7,8 +7,10 @@ use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\EmployeeRequest;
 use App\Models\Order;
 use App\Models\Role;
+use App\Models\Checkin;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class EmployeeController extends CRUDController
 {
@@ -110,14 +112,23 @@ class EmployeeController extends CRUDController
         ];
     }
 
-    public function getMySalary()
+    public function getMySalary($id)
     {
-//        $order = Order::with('orderProducts')->findOrFail($id);
-//        return view('frontend.dashboard.order.print', compact('order'));
-        $user = "";
+        // {
+        //     //        $order = Order::with('orderProducts')->findOrFail($id);
+        //     //        return view('frontend.dashboard.order.print', compact('order'));
+        $user = User::with('contract.checkins')->findOrFail($id);
         $pdf = Pdf::loadView('admin.prints.my-salary', compact('user'));
         return $pdf->stream('my-salary.pdf');
     }
 
+    public function getSalary()
+    {
+        //        $order = Order::with('orderProducts')->findOrFail($id);
+        //        return view('frontend.dashboard.order.print', compact('order'));
 
+        $users = User::with('contract.checkins')->get();
+        $pdf = Pdf::loadView('admin.prints.salary', compact('users'));
+        return $pdf->stream('salary.pdf');
+    }
 }

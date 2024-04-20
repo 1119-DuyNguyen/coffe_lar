@@ -1,86 +1,58 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{"Lương của tôi"}}</title>
+    <title>{{ 'Lương của tôi' }}</title>
     <style>
-        h4 {
-            margin: 0;
+        .container {
+            width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            /* border: 1px solid #ddd; */
+            border-radius: 5px;
+            justify-content: space-between;
         }
 
-        .w-full {
-            width: 100%;
+        .header,
+        {
+        text-align: center;
+        position: relative;
+        font-size: 24px;
+        top: 1px;
         }
 
-        .w-half {
-            width: 50%;
+        .company-name {
+            font-size: 20px;
+            font-weight: bold;
         }
 
-        .margin-top {
-            margin-top: 1.25rem;
+        .slip-title {
+            font-size: 18px;
+            text-decoration: underline;
         }
 
-
-        table {
-            width: 100%;
-            border-spacing: 0;
-        }
-
-        table.products {
-            border: 1px solid #ccc;
-            font-size: 1rem;
-        }
-
-        table.products tr {
-            background-color: #ffa426;
-        }
-
-        table.products th {
-            color: #ffffff;
-            padding: 0.5rem;
-
-        }
-
-        table tr.items:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        table tr.items:nth-child(even) {
-            background-color: #fff1e8;
-        }
-
-        table tr.items td {
-            padding: 0.5rem;
-
-        }
-
-        table.products tr, table.products td {
-            /*border:1px solid #C6C7C7;*/
-        }
-
-        .total {
-            text-align: right;
-            margin-top: 1rem;
-            font-size: 1rem;
-        }
-
-        .text-center {
-            text-align: center !important;
-        }
-
-        body {
-            /*font-family:  "Times New Roman", Times, serif;*/
-            font-family: "Times New Roman";
-        }
-
-        .title {
-            text-align: center;
+        .employee-info {
             position: relative;
-            font-size: 24px;
+            font-size: 14px;
             top: 1px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .employee-details {
+            /* margin-bottom: 5px; */
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .table-container {
+            width: 700px;
+            margin-left: 25%;
+            /* justify-content: center; */
         }
 
         .header {
@@ -101,76 +73,111 @@
             float: right;
             font-size: 16px;
         }
+
+        /*
+        .footer-container {
+            width: 700px;
+            /* margin: auto 250px; } */
+
+        table {
+            border-collapse: collapse;
+            /* Ensure borders don't overlap  */
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="title">
-    Công Ty TNHH Ngôi Nhà Cà Phê
-    <br/>
-    <br/>
-    <br/>
-    HÓA ĐƠN THANH TOÁN
-    <br/>
-    -------oOo-------
-</div>
-<div class="margin-top">
+    <div class="container">
+        <div class="header">
+            <div class="company-name">
+                Công Ty TNHH Ngôi Nhà Cà Phê
+            </div>
+            <br>
+            <br>
+            -------oOo-------
+            <div class="slip-title">
+                PHIẾU LƯƠNG THÁNG:{{ $user->contract->first()->checkins->first()->created_at->format('m/Y') }}
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class="employee-info">
+            <div class="employee-details">
+                <span>Mã Số NV: {{ $user->employee_code }} </span>
+            </div>
+            <div class="employee-details">
+                <span>Tên NV: {{ $user->name }} </span>
+            </div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Chỉ tiêu</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Lương cơ bản</td>
+                        <td>{{ $user->contract->first()->salary }}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Làm thêm giờ</td>
+                        <td>{{ $user->contract->first()->checkins->first()->over_times }}</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Số ngày nghỉ</td>
+                        <td>{{ $user->contract->first()->checkins->first()->auth_day_off }}</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Số ngày nghỉ có phép</td>
+                        <td>{{ $user->contract->first()->checkins->first()->unauth_day_off }}</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Số ngày công</td>
+                        <td>{{ $user->contract->first()->checkins->first()->reality_times }}</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Phụ cấp</td>
+                        <td>{{ $user->contract->first()->allowance }}</td>
+                    </tr>
 
-    <table class="w-full">
-        <tr>
-            <td class="w-half">
-                {{--                <div><h2>Đơn hàng: {{$order->id}}</h2></div>--}}
-                {{--                <div><h4>Tới:</h4></div>--}}
-                {{--                <div>Người nhận : {{$order->name_receiver}}</div>--}}
-                {{--                <div>Địa chỉ nhận : {{$order->address_receiver}}</div>--}}
-                {{--                <div>Số điện thoại nhận : {{$order->phone_receiver}}</div>--}}
-                {{--                <div>Địa chỉ email : {{$order->email_receiver}}</div>--}}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Thực lĩnh</td>
+                        <td colspan="1">{{ $user->contract->first()->checkins->first()->total_salary }}</< /td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="footer-container">
+            <footer>
+                <br><br>
+                <br><br>
+                <div style="display: flex; justify-content: space-between; width: 100%;">
+                    <span style="margin-right: 20%;">Chữ ký người lập phiếu</span>
+                    <span style="margin-left: 20%;">Chữ ký người nhận tiền</span>
+                </div>
+            </footer>
+        </div>
 
-                {{--                <div>123 Acme Str.</div>--}}
-            </td>
-            {{--            <td class="w-half">--}}
-            {{--                <div><h4>Từ:</h4></div>--}}
-            {{--                <div>Laravel Daily</div>--}}
-            {{--                <div>London</div>--}}
-            {{--            </td>--}}
-        </tr>
-    </table>
-</div>
-
-<div class="margin-top">
-    {{--    <table class="products">--}}
-    {{--        <tr>--}}
-    {{--            <th>Tên</th>--}}
-    {{--            <th>Giá (đồng)</th>--}}
-    {{--            <th>Số lượng</th>--}}
-    {{--        </tr>--}}
-    {{--        @foreach($orderProduct as $item)--}}
-    {{--            <tr class="items">--}}
-    {{--                <td>--}}
-    {{--                    {{ $item->product_name }}--}}
-    {{--                </td>--}}
-    {{--                <td class="text-center">--}}
-    {{--                    {{ $item->product_price }}--}}
-    {{--                </td>--}}
-    {{--                <td class="text-center">--}}
-    {{--                    {{ $item->qty }}--}}
-    {{--                </td>--}}
-    {{--            </tr>--}}
-    {{--        @endforeach--}}
-
-    {{--    </table>--}}
-</div>
-{{--<div class="total">--}}
-{{--    Thành tiền : {{$order->sub_total}}--}}
-{{--</div>--}}
-{{--<div class="total">--}}
-{{--    Phí vận chuyển : {{$order->fee_ship}}--}}
-{{--</div>--}}
-{{--<div class="total">--}}
-{{--    Tổng cộng : {{$order->total}}--}}
-{{--</div>--}}
-{{--<div><h4>Ngày tạo: {{$order->created_at}}</h4></div>--}}
-
-
+    </div>
 </body>
+
 </html>

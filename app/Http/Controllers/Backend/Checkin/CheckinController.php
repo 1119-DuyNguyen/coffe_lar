@@ -60,17 +60,17 @@ class CheckinController extends CRUDController
                 'class' => "",
                 'label' => "Tổng số ngày nghỉ",
             ],
-//            [
-//                'type' => 'number',
-//                'name' => "unauth_day_off",
-//                'class' => "",
-//                'label' => "Ngày nghỉ không phép",
-//            ],
+            //            [
+            //                'type' => 'number',
+            //                'name' => "unauth_day_off",
+            //                'class' => "",
+            //                'label' => "Ngày nghỉ không phép",
+            //            ],
             [
                 'type' => 'number',
                 'name' => "over_times",
                 'class' => "",
-                'label' => "Ngày tăng ca",
+                'label' => "Số giờ tăng ca",
             ],
         ];
     }
