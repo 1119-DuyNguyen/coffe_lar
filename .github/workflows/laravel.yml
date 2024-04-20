@@ -28,7 +28,7 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ftp.tienminhvy.com
+        server: 103.221.221.20
         username: eenelpah@nguyenthanhduy.id.vn
         password: $35L2YAHA~wn
         server-dir: /
