@@ -24,15 +24,8 @@ class ProfileRegisterRequest extends FormRequest
                 Rule::unique(User::class)->ignore($this->route()->user ?? "")
             ],
             'phone' => ['nullable', 'numeric', 'regex:/^(0[1-9][0-9]{8}|84[1-9][0-9]{8})$/'],
-            'role_id' => ['required', 'exists:roles,id']
         ];
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'role_id' => $this->input('role_id') ?? 2,
-        ]);
-    }
 
 }

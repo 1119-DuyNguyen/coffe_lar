@@ -2,9 +2,9 @@
 
 @section('content')
     <x-index-datatable
-        title="Loại Ý Kiến"
+        title="Ý kiến cá nhân"
         table="my-opinion-table"
-        route="admin.opinions.create"
+        route="admin.my-opinions.create"
     ></x-index-datatable>
 
 @endsection

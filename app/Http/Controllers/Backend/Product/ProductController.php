@@ -83,7 +83,7 @@ class ProductController extends CRUDController
                 'type' => 'text',
                 'name' => "description",
                 'class' => "",
-                'label' => "Mô tả sản phẩm",
+                'label' => "Mô tả ngắn sản phẩm",
             ],
             [
                 'type' => 'text',

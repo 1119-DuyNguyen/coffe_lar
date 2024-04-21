@@ -30,13 +30,11 @@ class UserController extends CRUDController
     protected function CRUDViewPath(): string
     {
         return "admin.users";
-        // TODO: Implement CRUDViewPath() method.
     }
 
     protected function getNameRouteCRU(): string
     {
         return "admin.users";
-        // TODO: Implement getNameRouteCRU() method.
     }
 
     protected function getFormElements(): array
@@ -54,26 +52,13 @@ class UserController extends CRUDController
                 'class' => "",
                 'label' => "Email",
             ],
-//            [
-//                'type' => 'text',
-//                'name' => "phone",
-//                'class' => "",
-//                'label' => "Số điện thoại",
-//            ],
             [
-                'type' => 'select',
-                'name' => "role_id",
-                'value' => function ($resource) {
-                    return $resource->role_id;
-                },
+                'type' => 'text',
+                'name' => "phone",
                 'class' => "",
-                'label' => "Vai trò",
-                'optionValues' => Role::all()->toArray(),
-                'optionKey' => 'id',
-                'optionLabel' => 'name'
+                'label' => "Số điện thoại",
             ],
 
         ];
-        // TODO: Implement getFormElements() method.
     }
 }

@@ -55,6 +55,12 @@ class MyOpinionController extends CRUDController
                 'optionLabel' => 'name'
             ],
             [
+                'type' => 'date',
+                'name' => "day_off",
+                'class' => "",
+                'label' => "Ngày xin nghỉ",
+            ],
+            [
                 'type' => 'text',
                 'name' => "topic",
                 'class' => "",
@@ -66,6 +72,8 @@ class MyOpinionController extends CRUDController
                 'class' => "",
                 'label' => "Nội dung",
             ],
+
+
         ];
     }
 }

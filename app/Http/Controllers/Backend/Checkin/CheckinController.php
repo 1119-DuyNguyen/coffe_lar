@@ -37,15 +37,27 @@ class CheckinController extends CRUDController
     protected function getFormElements(): array
     {
         return [
+//            [
+//                'type' => 'select',
+//                'name' => "contract_id",
+//                'value' => function ($resource) {
+//                    return $resource->contract_id;
+//                },
+//                'class' => "",
+//                'label' => "Hợp đồng",
+//                'optionValues' => Contract::all()->toArray(),
+//                'optionKey' => 'id',
+//                'optionLabel' => 'name'
+//            ],
             [
                 'type' => 'select',
                 'name' => "contract_id",
                 'value' => function ($resource) {
-                    return $resource->contract_id;
+                    return $resource->contract->user_id ?? "";
                 },
                 'class' => "",
-                'label' => "Hợp đồng",
-                'optionValues' => Contract::all()->toArray(),
+                'label' => "Nhân viên",
+                'optionValues' => User::employee()->get()->toArray(),
                 'optionKey' => 'id',
                 'optionLabel' => 'name'
             ],

@@ -174,6 +174,12 @@ return [
         "end_date" => "ngày kết thúc hợp đồng",
         "topic" => "chủ đề",
         "over_times" => "ngày tăng ca",
-        "auth_day_off" => "ngày nghỉ"
+        "auth_day_off" => "ngày nghỉ",
+        "tax_code" => "mã số thuế",
+        "day_of_birth" => "ngày sinh",
+        "employee_code" => "Mã nhân viên",
+        "bank_number" => "Số tài khoản ngân hàng",
+        "month_off" => "tháng xin nghỉ"
+
     ],
 ];

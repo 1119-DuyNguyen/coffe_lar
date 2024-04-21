@@ -131,6 +131,14 @@
                                                     503: function (responseObject, textStatus, errorThrown) {
                                                         // Service Unavailable (503)
                                                         // This code will be executed if the server returns a 503 response
+                                                    },
+                                                    403: function (responseObject, textStatus, errorThrown) {
+                                                        new FilamentNotification()
+                                                            .title('Không có quyền hạn')
+                                                            .danger()
+                                                            .duration(6000)
+                                                            .body('Hãy liên hệ quản trị viên cấp quyền')
+                                                            .send()
                                                     }
                                                 },
                                                 success: function (data) {

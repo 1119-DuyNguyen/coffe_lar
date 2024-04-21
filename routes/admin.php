@@ -25,9 +25,9 @@ Route::middleware('can:admin.products')->group(function () {
 });
 
 
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
 /** Admin Routes */
 Route::middleware('hasPermission')->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
     /** Slider Route */
     //    Route::resource('slider', SliderController::class);
 

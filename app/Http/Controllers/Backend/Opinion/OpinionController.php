@@ -42,42 +42,43 @@ class OpinionController extends CRUDController
     protected function getFormElements(): array
     {
         return [
-            [
-                'type' => 'select',
-                'name' => "type_opinion_id",
-                'value' => function ($resource) {
-                    return $resource->type_opinion_id;
-                },
-                'class' => "",
-                'label' => "Loại ý kiến",
-                'optionValues' => TypeOpinion::all()->toArray(),
-                'optionKey' => 'id',
-                'optionLabel' => 'name'
-            ],
 //            [
 //                'type' => 'select',
-//                'name' => "user_id",
+//                'name' => "type_opinion_id",
 //                'value' => function ($resource) {
-//                    return $resource->user_id;
+//                    return $resource->type_opinion_id;
 //                },
 //                'class' => "",
-//                'label' => "Nhân viên",
-//                'optionValues' => User::all()->toArray(),
+//                'label' => "Loại ý kiến",
+//                'optionValues' => TypeOpinion::all()->toArray(),
 //                'optionKey' => 'id',
 //                'optionLabel' => 'name'
 //            ],
-            [
-                'type' => 'text',
-                'name' => "topic",
-                'class' => "",
-                'label' => "Chủ đề",
-            ],
-            [
-                'type' => 'text',
-                'name' => "content",
-                'class' => "",
-                'label' => "Nội dung",
-            ],
+////            [
+////                'type' => 'select',
+////                'name' => "user_id",
+////                'value' => function ($resource) {
+////                    return $resource->user_id;
+////                },
+////                'class' => "",
+////                'label' => "Nhân viên",
+////                'optionValues' => User::all()->toArray(),
+////                'optionKey' => 'id',
+////                'optionLabel' => 'name'
+////            ],
+//            [
+//                'type' => 'text',
+//                'name' => "topic",
+//                'class' => "",
+//                'label' => "Chủ đề",
+//            ],
+//            [
+//                'type' => 'text',
+//                'name' => "content",
+//                'class' => "",
+//                'label' => "Nội dung",
+//            ],
+//
         ];
     }
 }

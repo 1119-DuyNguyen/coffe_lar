@@ -68,18 +68,7 @@ class EmployeeController extends CRUDController
                 'class' => "",
                 'label' => "Địa chỉ liên hệ",
             ],
-            [
-                'type' => 'select',
-                'name' => "role_id",
-                'value' => function ($resource) {
-                    return $resource->role_id;
-                },
-                'class' => "",
-                'label' => "Chức vụ",
-                'optionValues' => Role::employee()->get()->toArray(),
-                'optionKey' => 'id',
-                'optionLabel' => 'name'
-            ],
+
             [
                 'type' => 'date',
                 'name' => "day_of_birth",
@@ -124,13 +113,13 @@ class EmployeeController extends CRUDController
         $day = Carbon::createFromFormat('Y-m', $request->input('month'));
         $month = $request->input('month');
 
-        $checkin = Checkin::with('contract.user')->whereMonth('date', $day->month)->whereYear(
+        $checkin = Checkin::with('contract.user')->whereMonth('date', '=', $day->month)->whereYear(
             'date',
+            '=',
             $day->year
         )
             ->whereHas('contract', function ($query) {
-//                $query->where('user_id', '=', Auth::user()->id);
-                $query->where('user_id', '=', 4);
+                $query->where('user_id', '=', Auth::user()->id);
             })
             ->first();
         if (empty($checkin)) {
@@ -145,8 +134,9 @@ class EmployeeController extends CRUDController
     public function getSalary(Request $request)
     {
         $day = Carbon::createFromFormat('Y-m', $request->input('month'));
-        $checkins = Checkin::with('contract.user')->whereMonth('date', $day->month)->whereYear(
+        $checkins = Checkin::with('contract.user')->whereMonth('date', '=', $day->month)->whereYear(
             'date',
+            '=',
             $day->year
         )->get();
         $month = $request->input('month');

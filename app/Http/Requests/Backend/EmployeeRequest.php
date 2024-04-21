@@ -25,12 +25,11 @@ class EmployeeRequest extends FormRequest
             'name' => ['required', 'max:250'],
             'employee_code' => ['required'],
             'email' => ['required', 'max:250', 'email:rfc,dns'],
-            'phone' => ['required', 'phone', 'min:10'],
+            'phone' => ['required', 'string', 'regex:/^[0-9]{10}$/'],
             'address' => ['required', 'max:250'],
-            'role_id' => ['required'],
             'day_of_birth' => ['required'],
             'gender' => ['required'],
-            'tax_code' => ['required', 'max:250'],
+            'tax_code' => ['required', 'regex:/^[0-9]{10}$/'],
             'bank_number' => ['required', 'numeric'],
         ];
     }

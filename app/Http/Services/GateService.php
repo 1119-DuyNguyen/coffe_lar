@@ -9,25 +9,26 @@ class GateService
     {
         //        $nameRoute="product.change-status";
         //route admin.categories.index
-        $last_word_start = strrpos($nameRoute, '.'); // +1 so we don't include the space in our result
+        $last_word_start = strrpos($nameRoute, '.') + 1; // +1 so we don't include the dot in our result
         $last_word = substr($nameRoute, $last_word_start); // $last_word = PHP.
-
-        $nameRoute = substr_replace($nameRoute, '', $last_word_start);
+//        $nameRoute = substr_replace($nameRoute, '', $last_word_start - 1);
         //route admin.category
-        //        switch ($last_word){
-        //            case '':
-        //            case 'change-status':
-        //            case 'edit':
-        //                $nameRoute=substr_replace($nameRoute,'update',$last_word_start);
-        //                break;
-        //
-        //            case 'create':
-        //                $nameRoute=substr_replace($nameRoute,'store',$last_word_start);
-        //                break;
+        switch ($last_word) {
+            case 'index':
+            case 'edit':
+            case 'create':
+                $nameRoute = substr_replace($nameRoute, 'read', $last_word_start);
+                break;
+            case 'change-status':
+                $nameRoute = substr_replace($nameRoute, 'update', $last_word_start);
+                break;
 
-        //        }
+//                $nameRoute = substr_replace($nameRoute, 'store', $last_word_start);
+//                break;
+        }
         return $nameRoute;
     }
+
     static function checkIfHaveGateAdmin()
     {
     }

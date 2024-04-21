@@ -76,6 +76,7 @@
                     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
                 }
             </style>
+            @vite(['resources/css/custom.css'])
 
 
             <!-- /END GA -->

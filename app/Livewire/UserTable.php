@@ -18,9 +18,20 @@ class UserTable extends IndexDataTable
     protected function getColumns(): array
     {
         return [
-            TextColumn::make('id')->label('Id'),
-            TextColumn::make('name')->label('Tên'),
-            TextColumn::make('email')->label('Email'),
+//            TextColumn::make('id')->label('Id'),
+            TextColumn::make('name')->label('Tên')->searchable(),
+            TextColumn::make('email')->label('Email')->searchable(),
+            TextColumn::make('phone')->label('Điện thoại')->searchable(),
+
+//            TextColumn::make('latestContract.role.name')
+//                ->label('Chức vụ')
+//                ->wrap()
+//                ->getStateUsing(
+//                    fn($record
+//                    ) => ($record->latestContract->role->name ?? ((empty($record->employee_code)) ? 'Người mua hàng' : "Chưa thêm chức vụ"))
+//                ),
+
+
             ToggleColumn::make('status')->label('Trạng Thái'),
             TextColumn::make('created_at')->label('Ngày Tạo'),
         ];
@@ -29,7 +40,7 @@ class UserTable extends IndexDataTable
 
     public function datasource(): Builder
     {
-        return User::query()->with('role');
+        return User::buyer();
     }
 
     protected function getDataTableFilters(): array

@@ -2,7 +2,7 @@
 
 @section('content')
     <x-index-datatable
-        title="Tài khoản"
+        title="Người mua hàng"
         table="user-table"
         route="admin.users.create"
     ></x-index-datatable>

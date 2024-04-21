@@ -17,6 +17,7 @@ return new class extends Migration {
             //0, chờ duyệt, 1 đã duyệt, 2 từ chối
             $table->tinyInteger('status')->default(0);
 
+            $table->date('day_off');
 
             $table->string('topic')->nullable();
             $table->longText('content')->nullable();

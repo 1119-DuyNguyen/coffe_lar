@@ -10,16 +10,20 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class MyOpinionTable extends IndexDataTable
 {
-    protected string $buttonEditRoute = "admin.opinions.edit";
-    protected string $buttonDeleteRoute = "admin.opinions.destroy";
+    protected string $buttonEditRoute = "admin.my-opinions.edit";
+    protected string $buttonDeleteRoute = "admin.my-opinions.destroy";
 
 
     public function datasource(): Builder
     {
-        return Opinion::query()->with('typeOpinion', 'user')->orderBy('created_at', 'desc');
+        return Opinion::query()->with('typeOpinion', 'user')->orderBy('created_at', 'desc')->where(
+            'user_id',
+            Auth::user()->id
+        );
     }
 
     protected function getColumns(): array

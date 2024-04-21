@@ -3843,7 +3843,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a:before {
 }
 
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-menu li a {
-    padding-left: 61px;
+    padding-left: 2rem;
     background-color: #fff;
 }
 

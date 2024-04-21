@@ -32,6 +32,10 @@ abstract class IndexDataTable extends Component implements HasForms, HasTable
 
     abstract protected function getColumns(): array;
 
+    protected function getAnotherBtnActions(): array
+    {
+        return [];
+    }
 
     protected function getActionBtns()
     {
@@ -70,7 +74,7 @@ abstract class IndexDataTable extends Component implements HasForms, HasTable
                 ->tooltip("In")
                 ->icon('heroicon-o-printer');
         }
-        return $actionBtn;
+        return array_merge($this->getAnotherBtnActions(), $actionBtn);
     }
 
     private function addDynamicEventColumns(array $columns)
