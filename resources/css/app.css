@@ -38,3 +38,6 @@
 
 }
 
+.form-group .control-label, .form-group > label {
+    font-size: 1rem !important;
+}

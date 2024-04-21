@@ -129,81 +129,14 @@
         <script src="{{asset("backend/assets/js/custom.js")}}"></script>
 
         {{--vendor--}}
-        @include('setup-js')
 
         @livewireScripts
         @filamentScripts
         @livewire('notifications')
         @vite('resources/js/app.js')
-        <!-- Dynamic Delete alart -->
-
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+        @include('setup-js')
 
 
-                $('body').on('click', '.delete-item', function (event) {
-                    event.preventDefault();
-
-                    let deleteUrl = $(this).attr('href');
-
-                    Swal.fire({
-                        title: 'Bạn chắc chắn muốn xoá chứ ?',
-                        text: "Bạn sẽ không thể hoàn lại tác vụ này",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Xoá',
-                        cancelButtonText: 'Huỷ bỏ'
-
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-
-                            $.ajax({
-                                type: 'DELETE',
-                                url: deleteUrl,
-                                // headers: {
-                                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                // },
-                                success: function (data) {
-
-                                    if (data.status == 'success') {
-                                        Swal.fire(
-                                            'Xóa thành công!',
-                                            "",
-                                            // data.message,
-                                            'success'
-                                        ).then(() => {
-                                            window.location.reload();
-                                        })
-                                    } else if (data.status == 'error') {
-                                        Swal.fire(
-                                            data.message ?? 'Không thể xóa',
-                                            // data.message,
-                                            '',
-                                            'error'
-                                        )
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    console.log(error);
-                                }
-                            })
-                        }
-                    })
-                })
-
-            })
-
-
-        </script>
 
         @stack('scripts')
 

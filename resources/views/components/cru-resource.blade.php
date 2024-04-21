@@ -20,7 +20,7 @@
     </div>
 
     <div class="section-body">
-
+        {{ $headerBody ??"" }}
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -53,8 +53,8 @@
                             </form>
                             @push('scripts')
                                 <script>
-                                    var forms = document.querySelectorAll("form");
-
+                                    let forms = document.querySelectorAll(".main-content form");
+                                    console.log(forms);
                                     //init span error message
                                     forms.forEach(form => {
 
@@ -75,11 +75,9 @@
                                                 distinctInputCheckboxes[input.name] = input;
                                             }
                                         })
-                                        console.log(inputCheckboxes, distinctInputCheckboxes);
                                         for (let name in distinctInputCheckboxes) {
                                             let input = distinctInputCheckboxes[name];
                                             let parent = input.closest('.row');
-                                            console.log(parent, "hihfishdf")
                                             let span = document.createElement('div');
                                             span.innerHTML = `
                                                 <span class="text-danger error-text ${input.name.replace(/\[\]$/, "")}_error"
@@ -88,12 +86,14 @@
                                             parent.insertAdjacentHTML('beforebegin', span.outerHTML);
                                         }
 
+                                        console.log(form);
                                         form.addEventListener('submit', function (e) {
                                             e.preventDefault();
 
-                                            var all = $(this).serialize();
+                                            console.log(form.getAttribute("action"));
+                                            var all = $('.main-content form').serialize();
                                             $.ajax({
-                                                url: $(this).attr('action'),
+                                                url: form.getAttribute("action"),
                                                 type: "POST",
                                                 data: all,
                                                 beforeSend: function () {

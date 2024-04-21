@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
 
 Route::get('employees/salary', [EmployeeController::class, 'getSalary'])->name('employees.salary');
+Route::get('employees/my-salary', [EmployeeController::class, 'getMySalary'])->name('employees.my-salary');
+Route::get('employees/my-salary/form', [EmployeeController::class, 'getMySalaryForm'])->name(
+    'employees.my-salary.form'
+);
 Route::resource('employees', EmployeeController::class);
-Route::get('employees/{employees}/my-salary', [EmployeeController::class, 'getMySalary'])->name('employees.my-salary');
+
 
 Route::resource('type-opinions', TypeOpinionController::class);
 

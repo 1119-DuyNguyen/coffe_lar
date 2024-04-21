@@ -1,12 +1,16 @@
 @extends('admin.layouts.master')
 
 @section('content')
+
     <x-cru-resource
-        title="Quản lý nhân viên"
+        title="Thông tin cá nhân"
         :route="$routeCRU"
         :method="$method"
         :formElements="$formElements"
         :have-index-page="false"
 
-    ></x-cru-resource>
+    >
+
+
+    </x-cru-resource>
 @endsection

@@ -85,15 +85,6 @@
             padding: 5px;
         }
 
-        /*td::before {*/
-        /*    content: "";*/
-        /*    display: block;*/
-        /*    width: 100%;*/
-        /*    height: 1px;*/
-        /*    background-color: #ddd;*/
-        /*    position: absolute;*/
-        /*    bottom: 0;*/
-        /*}*/
 
         .footer-container {
             display: inline-block;

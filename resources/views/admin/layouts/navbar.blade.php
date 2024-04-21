@@ -172,10 +172,10 @@
                     <i class="fas fa-comments"></i> Ý kiến của tôi
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('admin.employees.my-salary', [\Illuminate\Support\Facades\Auth::user()->id]) }}"
+                <a href="{{ route('admin.employees.my-salary.form') }}"
                    class="dropdown-item has-icon">
 
-                    <i class="fas fa-comments"></i> Lương của tôi
+                    <i class="fas fa-wallet"></i> Lương của tôi
                 </a>
                 <div class="dropdown-divider"></div>
 
