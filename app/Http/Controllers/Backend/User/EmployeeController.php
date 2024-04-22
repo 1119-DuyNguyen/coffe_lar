@@ -109,7 +109,6 @@ class EmployeeController extends CRUDController
 
     public function getMySalary(Request $request)
     {
-        $user = User::with('contract.checkins')->findOrFail(Auth::user()->id);
         $day = Carbon::createFromFormat('Y-m', $request->input('month'));
         $month = $request->input('month');
 
