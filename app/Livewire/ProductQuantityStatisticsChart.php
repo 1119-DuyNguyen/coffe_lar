@@ -8,10 +8,9 @@ use Filament\Forms\Components\Select;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
-class ProductRevenueStatisticsChart extends ApexChartWidget
+class ProductQuantityStatisticsChart extends ApexChartWidget
 {
 
     protected static ?string $heading = '';
@@ -44,21 +43,15 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
         }
         $dateStart = Carbon::parse($this->filterFormData['date_start']);
         $dateEnd = Carbon::parse($this->filterFormData['date_end']);
-        $dataRevenue = Trend::model(ProductReport::class)
+        $data = Trend::model(ProductReport::class)
             ->between(
                 start: $dateStart,
                 end: $dateEnd,
             );
-
+//            ->perMonth()
+//            ->sum('price_sale');
 //        dd($this->getLabelsAndValues($data));
-        $dataProfit = Trend::query(
-            ProductReport::query()
-//                ->selectRaw('sum(price_sale)- sum(price_receipt) as aggregate')
-        )
-            ->between(
-                start: $dateStart,
-                end: $dateEnd,
-            );
+
 
         return [
             'chart' => [
@@ -70,22 +63,19 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
             ],
             'series' => [
                 [
-                    'name' => 'Doanh thu',
-                    'data' => $this->getLabelsAndValuesRevenue($dataRevenue)->map(
-                        fn(TrendValue $value) => $value->aggregate
+                    'name' => 'Số lượng bán ra',
+                    'data' => $this->getLabelsAndValuesTotalSales($data)->map(fn(TrendValue $value) => $value->aggregate
                     ),
                 ],
                 [
-                    'name' => 'Lợi nhuận',
-                    'data' => $this->getLabelsAndValuesProfit($dataProfit)->map(
+                    'name' => 'Số lượng nhập vào',
+                    'data' => $this->getLabelsAndValuesTotalReports($data)->map(
                         fn(TrendValue $value) => $value->aggregate
                     ),
                 ],
             ],
             'xaxis' => [
-                'categories' => $this->getLabelsAndValuesRevenue($dataRevenue)->map(
-                    fn(TrendValue $value) => $value->date
-                ),
+                'categories' => $this->getLabelsAndValuesTotalSales($data)->map(fn(TrendValue $value) => $value->date),
                 'labels' => [
                     'style' => [
                         'colors' => '#9ca3af',
@@ -108,7 +98,8 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
         ];
     }
 
-    private function getLabelsAndValuesProfit($data)
+
+    private function getLabelsAndValuesTotalSales($data)
     {
         $type = $this->filterFormData['type'];
         $dateStart = Carbon::parse($this->filterFormData['date_start']);
@@ -129,8 +120,7 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
 
                 break;
         }
-        $data = $data->aggregate("sum(price_sale)- sum(price_receipt)", "");
-
+        $data = $data->sum('total_sale');
 
         // build labels and values
         if ($type == "quarter" && count($data) > 0) {
@@ -153,7 +143,7 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
         return $data;
     }
 
-    private function getLabelsAndValuesRevenue($data)
+    private function getLabelsAndValuesTotalReports($data)
     {
         $type = $this->filterFormData['type'];
         $dateStart = Carbon::parse($this->filterFormData['date_start']);
@@ -174,7 +164,7 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
 
                 break;
         }
-        $data = $data->sum('price_sale');
+        $data = $data->sum('total_receipt');
 
         // build labels and values
         if ($type == "quarter" && count($data) > 0) {
@@ -196,7 +186,6 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
         }
         return $data;
     }
-
 
     private function getLocaleVn()
     {

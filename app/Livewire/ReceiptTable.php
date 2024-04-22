@@ -13,6 +13,7 @@ class ReceiptTable extends IndexDataTable
 {
     protected string $buttonEditRoute = "admin.receipts.edit";
     protected string $buttonDeleteRoute = "admin.receipts.destroy";
+    protected string $buttonPrintRoute = "admin.receipts.print";
 
 
     protected function datasource(): Builder

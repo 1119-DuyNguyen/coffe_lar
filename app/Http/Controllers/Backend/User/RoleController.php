@@ -56,7 +56,7 @@ class RoleController extends CRUDController
                 'label' => "Quyền",
                 'optionValues' => Permission::all()->toArray(),
                 'optionKey' => 'id',
-                'optionLabel' => 'name'
+                'optionLabel' => 'description'
             ],
         ];
     }

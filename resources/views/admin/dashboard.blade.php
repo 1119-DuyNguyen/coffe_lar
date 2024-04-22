@@ -75,7 +75,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Thống kê doanh thu </h4>
+                        <h4>Thống kê lợi nhuận bán hàng </h4>
                         {{--                        <div class="card-header-action">--}}
                         {{--                            <a href="{{route('admin.products.create')}}" class="btn btn-primary"><i--}}
                         {{--                                    class="fas fa-plus"></i> Thêm mới</a>--}}
@@ -83,6 +83,23 @@
                     </div>
                     <div class="card-body">
                         @livewire(\App\Livewire\ProductRevenueStatisticsChart::class)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Thống kê số lượng sản phẩm đã xuất </h4>
+                        {{--                        <div class="card-header-action">--}}
+                        {{--                            <a href="{{route('admin.products.create')}}" class="btn btn-primary"><i--}}
+                        {{--                                    class="fas fa-plus"></i> Thêm mới</a>--}}
+                        {{--                        </div>--}}
+                    </div>
+                    <div class="card-body">
+                        @livewire(\App\Livewire\ProductQuantityStatisticsChart::class)
                     </div>
 
                 </div>

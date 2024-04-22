@@ -15,6 +15,7 @@ class GateService
         //route admin.category
         switch ($last_word) {
             case 'index':
+            case 'print':
             case 'edit':
             case 'create':
                 $nameRoute = substr_replace($nameRoute, 'read', $last_word_start);

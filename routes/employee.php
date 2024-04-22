@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\Opinion\OpinionController;
 use App\Http\Controllers\Backend\Checkin\CheckinController;
 
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
 
@@ -29,6 +30,8 @@ Route::resource('contracts', ContractController::class);
 Route::resource('opinions', OpinionController::class);
 Route::resource('my-opinions', MyOpinionController::class);
 
+
+Route::get('receipts/{receipt}/print', [ReceiptController::class, 'print'])->name('receipts.print');
 
 /** receipt */
 Route::resource('receipts', ReceiptController::class);

@@ -1,5 +1,5 @@
 @php
-    $orderProducts = $order->orderProducts;
+    $orderProducts = $order->productReceipt;
 @endphp
 
 

@@ -9,26 +9,39 @@ use Illuminate\Database\Seeder;
 
 class PermissionRoleSeeder extends Seeder
 {
-    private function createRolePermission(Role $role, $name, $description)
+
+
+    private function createRolePermission(Role $role, $name, $description, $isCreated = false)
     {
-        $permission = Permission::create(['name' => $name, 'description' => $description]);
+        $permission = Permission::firstOrCreate(['name' => $name, 'description' => $description],
+            ['name' => $name, 'description' => $description]);
         $role->permissions()->attach($permission->id);
         return $permission;
     }
 
-    private function assignPermissionsToRole($permissions, $role)
+    private function assignPermissionsToRole($permissions, $role, $isCreated = false)
     {
         $manageWord = "Quản lý";
         foreach ($permissions as $per => $description) {
             if (str_contains(strtolower($description), strtolower($manageWord))) {
                 // bỏ chữ quản lý trong tài nguyên
                 $description = strtolower(str_replace($manageWord, "", $description));
-                $perRead = $this->createRolePermission($role, $per . '.read', 'Xem danh sách' . $description);
-                $perStore = $this->createRolePermission($role, $per . '.store', 'Khởi tạo ' . $description);
-                $perUpdate = $this->createRolePermission($role, $per . '.update', 'Cập nhập ' . $description);
-                $perDel = $this->createRolePermission($role, $per . '.destroy', 'Xóa ' . $description);
+                $perRead = $this->createRolePermission(
+                    $role,
+                    $per . '.read',
+                    'Xem danh sách' . $description,
+                    $isCreated
+                );
+                $perStore = $this->createRolePermission($role, $per . '.store', 'Khởi tạo ' . $description, $isCreated);
+                $perUpdate = $this->createRolePermission(
+                    $role,
+                    $per . '.update',
+                    'Cập nhập ' . $description,
+                    $isCreated
+                );
+                $perDel = $this->createRolePermission($role, $per . '.destroy', 'Xóa ' . $description, $isCreated);
             } else {
-                $this->createRolePermission($role, $per, $description);
+                $this->createRolePermission($role, $per, $description, $isCreated);
             }
         }
     }
@@ -56,7 +69,7 @@ class PermissionRoleSeeder extends Seeder
             'admin.orders.read' => 'Xem danh sách đơn hàng',
             'admin.orders.update' => 'Cập nhập đơn hàng',
             'admin.receipts' => 'Quản lý phiếu nhập',
-            
+
             'admin.dashboard.warehouse' => 'Xem thống kê sản phẩm trong kho',
             'admin.providers' => 'Quản lý nhà cung cấp',
 
@@ -78,12 +91,13 @@ class PermissionRoleSeeder extends Seeder
         ];
 
 
-        $this->assignPermissionsToRole($humanResourcePermission, $humanResourceRole);
+//        $this->assignPermissionsToRole($humanResourcePermission, $humanResourceRole);
 
 
         $this->assignPermissionsToRole(
             array_merge($onlyAdminPermission, $humanResourcePermission, $stockPermission, $sellerPermission),
-            $superAdminRole
+            $superAdminRole,
+            true
         );
 
 //        $this->createRolePermission($superAdminRole, 'admin.setting.index');
