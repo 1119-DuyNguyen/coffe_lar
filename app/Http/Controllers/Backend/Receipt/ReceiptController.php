@@ -107,7 +107,7 @@ class ReceiptController extends Controller
 
     public function print(string $id)
     {
-        $receipt = Receipt::with('productReceipt')->findOrFail($id);
+        $receipt = Receipt::with('productReceipt', 'provider')->findOrFail($id);
 //        return view('frontend.dashboard.order.print', compact('order'));
         $pdf = Pdf::loadView('admin.prints.receipt', compact('receipt'));
         return $pdf->stream('receipt.pdf');

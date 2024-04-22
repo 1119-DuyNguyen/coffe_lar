@@ -34,8 +34,12 @@ class ContractTable extends IndexDataTable
         return [
             TextColumn::make('id')->label('Id'),
             TextColumn::make('code')->label('Mã hợp đồng'),
-            TextColumn::make('name')->label('Loại hợp đồng'),
+            TextColumn::make('name')->label('Tên hợp đồng'),
             TextColumn::make('user.name')->label('Tên nhân viên'),
+            TextColumn::make('role.name')
+                ->label('Chức vụ')
+                ->wrap()
+            ,
             TextColumn::make('salary')->label('Lương'),
             TextColumn::make('allowance')->label('Phụ Cấp'),
             TextColumn::make('end_date')->label('Ngày hết hạn')->sortable(),  // Maintains sortable for 'end_date'

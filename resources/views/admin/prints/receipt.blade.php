@@ -1,5 +1,5 @@
 @php
-    $orderProducts = $order->productReceipt;
+    $receiptProducts = $receipt->productReceipt;
 @endphp
 
 
@@ -108,6 +108,11 @@
             float: right;
             font-size: 16px;
         }
+
+        .footer-container {
+            display: inline-block;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -143,17 +148,21 @@
         <tr>
             <td class="w-half">
                 <div>
-                    <h2>Đơn hàng: {{ $order->id }}</h2>
+                    <h2>Đơn hàng: {{ $receipt->id }}</h2>
                 </div>
-                <div>
-                    <h4>Tới:</h4>
-                </div>
-                <div>Người nhận : {{ $order->name_receiver }}</div>
-                <div>Địa chỉ nhận : {{ $order->address_receiver }}</div>
-                <div>Số điện thoại nhận : {{ $order->phone_receiver }}</div>
-                <div>Địa chỉ email : {{ $order->email_receiver }}</div>
+                {{--                <div>--}}
+                {{--                    <h4>Tới:</h4>--}}
+                {{--                </div>--}}
+                <div>Nhà cung cấp : {{ $receipt->provider->name }}</div>
+                {{--                <div>Địa chỉ nhận : {{ $order->address_receiver }}</div>--}}
+                {{--                <div>Số điện thoại nhận : {{ $order->phone_receiver }}</div>--}}
+                {{--                <div>Địa chỉ email : {{ $order->email_receiver }}</div>--}}
 
                 {{--                <div>123 Acme Str.</div> --}}
+
+                <div>
+                    Ngày tạo: {{ $receipt->created_at }}
+                </div>
             </td>
             {{--            <td class="w-half"> --}}
             {{--                <div><h4>Từ:</h4></div> --}}
@@ -171,7 +180,7 @@
             <th>Giá (đồng)</th>
             <th>Số lượng</th>
         </tr>
-        @foreach ($orderProducts as $item)
+        @foreach ($receiptProducts as $item)
             <tr class="items">
                 <td>
                     {{ $item->product->name }}
@@ -187,19 +196,22 @@
 
     </table>
 </div>
+
 <div class="total">
-    Thành tiền : {{ $order->sub_total }}
-</div>
-<div class="total">
-    Phí vận chuyển : {{ $order->fee_ship }}
-</div>
-<div class="total">
-    Tổng cộng : {{ $order->total_price }}
-</div>
-<div>
-    <h4>Ngày tạo: {{ $order->created_at }}</h4>
+    Tổng cộng : {{ $receipt->total_price }}
 </div>
 
+<div class="footer-container">
+    <footer>
+        <br><br>
+        <br><br>
+        <div>
+
+            <span style="float:right">Chữ ký người lập phiếu</span>
+            <span style="float:left">Chữ ký nhà cung cấp</span>
+        </div>
+    </footer>
+</div>
 
 </body>
 
