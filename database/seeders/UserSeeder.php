@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'day_of_birth' => DateTime::createFromFormat('d/m/Y', '8/12/2006'),
                 'gender' => 1,
                 'tax_code' => '8469212338',
-                'bank_number' => 430832827131
+                'bank_number' => 430732827131
             ],
             [
                 'name' => 'Tài khoản bị khoá',
