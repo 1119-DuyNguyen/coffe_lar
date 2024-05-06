@@ -22,24 +22,24 @@ class UserSeeder extends Seeder
                 'employee_code' => "AD01",
                 'password' => bcrypt('123'),
                 'status' => 1,
-                'phone' => '090654933',
-                'address' => 'nguyễn thương hiền',
+                'phone' => '0906549331',
+                'address' => '273 An Dương Vương, Quận 5, TP HCM',
                 'day_of_birth' => DateTime::createFromFormat('d/m/Y', '8/12/2006'),
-                'gender' => 'nam',
+                'gender' => 1,
                 'tax_code' => '8469212338',
-                'bank_number' => 12
+                'bank_number' => 430832827131
             ],
             [
                 'name' => 'Tài khoản bị khoá',
                 'email' => 'ban@gmail.com',
                 'password' => bcrypt('123'),
                 'status' => 0,
-                'phone' => '090553933',
-                'address' => 'lê hữu cầu',
+                'phone' => '0905539332',
+                'address' => '273 An Dương Vương, Quận 5, TP HCM',
                 'day_of_birth' => DateTime::createFromFormat('d/m/Y', '4/7/2011'),
-                'gender' => 'nữ',
+                'gender' => 0,
                 'tax_code' => '8469212339',
-                'bank_number' => 1231231
+                'bank_number' => 430833827131
             ],
             [
                 'name' => 'Người dùng',
@@ -47,12 +47,12 @@ class UserSeeder extends Seeder
                 'email' => 'user@gmail.com',
                 'password' => bcrypt('123'),
                 'status' => 1,
-                'phone' => '099994933',
-                'address' => 'naikore',
+                'phone' => '0999949343',
+                'address' => '273 An Dương Vương, Quận 5, TP HCM',
                 'day_of_birth' => DateTime::createFromFormat('d/m/Y', '10/12/2006'),
-                'gender' => 'nữ',
+                'gender' => 0,
                 'tax_code' => '8469212337',
-                'bank_number' => 124455
+                'bank_number' => 430513223135
             ]
         ];
         foreach ($seedData as $data) {
@@ -65,7 +65,13 @@ class UserSeeder extends Seeder
                 'email' => 'employee' . $i . '@gmail.com',
                 'employee_code' => "EMP" . str_pad($i, 6, "0", STR_PAD_LEFT),
                 'password' => bcrypt('123'),
-                'status' => 1
+                'status' => 1,
+                'phone' => '0829131393',
+                'address' => '273 An Dương Vương, Quận 5, TP HCM',
+                'day_of_birth' => DateTime::createFromFormat('d/m/Y', '10/12/2006'),
+                'gender' => 0,
+                'tax_code' => '8469212337',
+                'bank_number' => 430513123131
             ];
             User::create($data);
         }

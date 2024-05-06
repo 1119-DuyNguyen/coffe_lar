@@ -38,12 +38,11 @@ class ContractTable extends IndexDataTable
             TextColumn::make('user.name')->label('Tên nhân viên'),
             TextColumn::make('role.name')
                 ->label('Chức vụ')
-                ->wrap()
-            ,
+                ->wrap(),
             TextColumn::make('salary')->label('Lương'),
             TextColumn::make('allowance')->label('Phụ Cấp'),
             TextColumn::make('end_date')->label('Ngày hết hạn')->sortable(),  // Maintains sortable for 'end_date'
-            ToggleColumn::make('status')->label('Trạng thái'),
+            // ToggleColumn::make('status')->label('Trạng thái'),
             TextColumn::make('created_at')->label('Ngày tạo')->sortable(),  // Maintains sortable for 'created_at'
         ];
     }

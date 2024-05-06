@@ -37,27 +37,33 @@ class CheckinController extends CRUDController
     protected function getFormElements(): array
     {
         return [
-//            [
-//                'type' => 'select',
-//                'name' => "contract_id",
-//                'value' => function ($resource) {
-//                    return $resource->contract_id;
-//                },
-//                'class' => "",
-//                'label' => "Hợp đồng",
-//                'optionValues' => Contract::all()->toArray(),
-//                'optionKey' => 'id',
-//                'optionLabel' => 'name'
-//            ],
+            //            [
+            //                'type' => 'select',
+            //                'name' => "contract_id",
+            //                'value' => function ($resource) {
+            //                    return $resource->contract_id;
+            //                },
+            //                'class' => "",
+            //                'label' => "Hợp đồng",
+            //                'optionValues' => Contract::all()->toArray(),
+            //                'optionKey' => 'id',
+            //                'optionLabel' => 'name'
+            //            ],
             [
                 'type' => 'select',
                 'name' => "contract_id",
-                'value' => function ($resource) {
-                    return $resource->contract->user_id ?? "";
-                },
+                // 'value' => function ($resource) {
+                //     dd($resource->latestContract);
+                //     return $resource->latestContract->id ?? "";
+                // },
                 'class' => "",
-                'label' => "Nhân viên",
-                'optionValues' => User::employee()->get()->toArray(),
+                'label' => "Hợp đồng",
+                'optionValues' => Contract::all()->map(function ($contract) {
+                    return [
+                        'id' => $contract->id,
+                        'name' => $contract->user->name,
+                    ];
+                })->toArray(),
                 'optionKey' => 'id',
                 'optionLabel' => 'name'
             ],
@@ -69,7 +75,7 @@ class CheckinController extends CRUDController
             ],
             [
                 'type' => 'number',
-                'name' => "auth_day_off",
+                'name' => "unauth_day_off",
                 'class' => "",
                 'label' => "Tổng số ngày nghỉ",
             ],

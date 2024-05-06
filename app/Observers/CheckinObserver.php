@@ -17,10 +17,10 @@ class CheckinObserver
         $checkin->date = Carbon::parse($checkin->date)->format('Y-m');
     }
 
-//    public function saving(Checkin $checkin)
-//    {
-//
-//    }
+    //    public function saving(Checkin $checkin)
+    //    {
+    //
+    //    }
 
     /**
      * Handle the Checkin "created" event.
@@ -38,7 +38,8 @@ class CheckinObserver
                 'date',
                 '=',
                 $checkin->date->month
-            )->where('contract_id', $checkin->contract_id)->exists()) {
+            )->where('contract_id', $checkin->contract_id)->exists()
+        ) {
             throw ValidationException::withMessages(
                 ['date' => "Đã chấm công thời gian nhập. Vui lòng nhập lại nhân viên hoặc thời gian"]
             );
@@ -67,13 +68,14 @@ class CheckinObserver
             )->where('status', '=', 1)->count(DB::raw('DISTINCT DAY(day_off)'));
 
             $reality_times = 26;
-            $checkin->unauth_day_off = max($checkin->auth_day_off - min($count_opinions, 3), 0);
+            $checkin->unauth_day_off = max($checkin->unauth_day_off - min($count_opinions, 3), 0);
 
-            // lương 1 ngày * số ngày làm , lương 1h *2 * overtimes
+            // lương 1 ngày * số ngày làm + lương 1h *2 * overtimes + phụ cấp + lương 1 ngày * số ngày nghỉ không phép
             $total_salary = ($contract->salary * $reality_times) + ((($contract->salary) / 8) * 2 * $checkin->over_times) + ($contract->allowance) - ($checkin->unauth_day_off * $contract->salary);
             $reality_times -= $checkin->unauth_day_off;
             $checkin->reality_times = $reality_times;
             $checkin->total_salary = $total_salary;
+            $checkin->auth_day_off = $count_opinions;
             // dd($total_salary);
             // $checkin->save();
         }
@@ -83,29 +85,29 @@ class CheckinObserver
     /**
      * Handle the Checkin "updated" event.
      */
-//    public function updating(Checkin $checkin): void
-//    {
-//        $count_opinions = 0;
-//        if ($checkin->contract_id) {
-//            $contract = Contract::findOrFail($checkin->contract_id);
-//            $opinions = Opinion::query()->where('user_id', $checkin->contract->user_id)->get();
-//            // $opinions->where('contract_id', $checkin->contract_id);
-//            foreach ($opinions as $opinion) {
-//                if ($opinion->type_opinion_id == 2 || $opinion->type_opinion_id == 3) {
-//                    if ($opinion->status == 1 && (date('m', strtotime($opinion->updated_at)) == date('m'))) {
-//                        $count_opinions++;
-//                    }
-//                }
-//            }
-//
-//            $total_salary = null;
-//            $reality_times = 26;
-//            $checkin->unauth_day_off = $checkin->auth_day_off - min($count_opinions, 3);
-//            $total_salary = ($contract->salary * $reality_times) + ((($contract->salary) / 8) * 2 * $checkin->over_times) + ($contract->allowance) - ($checkin->unauth_day_off * $contract->salary);
-//            $reality_times = 26 - $checkin->unauth_day_off;
-//            $checkin->reality_times = $reality_times;
-//            $checkin->total_salary = $total_salary;
-//            // dd($total_salary);
-//        }
-//    }
+    //    public function updating(Checkin $checkin): void
+    //    {
+    //        $count_opinions = 0;
+    //        if ($checkin->contract_id) {
+    //            $contract = Contract::findOrFail($checkin->contract_id);
+    //            $opinions = Opinion::query()->where('user_id', $checkin->contract->user_id)->get();
+    //            // $opinions->where('contract_id', $checkin->contract_id);
+    //            foreach ($opinions as $opinion) {
+    //                if ($opinion->type_opinion_id == 2 || $opinion->type_opinion_id == 3) {
+    //                    if ($opinion->status == 1 && (date('m', strtotime($opinion->updated_at)) == date('m'))) {
+    //                        $count_opinions++;
+    //                    }
+    //                }
+    //            }
+    //
+    //            $total_salary = null;
+    //            $reality_times = 26;
+    //            $checkin->unauth_day_off = $checkin->auth_day_off - min($count_opinions, 3);
+    //            $total_salary = ($contract->salary * $reality_times) + ((($contract->salary) / 8) * 2 * $checkin->over_times) + ($contract->allowance) - ($checkin->unauth_day_off * $contract->salary);
+    //            $reality_times = 26 - $checkin->unauth_day_off;
+    //            $checkin->reality_times = $reality_times;
+    //            $checkin->total_salary = $total_salary;
+    //            // dd($total_salary);
+    //        }
+    //    }
 }
