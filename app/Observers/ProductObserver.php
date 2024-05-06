@@ -42,7 +42,7 @@ class ProductObserver
 
     private function shouldUpdateSlug(Product $product, $commingSlug): bool
     {
-        return $product->isDirty('slug') && !($product->slug === $commingSlug && $product->slug != null);
+        return $product->isDirty('name') && $product->slug != $commingSlug && $product->slug != null;
     }
 
     public function creating(Product $product)
@@ -63,6 +63,7 @@ class ProductObserver
     public function updating(Product $product)
     {
         $commingSlug = \Str::slug($this->request->input('name'));
+
         if ($this->shouldUpdateSlug($product, $commingSlug)) {
             // check exists
             // then generate slug
