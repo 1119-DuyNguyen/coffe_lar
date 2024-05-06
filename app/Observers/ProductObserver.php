@@ -47,10 +47,10 @@ class ProductObserver
 
     public function creating(Product $product)
     {
-        $commingSlug = $this->request->input('slug');
-//        dd($product->slug === $this->request->input('slug') && $product->slug != null);
+        $commingSlug = $this->request->input('name');
+        //        dd($product->slug === $this->request->input('slug') && $product->slug != null);
         if ($this->shouldUpdateSlug($product, $commingSlug)) {
-//            dd(Product::where('slug', \Str::slug($product->name, '-'))->exists());
+            //            dd(Product::where('slug', \Str::slug($product->name, '-'))->exists());
             $this->generateSlug($product);
         }
     }
@@ -65,7 +65,7 @@ class ProductObserver
 
     public function updating(Product $product)
     {
-        $commingSlug = $this->request->input('slug');
+        $commingSlug = $this->request->input('name');
         if ($this->shouldUpdateSlug($product, $commingSlug)) {
             // check exists
             // then generate slug
