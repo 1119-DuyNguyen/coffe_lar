@@ -5,6 +5,7 @@
      'formElements'=>[],
      'resource'=> [],
      'haveIndexPage'=>true,
+     'haveFile'=> false
 ])
 @php
     $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
@@ -41,7 +42,9 @@
                         @if(!empty($formElements))
                             <form
                                 action="{{$route}}"
-                                method="POST">
+                                method="POST"
+                                enctype="{{ ($haveFile) ? 'multipart/form-data' : "" }}"
+                            >
                                 @csrf
                                 @method($method)
                                 @foreach($formElements as $type => $formElement)
@@ -91,11 +94,15 @@
                                             e.preventDefault();
 
                                             console.log(form.getAttribute("action"));
-                                            var all = $('.main-content form').serialize();
+                                            // var all = $('.main-content form').serialize();
                                             $.ajax({
                                                 url: form.getAttribute("action"),
                                                 type: "POST",
-                                                data: all,
+                                                // data: all,
+                                                dataType: "JSON",
+                                                data: new FormData(this),
+                                                processData: false,
+                                                contentType: false,
                                                 beforeSend: function () {
 
                                                     $(document).find('span.error-text').text('');

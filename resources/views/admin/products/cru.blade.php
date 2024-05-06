@@ -6,6 +6,7 @@
         :route="$routeCRU"
         :method="$method"
         :formElements="$formElements"
+        :have-file="true"
     ></x-cru-resource>
 
 @endsection
