@@ -152,18 +152,19 @@
         const dynamicSidebar = function () {
 
             // for single sidebar menu
-            var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+            // var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+            var url = location.origin + location.pathname;
 
             // multiple
             var navActive = Array.from(document.querySelectorAll('ul.sidebar-menu a')).filter(function (a) {
                 return url.includes(a.href);
             });
-            // console.log(navActive);
+            console.log(navActive, url);
             navActive.forEach(nav => {
 
                 var parent = nav.closest('li.dropdown');
                 if (parent) {
-                    if (nav.href == url) {
+                    if (nav.href == url || url.includes(nav.href)) {
                         nav.parentElement.classList.add('active');
                     }
                     parent.classList.add('active');
