@@ -23,7 +23,7 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:250'],
-            'employee_code' => ['required'],
+            'employee_code' => ['nullable'],
             'email' => ['required', 'max:250', 'email:rfc,dns'],
             'phone' => ['required', 'string', 'regex:/^[0-9]{10}$/'],
             'address' => ['required', 'max:250'],
@@ -33,5 +33,4 @@ class EmployeeRequest extends FormRequest
             'bank_number' => ['required', 'numeric'],
         ];
     }
-
 }

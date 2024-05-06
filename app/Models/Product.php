@@ -40,7 +40,7 @@ class Product extends Model
 
     public function receiptProduct(): HasMany
     {
-        return $this->hasMany(ReceiptProduct::class);
+        return $this->hasMany(ProductReceipt::class);
     }
 
     protected static function boot()
@@ -53,6 +53,4 @@ class Product extends Model
         // this way the child classes auto-register the observer to their own class
         static::observe(ProductObserver::class);
     }
-
-
 }

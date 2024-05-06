@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Backend\EmployeeRequest;
+use App\Models\Contract;
 use App\Models\Role;
 use App\Models\User;
 use App\Traits\ProfileHandlerTrait;
@@ -49,7 +50,7 @@ class ProfileController extends CRUDController
                 'label' => "Email",
             ],
             [
-                'type' => 'text',
+                'type' => 'disabled',
                 'name' => "employee_code",
                 'class' => "",
                 'label' => "Mã nhân viên",
@@ -70,13 +71,14 @@ class ProfileController extends CRUDController
                 'type' => 'select',
                 'name' => "role_id",
                 'value' => function ($resource) {
-                    return $resource->role_id;
+                    return Contract::where('user_id', $resource->id)->latest()->first()->role_id;
                 },
                 'class' => "",
                 'label' => "Chức vụ",
-                'optionValues' => Role::employee()->get()->toArray(),
+                'optionValues' => Role::all()->toArray(),
                 'optionKey' => 'id',
-                'optionLabel' => 'name'
+                'optionLabel' => 'name',
+                'disabled' => true
             ],
             [
                 'type' => 'date',
@@ -127,15 +129,15 @@ class ProfileController extends CRUDController
             'password' => bcrypt($request->input('password'))
         ]);
         Notification::make()->title("Mật khẩu đã được cập nhập thành công")->success()->send();
-//        toast()->success('Mật khẩu đã được cập nhập thành công ');
+        //        toast()->success('Mật khẩu đã được cập nhập thành công ');
 
         return redirect()->back();
     }
-//    public function index()
-//    {
-//        $user = auth()->user();
-//        //        $addresses = UserAddress::where('user_id', Auth::user()->id)->get();
-////        return "404";
-////        return view('frontend.pages.profile', compact('user'));
-//    }
+    //    public function index()
+    //    {
+    //        $user = auth()->user();
+    //        //        $addresses = UserAddress::where('user_id', Auth::user()->id)->get();
+    ////        return "404";
+    ////        return view('frontend.pages.profile', compact('user'));
+    //    }
 }
