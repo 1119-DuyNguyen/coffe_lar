@@ -12,7 +12,7 @@ class MyOpinionObserver
 {
 
 
-    public function saving(Opinion $opinion)
+    public function creating(Opinion $opinion)
     {
         try {
             $opinion->day_off = Carbon::parse($opinion->day_off);
