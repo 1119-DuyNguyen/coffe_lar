@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         $seedData = [
             [
-                'name' => 'Người dùng tối cao',
+                'name' => 'Quản lý',
                 'email' => 'admin@gmail.com',
                 'employee_code' => "AD01",
                 'password' => bcrypt('123'),
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
             User::create($data);
         }
         // create employee
-        for ($i = 1; $i <= 50; ++$i) {
+        for ($i = 1; $i <= 10; ++$i) {
             $data = [
                 'name' => 'Nhân viên ' . $i,
                 'email' => 'employee' . $i . '@gmail.com',
