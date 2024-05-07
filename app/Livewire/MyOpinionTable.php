@@ -52,16 +52,14 @@ class MyOpinionTable extends IndexDataTable
 
 
                 )
-                ->getStateUsing(fn($record) => match ($record->status) {
+                ->getStateUsing(fn ($record) => match ($record->status) {
                     0 => "Chờ duyệt",
                     1 => "Duyệt",
                     2 => "Từ chối",
                     default => ""
-                })
+                }),
 
-            ,
-
-            TextColumn::make('created_at')->label('Ngày tạo'),  // Maintains sortable for 'created_at'
+            TextColumn::make('day_off')->label('Ngày nghỉ'),  // Maintains sortable for 'created_at'
         ];
     }
 
@@ -78,11 +76,11 @@ class MyOpinionTable extends IndexDataTable
                     return $query
                         ->when(
                             $data['created_from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('day_off', '>=', $date),
                         )
                         ->when(
                             $data['created_until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('day_off', '<=', $date),
                         );
                 }),
             SelectFilter::make('status')
@@ -93,12 +91,10 @@ class MyOpinionTable extends IndexDataTable
                     2 => "Từ chối"
                 ])
 
-//                ->default(false)
-//                ->trueLabel('Đã duyệt')
-//                ->falseLabel('Chưa duyệt'),
+            //                ->default(false)
+            //                ->trueLabel('Đã duyệt')
+            //                ->falseLabel('Chưa duyệt'),
 
         ];
     }
-
-
 }

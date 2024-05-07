@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class OpinionTable extends IndexDataTable
 {
-//    protected string $buttonEditRoute = "admin.opinions.edit";
-//    protected string $buttonDeleteRoute = "admin.opinions.destroy";
+    //    protected string $buttonEditRoute = "admin.opinions.edit";
+    //    protected string $buttonDeleteRoute = "admin.opinions.destroy";
 
 
     public function datasource(): Builder
@@ -44,15 +44,17 @@ class OpinionTable extends IndexDataTable
                     ]
                 )
                 ->selectablePlaceholder(false)
-                ->disabled(function ($record
-                ): bool {
-                    return $record->status != 0;
-                }
+                ->disabled(
+                    function (
+                        $record
+                    ): bool {
+                        return $record->status != 0;
+                    }
                 )->afterStateUpdated(function ($record, $state) {
                     $this->dispatch('refreshTable');
                 }),
 
-            TextColumn::make('created_at')->label('Ngày tạo'),  // Maintains sortable for 'created_at'
+            TextColumn::make('day_off')->label('Ngày nghỉ'),  // Maintains sortable for 'created_at'
         ];
     }
 
@@ -69,11 +71,11 @@ class OpinionTable extends IndexDataTable
                     return $query
                         ->when(
                             $data['created_from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('day_off', '>=', $date),
                         )
                         ->when(
                             $data['created_until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('day_off', '<=', $date),
                         );
                 }),
             SelectFilter::make('status')
@@ -84,12 +86,10 @@ class OpinionTable extends IndexDataTable
                     2 => "Từ chối"
                 ])->default(0)
 
-//                ->default(false)
-//                ->trueLabel('Đã duyệt')
-//                ->falseLabel('Chưa duyệt'),
+            //                ->default(false)
+            //                ->trueLabel('Đã duyệt')
+            //                ->falseLabel('Chưa duyệt'),
 
         ];
     }
-
-
 }
