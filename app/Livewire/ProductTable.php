@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,11 +23,15 @@ class ProductTable extends IndexDataTable
     {
         return [
             TextColumn::make('id')->label('Id'),
-            TextColumn::make('thumb_image')->label('Ảnh Nền'),
-            TextColumn::make('name')->label('Tên Sản Phẩm'),
-            TextColumn::make('category_id')->label('Danh mục'),
+//            TextColumn::make('thumb_image')->label('Ảnh Nền'),
+            ImageColumn::make('thumb_image')->disk('product')->label('Ảnh Nền'),
+
+            TextColumn::make('name')->label('Tên Sản Phẩm')->limit(25),
+            TextColumn::make('category.name')->label('Danh mục'),
             TextColumn::make('description')->label('Mô Tả')->limit(25),
-            TextColumn::make('content')->label('Nội Dung')->limit(25),
+            TextColumn::make('stock')->label('Số lượng tồn')->limit(25),
+
+//            TextColumn::make('content')->label('Nội Dung')->limit(25),
             TextColumn::make('price')->label('Đơn Giá( đ )'),
             TextColumn::make('created_at')->label('Ngày Tạo'),
             ToggleColumn::make('status')->label('Trạng Thái'),

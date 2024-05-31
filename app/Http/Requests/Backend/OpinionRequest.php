@@ -26,6 +26,8 @@ class OpinionRequest extends FormRequest
             'user_id' => ['required', 'numeric'],
             'topic' => ['required', 'max:250'],
             'content' => ['required', 'max:250'],
+            'day_off' => ['required'],
+
         ];
     }
 }

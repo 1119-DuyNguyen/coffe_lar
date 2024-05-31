@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,6 +14,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('type_opinion_id')->constrained();
+            //0, chờ duyệt, 1 đã duyệt, 2 từ chối
+            $table->tinyInteger('status')->default(0);
+
+            $table->date('day_off');
+
             $table->string('topic')->nullable();
             $table->longText('content')->nullable();
             $table->timestamps();

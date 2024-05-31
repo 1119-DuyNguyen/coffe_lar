@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,13 +12,15 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('code')->unique()->default();
             $table->string('name');
             $table->foreignId('user_id')->constrained();
             $table->double('salary');
             $table->double('allowance');
             $table->date('end_date');
             $table->boolean('status')->default(true);
+            $table->foreignId('role_id')->constrained()->NoActionOnDelete();
+
             $table->timestamps();
         });
     }

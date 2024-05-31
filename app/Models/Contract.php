@@ -19,57 +19,16 @@ class Contract extends Model
         'allowance',
         'end_date',
         'status',
+        'role_id'
     ];
 
     public function user(): belongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function checkins()
-    {
-        return $this->hasMany(Checkin::class);
-    }
-    public function getId_ContractAttribute($value)
-    {
-        return $value;
-    }
-    public function setId_ContractAttribute($value)
-    {
-        $this->attributes['id_contract'] = $value;
-    }
-    public function getNameAttribute($value)
-    {
-        return $value;
-    }
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-    }
 
-    public function getSalaryAttribute($value)
+    public function role(): BelongsTo
     {
-        return $value;
-    }
-    public function setSalaryAttribute($value)
-    {
-        $this->attributes['salary'] = $value;
-    }
-
-    public function getAllowanceAttribute($value)
-    {
-        return $value;
-    }
-    public function setAllowanceAttribute($value)
-    {
-        $this->attributes['allowance'] = $value;
-    }
-
-    public function getStatusAttribute($value)
-    {
-        return $value;
-    }
-    public function setStatusAttribute($value)
-    {
-        $this->attributes['status'] = $value;
+        return $this->belongsTo(Role::class);
     }
 }

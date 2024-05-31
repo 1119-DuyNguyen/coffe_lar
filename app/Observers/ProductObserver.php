@@ -26,7 +26,7 @@ class ProductObserver
         //nếu slug đã tồn tại
         if ($slugTonTai == true) {
             throw ValidationException::withMessages([
-                'message' => 'đã tồn tại slug'
+                'name' => 'đã tồn tại slug'
             ]);
         }
         $product->slug = $StringNameOfSlug;
@@ -42,17 +42,14 @@ class ProductObserver
 
     private function shouldUpdateSlug(Product $product, $commingSlug): bool
     {
-        return $product->isDirty('slug') && !($product->slug === $commingSlug && $product->slug != null);
+        return $product->isDirty('name') && $product->slug != $commingSlug && $product->slug != null;
     }
 
     public function creating(Product $product)
     {
-        $commingSlug = $this->request->input('slug');
-//        dd($product->slug === $this->request->input('slug') && $product->slug != null);
-        if ($this->shouldUpdateSlug($product, $commingSlug)) {
-//            dd(Product::where('slug', \Str::slug($product->name, '-'))->exists());
-            $this->generateSlug($product);
-        }
+        $commingSlug = \Str::slug($this->request->input('name'));
+        //        dd($product->slug === $this->request->input('slug') && $product->slug != null);
+        $this->generateSlug($product);
     }
 
     /**
@@ -65,7 +62,8 @@ class ProductObserver
 
     public function updating(Product $product)
     {
-        $commingSlug = $this->request->input('slug');
+        $commingSlug = \Str::slug($this->request->input('name'));
+
         if ($this->shouldUpdateSlug($product, $commingSlug)) {
             // check exists
             // then generate slug
@@ -76,26 +74,11 @@ class ProductObserver
     }
 
     /**
-     * Handle the Product "deleted" event.
+     * Handle the Product "saving" event.
      */
-    public function deleted(Product $product): void
+    public function saving(Product $product): void
     {
         //
     }
 
-    /**
-     * Handle the Product "restored" event.
-     */
-    public function restored(Product $product): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Product "force deleted" event.
-     */
-    public function forceDeleted(Product $product): void
-    {
-        //
-    }
 }

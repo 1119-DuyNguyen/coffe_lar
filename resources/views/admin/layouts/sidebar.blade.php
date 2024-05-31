@@ -13,48 +13,55 @@
 
     {{--    </div>--}}
     <ul class="sidebar-menu">
-        <li>
-            <form action="{{route('logout')}}" method="POST">
-                @csrf
+        <li class=" menu-header">Bảng điều khiển</li>
 
-                <a class="nav-link " href="#" onclick="this.closest('form').submit();return false;"
-                >
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Đăng xuất</span>
-                </a>
-
-
-            </form>
+        <li><a class="nav-link" href="{{route('admin.dashboard.index')}}">
+                <i class="fas fa-chart-bar"></i>
+                <span>Trang chủ</span></a>
         </li>
-        {{--        <li><a class="nav-link " href="{{route('home')}}">--}}
-        {{--                <i class="fas fa-arrow-left"></i>--}}
-        {{--                <span>Quay lại tra</span></a></li>--}}
-        {{-- [ name=>str, title=>str,child=>[]]--}}
         @php
             $listLanguage="Danh sách";
 
             $addLanguage="Khởi tạo";
         @endphp
         @foreach([
-        ['name'=>'Trang chủ','icon'=>'<i class="fas fa-chart-bar"></i>','routeName'=>'admin.dashboard.index'
-        ,'title'=>'Dashboard','child'=>[]],
-
-        ['title'=>'Nhân sự'],
-
-        ['name'=>'Người dùng','icon'=>'<i class="fas fa-user"></i>','routeName'=>'admin.users.index'],
-       ['name'=>'Nhân viên','icon'=>'<i class="fas fa-user-tie"></i>','routeName'=>'admin.employees.index'],
-        ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','routeName'=>'admin.roles.index'],
-        ['name'=>'Loại ý kiến','icon'=>'<i class="fas fa-comment-dots"></i>','routeName'=>'admin.type-opinions.index'],
 
 
-        ['name'=>'Hợp đồng','icon'=>'<i class="fas fa-file-contract"></i>','routeName'=>'admin.contracts.index'],
+        ['name'=>'Nhân sự', 'icon'=> '<i class="fas fa-users-cog"></i>' ,'child'=>[
 
-        ['name'=>'Ý kiến','icon'=>'<i class="fas fa-comments"></i>','routeName'=>'admin.opinions.index'],
+            ['name'=>'Người mua hàng','icon'=>'<i class="fas fa-user"></i>','routeName'=>'admin.users.index'],
+            ['name'=>'Nhân viên','icon'=>'<i class="fas fa-user-tie"></i>','routeName'=>'admin.employees.index'],
+            ['name'=>'Role','icon'=>'<i class="fas fa-passport"></i>','routeName'=>'admin.roles.index'],
+            ['name'=>'Hợp đồng','icon'=>'<i class="fas fa-file-contract"></i>','routeName'=>'admin.contracts.index'],
+//        ['name'=>'Loại ý kiến','icon'=>'<i class="fas fa-comment-dots"></i>','routeName'=>'admin.type-opinions.index'],
+
+            ['name'=>'Ý kiến','icon'=>'<i class="fas fa-comments"></i>','routeName'=>'admin.opinions.index'],
+            ['name'=>'Chấm công','icon'=>'<i class="fas fa-calculator"></i>','routeName'=>'admin.checkins.index'],
+
+        ]],
+
+
+       ['name'=>'Bán hàng', 'icon'=> '<i class="fas fa-coins"></i>' ,'child'=>[
+
+        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ],
+
+        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index' ],
+
+        ]],
+       ['name'=>'Kho', 'icon'=> '<i class="fas fa-warehouse"></i>' ,'child'=>[
+
+        ['name'=>'Phiếu nhập','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
+
+        ['name'=>'Đơn đặt hàng','icon'=>'<i class="fas fa-file-alt"></i>','routeName'=>'admin.orders.index' ],
+
+        ['name'=>'Nhà cung cấp','icon'=>'<i class="fas fa-shuttle-van"></i>','routeName'=>'admin.providers.index'],
+
+        ]],
+
 
         /** receipt */
 
 
-        ['name'=>'Chấm công','icon'=>'<i class="fas fa-calculator"></i>','routeName'=>'admin.checkins.index'],
 
 //               ['name'=>'Tính lương','icon'=>'<i class="fas fa-file-invoice-dollar"></i>','routeName'=>'admin.products.index' ,
 //        'child'=>
@@ -62,18 +69,8 @@
 //
 //  ]
 //        ],
-        ['title'=>'Thương mại'],
-        ['name'=>'Category','icon'=>'<i class="fas fa-border-all"></i>','routeName'=>'admin.categories.index' ],
 
-        ['name'=>'Products','icon'=>'<i class="fas fa-coffee"></i>','routeName'=>'admin.products.index'
 
-        ],
-
-                ['name'=>'Phiếu nhập','icon'=>'<i class="fas fa-file-import"></i>','routeName'=>'admin.receipts.index'],
-
-        ['name'=>'Đơn đặt hàng','icon'=>'<i class="fas fa-file-alt"></i>','routeName'=>'admin.orders.index' ],
-
-        ['name'=>'Nhà cung cấp','icon'=>'<i class="fas fa-shuttle-van"></i>','routeName'=>'admin.providers.index'],
 
 //        ['name'=>'Thống kê','icon'=>'<i class="fas fa-scroll"></i>','routeName'=>'admin.receipts.index'],
 
@@ -94,20 +91,17 @@
          as $nav
         )
 
-            {{-- <li><a class="nav-link " --}} {{-- href="{{ route('admin.subscribers.index') }}"><i
-                    class="fas fa-user"></i>--}}
-            {{-- <span>Subscribers</span></a></li>--}}
             @if(isset($nav['title']))
-                <li class="menu-header">{{__($nav['title'])}}</li>
+                <li class=" menu-header">{{__($nav['title'])}}</li>
             @endif
             @if(isset($nav['name']))
                 @if(empty($nav['child']))
 
-                    {{--                    @can(GateService::getGateDefineFromRouteName($nav['routeName']))--}}
-                    <li><a class="nav-link " href="{{route($nav['routeName'])}}">
-                            {!! $nav['icon']!!}
-                            <span>{{__($nav['name'])}}</span></a></li>
-                    {{--                    @endcan--}}
+                    @can(GateService::getGateDefineFromRouteName($nav['routeName']))
+                        <li><a class="nav-link " href="{{route($nav['routeName'])}}">
+                                {!! $nav['icon']!!}
+                                <span>{{__($nav['name'])}}</span></a></li>
+                    @endcan
 
                 @else
                     <li class="dropdown">
@@ -120,7 +114,7 @@
                             $nameRoute=GateService::getGateDefineFromRouteName($child['routeName']);
                             $nameRouteList[]=$nameRoute;
 
-                            if(true||Gate::allows($nameRoute))
+                            if(Gate::allows($nameRoute))
                             {
                             $html.='
                         <li><a class="nav-link " href="'.route($child['routeName']).'">
@@ -131,15 +125,15 @@
                         }
 
                         @endphp
-                        {{--                        @canany($nameRouteList )--}}
-                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                            {!! $nav['icon']!!}
-                            <span> {{__($nav['name'])}}</span></a>
-                        <ul class="dropdown-menu">
-                            {!! $html !!}
+                        @canany($nameRouteList )
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                {!! $nav['icon']!!}
+                                <span> {{__($nav['name'])}}</span></a>
+                            <ul class="dropdown-menu">
+                                {!! $html !!}
 
-                        </ul>
-                        {{--                        @endcan--}}
+                            </ul>
+                        @endcan
 
                     </li>
 
@@ -158,18 +152,19 @@
         const dynamicSidebar = function () {
 
             // for single sidebar menu
-            var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+            // var url = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+            var url = location.origin + location.pathname;
 
             // multiple
             var navActive = Array.from(document.querySelectorAll('ul.sidebar-menu a')).filter(function (a) {
                 return url.includes(a.href);
             });
-            console.log(navActive);
+            console.log(navActive, url);
             navActive.forEach(nav => {
 
                 var parent = nav.closest('li.dropdown');
                 if (parent) {
-                    if (nav.href == url) {
+                    if (nav.href == url || url.includes(nav.href)) {
                         nav.parentElement.classList.add('active');
                     }
                     parent.classList.add('active');

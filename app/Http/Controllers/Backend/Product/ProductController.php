@@ -10,6 +10,7 @@ use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Role;
 use App\Traits\CrudTrait;
+use Illuminate\Http\Request;
 
 
 class ProductController extends CRUDController
@@ -51,6 +52,7 @@ class ProductController extends CRUDController
         return "admin.products";
     }
 
+
     protected function getFormElements(): array
     {
         return [
@@ -83,7 +85,7 @@ class ProductController extends CRUDController
                 'type' => 'text',
                 'name' => "description",
                 'class' => "",
-                'label' => "Mô tả sản phẩm",
+                'label' => "Mô tả ngắn sản phẩm",
             ],
             [
                 'type' => 'text',

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Services\GateService;
 use Closure;
+use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +15,7 @@ class HasPermissionMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
 
     public function handle(Request $request, Closure $next): Response
@@ -26,24 +27,30 @@ class HasPermissionMiddleware
         }
 
         $routeName = GateService::getGateDefineFromRouteName($request->route()->getName());
-
+//        dd($routeName);
         if ($request->user()->can($routeName)) {
             return $next($request);
-        } else if (Gate::allows('admin')) {
-            $gate = array_filter(Gate::abilities(), function ($var, $key) {
-                return  str_contains($key, 'admin');
-            }, ARRAY_FILTER_USE_BOTH);
+        } else {
+            if ($request->ajax()) {
+//                return response()->json(['error' => 'Tài khoản không có quyền truy cập'], 403);
 
-            //check if admin site
-            foreach ($gate as $key => $value) {
-
-                if (Gate::any($key)) {
-                    return redirect(route($key . '.index'));
-                }
+                abort(403, 'Tài khoản không có quyền truy cập');
+//                return false;
             }
-            return false;
+            if (Gate::allows('admin')) {
+                $gate = array_filter(Gate::abilities(), function ($var, $key) {
+                    return str_contains($key, 'admin');
+                }, ARRAY_FILTER_USE_BOTH);
 
-            // return redirect()->;
+                //check if admin site
+                foreach ($gate as $key => $value) {
+                    if (Gate::any($key)) {
+                        return redirect(route('admin.dashboard.index'));
+                    }
+                }
+                return false;
+                // return redirect()->;
+            }
         }
         abort(403);
         //        if(in_array($last_word,['index','show','store','update','destroy']))

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Opinion\MyOpinionController;
 use App\Http\Controllers\Backend\Receipt\ReceiptController;
 use App\Http\Controllers\Backend\User\EmployeeController;
 use App\Http\Controllers\Backend\Opinion\TypeOpinionController;
@@ -8,11 +9,17 @@ use App\Http\Controllers\Backend\Opinion\OpinionController;
 use App\Http\Controllers\Backend\Checkin\CheckinController;
 
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Provider\ProviderController;
 
-
+Route::get('employees/salary', [EmployeeController::class, 'getSalary'])->name('employees.salary');
+Route::get('employees/my-salary', [EmployeeController::class, 'getMySalary'])->name('employees.my-salary');
+Route::get('employees/my-salary/form', [EmployeeController::class, 'getMySalaryForm'])->name(
+    'employees.my-salary.form'
+);
 Route::resource('employees', EmployeeController::class);
+
 
 Route::resource('type-opinions', TypeOpinionController::class);
 
@@ -21,6 +28,10 @@ Route::resource('providers', ProviderController::class);
 Route::resource('contracts', ContractController::class);
 
 Route::resource('opinions', OpinionController::class);
+Route::resource('my-opinions', MyOpinionController::class);
+
+
+Route::get('receipts/{receipt}/print', [ReceiptController::class, 'print'])->name('receipts.print');
 
 /** receipt */
 Route::resource('receipts', ReceiptController::class);

@@ -6,6 +6,7 @@ use App\Http\Services\SettingService;
 use App\Models\GeneralSetting;
 use App\Models\LogoSetting;
 use App\Models\Role;
+use App\Models\User;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Pagination\Paginator;
@@ -49,9 +50,9 @@ class AppServiceProvider extends ServiceProvider
         }
         // Every permission may have multiple roles assigned
         foreach ($permissionsArray as $name => $roles) {
-            Gate::define($name, function ($user) use ($name, $permissionsArray) {
+            Gate::define($name, function (User $user) use ($name, $permissionsArray) {
                 // We check if we have the needed roles among current user's roles
-                $isRole = isset($permissionsArray[$name][$user->role->id]);
+                $isRole = isset($permissionsArray[$name][($user->latestContract->role_id ?? -1)]);
                 //check if admin site
 
                 return $isRole;
@@ -62,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $gate = array_filter(Gate::abilities(), function ($var, $key) {
             return str_contains($key, 'admin');
         }, ARRAY_FILTER_USE_BOTH);
-        Gate::define('admin', function ($user) use ($gate) {
+        Gate::define('admin', function (User $user) use ($gate) {
             //check if admin site
             foreach ($gate as $key => $value) {
                 if (Gate::any($key)) {
@@ -75,7 +76,6 @@ class AppServiceProvider extends ServiceProvider
 
         //     return false;
         // });
-        // dd(Gate::abilities());
     }
 
     /**

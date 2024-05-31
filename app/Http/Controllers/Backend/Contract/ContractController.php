@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Contract;
 use App\Http\Controllers\CRUDController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ContractRequest;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\User;
@@ -45,7 +46,7 @@ class ContractController extends CRUDController
                 'type' => 'text',
                 'name' => "name",
                 'class' => "",
-                'label' => "Loại hợp đồng",
+                'label' => "Tên hợp đồng",
             ],
             [
                 'type' => 'select',
@@ -76,6 +77,18 @@ class ContractController extends CRUDController
                 'name' => "end_date",
                 'class' => "",
                 'label' => "Ngày kết thúc hợp đồng",
+            ],
+            [
+                'type' => 'select',
+                'name' => "role_id",
+                'value' => function ($resource) {
+                    return $resource->role_id;
+                },
+                'class' => "",
+                'label' => "Chức vụ",
+                'optionValues' => Role::all()->toArray(),
+                'optionKey' => 'id',
+                'optionLabel' => 'name'
             ],
         ];
     }

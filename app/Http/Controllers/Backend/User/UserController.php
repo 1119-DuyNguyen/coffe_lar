@@ -21,11 +21,6 @@ class UserController extends CRUDController
         return User::class;
     }
 
-    protected function addAutoInput(Request $request): array
-    {
-        $role_id = $request->input('role_id', []);
-        return ['role_id' => $role_id];
-    }
 
     protected function getFormRequest(): string
     {
@@ -35,13 +30,11 @@ class UserController extends CRUDController
     protected function CRUDViewPath(): string
     {
         return "admin.users";
-        // TODO: Implement CRUDViewPath() method.
     }
 
     protected function getNameRouteCRU(): string
     {
         return "admin.users";
-        // TODO: Implement getNameRouteCRU() method.
     }
 
     protected function getFormElements(): array
@@ -65,20 +58,7 @@ class UserController extends CRUDController
                 'class' => "",
                 'label' => "Số điện thoại",
             ],
-            [
-                'type' => 'select',
-                'name' => "role_id",
-                'value' => function ($resource) {
-                    return $resource->role_id;
-                },
-                'class' => "",
-                'label' => "Vai trò",
-                'optionValues' => Role::all()->toArray(),
-                'optionKey' => 'id',
-                'optionLabel' => 'name'
-            ],
 
         ];
-        // TODO: Implement getFormElements() method.
     }
 }

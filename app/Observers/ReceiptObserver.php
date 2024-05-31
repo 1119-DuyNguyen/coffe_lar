@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductReport;
 use App\Models\Receipt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 
 class ReceiptObserver
@@ -20,10 +21,22 @@ class ReceiptObserver
     {
         $isSeed = config('services.is_seed_data');
         if ($isSeed) {
-            return [
-                ['product_id' => 1, 'quantity' => 4, 'price' => 9000],
-                ['product_id' => 2, 'quantity' => 4, 'price' => 10000]
-            ];
+            $seedData = [];
+            for ($i = 1; $i <= 30; ++$i) {
+                $randomDay = Carbon::now()->subYears(rand(1, 10));
+                $seedData[] = [
+                    'product_id' => $i,
+                    'quantity' => 4,
+                    'price' => 9000,
+                    'created_at' => $randomDay,
+                    'updated_at' => $randomDay
+                ];
+            }
+            return $seedData;
+//            return [
+//                ['product_id' => 1, 'quantity' => 4, 'price' => 9000],
+//                ['product_id' => 2, 'quantity' => 4, 'price' => 10000]
+//            ];
         }
         return $this->request->input('product_receipt');
     }

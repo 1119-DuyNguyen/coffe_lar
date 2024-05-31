@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\InputHandlerTrait;
 use Exception;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -148,10 +149,12 @@ abstract class CRUDController extends Controller
         $data = $this->handleDataInput($request);
 
         $this->model()::create($data);
-        //        toast()->success('Created Successfully!');
-        toast()->success('Khởi tạo dữ liệu thành công');
+        Notification::make()
+            ->title('Khởi tạo dữ liệu thành công')
+            ->success()
+            ->send();
 
-        return redirect()->back();
+        return response()->json();
     }
 
     /**
@@ -167,31 +170,27 @@ abstract class CRUDController extends Controller
      */
     public function update(Request $request, $resource_id)
     {
-        try {
-            $resource = $this->model()::findOrFail($resource_id);
+        $resource = $this->model()::findOrFail($resource_id);
 
-            $data = $this->handleDataInput(
-                $request,
-                !empty($this->getImageInput())
-                    ? $resource->{$this->getImageInput()}
-                    : null
-            );
-            foreach ($this->unsetUpdateEmptyField() as $field) {
-                if (empty($data[$field])) {
-                    unset($data[$field]);
-                }
+        $data = $this->handleDataInput(
+            $request,
+            !empty($this->getImageInput())
+                ? $resource->{$this->getImageInput()}
+                : null
+        );
+        foreach ($this->unsetUpdateEmptyField() as $field) {
+            if (empty($data[$field])) {
+                unset($data[$field]);
             }
-            $resource->fill($data);
-            $resource->save();
-
-            toast()->success('Cập nhập dữ liệu thành công!');
-        } catch (ValidationException $e) {
-            return response(['status' => 'error', 'message' => $e->getMessage()]);
-        } catch (Exception $e) {
         }
+        $resource->fill($data);
+        $resource->save();
+        Notification::make()
+            ->title('Cập nhập thành công')
+            ->success()
+            ->send();
 
-
-        return redirect()->back();
+        return response()->json();
     }
 
     /**

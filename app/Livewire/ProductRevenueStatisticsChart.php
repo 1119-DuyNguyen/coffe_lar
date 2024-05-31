@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class ProductRevenueStatisticsChart extends ApexChartWidget
@@ -43,15 +44,21 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
         }
         $dateStart = Carbon::parse($this->filterFormData['date_start']);
         $dateEnd = Carbon::parse($this->filterFormData['date_end']);
-        $data = Trend::model(ProductReport::class)
+        $dataRevenue = Trend::model(ProductReport::class)
             ->between(
                 start: $dateStart,
                 end: $dateEnd,
-            )
-            ->perMonth()
-            ->sum('price_sale');
-//        dd($this->getLabelsAndValues($data));
+            );
 
+//        dd($this->getLabelsAndValues($data));
+        $dataProfit = Trend::query(
+            ProductReport::query()
+//                ->selectRaw('sum(price_sale)- sum(price_receipt) as aggregate')
+        )
+            ->between(
+                start: $dateStart,
+                end: $dateEnd,
+            );
 
         return [
             'chart' => [
@@ -64,11 +71,21 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
             'series' => [
                 [
                     'name' => 'Doanh thu',
-                    'data' => $this->getLabelsAndValues($data)->map(fn(TrendValue $value) => $value->aggregate),
+                    'data' => $this->getLabelsAndValuesRevenue($dataRevenue)->map(
+                        fn(TrendValue $value) => $value->aggregate
+                    ),
+                ],
+                [
+                    'name' => 'Lợi nhuận',
+                    'data' => $this->getLabelsAndValuesProfit($dataProfit)->map(
+                        fn(TrendValue $value) => $value->aggregate
+                    ),
                 ],
             ],
             'xaxis' => [
-                'categories' => $this->getLabelsAndValues($data)->map(fn(TrendValue $value) => $value->date),
+                'categories' => $this->getLabelsAndValuesRevenue($dataRevenue)->map(
+                    fn(TrendValue $value) => $value->date
+                ),
                 'labels' => [
                     'style' => [
                         'colors' => '#9ca3af',
@@ -91,8 +108,52 @@ class ProductRevenueStatisticsChart extends ApexChartWidget
         ];
     }
 
+    private function getLabelsAndValuesProfit($data)
+    {
+        $type = $this->filterFormData['type'];
+        $dateStart = Carbon::parse($this->filterFormData['date_start']);
+        $dateEnd = Carbon::parse($this->filterFormData['date_end']);
+        // build query
+        $data = Trend::model(ProductReport::class)
+            ->between(
+                start: $dateStart,
+                end: $dateEnd,
+            );
+        switch ($type) {
+            case "year":
+                $data = $data->perYear();
+                break;
+            case "month":
+            case "quarter":
+                $data = $data->perMonth();
 
-    private function getLabelsAndValues($data)
+                break;
+        }
+        $data = $data->aggregate("sum(price_sale)- sum(price_receipt)", "");
+
+
+        // build labels and values
+        if ($type == "quarter" && count($data) > 0) {
+            $transformData = collect();
+            $lastLabel = "";
+            $lastSum = 0;
+            foreach ($data as $value) {
+                $date = Carbon::parse($value->date);
+                $label = $date->year . '-Q' . $date->quarter;
+                if (!empty($lastLabel) && $label != $lastLabel) {
+                    $transformData->push(new TrendValue($lastLabel, $lastSum));
+                    $lastSum = 0;
+                }
+                $lastLabel = $label;
+                $lastSum += $value->aggregate;
+            }
+            $transformData->push(new TrendValue($lastLabel, $lastSum));
+            return $transformData;
+        }
+        return $data;
+    }
+
+    private function getLabelsAndValuesRevenue($data)
     {
         $type = $this->filterFormData['type'];
         $dateStart = Carbon::parse($this->filterFormData['date_start']);

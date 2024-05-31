@@ -36,6 +36,8 @@
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            ,
+            contentType: "application/json",
         }
         ,
         statusCode: {
@@ -114,7 +116,7 @@
         },
 
     });
-    const formAjax= function (selector,callbackSuccess){
+    const formAjax = function (selector, callbackSuccess) {
         var forms = document.querySelectorAll(selector);
         // console.log(forms,"hi")
 

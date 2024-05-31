@@ -1,0 +1,49 @@
+
+.form-control[readonly] {
+    background-color: inherit;
+}
+
+.form-control {
+    border-color: #e4e6fc;
+}
+
+.power_grid.form-control[readonly] {
+    min-width: 250px;
+}
+
+.btn-primary, .btn-primary.disabled {
+
+    background-color: #6777ef;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.form-control:not(.form-control-sm):not(.form-control-lg) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.5rem;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)
+
+}
+
+.form-group .control-label, .form-group > label {
+    font-size: 1rem !important;
+}
+
+body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-menu li a, .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
+    padding-left: 2rem;
+}
+
+.main-sidebar {
+    z-index: 1;
+}
+
+.section {
+    z-index: 0;
+}

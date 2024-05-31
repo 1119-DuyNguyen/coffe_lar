@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Http\Services\CartService;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductReport;
@@ -38,7 +39,27 @@ class OrderObserver
                 ]
             ];
         }
-        return $this->request->input('product_receipt');
+        $productOrder = [];
+        $listCart = CartService::getListCart();
+
+        $cartItems = $listCart['cartList'];
+        foreach ($cartItems as $key => $cartItem) {
+            $product = $cartItem['product-data'] ?? [];
+//                if ($product->stock < $cartItem['quantity']) {
+//                    throw new Exception("Sản phẩm đã hết hàng");
+//                }
+            // sản phẩm data lỗi hoặc hết hàng thì không ghi nhận. Chưa fix bug quantity
+            if (empty($product) || ($product->stock < $cartItem['quantity'])) {
+                continue;
+            }
+            $productOrder[] = [
+                'product_id' => $product->id,
+                'quantity' => $cartItem['quantity'],
+                'price' => $product->price
+            ];
+        }
+////        $request->merge(['product_order' => $cartItems]);
+        return $productOrder;
     }
 
     public function creating(Order $order)
@@ -60,7 +81,7 @@ class OrderObserver
                 throw ValidationException::withMessages(['data.total_price' => 'Giá sản phẩm nhập không tương ứng']);
             }
         } else {
-            throw ValidationException::withMessages(['data.products' => 'Bạn chưa nhập sản phẩm vào phiếu nhập']);
+            throw ValidationException::withMessages(['data.products' => 'Bạn chưa nhập sản phẩm vào đơn hàng']);
         }
     }
 

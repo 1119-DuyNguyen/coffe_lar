@@ -1,7 +1,7 @@
 @extends('templates.clients.layouts.master')
 @section('content')
     @php
-        $user=\Illuminate\Support\Facades\Auth::user();
+        $user = \Illuminate\Support\Facades\Auth::user();
     @endphp
         <!-- =========================== Billing Section =================================== -->
     <section>
@@ -21,9 +21,7 @@
                                 <!-- Email -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require name="name"
-                                           value="{{ $user->name??"" }}" type="text"
-                                           placeholder="Họ tên"
-                                           required="">
+                                           value="{{ $user->name ?? '' }}" type="text" placeholder="Họ tên" required="">
                                 </div>
                             </div>
 
@@ -31,8 +29,8 @@
                                 <!-- Email -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require type="number"
-                                           value="{{ $user->phone ?? '' }}" name="phone"
-                                           placeholder="Số điện thoại" required="">
+                                           value="{{ $user->phone ?? '' }}" name="phone" placeholder="Số điện thoại"
+                                    >
                                 </div>
                             </div>
 
@@ -40,8 +38,7 @@
                                 <!-- Company Name -->
                                 <div class="form-group">
                                     <input class="form-control form-control-sm" require type="email"
-                                           value="{{ $user->email??"" }}" name="email"
-                                           placeholder="Email">
+                                           value="{{ $user->email ?? '' }}" name="email" placeholder="Email">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -57,8 +54,7 @@
                             <div class="col-12">
                                 <div class="location_group form-group province">
                                     <label>Tỉnh /Thành phố</label>
-                                    <select value="" name="province"
-                                            class="input_search province" required>
+                                    <select value="" name="province" class="input_search province" required>
                                     </select>
                                 </div>
                             </div>
@@ -68,8 +64,7 @@
                                 <div class="location_group form-group district">
                                     <label>Quận</label>
 
-                                    <select value="" name="district" required
-                                            class="input_search district">
+                                    <select value="" name="district" required class="input_search district">
 
                                     </select>
                                 </div>
@@ -79,24 +74,13 @@
 
                                 <div class="location_group form-group ward">
                                     <label>Phường / Xã</label>
-                                    <select value="" name="ward" required
-                                            class="input_search ward">
+                                    <select value="" name="ward" required class="input_search ward">
                                     </select>
                                 </div>
 
 
                             </div>
-                            {{--                            <div class="col-12">--}}
 
-                            {{--                                <div class="location_group form-group service">--}}
-                            {{--                                    <label>Phương thức vận chuyển</label>--}}
-                            {{--                                    <select type="text" value="" name="service" required--}}
-                            {{--                                            class="input_search service">--}}
-                            {{--                                    </select>--}}
-                            {{--                                </div>--}}
-
-
-                            {{--                            </div>--}}
                             <div class="col-12">
                                 <!-- Company Name -->
                                 <div class="form-group">
@@ -121,50 +105,12 @@
                                            type="radio">
                                     <!-- Label -->
                                     <label class="custom-control-label font-size-sm text-body text-nowrap"
-                                           for="cod"><img src="{{ asset('frontend/assets/img/cod.jpg') }}"
-                                                          alt="..."> Tiền mặt</label>
+                                           for="cod"><img src="{{ asset('frontend/assets/img/cod.jpg') }}" alt="...">
+                                        Tiền mặt</label>
                                 </div>
                             </div>
 
-                            {{--                            <div class="list-group-item">--}}
-                            {{--                                <!-- Radio -->--}}
-                            {{--                                <div class="custom-control custom-radio">--}}
-                            {{--                                    <!-- Input -->--}}
-                            {{--                                    <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment"--}}
-                            {{--                                           value="1" type="radio">--}}
-                            {{--                                    <!-- Label -->--}}
-                            {{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
-                            {{--                                           for="checkoutPaymentPaypal"><img--}}
-                            {{--                                            src="{{ asset('frontend/assets/img/paypal.png') }}" alt="...">--}}
-                            {{--                                        Paypal</label>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
 
-                            {{--                            <div class="list-group-item">--}}
-                            {{--                                <!-- Radio -->--}}
-                            {{--                                <div class="custom-control custom-radio">--}}
-                            {{--                                    <!-- Input -->--}}
-                            {{--                                    <input class="custom-control-input" id="momo" name="payment" value="2"--}}
-                            {{--                                           type="radio">--}}
-                            {{--                                    <!-- Label -->--}}
-                            {{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
-                            {{--                                           for="momo"><img src="{{ asset('frontend/assets/img/momo.png') }}"--}}
-                            {{--                                                           alt="..."> Momo</label>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
-
-                            {{--                            <div class="list-group-item">--}}
-                            {{--                                <!-- Radio -->--}}
-                            {{--                                <div class="custom-control custom-radio">--}}
-                            {{--                                    <!-- Input -->--}}
-                            {{--                                    <input class="custom-control-input" id="vnpay" name="payment" value="3"--}}
-                            {{--                                           type="radio">--}}
-                            {{--                                    <!-- Label -->--}}
-                            {{--                                    <label class="custom-control-label font-size-sm text-body text-nowrap"--}}
-                            {{--                                           for="vnpay"><img src="{{ asset('frontend/assets/img/vnpay.png') }}"--}}
-                            {{--                                                            alt="..."> Vnpay</label>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-5">
@@ -255,7 +201,7 @@
                                             },
                                             success: function (data) {
                                                 loadCart(data);
-                                                loadCartItem(data);
+                                                // loadCartItem(data);
                                             }
                                         });
 
@@ -290,7 +236,7 @@
 
                     },
                     getDistrict: function (province) {
-                        let url = "{{ route('ghn.district', ":idProvince") }}";
+                        let url = "{{ route('ghn.district', ':idProvince') }}";
                         url = url.replace(':idProvince', province);
                         let _this = this;
                         try {
@@ -309,7 +255,7 @@
                     },
 
                     getWard: function (district) {
-                        let url = "{{ route('ghn.ward', ":idDistrict") }}";
+                        let url = "{{ route('ghn.ward', ':idDistrict') }}";
                         url = url.replace(':idDistrict', district);
                         let _this = this;
                         try {
@@ -327,7 +273,7 @@
                         }
                     },
                     getService: function (district, ward) {
-                        let url = "{{ route('ghn.ward', ":idDistrict") }}";
+                        let url = "{{ route('ghn.ward', ':idDistrict') }}";
                         url = url.replace(':idDistrict', district);
                         let _this = this;
                         try {
@@ -392,7 +338,6 @@
                 })
             });
         </script>
-
     @endpush
 
 @stop

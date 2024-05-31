@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend\Receipt;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CRUDController;
 use App\Http\Requests\Backend\ReceiptRequest;
+use App\Models\Order;
 use App\Models\Permission;
 use App\Models\Product;
 use App\Models\ProductReceipt;
 use App\Models\Provider;
 use App\Models\Receipt;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class ReceiptController extends Controller
@@ -100,7 +102,14 @@ class ReceiptController extends Controller
 
     protected function getFormRequest(): string
     {
-        // TODO: Implement getFormRequest() method.
         return ReceiptRequest::class;
+    }
+
+    public function print(string $id)
+    {
+        $receipt = Receipt::with('productReceipt', 'provider')->findOrFail($id);
+//        return view('frontend.dashboard.order.print', compact('order'));
+        $pdf = Pdf::loadView('admin.prints.receipt', compact('receipt'));
+        return $pdf->stream('receipt.pdf');
     }
 }

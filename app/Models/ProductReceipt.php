@@ -41,6 +41,11 @@ class ProductReceipt extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function receipts(): BelongsTo
     {
         return $this->belongsTo(Receipt::class);

@@ -25,7 +25,6 @@ class User extends Authenticatable
         'address',
         'password',
         'phone',
-        'role_id',
         'status',
         'tax_code',
         'bank_number',
@@ -53,10 +52,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
 
     public function cart(): HasOne
     {
@@ -68,14 +63,20 @@ class User extends Authenticatable
         return $this->hasMany(Contract::class);
     }
 
+    public function latestContract()
+    {
+        return $this->hasOne(Contract::class)->latest();
+    }
+
     // user with role = employee
     public static function employee(): User|\Illuminate\Database\Eloquent\Builder
     {
-        return User::whereHas(
-            'role',
-            function ($query) {
-                $query->where('is_employee', true);
-            }
-        );
+        return User::with('latestContract')->whereNotNull('employee_code');
+    }
+
+    // user with role = employee
+    public static function buyer(): User|\Illuminate\Database\Eloquent\Builder
+    {
+        return User::with('latestContract')->whereNull('employee_code');
     }
 }

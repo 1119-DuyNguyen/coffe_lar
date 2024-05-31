@@ -4,11 +4,13 @@
      "method"=> "PUT",
      'formElements'=>[],
      'resource'=> [],
+     'haveIndexPage'=>true,
+     'haveFile'=> false
 ])
 @php
     $isUpdateMethod = ($method === "PUT"|| $method === "PATCH") ? true : false;
     $indexRoute= ($method === "PUT"|| $method === "PATCH") ? substr($route, 0, strrpos($route, "/")) : $route;
-    $textSubmitData = $isUpdateMethod ? "Cập nhập " : "Khởi tạo ";
+    $textSubmitData = $isUpdateMethod ? "Cập nhật " : "Khởi tạo ";
 @endphp
 {{--cru =  create read update --}}
 
@@ -19,7 +21,7 @@
     </div>
 
     <div class="section-body">
-
+        {{ $headerBody ??"" }}
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -30,14 +32,19 @@
                     <div class="card-body">
 
                         <div class="w-100 text-right p-4">
-                            <a class="btn btn-primary "
-                               href="{{$indexRoute}}"><i class="fas fa-long-arrow-alt-left"></i> Quay lại danh sách</a>
+                            @if($haveIndexPage)
+                                <a class="btn btn-primary "
+                                   href="{{$indexRoute}}"><i class="fas fa-long-arrow-alt-left"></i> Quay lại danh sách</a>
+
+                            @endif
 
                         </div>
                         @if(!empty($formElements))
                             <form
                                 action="{{$route}}"
-                                method="POST">
+                                method="POST"
+                                enctype="{{ ($haveFile) ? 'multipart/form-data' : "" }}"
+                            >
                                 @csrf
                                 @method($method)
                                 @foreach($formElements as $type => $formElement)
@@ -49,8 +56,8 @@
                             </form>
                             @push('scripts')
                                 <script>
-                                    var forms = document.querySelectorAll("form");
-
+                                    let forms = document.querySelectorAll(".main-content form");
+                                    console.log(forms);
                                     //init span error message
                                     forms.forEach(form => {
 
@@ -62,7 +69,7 @@
                                                 <span class="text-danger error-text ${input.name.replace(/\[\]$/, "")}_error"
                                                 style="color: red"></span>`;
 
-                                            parent.insertAdjacentHTML('afterend', span.outerHTML);
+                                            parent.insertAdjacentHTML('beforeend', span.outerHTML);
                                         })
                                         let inputCheckboxes = form.querySelectorAll('input[type=checkbox][name]');
                                         let distinctInputCheckboxes = {};
@@ -71,11 +78,9 @@
                                                 distinctInputCheckboxes[input.name] = input;
                                             }
                                         })
-                                        console.log(inputCheckboxes, distinctInputCheckboxes);
                                         for (let name in distinctInputCheckboxes) {
                                             let input = distinctInputCheckboxes[name];
                                             let parent = input.closest('.row');
-                                            console.log(parent, "hihfishdf")
                                             let span = document.createElement('div');
                                             span.innerHTML = `
                                                 <span class="text-danger error-text ${input.name.replace(/\[\]$/, "")}_error"
@@ -84,14 +89,20 @@
                                             parent.insertAdjacentHTML('beforebegin', span.outerHTML);
                                         }
 
+                                        console.log(form);
                                         form.addEventListener('submit', function (e) {
                                             e.preventDefault();
 
-                                            var all = $(this).serialize();
+                                            console.log(form.getAttribute("action"));
+                                            // var all = $('.main-content form').serialize();
                                             $.ajax({
-                                                url: $(this).attr('action'),
+                                                url: form.getAttribute("action"),
                                                 type: "POST",
-                                                data: all,
+                                                // data: all,
+                                                dataType: "JSON",
+                                                data: new FormData(this),
+                                                processData: false,
+                                                contentType: false,
                                                 beforeSend: function () {
 
                                                     $(document).find('span.error-text').text('');
@@ -127,6 +138,14 @@
                                                     503: function (responseObject, textStatus, errorThrown) {
                                                         // Service Unavailable (503)
                                                         // This code will be executed if the server returns a 503 response
+                                                    },
+                                                    403: function (responseObject, textStatus, errorThrown) {
+                                                        new FilamentNotification()
+                                                            .title('Không có quyền hạn')
+                                                            .danger()
+                                                            .duration(6000)
+                                                            .body('Hãy liên hệ quản trị viên cấp quyền')
+                                                            .send()
                                                     }
                                                 },
                                                 success: function (data) {

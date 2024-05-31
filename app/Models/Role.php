@@ -37,15 +37,6 @@ class Role extends Model
         static::observe(RoleObserver::class);
     }
 
-    /**
-     * Scope a query to except admin, buyer(user) role.
-     *
-     *
-     */
-    public function scopeEmployee(Builder $query): void
-    {
-        $query->whereNotIn('id', [1, 2]);
-    }
 
     /**
      * The users that belong to the role.

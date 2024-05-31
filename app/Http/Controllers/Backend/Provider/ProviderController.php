@@ -50,6 +50,7 @@ class ProviderController extends CRUDController
                 'type' => 'textfield',
                 'name' => "description",
                 'class' => "",
+                'optional' => true,
                 'label' => "Mô tả",
             ],
         ];

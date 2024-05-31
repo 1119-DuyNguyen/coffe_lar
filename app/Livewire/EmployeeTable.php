@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\Role;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 class EmployeeTable extends IndexDataTable
@@ -21,9 +23,16 @@ class EmployeeTable extends IndexDataTable
     protected function getColumns(): array
     {
         return [
-            TextColumn::make('employee_code')->label('Mã nhân viên'),
-            TextColumn::make('name')->label('Tên')->sortable(),  // Maintains sortable for 'name'
-            TextColumn::make('role.name')->label('Chức vụ'),
+            TextColumn::make('employee_code')->label('Mã nhân viên')->searchable(),
+            TextColumn::make('name')->label('Tên')->searchable(),
+
+            TextColumn::make('latestContract.role.name')
+                ->label('Chức vụ')
+                ->wrap()
+                ->getStateUsing(
+                    fn($record
+                    ) => ($record->latestContract->role->name ?? ((empty($record->employee_code)) ? 'Người mua hàng' : "Chưa có chức vụ"))
+                ),
             ToggleColumn::make('status')->label('Trạng Thái'),
             TextColumn::make('created_at')->label('Ngày Tạo')->sortable(),  // Maintains sortable for 'created_at'
         ];
@@ -47,6 +56,19 @@ class EmployeeTable extends IndexDataTable
                             $data['created_until'],
                             fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                         );
+                }),
+
+            SelectFilter::make('role')->label("Chức vụ")
+                ->options(fn() => Role::all()->pluck('name', 'id')->put('undefined_role', 'Chưa có chức vụ'))
+                ->modifyQueryUsing(function (Builder $query, $state) {
+                    if (!$state['value']) {
+                        return $query;
+                    }
+                    if ($state['value'] == 'undefined_role') {
+                        return $query->doesntHave('latestContract');
+                    }
+
+                    return $query->whereHas('latestContract', fn($query) => $query->where('role_id', $state['value']));
                 })
         ];
     }

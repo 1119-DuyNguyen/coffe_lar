@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'thumb_image' => ['sometimes', 'image', 'max:3000'],
+//            'thumb_image' => ['required'],
             'name' => [
                 'required',
                 'max:200',
@@ -35,10 +35,10 @@ class ProductRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'price' => ['required', 'integer', 'min:1'],
             'weight' => ['required', 'integer', 'min:1'],
-//            'qty' => ['required'],
+            //            'qty' => ['required'],
             'description' => ['required', 'max: 600'],
             'content' => ['required'],
-            'status' => ['required']
+            // 'status' => ['required']
         ];
     }
 }

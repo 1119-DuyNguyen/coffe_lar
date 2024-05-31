@@ -2,16 +2,12 @@
 
 namespace App\Http\Services;
 
-use App\Models\Coupon;
 use App\Models\Order;
-use App\Models\OrderProduct;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class OrderService
@@ -89,12 +85,12 @@ class OrderService
         }
         DB::beginTransaction();
         try {
+            // store order products
+
+
             $order = new Order();
 
-            if (Auth::check()) {
-                $order['user_id'] = Auth::user()->id;
-            }
-            // thanh toán hay chưa
+            $order['user_id'] = Auth::check() ? Auth::user()->id : null;
             // thanh toán hay chưa
             $order['name_receiver'] = $request->input("name");
             $order['phone_receiver'] = $request->input("phone");
@@ -103,33 +99,15 @@ class OrderService
             $order['address_receiver'] = $realAddress;
             $order['sub_total'] = $subtotal;
             $order['fee_ship'] = $feeShip;
-            $order['total'] = $subtotal + $feeShip;
+            $order['total_price'] = $subtotal + $feeShip;
+            $order['total_quantity'] = $listCart['total_quantity_cart'];
 
             $order->save();
-            // store order products
-            $productQuantity = [];
 
-            $cartItems = $listCart['cartList'];
-            foreach ($cartItems as $cart) {
-                $product = $cart['product-data'] ?? [];
-                if (empty($product)) {
-                    continue;
-                }
-                $qty = $cart['quantity'];
-                $orderProduct = new OrderProduct();
-                $orderProduct->order_id = $order->id;
-                $orderProduct->product_id = $product->id;
-                $orderProduct->product_name = $product->name;
-                $orderProduct->product_price = $product->price;
-                $orderProduct->qty = $qty;
-
-                $orderProduct->save();
-            }
-            CartService::clear();
 
             DB::commit();
 
-//            alert('Order created!', 'We will contact you shortly to confirm your order details.');
+            //            alert('Order created!', 'We will contact you shortly to confirm your order details.');
 
             return Redirect::to('/');
         } catch (\Exception $ex) {
@@ -137,34 +115,9 @@ class OrderService
             if ($ex instanceof ValidationException) {
                 throw ValidationException::withMessages([$ex->getMessage()]);
             }
+            dd($ex->getMessage());
             abort(500);
-//            return Redirect::to(route('cart.index'));
+            // return Redirect::to(route('cart.index'));
         }
-    }
-
-    public function storeOrder($paymentMethod, $paymentStatus, $paidAmount, $paidCurrencyName, $paidCurrencyIcon)
-    {
-        $listCart = \Cart::getContent();
-        if (count($listCart) < 1) {
-            toast()->error('Something wrong !!! You must have product in cart');
-            return Redirect::to('/');
-        }
-        $coupon = Session::get('coupon');
-        $subTotal = getCartTotal();
-
-
-//        $productQuantity = [];
-//        foreach (\Cart::getContent() as $item) {
-//            $productQuantity[$item->attributes->product_id] = $item->quantity;
-//        }
-//        $productList = Product::whereIn('id', array_keys($productQuantity))->get();
-//        foreach ($productList as $product)
-//        {
-//        $product->decrement('qty', $productQuantity[$product->id]);
-//        }
-
-
-//        dd($productQuantity,$productList);
-
     }
 }

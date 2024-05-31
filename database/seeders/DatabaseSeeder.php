@@ -46,14 +46,14 @@ class DatabaseSeeder extends Seeder
         );
         for ($i = 0; $i < 30; ++$i) {
             // cà phê đóng gói
-            DB::insert(
-                "
-            INSERT INTO `products` (`id`, `name`, `slug`, `thumb_image`, `category_id`, `description`, `content`, `price`, `status`, `created_at`, `updated_at`) VALUES
-            (" . $i + 61 . ", 'Tri Ân Thầy Cô {$i}', 'tri-an-thay-co-{$i}', 'uploads/products/tri-an-thay-co.jpg', 1, 'Món quà ý nghĩa ngày nhà giáo', '<p>Khi mua trọn bộ &nbsp;<strong>Tri ân Thầy Cô</strong> Quý khách sẽ được<strong>&nbsp;Tặng kèm 1 phin nhôm nâu và 1 túi giấy đen</strong><br>
-            Thời gian khuyến mãi: từ hôm nay đến 30/11/2023 ( hoặc đến khi hết quà tặng).<br>
-            </p>
-              ', 337000, 1, '2023-09-23 17:52:28', '2023-09-23 17:52:28')"
-            );
+//            DB::insert(
+//                "
+//            INSERT INTO `products` (`id`, `name`, `slug`, `thumb_image`, `category_id`, `description`, `content`, `price`, `status`, `created_at`, `updated_at`) VALUES
+//            (" . $i + 61 . ", 'Tri Ân Thầy Cô {$i}', 'tri-an-thay-co-{$i}', 'uploads/products/tri-an-thay-co.jpg', 1, 'Món quà ý nghĩa ngày nhà giáo', '<p>Khi mua trọn bộ &nbsp;<strong>Tri ân Thầy Cô</strong> Quý khách sẽ được<strong>&nbsp;Tặng kèm 1 phin nhôm nâu và 1 túi giấy đen</strong><br>
+//            Thời gian khuyến mãi: từ hôm nay đến 30/11/2023 ( hoặc đến khi hết quà tặng).<br>
+//            </p>
+//              ', 337000, 1, '2023-09-23 17:52:28', '2023-09-23 17:52:28')"
+//            );
             // bộ quà tặng
             DB::insert(
                 "
@@ -66,12 +66,12 @@ class DatabaseSeeder extends Seeder
               ', 337000, 1, '2023-09-23 17:52:28', '2023-09-23 17:52:28')"
             );
             // vật phẩm bán lẻ
-            DB::insert(
-                "
-            INSERT INTO `products` (`id`, `name`, `slug`, `thumb_image`, `category_id`, `description`, `content`, `price`, `status`, `created_at`, `updated_at`) VALUES
-            (" . $i + 31 . ", 'Phin Nhôm Vĩ Nhân {$i}', 'phin-nhom-vi-nhan-{$i}', 'uploads/products/phin-nhom-vi-nhan.png', 3, 'Món quà ý nghĩa ngày nhà giáo', '<p>Thể tích đạt tiêu chuẩn của phin khoảng 170ml.</p>
-            <p>Chất liệu nhôm thích hợp nhất cho một chiếc phin lọc cà phê.</p>', 337000, 1, '2023-09-23 17:52:28', '2023-09-23 17:52:28')"
-            );
+//            DB::insert(
+//                "
+//            INSERT INTO `products` (`id`, `name`, `slug`, `thumb_image`, `category_id`, `description`, `content`, `price`, `status`, `created_at`, `updated_at`) VALUES
+//            (" . $i + 31 . ", 'Phin Nhôm Vĩ Nhân {$i}', 'phin-nhom-vi-nhan-{$i}', 'uploads/products/phin-nhom-vi-nhan.png', 3, 'Món quà ý nghĩa ngày nhà giáo', '<p>Thể tích đạt tiêu chuẩn của phin khoảng 170ml.</p>
+//            <p>Chất liệu nhôm thích hợp nhất cho một chiếc phin lọc cà phê.</p>', 337000, 1, '2023-09-23 17:52:28', '2023-09-23 17:52:28')"
+//            );
         }
 //        $file_path = [
 ////            __DIR__ . '/seeder-order.sql',
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
 //        }
 
 
-        $this->call(ProductSeeder::class);
+//        $this->call(ProductSeeder::class);
 
         $this->call(ReceiptProductSeeder::class);
         $this->call(OrderSeeder::class);

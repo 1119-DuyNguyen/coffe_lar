@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\CheckinObserver;
+use App\Observers\MyOpinionObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +17,7 @@ class Opinion extends Model
         'user_id',
         'topic',
         'content',
+        'day_off'
     ];
 
     public function typeOpinion(): belongsTo
@@ -22,28 +25,19 @@ class Opinion extends Model
         return $this->belongsTo(TypeOpinion::class);
     }
 
-    public function getTopicAttribute($value)
+    public function user(): belongsTo
     {
-        return $value;
+        return $this->belongsTo(User::class);
     }
-    public function setTopicAttribute($value)
+
+    protected static function boot()
     {
-        $this->attributes['topic'] = $value;
-    }
-    public function getTypeOpinionIdAttribute($value)
-    {
-        return $value;
-    }
-    public function setTypeOpinionIdAttribute($value)
-    {
-        $this->attributes['type_opinion_id'] = $value;
-    }
-    public function getContentAttribute($value)
-    {
-        return $value;
-    }
-    public function setContentAttribute($value)
-    {
-        $this->attributes['content'] = $value;
+        // you MUST call the parent boot method
+        // in this case the \Illuminate\Database\Eloquent\Model
+        parent::boot();
+
+        // note I am using static::observe(...) instead of Config::observe(...)
+        // this way the child classes auto-register the observer to their own class
+        static::observe(MyOpinionObserver::class);
     }
 }

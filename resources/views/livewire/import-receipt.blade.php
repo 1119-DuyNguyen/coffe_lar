@@ -8,7 +8,7 @@
 
 
         <button type="submit" class="btn btn-primary">
-            Thực hiện thao tác
+            {{(isset($this->receipt))? "Cập nhật" : "Khởi tạo"}}
         </button>
     </form>
 

@@ -17,8 +17,8 @@ class ProviderSeeder extends Seeder
     {
         $seedData = [
             [
-                'name' => 'nhà cung cấp hà nội',
-                'description' => 'nhà cung cấp chăm chỉ',
+                'name' => 'Nhà cung cấp hà nội',
+                'description' => 'Nhà cung cấp chăm chỉ',
 
             ],
 
@@ -27,10 +27,10 @@ class ProviderSeeder extends Seeder
             Provider::create($data);
         }
         // create employee
-        for ($i = 1; $i <= 50; ++$i) {
+        for ($i = 1; $i <= 10; ++$i) {
             $data = [
                 'name' => 'Nhà cung cấp ' . $i,
-                'description' => 'nhà cung cấp chăm chỉ ' . $i,
+                'description' => 'Nhà cung cấp chăm chỉ ' . $i,
             ];
             Provider::create($data);
         }
