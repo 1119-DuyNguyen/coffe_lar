@@ -1,15 +1,15 @@
 # Yêu cầu hệ thống
 
-Người dùng khách:
+## Người dùng khách:
 -	Tìm kiếm sản phẩm
 -	Đăng nhập/ Đăng kí
-Người dùng: 
+## Người dùng: 
 -	Quản lý giỏ hàng
 -	Quản lý thông tin tài khoản
 -	Xem lịch sử mua hàng
 -	Đặt hàng
 
-người quản lý nhân sự:
+## người quản lý nhân sự:
 -	Thống kê
 - Thêm/xóa nhân sự trong doanh nghiệp.
 - Thay đổi chức vụ của nhân sự, lưu ý, khi thay đổi chức vụ phải có thời điểm cụ thể
@@ -17,13 +17,15 @@ và lương sẽ thay đổi theo
 - Tính lương cho mỗi nhân sự, theo quy định của doanh nghiệp
 - Duyệt nhân sự nghỉ việc, nghỉ phép…
 - Thống kê theo tháng, năm tình hình nhân sự lương, thưởng nhân sự
-nhân viên:
+## nhân viên:
 - Nhân viên có thể xem, sửa thông tin của chính mình.
 - Nhân viên có thể nộp đơn xin nghỉ phép, nghỉ ốm đau thai sản, nghỉ việc.
 - Xem được cách tính lương, lương mỗi tháng của chính mình.
 - In được bảng lương theo tháng
 - In được bảng lương theo năm
-Quản lý kho
+
+
+## Quản lý kho
 
 -	Quản lý danh mục
 -	Xử lí đơn hàng
