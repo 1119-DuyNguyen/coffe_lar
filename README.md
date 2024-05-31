@@ -24,15 +24,39 @@ Người dùng:
 •	Quản lý thông tin tài khoản
 •	Xem lịch sử mua hàng
 •	Đặt hàng
-Nhân viên : 
-•	Quản lý tài khoản
-•	Quản lý vai trò
-•	Quản lý danh mục
-•	Quản lý sản phẩm
-•	Xử lí đơn hàng
-•	Thống kê
 
-# Sơ đồ Usecase tổng quan của hệ thống cửa hàng cà phê
+người quản lý nhân sự:
+•	Thống kê
+• Thêm/xóa nhân sự trong doanh nghiệp.
+• Thay đổi chức vụ của nhân sự, lưu ý, khi thay đổi chức vụ phải có thời điểm cụ thể
+và lương sẽ thay đổi theo
+• Tính lương cho mỗi nhân sự, theo quy định của doanh nghiệp
+• Duyệt nhân sự nghỉ việc, nghỉ phép…
+• Thống kê theo tháng, năm tình hình nhân sự lương, thưởng nhân sự
+nhân viên:
+• Nhân viên có thể xem, sửa thông tin của chính mình.
+• Nhân viên có thể nộp đơn xin nghỉ phép, nghỉ ốm đau thai sản, nghỉ việc.
+• Xem được cách tính lương, lương mỗi tháng của chính mình.
+• In được bảng lương theo tháng
+• In được bảng lương theo năm
+Quản lý kho
+
+●	Quản lý danh mục
+●	Xử lí đơn hàng
+● Quản lý thông tin về sản phẩm doanh nghiệp đang kinh doanh, giá cả, chi tiết số
+lượng tồn của mỗi sản phẩm giá nhập vào
+● Thêm/ xoá/ sửa thông tin sản phẩm.
+● Lập phiếu nhập sản phẩm vào doanh nghiệp.
+● Thêm, sửa, xoá, tìm kiếm thông tin nhà cung cấp
+● In báo cáo thống kê theo tháng, năm về sản phẩm
+ Quản lý kinh doanh
+● Lập được phiếu xuất sản phẩm cho hoạt động kinh doanh: số lượng bán, giá bán.
+● Thống kê số lượng sản phẩm đã xuất theo tháng, quý, năm.
+● Thống kê được lợi nhuận của doanh nghiệp theo tháng, quý, năm
+BFD
+![image](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/63e11e1a-0bf2-4586-bbf6-21c77d2d67ff)
+
+# Sơ đồ Usecase tổng quan của hệ thống cửa hàng cà phê (chưa update)
 ![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/90be87ae-40cc-4ceb-9a0f-1d26f67a69b8)
 
 
@@ -44,7 +68,8 @@ Nhân viên :
 | 3 | NhanVien | Là người xử lý đơn hàng và tuỳ vào cấp bậc có thể làm các chức năng như thống kê, quản lý tài nguyên của hệ thống, xử lý đơn hàng, tạo các tài khoản với vai trò mang các quyền nhất định |
 
 # Database
-![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/6a27e1b9-1d9b-4714-bde2-84a211c7d300)
+
+![image](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/dd7bd0e6-ce71-4e38-b04d-8a68de9de8bd)
 
 
 # Demo chức năng đặt mua hàng : 
