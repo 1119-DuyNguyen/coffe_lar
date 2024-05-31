@@ -1,59 +1,45 @@
-# Mô tả chung hoạt động của ứng dụng:
-- Khách hàng chọn lựa sản phẩm và thêm vào giỏ hàng theo ý muốn
-- Khách hàng vào trang mua hàng để xem giá cả sản phẩm và tiền ship
-- Khi khách hàng bấm nút thanh toán(đặt hàng) trên ứng dụng web, nhân viên sẽ sử dụng phần mềm để xem xét việc bán sản phẩm cho khách hàng,
-- Nếu không được chấp thuận sẽ thông báo với khách hàng.
-- Nếu chấp thuận nhân viên sẽ vào web giaohangnhanh để lên đơn hàng cho quý khách
-- Khi bán sản phẩm cho khách hàng, phần mềm sẽ ghi lại hóa đơn tổng hợp các thông tin như: tên khách hàng, số điện thoại, ngày mua hàng, sản phẩm khách hàng đã mua, giá ship, ...
-- Về doanh thu bán hàng, ứng dụng sẽ thống kê doanh số sản phẩm đã bán được theo thời gian.
-
-Hiện ứng dụng chỉ để bán hàng và không hỗ trợ quản lý nhập hàng
-
-# Bảng phân rã chức năng
-
-![ảnh](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/a0197740-1278-49e8-8006-dc032f2e7897)
-
-
 # Yêu cầu hệ thống
 
 Người dùng khách:
-•	Tìm kiếm sản phẩm
-•	Đăng nhập/ Đăng kí
+-	Tìm kiếm sản phẩm
+-	Đăng nhập/ Đăng kí
 Người dùng: 
-•	Quản lý giỏ hàng
-•	Quản lý thông tin tài khoản
-•	Xem lịch sử mua hàng
-•	Đặt hàng
+-	Quản lý giỏ hàng
+-	Quản lý thông tin tài khoản
+-	Xem lịch sử mua hàng
+-	Đặt hàng
 
 người quản lý nhân sự:
-•	Thống kê
-• Thêm/xóa nhân sự trong doanh nghiệp.
-• Thay đổi chức vụ của nhân sự, lưu ý, khi thay đổi chức vụ phải có thời điểm cụ thể
+-	Thống kê
+- Thêm/xóa nhân sự trong doanh nghiệp.
+- Thay đổi chức vụ của nhân sự, lưu ý, khi thay đổi chức vụ phải có thời điểm cụ thể
 và lương sẽ thay đổi theo
-• Tính lương cho mỗi nhân sự, theo quy định của doanh nghiệp
-• Duyệt nhân sự nghỉ việc, nghỉ phép…
-• Thống kê theo tháng, năm tình hình nhân sự lương, thưởng nhân sự
+- Tính lương cho mỗi nhân sự, theo quy định của doanh nghiệp
+- Duyệt nhân sự nghỉ việc, nghỉ phép…
+- Thống kê theo tháng, năm tình hình nhân sự lương, thưởng nhân sự
 nhân viên:
-• Nhân viên có thể xem, sửa thông tin của chính mình.
-• Nhân viên có thể nộp đơn xin nghỉ phép, nghỉ ốm đau thai sản, nghỉ việc.
-• Xem được cách tính lương, lương mỗi tháng của chính mình.
-• In được bảng lương theo tháng
-• In được bảng lương theo năm
+- Nhân viên có thể xem, sửa thông tin của chính mình.
+- Nhân viên có thể nộp đơn xin nghỉ phép, nghỉ ốm đau thai sản, nghỉ việc.
+- Xem được cách tính lương, lương mỗi tháng của chính mình.
+- In được bảng lương theo tháng
+- In được bảng lương theo năm
 Quản lý kho
 
-●	Quản lý danh mục
-●	Xử lí đơn hàng
-● Quản lý thông tin về sản phẩm doanh nghiệp đang kinh doanh, giá cả, chi tiết số
+-	Quản lý danh mục
+-	Xử lí đơn hàng
+- Quản lý thông tin về sản phẩm doanh nghiệp đang kinh doanh, giá cả, chi tiết số
 lượng tồn của mỗi sản phẩm giá nhập vào
-● Thêm/ xoá/ sửa thông tin sản phẩm.
-● Lập phiếu nhập sản phẩm vào doanh nghiệp.
-● Thêm, sửa, xoá, tìm kiếm thông tin nhà cung cấp
-● In báo cáo thống kê theo tháng, năm về sản phẩm
+- Thêm/ xoá/ sửa thông tin sản phẩm.
+- Lập phiếu nhập sản phẩm vào doanh nghiệp.
+- Thêm, sửa, xoá, tìm kiếm thông tin nhà cung cấp
+- In báo cáo thống kê theo tháng, năm về sản phẩm
  Quản lý kinh doanh
-● Lập được phiếu xuất sản phẩm cho hoạt động kinh doanh: số lượng bán, giá bán.
-● Thống kê số lượng sản phẩm đã xuất theo tháng, quý, năm.
-● Thống kê được lợi nhuận của doanh nghiệp theo tháng, quý, năm
-BFD
+- Lập được phiếu xuất sản phẩm cho hoạt động kinh doanh: số lượng bán, giá bán.
+- Thống kê số lượng sản phẩm đã xuất theo tháng, quý, năm.
+- Thống kê được lợi nhuận của doanh nghiệp theo tháng, quý, năm
+
+# BFD Bảng phân rã chức năng
+
 ![image](https://github.com/1119-DuyNguyen/coffe_lar/assets/62139508/63e11e1a-0bf2-4586-bbf6-21c77d2d67ff)
 
 # Sơ đồ Usecase tổng quan của hệ thống cửa hàng cà phê (chưa update)
